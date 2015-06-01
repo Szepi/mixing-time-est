@@ -186,21 +186,22 @@ following lemma.
     \norm{\wh\vL - \vL}
     \leq
     C\,
-    \Parens{
+%    \Parens{
       \sqrt{
         \frac{
           \log\Parens{\frac{d}{\delta}}
           \log\Parens{\frac{n}{\pimin\delta}}
         }{\pimin\gap n}
       }
+%      +
+%      \frac{
+%        \log\Parens{\frac{d}{\delta}}
+%        \log\Parens{\frac{n}{\pimin\delta}}
+%      }{\pimin\gap n}
       +
-      \frac{
-        \log\Parens{\frac{d}{\delta}}
-        \log\Parens{\frac{n}{\pimin\delta}}
-      }{\pimin\gap n}
-      +
+      C\,
       \frac{\log\Parens{\frac{1}{\gap}}}{\gap n}
-    }
+%    }
   \end{equation*}
 \end{lemma}
 The remainder of this section is devoted to proving this
@@ -1260,11 +1261,11 @@ In this event, \cref{eq:singletonbound} also holds, and hence by
         \ln\Parens{\frac{n}{\pimin\delta}}
       }{\pimin\gap n}
     }
-    +
-    \frac{
-      \ln\Parens{\frac{d}{\delta}}
-      \ln\Parens{\frac{n}{\pimin\delta}}
-    }{\pimin\gap n}
+%    +
+%    \frac{
+%      \ln\Parens{\frac{d}{\delta}}
+%      \ln\Parens{\frac{n}{\pimin\delta}}
+%    }{\pimin\gap n}
   }
   .
 \end{multline*}

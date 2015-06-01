@@ -72,14 +72,14 @@ These estimators have the following accuracy guarantees.
     C \,
     \Parens{
       \sqrt{\frac{\log\frac{d}{\delta}\cdot\log\frac{n}{\pimin\delta}}{\pimin\gap n}}
-      + \frac{\log\frac{d}{\delta}\cdot\log\frac{n}{\pimin\delta}}{\pimin\gap n}  
+%      + \frac{\log\frac{d}{\delta}\cdot\log\frac{n}{\pimin\delta}}{\pimin\gap n}  
       + \frac{\log\frac{1}{\gap}}{\gap n}  
     }
     \,.
   \end{equation}
 \end{theorem}
 \todoc{In \eqref{eq:gapbound}, we should be able to merge the second term into the first, right?}
-\todod{No, not for all values of $n$.}
+\todod{Oh, I see what you mean---yes, that's right.}
 
 \Cref{thm:err} implies that the sequence lengths required to estimate
 $\pimin$ and
