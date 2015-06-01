@@ -3,7 +3,7 @@
 %Performance guarantees play a key role in the analysis and design of machine learning algorithms.
 
 In this paper we study the construction of fully empirical bounds on the mixing time of Markov chains based on a single sample path.
-Let $(X_t)_{t=1,2,\dots}$ be an irreducible, aperiodic time-homogeneous Markov chain on a finite state space $[d]$ of $d$ states numbered by positive integers with transition matrix $\vP$. Under this assumption, the chain converges to its unique stationary \todoc{Maybe steady state is better?}
+Let $(X_t)_{t=1,2,\dotsc}$ be an irreducible, aperiodic time-homogeneous Markov chain on a finite state space $[d]$ of $d$ states numbered by positive integers with transition matrix $\vP$. Under this assumption, the chain converges to its unique stationary \todoc{Maybe steady state is better?}
 distribution $\vpi = (\pi_i)_{i=1}^d$ regardless of the distribution $\vq$ of $X_1$: 
 $\lim_{t\to\infty} \Pr_{\vq}\Parens{X_t = i} = \lim_{t\to\infty} (\vq \vP^t)_i = \pi_i$, $1\le i \le d$.
 The mixing time $\tmix$ of the Markov chain is the time that it takes for the chain to reach its stationary distribution, say,
@@ -20,11 +20,16 @@ The mixing time $\tmix$ of the Markov chain is the time that it takes for the ch
     \leq 1/4
   }\,.
 \]
-Here $\vpi(A) = \sum_{i\in A} \pi_i$ is the total probability assigned to set $A$ by $\vpi$ and the supremum is over
+Here $\vpi(A) = \sum_{i\in A} \pi_i$ is the total probability assigned
+to set $A$ by $\vpi$, and the supremum is over
 all possible initial distributions $\vq$.
-The problem studied in the paper is the construction of a confidence set $C_n = C_n(X_1,\dots,X_n,\delta) \subset [0,\infty]$ based on the knowledge of $X_1,\dots,X_n$ only that captures the mixing time $\tmix$ with a pre-specified probability $0\le \delta \le 1$. 
+The problem studied in the paper is the construction of a confidence
+set $C_n = C_n(X_1,X_2,\dotsc,X_n,\delta) \subset [0,\infty]$ based on
+the knowledge of $X_1,X_2,\dotsc,X_n$ only that captures the mixing
+time $\tmix$ with a pre-specified probability $1-\delta \in (0,1)$. 
 In the remainder of the introduction, we describe the background of why this problem might be interesting, followed by a 
 brief description of our main results.
+\todod{``might be interesting'' sounds weak.}
 
 In numerous scientific applications and some machine learning tasks
 one is interested in estimating the mean $\vpi(f) = \sum_i \pi_i f(i)$ of some function $f$ of the states of a Markov chain. 
