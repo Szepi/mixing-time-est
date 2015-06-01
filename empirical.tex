@@ -36,18 +36,20 @@ We adopt a different strategy for estimating $\vpi$, which leads to
 our construction of empirical confidence intervals, detailed in
 \cref{alg:empest}.
 We form the matrix $\wh\vP$ using smoothed frequency estimates of
-$\vP$ (Step~\ref{step:P}), then 
-compute the so-called group inverse $\giAh$ of $\wh\vA = I - \wh\vP$,
-followed by finding the unique stationary
-distribution $\hat\vpi$ of $\wh\vP$ (Step~\ref{step:pi}).
-The group inverse $\giAh$ of $\wh\vA$ is uniquely defined and if $\wh\vP$ defines an ergodic chain
-(which is the case here due to the use of the smoothed estimates),
-$\giAh$ can be computed at the cost of inverting an $(d-1)\times (d-1)$ matrix
-(cf. Theorem 5.2 in \cite{meyer1975role}).
-Further, once given $\giAh$, the unique stationary distribution of $\wh\vP$ can be 
-read out from the last row of $\giAh$ (Theorem 5.3 of  \cite{meyer1975role}).
-The group inverse will also be used later to compute the sensitivity of $\vpi$
-based on a result from \cite{cho2001comparison}.
+$\vP$ (Step~\ref{step:P}), then compute the so-called group inverse
+$\giAh$ of $\wh\vA = I - \wh\vP$ (Step~\ref{step:gi}), followed by
+finding the unique stationary distribution $\hat\vpi$ of $\wh\vP$
+(Step~\ref{step:pi}).
+The group inverse $\giAh$ of $\wh\vA$ is uniquely defined; and if
+$\wh\vP$ defines an ergodic chain (which is the case here due to the
+use of the smoothed estimates), $\giAh$ can be computed at the cost of
+inverting an $(d-1)\times (d-1)$ matrix~\citep[Theorem
+5.2]{meyer1975role}.
+Further, once given $\giAh$, the unique stationary distribution
+$\hat\vpi$ of $\wh\vP$ can be read out from the last row of
+$\giAh$~\citep[Theorem 5.3]{meyer1975role}.
+The group inverse will also be used later to compute the sensitivity
+of $\vpi$ based on a result from \cite{cho2001comparison}.
 Based on $\hat\vpi$ and $\wh\vP$, we construct the plug-in estimate
 $\wh\vL$ of $\vL$, and use the eigenvalues of its symmetrization to
 form the estimate $\hatgap$ of the spectral gap (Steps~\ref{step:eig}
