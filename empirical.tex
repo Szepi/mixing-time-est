@@ -19,8 +19,8 @@ Ostrowski-Elsner theorem.
 However, as explained earlier, this would lead to a slow
 $O(n^{-1/(2d)})$ rate.
 We avoid this slow rate by using an estimate of the symmetric matrix
-$\vL$, and employing a stronger perturbation result (namely Weyl's
-inequality) available for symmetric matrices.
+$\vL$, so that we can use a stronger perturbation result (namely Weyl's
+inequality, as in the proof of \cref{thm:err}) available for symmetric matrices.
 
 To form an estimate of $\vL$ based on an estimate of the transition
 probabilities, one possibility is to estimate $\vpi$ using a
@@ -39,17 +39,33 @@ We form the matrix $\wh\vP$ using smoothed frequency estimates of
 $\vP$ (Step~\ref{step:P}), then compute the so-called group inverse
 $\giAh$ of $\wh\vA = I - \wh\vP$ (Step~\ref{step:gi}), followed by
 finding the unique stationary distribution $\hat\vpi$ of $\wh\vP$
-(Step~\ref{step:pi}).
-The group inverse $\giAh$ of $\wh\vA$ is uniquely defined; and if
+(Step~\ref{step:pi}), this way decoupling the bound on the accuracy of $\hat\vpi$
+from the mixing time.
+The group inverse $\giAh$ of $\wh\vA$ is uniquely defined;
+ and if
 $\wh\vP$ defines an ergodic chain (which is the case here due to the
 use of the smoothed estimates), $\giAh$ can be computed at the cost of
 inverting an $(d-1)\times (d-1)$ matrix~\citep[Theorem
-5.2]{meyer1975role}.
+5.2]{meyer1975role}.%
+\footnote{
+\label{ftnote:group-inverse}
+The group inverse of a square matrix $\vA$, a special case of the {\em Drazin inverse},
+is the unique matrix $\vA^\#$ satisfying
+$ \vA\vA^\#\vA = \vA$,
+$\vA^\#\vA\vA^\# = \vA^\#$ and
+$\vA^\#\vA = \vA\vA^\#$.
+%It is efficiently computable,
+%and for $\vA=\vI-\vP$, where $\vP$ is ergodic with stationary distribution $\vpi$,
+%has the
+%following simple
+%form: $\vA^\#=(\vI-\vP+\v1\vpi^\t)^{-1}-\v1\vpi^\t$
+%\citep{seneta1993sensitivity,meyer1975role}.
+}
 Further, once given $\giAh$, the unique stationary distribution
 $\hat\vpi$ of $\wh\vP$ can be read out from the last row of
 $\giAh$~\citep[Theorem 5.3]{meyer1975role}.
 The group inverse will also be used later to compute the sensitivity
-of $\vpi$ based on a result from \cite{cho2001comparison}.
+of $\vpi$ based on a result of Cho and Meyer \cite{cho2001comparison}.
 Based on $\hat\vpi$ and $\wh\vP$, we construct the plug-in estimate
 $\wh\vL$ of $\vL$, and use the eigenvalues of its symmetrization to
 form the estimate $\hatgap$ of the spectral gap (Steps~\ref{step:eig}
@@ -64,7 +80,7 @@ frequency estimates of $\vP$.
 Note that the most expensive step in the algorithm is the computation of the group inverse,
 which, as noted reduces to matrix inversion.
 Thus, with a standard implementation of matrix inversion, the algorithm's complexity becomes 
-$O( n + d^3)$, while the space complexity is $O(d^2)$.
+$O( n + d^3)$, while its space complexity is $O(d^2)$.
 \todoc{Implement and test?}
 
 \begin{algorithm}[t]
@@ -216,10 +232,6 @@ $O( n + d^3)$, while the space complexity is $O(d^2)$.
 \end{algorithm}
 
 The main result of this section is the following result:
-\todoc{Conditions?}
-\todod{I think they are fine now. Ergodicity is defined in section 3
-now, and we discuss why it already implies the $\pimin>0$ and
-$\gap>0$.}
 \begin{theorem}
   \label{thm:empirical}
   Suppose \cref{alg:empest} is given as input a sample path of length
@@ -258,6 +270,17 @@ $\gap>0$.}
   where $\kappa$ is analogous to the $\hat{\kappa}$ computed
   by~\cref{alg:empest} with $\giAh$ replaced by the group inverse
   $\giA$ of $\vA := \vI - \vP$.
+  \todoc{
+    Precisely,
+    what we mean by the $O(\cdot)$ notation is as follows:
+  for a random sequence of nonnegative numbers $(X_n)_n$
+  and another sequence of nonrandom positive numbers $(a_n^\eps)_n$ 
+  indexed by $\eps$ we
+  say that $X_n = O(a_n^\eps)$ holds almost surely as $n\to \infty$
+  if for some universal constant $C>0$, 
+  $\limsup_{n\to \infty} X_n/a_n^\eps \le C$ holds almost surely, regardless of
+  the choice of $\eps$. I think this should be made clear.
+  }
 \end{theorem}
 The proof of \cref{thm:empirical} is given in \cref{app:empirical}.
 As mentioned above, the obstacle encountered in \cref{thm:err} is

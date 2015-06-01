@@ -22,7 +22,7 @@ vector $\hat\vpi \in \Delta^{d-1}$ by
   \hat{\pi}_i
   & := \frac{|\{ t \in [n] : X_t = i \}|}{n}
   , \quad i \in [d]
-  .
+  \,.
 \end{align*}
 Furthermore, define
 \[
@@ -44,7 +44,7 @@ and our estimator of the spectral gap $\gap$ is
   \hatgap := 1 - \max\{ \hat\lambda_2, |\hat\lambda_d| \} .
 \]
 
-These estimators have the following accuracy guarantees. 
+These estimators have the following accuracy guarantees:
 \begin{theorem}
   \label{thm:err}
   There exists an absolute constant $C>0$ such that the following
@@ -78,8 +78,6 @@ These estimators have the following accuracy guarantees.
     \,.
   \end{equation}
 \end{theorem}
-\todoc{In \eqref{eq:gapbound}, we should be able to merge the second term into the first, right?}
-\todod{Oh, I see what you mean---yes, that's right.}
 
 \Cref{thm:err} implies that the sequence lengths required to estimate
 $\pimin$ and
@@ -108,6 +106,7 @@ directly applying a blocking technique of~\citet{Bernstein27} as
 described in the article of~\citet{Yu94}.
 The proof is given in \cref{app:upper}.
 
+\todoc{Make this paragraph into a remark?}
 Note that because the eigenvalues of $\vL$ are the same as that of the
 transition probability matrix $\vP$, 
 we could have instead opted to

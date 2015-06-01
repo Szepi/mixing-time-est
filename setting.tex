@@ -27,6 +27,9 @@ probability of seeing state $i$ followed by state $j$ when the chain
 is started from its stationary distribution.
 The matrix $\vM$ is symmetric on account of the reversibility of
 $\vP$, and hence it follows that $\vL$ is also symmetric.
+As we will see later, we will strongly exploit this later.  \todoc{Say more? Maybe not..}
+%will be advantageous due to the existence of stronger perturbation results
+%for symmetric matrices.
 Further, $\vL = \Diag(\vpi)^{1/2} \vP \Diag(\vpi)^{-1/2}$, hence $\vL$
 and $\vP$ are similar and thus their eigenvalue systems are identical.
 Ergodicity and reversibility imply that the eigenvalues of $\vL$ are
@@ -39,6 +42,8 @@ Denote and order the eigenvalues of $\vL$ as
 \]
 Let $\slem := \max\{ \lambda_2,\, |\lambda_d| \}$, and define the
 (absolute) spectral gap to be $\gap := 1-\slem$, which is strictly positive.
+\todoc{Do our results generalize to the spectral gap? Where do we need that we talk about the absolute spectral gap?
+What is the difference between the spectral and the absolute spectral gap? Say, in their relationship to $\tmix$?}
 %Throughout the paper, both $\pimin$ and $\gap$ are assumed
 %to be positive.
 
@@ -83,7 +88,8 @@ and~12.4]{LePeWi08}:
 Moreover, convergence rates for empirical processes on Markov chain
 sequences are also often given in terms of mixing coefficients that
 can ultimately be bounded in terms of $\pimin$ and
-$\gap$~\citep[e.g.,][]{MR1921877,MoRo08,MoRo09}. \todoc{Cite one? Btw, do these really have these results?}
+$\gap$, as we will show in the proof of our first result.\todoc{I removed the citations (saving space), referring to the proof.}
+%~\citep[e.g.,][]{MR1921877,MoRo08,MoRo09}. 
 Therefore, valid confidence intervals for $\pimin$ and $\gap$ can be
 used to make these rates fully observable.
 

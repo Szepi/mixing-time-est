@@ -1,3 +1,4 @@
+%!TEX root =  matrix-est.tex
 In this section, we derive \cref{alg:empest} and prove
 \cref{thm:empirical}.
 
@@ -211,7 +212,9 @@ following equalities:
   \giAh\wh\vA\giAh = \giAh , \quad
   \giAh\wh\vA = \wh\vA\giAh .
 \]
-The matrix $\giAh$ is a central quantity that captures many properties
+The matrix $\giAh$, which is well defined no matter what transition probability matrix $\wh\vP$ we start with 
+\citep{meyer1975role},
+ is a central quantity that captures many properties
 of the ergodic Markov chain with transition matrix
 $\wh\vP$~\citep{meyer1975role}.
 We denote the $(i,j)$-th entry of $\giAh$ by $\giAh_{i,j}$.
