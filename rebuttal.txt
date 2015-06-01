@@ -1,0 +1,38 @@
+We thank the referees for the helpful comments. A detailed response follows.
+
+Empirical bounds:
+
+Empirical bounds are essential for many real learning applications where one must make decisions based on a single sample path, with no other prior information, and hence are of independent interest.  Such bounds were also sought by McDonald et al (2011) and Meir (2000) but not achieved.  We also think obtaining empirical bounds for gamma_* is very natural problem.
+
+The confidence interval from Thm.4 is fully empirical, and do not require apriori knowledge of gamma_* or pi_*. In particular, the interval is always correct even if gamma_* and pi_* are actually zero. When gamma_* and pi_* are positive, the width of the interval shrinks at a rate shown in Thm.4 (which depends inversely on gamma_* and pi_*) and hence we obtain nontrivial confidence intervals.
+
+A confidence region for gamma_* that one can obtain from Thm.1 is a union of two intervals: one around 0, and another around gamma_*. Call these I0 and I1, respectively. The width of each shrinks (at a better rate than Thm.4), but gamma_*=0 is never precluded.
+
+However, using union(I0,I1) intersected with the Alg.1 interval (a 1-2delta confidence region) eventually precludes gamma_*=0 (and eventually I0), upon which we are left with a single interval as tight as I1 alone.
+
+Nonreversible chains:
+
+We discuss an exp(d) approach to non-reversible chains (Sec.6), leaving poly(d) as an open problem. The reversible case is important (it arises in MCMC) and also the natural first step in this line of work.
+
+E-norms:
+
+Indeed, they are mixed-up, and there is a small gap in the submission, which is easily fixed.  Upper bound the norm of E_{pi,i} by the maximum of the norms of E_{pi,1} and E_{pi,2}.  Now, use max( |sqrt(x)-1|, |sqrt(1/x)-1| ) <= 1/2 max(|x-1|,|1/x-1|).  The only change in the rest is to redefine \hat{rho}(delta) to be 2 max(rho(delta),rho'(delta)) + 4 max(rho(delta),rho'(delta))^2.  This does not impact the result's asymptotics, as rho(delta) and rho'(delta) are of the same order-of-magnitude.
+
+Delta:
+
+\tilde\Delta is closed-form (easy to analyze); computing \hat\Delta requires solving an optimization problem.  \tilde\Delta is not always smaller.  The opposite is true whp: the true P_{i,j} is a feasible solution, and its deviation from \hat{P}_{i,j} is bounded by \tilde\Delta.
+
+Thms.{1,2,3}:
+
+Bounds are not tight: the polynomial dependence on 1/pi_* and 1/gamma_* do not match (linear in lowerbound, higher degree poly in upperbound). Thm.2 implies lowerbound for both multiplicative and additive accuracy; Thm.3 gives lowerbound for multiplicative accuracy.
+
+Bernstein/Samson/Paulin:
+
+On page 8, we use standard iid Bernstein (exploiting Markov assumption).  However, we also use Theorem 3.8 of Paulin (2015) to prove Theorem 1 (we inadvertently submitted a version that uses looser bounds). Neither Samson/Paulin directly gives the result needed matrices, nor empirical bounds; they are related and will be cited in the revision.
+
+More for Rev.3:
+
+Standard binomial lowerbounds imply 1/pi_* is necessary to estimate pi_* multiplicatively accurately.
+
+Besides Sym(L) trick, we have another new trick to estimate pi.
+

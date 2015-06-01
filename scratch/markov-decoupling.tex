@@ -1,0 +1,577 @@
+\documentclass[11pt]{article}
+\usepackage{todonotes}
+\newcommand{\todoc}[2][]{\todo[size=\scriptsize,color=green!10!white,#1]{Cs: #2}} % Csaba's comments
+\newcommand{\todot}[2][]{\todo[size=\scriptsize,inline,color=blue!20!white,#1]{D: #2}} % Daniel's comments
+\newcommand{\todor}[2][]{\todo[size=\scriptsize,color=orange!20!white,#1]{A: #2}} % Aryeh's comments
+
+\usepackage{amsmath,amsbsy,amsfonts,amssymb,amsthm,color,dsfont}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PACKAGES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{latexsym}
+\usepackage{fullpage}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{enumerate}
+\usepackage{accents}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage[ruled]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{dsfont}
+\usepackage[bf]{caption}
+\usepackage{hyperref}
+\hypersetup{
+    bookmarks=true,         % show bookmarks bar?
+    unicode=false,          % non-Latin characters in AcrobatÕs bookmarks
+    pdftoolbar=true,        % show AcrobatÕs toolbar?
+    pdfmenubar=true,        % show AcrobatÕs menu?
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width of the page to the window
+    pdftitle={My title},    % title
+    pdfauthor={Author},     % author
+    pdfsubject={Subject},   % subject of the document
+    pdfcreator={Creator},   % creator of the document
+    pdfproducer={Producer}, % producer of the document
+    pdfkeywords={keyword1} {key2} {key3}, % list of keywords
+    pdfnewwindow=true,      % links in new window
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=red,          % color of internal links (change box color with linkbordercolor)
+    citecolor=blue,        % color of links to bibliography
+    filecolor=magenta,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+\usepackage{amsthm}
+\usepackage{times}
+\usepackage{natbib}
+\usepackage{nicefrac}
+\usepackage{wrapfig}
+\usepackage[capitalize]{cleveref}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MACROS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\defined}{\vcentcolon =}
+\newcommand{\rdefined}{=\vcentcolon}
+\newcommand{\E}{\mathbb E}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\calF}{\mathcal F}
+\newcommand{\sr}[1]{\stackrel{#1}}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\ind}[1]{\mathds{1}\!\!\set{#1}}
+\newcommand{\argmax}{\operatornamewithlimits{arg\,max}}
+\newcommand{\argmin}{\operatornamewithlimits{arg\,min}}
+\newcommand{\floor}[1]{\left \lfloor {#1} \right\rfloor}
+\newcommand{\ceil}[1]{\left \lceil {#1} \right\rceil}
+
+\def\subsubsect#1{\vspace{1ex plus 0.5ex minus 0.5ex}\noindent{\bf\boldmath{#1.}}}
+
+\renewcommand{\P}[1]{\mathbb{P}\left\{#1\right\}}
+\newcommand{\Prob}[1]{\mathbb{P}\left\{#1\right\}}
+\newcommand{\EE}[1]{\mathbb{E}\left[#1\right]}
+
+\let\temp\epsilon
+\let\epsilon\varepsilon
+\newcommand{\eps}{\varepsilon}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THEOREMS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+
+\newcommand{\R}{\mathds{R}}
+
+\newcommand\wh{\ensuremath{\widehat}}
+\newcommand\wt{\ensuremath{\widetilde}}
+\newcommand\norm[1]{\left\| #1 \right\|}
+\newcommand\tvnorm[1]{\left\| #1 \right\|_{\mathrm{TV}}}
+\newcommand\parens[1]{\left( #1 \right)}
+\DeclareMathOperator{\Diag}{Diag}
+\DeclareMathOperator{\Sym}{Sym}
+\renewcommand\t{{\ensuremath{\scriptscriptstyle{\top}}}}
+\newcommand\be{\ensuremath{\mathbf{e}}}
+\newcommand\tmix{\ensuremath{t_{\mathrm{mix}}}}
+\newcommand\htmix{\ensuremath{\hat{t}_{\mathrm{mix}}}}
+\newcommand{\od}{\bar{d}}
+\newcommand{\tcouple}{\tau_{\mathrm{couple}}}
+\newcommand{\ZZ}{\mathcal{Z}}
+\newcommand\trel{\ensuremath{t_{\mathrm{rel}}}}
+\newcommand{\ip}[1]{\langle#1\rangle}
+\newcommand{\DF}{\mathcal{E}}
+\newcommand\ttmix{\ensuremath{t_{\mathrm{mix},2}}}
+
+\newcommand{\paren}[1]{\left( #1 \right)}
+\newcommand{\sqprn}[1]{\left[ #1 \right]}
+\newcommand{\tlprn}[1]{\left\{ #1 \right\}}
+%\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\oo}[1]{\frac{1}{#1}}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\nrm}[1]{\left\Vert #1 \right\Vert}
+\newcommand{\TV}[1]{\nrm{#1}_{\textrm{{\tiny \textup{TV}}}}}
+
+\def\ddefloop#1{\ifx\ddefloop#1\else\ddef{#1}\expandafter\ddefloop\fi}
+% \bbA, \bbB, ...
+\def\ddef#1{\expandafter\def\csname bb#1\endcsname{\ensuremath{\mathbb{#1}}}}
+\ddefloop ABCDEFGHIJKLMNOPQRSTUVWXYZ\ddefloop
+
+\title{Statistical Estimation of Mixing Times}
+%\author{Daniel, Aryeh, Csaba}
+
+
+\begin{document}
+\maketitle
+
+
+
+
+\section{Markov decoupling}
+
+The following convention will be used for discontiguous indices. For 
+$I
+=\set{i_1,i_2,\ldots,i_{|I|}}
+\subset\N
+$ and
+any sequence $u=u_1,u_2,\ldots$,
+we write
+$$
+(u_i)_{i\in I}:=(u_{i_1},u_{i_2},\ldots,u_{i_{|I|}}).
+$$
+Also, for any random variable, $\cal L(\cdot)$ will denote its
+law (distribution).
+
+
+Let $X=(X_1,X_2,\ldots)$ be a 
+stationary
+$(G,\theta)$-geometrically ergodic
+(in the sense of \cite{meroi2012-jap})
+Markov chain.
+Define
+$\tilde X=(\tilde X_1,\tilde X_2,\ldots)$ be a 
+the iid sequence
+distributed according to 
+the stationary distribution of $X$.
+
+
+{\bf Theorem.}
+For $I=\set{s,2s,\ldots,ts}$ for some $s,t\in\N$, we have
+$$
+\TV{{\cal L}(X_{i\in I}) - {\cal L}(\tilde X_{i\in I})}
+\le 
+2(t-1)G\theta^{s-1}
+.
+$$
+
+
+
+
+
+\bibliographystyle{plainnat}
+\bibliography{all}
+
+\end{document}
+
+
+
+
+and
+$\tilde Y=\tilde Y_1,\tilde Y_2,\ldots$ 
+be the iid sequence
+of $\N$-valued random variables
+distributed according to 
+the stationary distribution of $Y$.
+% (given by
+%$\rho=B\pi$).
+Define 
+the index set
+$I=\set{s,2s,\ldots,ts}$ for some $s,t\in\N$.
+Then
+\beq
+\TV{\calL(Y_{i\in I}) - \calL(\tilde Y_{i\in I})}
+\le 
+2(t-1)G\tha^{s-1}
+%2G\tha^{s-1}
+.
+\eeq
+\enthn
+
+
+
+
+The following convention will be used for discontiguous indices. For 
+$I
+=\set{i_1,i_2,\ldots,i_{|I|}}
+\subset\N
+$ and
+$u\in\N^I$, the coordinates of $u$ are indexed as 
+\beqn
+\label{eq:index}
+u=(u_i)_{i\in I}=(u_{i_1},u_{i_2},\ldots,u_{i_{|I|}})
+\eeqn
+and {\bf not} as $u=(u_i)_{1\le i\le|I|}=(u_{1},u_{2},\ldots,u_{|I|})$.
+
+\bethn
+\label{thm:hmm-decoup}
+%Let 
+%$(\pi,A,B)$ be a stationary $(G,\tha)$-geometrically ergodic Markov kernel
+%with stationary distribution $\pi$ and $B$ an emission probability matrix.
+Let $Y=Y_1,Y_2,\ldots$ be a 
+stationary
+$(G,\tha)$-geometrically ergodic
+hidden Markov chain 
+%induced by $(\pi,A,B)$,
+and
+$\tilde Y=\tilde Y_1,\tilde Y_2,\ldots$ be the iid sequence
+of $\N$-valued random variables
+distributed according to 
+the stationary distribution of $Y$.
+% (given by
+%$\rho=B\pi$).
+Define 
+the index set
+$I=\set{s,2s,\ldots,ts}$ for some $s,t\in\N$.
+Then
+\beq
+\TV{\calL(Y_{i\in I}) - \calL(\tilde Y_{i\in I})}
+\le 
+2(t-1)G\tha^{s-1}
+%2G\tha^{s-1}
+.
+\eeq
+\enthn
+%{\em Remark}: 
+%Note that the bound is {\em dimension-free} in that it does not 
+%depend on $T=|I|$.
+
+The proof of Theorem \ref{thm:hmm-decoup} will proceed via several lemmata. 
+First, we reduce
+HMM decoupling to the simpler Markov decoupling:
+\belen
+\label{lem:hmm<markov-decoup}
+Let $Y$
+be the Markov chain induced by $(\pi,A,B)$
+and
+$X$ be the Markov chain underlying $Y$.
+Define
+$\tilde X$ and $\tilde Y$ to be the iid $\N$-valued processes distributed according to 
+$\pi$ and
+$\rho=B\pi$, respectively,
+and
+%
+%, $\tilde Y$, $A$, $B$, and $\pi$ be as in the statement of 
+%Theorem \ref{thm:hmm-decoup} and let $X=X_1,X_2,\ldots$ be the 
+%Markov chain underlying $Y$.
+%Define $\tilde X=\tilde X_1,\tilde X_2,\ldots$ be an 
+%iid sequence of $\N$-valued random variables
+%distributed according to $\pi$ and
+choose any
+$I\subset\set{1,\ldots,n}$, $n\in\N$.
+Then
+\beq
+\TV{\calL(Y_{i\in I}) - \calL(\tilde Y_{i\in I})}
+\le
+\TV{\calL(X_{i\in I}) - \calL(\tilde X_{i\in I})} 
+.
+\eeq
+\enlen
+\bepf
+Let $Q$ and $\tilde Q$ be the probability measures 
+induced 
+on $\N^{ts}$
+by $X$ and ${\tilde X}$, respectively,
+and let
+$P$ and $\tilde P$ 
+be the probability measures induced by
+ $Y$ and ${\tilde Y}$.
+Put $J=\set{1,\ldots,n}\setminus I$.
+
+For $w\in\N^I$ and $z\in\N^J$, define $x[w,z]\in\N^{I\cup J}$
+to be such that $x_i=w_i$ for $i\in I$ and $x_j=z_j$ for $j\in J$ 
+(recall our indexing convention (\ref{eq:index})). 
+For $u\in\N^I,v\in\N^J$, we define $y[u,v]\in\N^{I\cup J}$ 
+analogously.
+Then
+\beq
+\TV{\calL(Y_{i\in I}) - \calL(\tilde Y_{i\in I})}
+&=& 
+\oo2\sum_{u\in\N^I}\abs{ \sum_{v\in\N^J} \paren{P(y[u,v])-\tilde P(y[u,v])}} \\
+\hide{
+&=&
+\oo2\sum_{u\in\N^I}\abs{ 
+\sum_{v\in\N^J }
+\sum_{x\in\N^{I\cup J}}
+\prod_{i\in I}B_{u_i,x_i} \prod_{j\in J}B_{v_j,x_j}
+\paren{
+Q(x)
+-
+\tilde Q(x)
+}
+} 
+\\
+}
+&=&
+\oo2\sum_{u\in\N^I}\abs{ 
+\sum_{v\in\N^J }
+%\sum_{x\in\N^{I\cup J}
+\sum_{w\in\N^{I}}
+\sum_{z\in\N^{J}}
+\prod_{i\in I}B_{u_i,w_i} \prod_{j\in J}B_{v_j,z_j}
+\paren{
+Q(x[w,z])
+-
+\tilde Q(x[w,z])
+}
+}
+\\
+&=&
+\oo2\sum_{u\in\N^I}\abs{ 
+\sum_{w\in\N^{I}}
+\sum_{z\in\N^{J}}
+\prod_{i\in I}B_{u_i,w_i}
+\paren{
+Q(x[w,z])
+-
+\tilde Q(x[w,z])
+}
+}
+\\
+&\le&
+\oo2\sum_{u\in\N^I}
+\sum_{w\in\N^{I}}
+\prod_{i\in I}B_{u_i,w_i}
+\abs{ 
+\sum_{z\in\N^{J}}
+\paren{
+Q(x[w,z])
+-
+\tilde Q(x[w,z])
+}
+}
+\\
+&=&
+\oo2
+\sum_{w\in\N^{I}}
+\abs{ 
+\sum_{z\in\N^{J}}
+\paren{
+Q(x[w,z])
+-
+\tilde Q(x[w,z])
+}
+}\\
+&=&
+\TV{\calL(X_{i\in I}) - \calL(\tilde X_{i\in I})} 
+.
+\eeq
+\enpf
+
+Next, we 
+establish a Markov decoupling result, which may be of independent interest.
+The result relies on the following lemma, whose proof was sketched in
+\cite[Lemma 2.2.5, Remark 2.2.7]{kont07-thesis}, and which we give in the Appendix for completeness.
+\belen
+\label{lem:2kernels}
+Consider two at most countable sets $\calX,\calY$.
+Let 
+$p_0$ 
+be
+a distribution on $\calX$, and
+$p_1(\cdot\gn x)$, $x\in\calX$, a (conditional probability) 
+%transition
+kernel from $\calX$ to $\calY$,
+%We will 
+and
+write 
+$
+\mu=
+p_0\tp p_1
+%(\cdot\gn x)
+$ for the distribution on
+$\calX\times\calY$ defined by
+\beq
+\mu(x,y) &=& p_0(x)p_1(y\gn x),
+\qquad x,y\in\calX\times\calY.
+\eeq
+Similarly, let $q_0$ be a distribution on $\calX$ and $q_1$ a kernel from $\calX$
+to $\calY$; define
+$\nu=q_0\tp q_1
+%(\cdot\gn x)
+$. 
+Then
+\beqn
+\label{eq:tvtensker}
+\TV{\mu-\nu} &\leq &
+d_0+d_1-d_0d_1,
+\eeqn
+where $d_0=\TV{p_0-q_0}$ and
+\beq
+d_1 &=& \sup_{x\in\calX}\TV{p_1(\cdot\gn x)-q_1(\cdot\gn x)}.
+\eeq
+\enlen
+
+%prove a 
+%dimension-free
+%Markov contraction inequality:
+\belen
+\label{lem:markov-decoup}
+Let $X=(X_1,\ldots,X_n)$
+be a 
+stationary
+Markov chain 
+%Let $A$ be 
+%Markov kernel 
+with 
+stationary distribution $\pi$
+and
+contraction coefficient $\kappa$,
+%induced by $(\xi,A)$
+and
+$\tilde X=(\tilde X_1,\ldots,\tilde X_n)$ 
+be the iid process with distribution $\pi$.
+Then
+\beq
+\TV{\calL(X)-\calL(\tilde X)}\le(n-1)\kappa
+.
+\eeq
+\enlen
+\bepf
+We will prove the claim by recursive applications of 
+(\ref{eq:tvtensker}). First, take 
+$\calX=\N$, $\calY=\N^{n-1}$,
+$p_0=\calL(X_1)$, $p_1=\calL(\sseq X2n\gn X_1)$,
+$q_0=\pi$, $q_1=\pi^{n-1}$.
+Clearly, $d_0=0$, and hence
+\beq
+\TV{\calL(X)-\calL(\tilde X)}\le \sup_{x_1\in\calX}
+\TV{\calL(\sseq X2n\gn X_1=x_1) - \pi^{n-1}}.
+\eeq
+For any fixed $x_1\in\calX$, we bound 
+$\TV{\calL(\sseq X2n\gn X_1=x_1) - \pi^{n-1}}$ 
+again via (\ref{eq:tvtensker}),
+this time taking $\calX=\N$, $\calY=\N^{n-2}$,
+$p_0=\calL(X_2\gn X_1=x_1)$, $p_1=\calL(\sseq X3n\gn X_2)$,
+$q_0=\pi$, $q_1=\pi^{n-2}$. Now
+$d_0=\TV{ \calL(X_2\gn X_1=x_1)-\pi}\le\kappa$, and so 
+(\ref{eq:tvtensker}) implies
+\beq
+\TV{\calL(\sseq X2n\gn X_1=x_1) - \pi^{n-1}}
+\le \kappa + \sup_{x_2\in\calX}
+\TV{\calL(\sseq X3n\gn X_2=x_2) - \pi^{n-2}}.
+\eeq
+Continuing this process yields the claim.
+%ALSO WRONG
+\hide{
+\beq
+\TV{\calL(X)-\calL(X')}
+&=&
+\oo2
+\sum_{x\in\N^n}
+\abs{
+\paren{\xi_{x_1}-\xi'_{x_1}}
+A_{x_2,x_1}\ldots A_{x_n,x_{n-1}}
+}\\
+&=&
+\oo2
+\sum_{x\in\N^n}
+A_{x_2,x_1}\ldots A_{x_n,x_{n-1}}
+\abs{
+{\xi_{x_1}-\xi'_{x_1}}
+}\\
+&=&
+\oo2
+\sum_{x_1\in\N}
+\abs{
+{\xi_{x_1}-\xi'_{x_1}}
+}=\TV{\xi-\xi'}
+\hide{
+%WRONG, keeping for posterity
+&\le&
+\oo2
+\sum_{x_2^n\in\N^{n-1}}
+A_{x_2,x_2}\ldots A_{x_n,x_{n-1}}
+\abs{
+\sum_{x_1\in\N}
+A_{x_2,x_1}
+\paren{
+\xi_{x_1}-\xi'_{x_1}
+}
+}\\
+&=&
+\oo2
+\sum_{x_2\in\N }
+\abs{
+\sum_{x_1\in\N }
+A_{x_2,x_1}
+\paren{
+\xi_{x_1}
+-
+\xi'_{x_1}
+}
+}\\
+&=&
+\TV{A(\xi-\psi)} \le \kappa\TV{\xi-\psi}
+}
+\eeq
+where the last inequality follows from Lemma \ref{lem:markov-contraction}.
+}
+\enpf
+{\em Remark.} A more careful application of (\ref{eq:tvtensker}),
+together with \cite[Lemma 12]{mark-conc}, yields the sharper estimate
+\beq
+\TV{\calL(X)-\calL(\tilde X)}\le 1-(1-\kappa)^{n-1}.
+\eeq
+
+We proceed with the proof of the HMM decoupling theorem:
+\bepf[Proof of Theorem \ref{thm:hmm-decoup}]
+Let $X$ be the Markov chain underlying $Y$
+induced by $(\xi,A)$ for some stochastic vector $\xi$,
+and let $\tilde X$ be its 
+corresponding iid version, distributed according to $\pi$,
+the stationary distribution of $A$.
+Then Lemma \ref{lem:hmm<markov-decoup} implies that, for any $I\subset\N$,
+\beq
+\TV{\calL(Y_{i\in I}) - \calL(\tilde Y_{i\in I})}
+\le
+\TV{\calL(X_{i\in I}) - \calL(\tilde X_{i\in I})} .
+\eeq
+Now for $I=\set{s,2s,\ldots,ts}$, we have
+\beq
+\calL(X_{i\in I}) = \calL(Z_1,\ldots,Z_t),
+\eeq
+where $Z=\seq Z1t$ is the Markov chain induced by $(\xi,A^{s-1})$.
+Now by Corollay \ref{cor:ergo-contr}, $A^{s-1}$ has contraction coefficient
+$\kappa\le2G\tha^{s-1}$, and so Lemma \ref{lem:markov-decoup} implies
+\beq
+\TV{\calL(X_{i\in I}) - \calL(\tilde X_{i\in I})}
+&=&
+\TV{\calL\seq Z1t - \calL\seq{\tilde X}{1}{t}} \\
+&\le& 
+2(t-1)G\tha^{s-1}
+%\kappa\TV{\xi-\pi}\le
+%2G\tha^{s-1}
+.
+\eeq
+\enpf
+
+
+
+\bibliographystyle{plainnat}
+\bibliography{all}
+
+\end{document}
+

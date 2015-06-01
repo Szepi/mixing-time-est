@@ -1,0 +1,102 @@
+%!TEX root =  matrix-est.tex
+\label{sec:setting}
+Let $\vP \in (\Delta^{d-1})^d \subset [0,1]^{d \times d}$ be a $d
+\times d$ row-stochastic matrix for an ergodic (i.e., irreducible and
+aperiodic) Markov chain.
+This implies there is a unique stationary distribution $\vpi \in
+\Delta^{d-1}$ with $\pi_i > 0$ for all $i \in [d]$~\citep[Corollary
+1.17]{LePeWi08}.
+We also assume that $\vP$ is \emph{reversible} (with respect to
+$\vpi$):
+\begin{align}
+\label{eq:reversibility}
+  \pi_i P_{i,j} = \pi_j P_{j,i} ,
+  \quad i,j \in [d] .
+\end{align}
+The minimum stationary probability is denoted by $\pimin := \min_{i
+\in [d]} \pi_i$.
+
+Define the matrices
+\begin{align*}
+\vM := \Diag(\vpi) \vP \quad \text{and} \quad
+\vL := \Diag(\vpi)^{-1/2} \vM \Diag(\vpi)^{-1/2}\,.
+\end{align*}
+The $(i,j)$th entry of the matrix $M_{i,j}$ contains the \emph{doublet
+probabilities} associated with $\vP$: $M_{i,j} = \pi_i P_{i,j}$ is the
+probability of seeing state $i$ followed by state $j$ when the chain
+is started from its stationary distribution.
+The matrix $\vM$ is symmetric on account of the reversibility of
+$\vP$, and hence it follows that $\vL$ is also symmetric.
+Further, $\vL = \Diag(\vpi)^{1/2} \vP \Diag(\vpi)^{-1/2}$, hence $\vL$
+and $\vP$ are similar and thus their eigenvalue systems are identical.
+Ergodicity and reversibility imply that the eigenvalues of $\vL$ are
+contained in the interval $\opencloseint{-1,1}$, and that $1$ is an
+eigenvalue of $\vL$ with multiplicity $1$~\citep[Lemmas 12.1 and
+12.2]{LePeWi08}.
+Denote and order the eigenvalues of $\vL$ as
+\[
+  1 = \lambda_1 > \lambda_2 \geq \dotsb \geq \lambda_d > -1 .
+\]
+Let $\slem := \max\{ \lambda_2,\, |\lambda_d| \}$, and define the
+(absolute) spectral gap to be $\gap := 1-\slem$, which is strictly positive.
+%Throughout the paper, both $\pimin$ and $\gap$ are assumed
+%to be positive.
+
+Let $(X_t)_{t\in\bbN}$ be a Markov chain whose transitions are governed by
+$\vP$.
+For each $t \in \bbN$, let $\vpi^{(t)} \in \Delta^{d-1}$ denote the
+marginal distribution of $X_t$, so
+\[
+  \vpi^{(t+1)} = \vpi^{(t)} \vP ,
+  \quad t \in \bbN .
+\]
+Note that the initial distribution $\vpi^{(1)}$ is arbitrary,
+and need not be the stationary distribution $\vpi$.
+
+The goal is to estimate $\pimin$ and $\gap$ from the length $n$ sample
+path $(X_t)_{t \in [n]}$, and also to construct fully empirical
+confidence intervals that $\pimin$ and $\gap$ with high probability;
+in particular, the construction of the intervals should not depend on
+any unobservable quantities, including $\pimin$ and $\gap$ themselves.
+It is well-known that the \emph{mixing time} of the Markov chain $\tmix$ (defined in the introduction)
+\hide{,
+\[
+  \tmix
+  :=
+  \min\Braces{
+    t \in \bbN :
+    \sup_{\vq \in \Delta^{d-1}}
+    \Norm{
+      \vq \vP^t - \vpi
+    }_{\tv} \leq 1/4
+  }
+  ,
+\]}
+can be bounded in terms of $\pimin$ and $\gap$~\citep[Theorems~12.3
+and~12.4]{LePeWi08}:
+\[
+  \Parens{\frac1{\gap} - 1} \ln2
+  \ \leq \ \tmix
+  \ \leq \ \frac1{\gap} \log \frac4{\pimin}
+  .
+\]
+Moreover, convergence rates for empirical processes on Markov chain
+sequences are also often given in terms of mixing coefficients that
+can ultimately be bounded in terms of $\pimin$ and
+$\gap$~\citep[e.g.,][]{MR1921877,MoRo08,MoRo09}. \todoc{Cite one? Btw, do these really have these results?}
+Therefore, valid confidence intervals for $\pimin$ and $\gap$ can be
+used to make these rates fully observable.
+
+%Therefore, confidence intervals for $\pimin$ and $\gap$ can be used to
+%make these rates data-dependent and hence usable in procedures such
+%as Structural Risk Minimization.
+%\todoc{citation for SRM, and other applications?}
+%
+%Additionally, we aim to provide
+%asymptotic convergence rates
+%as well as data-dependent confidence intervals;
+%the latter should not depend on any unknown quantities
+%(such as $\pimin$ and $\gap$).
+%
+%\todoc[inline]{What is the data? What is the problem?}
+

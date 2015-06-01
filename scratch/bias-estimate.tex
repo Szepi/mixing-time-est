@@ -1,0 +1,295 @@
+\documentclass[11pt]{article}
+\usepackage{todonotes}
+\newcommand{\todoc}[2][]{\todo[size=\scriptsize,color=green!10!white,#1]{Cs: #2}} % Csaba's comments
+\newcommand{\todot}[2][]{\todo[size=\scriptsize,inline,color=blue!20!white,#1]{D: #2}} % Daniel's comments
+\newcommand{\todor}[2][]{\todo[size=\scriptsize,color=orange!20!white,#1]{A: #2}} % Aryeh's comments
+
+\usepackage{amsmath,amsbsy,amsfonts,amssymb,amsthm,color,dsfont}
+
+
+
+\def\ddefloop#1{\ifx\ddefloop#1\else\ddef{#1}\expandafter\ddefloop\fi}
+
+% \bA, \bB, ...
+\def\ddef#1{\expandafter\def\csname b#1\endcsname{\ensuremath{\mathbf{#1}}}}
+\ddefloop ABCDEFGHIJKLMNOPQRSTUVWXYZ\ddefloop
+
+% \bbA, \bbB, ...
+\def\ddef#1{\expandafter\def\csname bb#1\endcsname{\ensuremath{\mathbb{#1}}}}
+\ddefloop ABCDEFGHIJKLMNOPQRSTUVWXYZ\ddefloop
+
+% \cA, \cB, ...
+\def\ddef#1{\expandafter\def\csname c#1\endcsname{\ensuremath{\mathcal{#1}}}}
+\ddefloop ABCDEFGHIJKLMNOPQRSTUVWXYZ\ddefloop
+
+% \vA, \vB, ..., \va, \vb, ...
+\def\ddef#1{\expandafter\def\csname v#1\endcsname{\ensuremath{\boldsymbol{#1}}}}
+\ddefloop ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\ddefloop
+
+% \valpha, \vbeta, ...,  \vGamma, \vDelta, ...,
+\def\ddef#1{\expandafter\def\csname v#1\endcsname{\ensuremath{\boldsymbol{\csname #1\endcsname}}}}
+\ddefloop {alpha}{beta}{gamma}{delta}{epsilon}{varepsilon}{zeta}{eta}{theta}{vartheta}{iota}{kappa}{lambda}{mu}{nu}{xi}{pi}{varpi}{rho}{varrho}{sigma}{varsigma}{tau}{upsilon}{phi}{varphi}{chi}{psi}{omega}{Gamma}{Delta}{Theta}{Lambda}{Xi}{Pi}{Sigma}{varSigma}{Upsilon}{Phi}{Psi}{Omega}\ddefloop
+
+\newcommand\Sig{\ensuremath{\varSigma}}
+\newcommand\veps{\ensuremath{\varepsilon}}
+\newcommand\eps{\ensuremath{\epsilon}}
+
+\renewcommand\t{{\ensuremath{\scriptscriptstyle{\top}}}}
+
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\Diag}{Diag}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\vol}{vol}
+
+\DeclareMathOperator{\var}{var}
+
+\DeclareMathOperator{\Bd}{bd}
+\DeclareMathOperator{\Cl}{cl}
+\DeclareMathOperator{\Conv}{conv}
+\DeclareMathOperator{\Int}{int}
+\DeclareMathOperator{\Null}{ker}
+\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\Range}{ran}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\newcommand\wt{\ensuremath{\widetilde}}
+\newcommand\wh{\ensuremath{\widehat}}
+\renewcommand\v{\ensuremath{\boldsymbol}}
+
+\newcommand\comment[1]{{\color{blue}\{\textbf{Comment}: #1\}}}
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{claim}{Claim}
+\newtheorem{proposition}{Proposition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{condition}{Condition}
+\newtheorem{example}{Example}
+\newtheorem{problem}{Problem}
+
+\newcommand\parens[1]{(#1)}
+\newcommand\norm[1]{\|#1\|}
+\newcommand\braces[1]{\{#1\}}
+\newcommand\brackets[1]{[#1]}
+\newcommand\ceil[1]{\lceil#1\rceil}
+\newcommand\abs[1]{|#1|}
+\newcommand\ind[1]{\ensuremath{\mathds{1}\{#1\}}}
+\newcommand\dotp[1]{\langle #1 \rangle}
+
+\newcommand\Parens[1]{\left(#1\right)}
+\newcommand\Norm[1]{\left\|#1\right\|}
+\newcommand\Braces[1]{\left\{#1\right\}}
+\newcommand\Brackets[1]{\left[#1\right]}
+\newcommand\Ceil[1]{\left\lceil#1\right\rceil}
+\newcommand\Abs[1]{\left|#1\right|}
+\newcommand\Ind[1]{\ensuremath{\mathds{1}\left\{#1\right\}}}
+\newcommand\Dotp[1]{\left\langle #1 \right\rangle}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PACKAGES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{latexsym}
+\usepackage{fullpage}
+\usepackage{amsmath}
+\usepackage{amssymb}
+%\usepackage{mathtools}
+\usepackage{enumerate}
+\usepackage{accents}
+\usepackage{tikz}
+%\usepackage{pgfplots}
+\usepackage[ruled]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{dsfont}
+\usepackage[bf]{caption}
+\usepackage{hyperref}
+\hypersetup{
+    bookmarks=true,         % show bookmarks bar?
+    unicode=false,          % non-Latin characters in Acrobats bookmarks
+    pdftoolbar=true,        % show Acrobats toolbar?
+    pdfmenubar=true,        % show Acrobats menu?
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width of the page to the window
+    pdftitle={My title},    % title
+    pdfauthor={Author},     % author
+    pdfsubject={Subject},   % subject of the document
+    pdfcreator={Creator},   % creator of the document
+    pdfproducer={Producer}, % producer of the document
+    pdfkeywords={keyword1} {key2} {key3}, % list of keywords
+    pdfnewwindow=true,      % links in new window
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=red,          % color of internal links (change box color with linkbordercolor)
+    citecolor=blue,        % color of links to bibliography
+    filecolor=magenta,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+\usepackage{amsthm}
+\usepackage{times}
+\usepackage{natbib}
+\usepackage{nicefrac}
+\usepackage{wrapfig}
+\usepackage[capitalize]{cleveref}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MACROS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\defined}{\vcentcolon =}
+\newcommand{\rdefined}{=\vcentcolon}
+%\newcommand{\E}{\mathbb E}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\calF}{\mathcal F}
+\newcommand{\calR}{\mathcal R}
+\newcommand{\sr}[1]{\stackrel{#1}}
+\newcommand{\set}[1]{\left\{#1\right\}}
+%\newcommand{\ind}[1]{\mathds{1}\!\!\set{#1}}
+%\newcommand{\argmax}{\operatornamewithlimits{arg\,max}}
+%\newcommand{\argmin}{\operatornamewithlimits{arg\,min}}
+%\newcommand{\floor}[1]{\left \lfloor {#1} \right\rfloor}
+%\newcommand{\ceil}[1]{\left \lceil {#1} \right\rceil}
+
+\def\subsubsect#1{\vspace{1ex plus 0.5ex minus 0.5ex}\noindent{\bf\boldmath{#1.}}}
+
+\renewcommand{\P}[1]{\mathbb{P}\left\{#1\right\}}
+\newcommand{\Prob}[1]{\mathbb{P}\left\{#1\right\}}
+\newcommand{\EE}[1]{\mathbb{E}\left[#1\right]}
+
+\let\temp\epsilon
+\let\epsilon\varepsilon
+%\newcommand{\eps}{\varepsilon}
+
+
+
+\newcommand{\beq}{\begin{eqnarray*}}
+\newcommand{\eeq}{\end{eqnarray*}}
+\newcommand{\beqn}{\begin{eqnarray}}
+\newcommand{\eeqn}{\end{eqnarray}}
+
+\newcommand{\gn}{\, | \,}
+
+\def\ddefloop#1{\ifx\ddefloop#1\else\ddef{#1}\expandafter\ddefloop\fi}
+% \bbA, \bbB, ...
+\def\ddef#1{\expandafter\def\csname bb#1\endcsname{\ensuremath{\mathbb{#1}}}}
+\ddefloop ABCDEFGHIJKLMNOPQRSTUVWXYZ\ddefloop
+
+\newcommand\pmat[4]{\ensuremath{\begin{pmatrix} #1 & #2 \\ #3 & #4\end{pmatrix}}}
+\newcommand{\TV}[1]{\nrm{#1}_{\textrm{{\tiny \textup{TV}}}}}
+\newcommand{\hide}[1]{}
+
+%\input{__includes}
+
+\newcommand\pimin{\ensuremath{\pi_{\min}}}
+\newcommand\Geom{\ensuremath{\operatorname{Geom}}}
+\newcommand\errm{\ensuremath{\v{\cE}_{\vM}}}
+\newcommand\errp{\ensuremath{\v{\cE}_{\vpi}}}
+\newcommand\tv{\ensuremath{\mathrm{tv}}}
+
+
+\title{Non-stationarity bias}
+%{Lower bounds}
+%\author{Daniel, Aryeh, Csaba}
+
+
+\begin{document}
+\maketitle
+
+There is a bias in the estimates that arises when the initial state
+distribution is not the stationary distribution.
+We first quantify this bias.
+
+Define
+\begin{align*}
+  \vpi^{(H_s)} & := \frac1{|H_s|} \sum_{t \in H_s} \vpi^{(t)} ,
+  & \vpi^{(T_s)} & := \frac1{|T_s|} \sum_{t \in T_s} \vpi^{(t)} , \\
+  \vpi^{(H)} & := \sum_{s=1}^{\mu_H} w_{H,s} \vpi^{(H_s)} ,
+  & \vpi^{(T)} & := \sum_{s=1}^{\mu_T} w_{T,s} \vpi^{(T_s)} ,
+\end{align*}
+\begin{align*}
+  \vpi^{(H,T)} & := \frac{n_H}{n-1} \vpi^{(H)} + \frac{n_T}{n-1}
+  \vpi^{(T)}
+  = \frac1{n-1} \sum_{t=1}^{n-1} \vpi^{(t)}
+\end{align*}
+(the first four definitions are used later).
+Then
+\begin{multline*}
+  \Diag(\vpi)^{-1/2}\bbE(\wh\vM)\Diag(\vpi)^{-1/2} - \vL
+  \\
+  =
+  \Parens{
+    \Diag(\vpi)^{-1/2} \Diag(\vpi^{(H,T)}) \Diag(\vpi)^{-1/2} - \vI
+  } \vL
+  ,
+\end{multline*}
+and therefore
+\[
+  \Norm{\Diag(\vpi)^{-1/2}\bbE(\wh\vM)\Diag(\vpi)^{-1/2} - \vL}
+  \leq \max_{i \in [d]} \Abs{ \frac{\pi_i^{(H,T)}}{\pi_i} - 1 }
+\]
+since $\norm{\vL} \leq 1$.
+
+
+
+
+\paragraph{Bounding the bias}
+We will make use of \citet{MoTe06} Proposition 1.12 and Corollary 1.15:
+%Aldous-Fill \cite{aldous-fill} Ch. 3 Lemma 26:
+\beqn
+\label{eq:L2-contraction}
+\norm{
+\vUpsilon^{(t)}
+-1
+}_2 \le 
+(1-\gamma^2)^{t-1}\sqrt{\frac{1-\pi_{\min}}{\pi_{\min}}},
+\eeqn
+where $\Upsilon_i^{(t)}=\frac{\pi_i^{(t)}}{\pi_i}$.
+
+
+
+
+Now
+
+\beq
+\max_{i \in [d]} \Abs{ \frac{\pi_i^{(H,T)}}{\pi_i} - 1 }
+&\le&
+\sqrt{\sum_{i\in[d]}
+\Parens{ \frac{\pi_i^{(H,T)}}{\pi_i} - 1 }^2
+}\\
+&=&
+\Norm{ 
+\frac1{n-1} \sum_{t=1}^{n-1} 
+\vUpsilon^{(t)}
+-1
+}_2
+\\
+&\le&
+\frac1{n-1}
+\sum_{t=1}^{n-1}
+\norm{
+\vUpsilon^{(t)}
+-1
+}_2
+\\
+&\le&
+\frac1{n-1}
+\sqrt{\frac{1-\pi_{\min}}{\pi_{\min}}}
+\cdot
+\frac{1-\gamma^2-(1-\gamma^2)^n}{\gamma^2(1-\gamma^2)}
+\\
+&=&
+O\Parens{ \frac1{n\gamma^2\sqrt{\pi_{\min}}}}
+.
+\eeq
+
+\end{document}
+

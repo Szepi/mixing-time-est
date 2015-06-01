@@ -1,0 +1,390 @@
+%!TEX root =  matrix-est.tex
+
+\begin{sloppypar}
+Predicting diverse characteristics of various physical and simulated phenomena, 
+	performance monitoring and diagnostics of controlled systems, 
+        as well as
+	various speech recognition, video or natural language processing tasks 
+	are all examples that involve temporally dependent data.
+Classical results of statistics and statistical learning theory extend 
+	to the dependent data in a more or less seamless fashion,
+	at least when the data is sufficiently ``mixing''.
+Such results include the central limit theorem, 
+	exponential tail bounds for empirical processes, 
+	performance guarantees for complexity regularization
+	using sieves or roughness penalties, as well as 
+	results based on stability arguments or Rademacher-complexity 
+	\citep{Woo86,Dou94,Yu94,ZheChu96,dlPenaGine99,Mei00,
+MR1921877,vid2003,gamarnik03,LoKuScha05,MoRo08,MoRo09,
+DBLP:conf/nips/SteinwartC09,Steinwart2009175,
+FaSze11,
+london:nips12asalsn,london:icml13,
+DBLP:conf/nips/ShaliziK13}.
+\end{sloppypar}
+
+While under sufficiently fast mixing, the form of the results is preserved,
+	the performance guarantees are typically dependent on the \emph{unknown}
+	mixing time of the underlying stochastic process.	
+A simple example where this problem arises is when a data-dependent bound
+	on the performance of a small number of predictors is needed for the selection
+	of the best estimator.
+\citet{Mei00} 	considers the more challenging problem of complexity regularization and notes that
+	this technique remains ``a theoretician's dream'' in the absence of an estimate of the mixing time.
+%As noted by \citet{Mei00}, in order to form better predictions, 
+An analogue issue arises in the convergence diagnostics of Monte-Carlo Markov Chain (MCMC)
+	samplers, or when a single sample path of a stochastic controlled system is used to
+	estimate the performance of a control policy.
+Owning to the wide applicability of MCMC methods to various computational problems,
+	much effort has been devoted to developing effective convergence diagnostic methods
+	with the aim of deriving stopping rules or stationarity diagnoses.
+While a large number of heuristic techniques have been developed 
+	\citep[e.g.,][]{MCMCDiscussion93,CoCa96},
+	it is widely recognized that all these methods may fail to meet the guarantees
+	that they are designed for.
+	
+In the theory community, 
+	\citet{BaFoRuSmiWhi00,BaFoRuSmiWhi13} develop algorithms for testing whether a given Markov
+	chain over a finite state space of size $d$ is rapidly mixing.
+In particular, based on testing closeness of distributions when a sampling device is available,
+	their algorithm can distinguish between chains that in $t$ steps for a fixed $t$ reach a distribution
+	close to the stationary distribution by simulating $\tilde{O}(t d^{5/3})$ transitions.
+It is remarkable that when $t$ is small enough, the procedure requires sublinearly many samples
+	in the total number of transitions in the Markov chain.
+The algorithm is assumes that transitions can be simulated from any given state.
+	
+\citet{BhaBoMo11} study a similar question for Markov chains with very large state spaces.
+	In particular, they assume an circuit based description of the transition probability structure of the matrix
+	and derive several hardness results for Markov chains whose state space 
+	consists of all binary strings of a given length.
+For example, they prove that given a Markov chain that mixes rapidly, it is $S\!Z\!K$-hard
+	to distinguish whether the chain is close to stationarity by time $t$ or far from stationarity at time $ct$ for a constant $c$
+	when started from a given initial state ($S\!Z\!K \subset A\!M \cap \mathrm{co}A\!M$, 
+	which is conjectured to extend beyond $B\!P\!P$ \citep{GoVa11}).%
+\footnote{$SZK$ stands for statistical zero-knowledge, $BPP$ stands for probabilistic polynomial-time, 
+$AM$ stands for ``Arthur-Merlin protocol''.}
+
+Other works include that of \citet{McDoShaSche11} who propose to estimate the $\beta$-mixing coefficients 
+	of a stationary process possessing a density based on histogram estimates of the underlying joint density.
+Their main result is a consistency result for a fixed ``lag''. For fast mixing processes (e.g., for $k$-step Markov processes)
+their result yields a convergence rate, which is given in terms of the unknown mixing coefficients.
+%Catch-22 problem remains: The rate of convergence of their estimates depends on the unknown mixing coefficients
+%(Theorem 2.4)
+% $\exp(W(\ln(n)))$ is the window length, where $W$ is Lambert's $W$-function (i.e., this is between $\ln \ln(n)$ and $\ln n$).
+An earlier paper of the same spirit is that of \citet{Nobel06} who considers the generalization of 
+existing discernibility results for i.i.d. processes to weakly uniformly ergodic families and shows how
+this can be used to study, and in some cases estimate, polynomial mixing times for dependent processes.
+ 
+ \todoc[inline]{\url{http://arxiv.org/abs/1212.2016}, Non-asymptotic confidence intervals for MCMC in practice
+Benjamin M. Gyori, Daniel Paulin, could be interesting.
+At the end of the abstract they say:
+``We propose estimators of the parameters appearing in the bounds, and illustrate our results with simulations on lattice models in statistical physics as well as an example of Bayesian model averaging.''
+See also \url{http://arxiv.org/abs/1409.7986v1}.
+}
+%\todoc[inline]{Add:
+%Computable exponential bounds for screened estimation and simulation
+%I Kontoyiannis, S Meyn 
+%AREYH: is that one relevant? They deal with iid sequences
+%and
+%Exponential bounds and stopping rules for MCMC and general Markov chains
+%I Kontoyiannis, L Lastras-Montano, S Meyn
+%AREYH: I don't think this one is too relevant either:
+%their bounds depend on unknown quantities
+%}
+%\citet{DBLP:conf/valuetools/KontoyiannisLM06}
+%give large deviation bounds
+
+\paragraph{Main results.}
+Consider a reversible ergodic Markov chain on $d$ states with spectral
+gap $\gap$ (which is well-known to govern mixing time)
+and stationary distribution minorized by $\pimin$. \todoc{Should we add definitions? Reversible, ergodic, spectral gap? Where?}
+Our main results are summarized as follows.
+\begin{enumerate}
+  \item
+    In Theorem~\ref{thm:err}, we give a procedure that estimates
+    $\gap$ to within a constant multiplicative factor from \emph{a single
+    sample path} of length
+    $\tilde{O}\parens{1/(\pimin\gap^3)}$.\footnote{The
+    $\tilde{O}(\cdot)$ notation suppresses logarithmic factors.}
+
+  \item
+    In Theorems~\ref{thm:lb-pimin} and \ref{thm:lb-gap}, we show that
+    $\Omega\parens{ (d\ln d)/\gap + 1/\pimin }$ observations are
+    necessary for constant multiplicative accuracy.
+
+  \item
+    Finally, in Theorem~\ref{thm:empirical} we develop a procedure for
+    providing \emph{fully data-dependent confidence bounds} on the
+    spectral gap $\gap$.
+    The procedure uses just a single sample path and does not require
+    knowing anything about $\gap$ or $\pimin$.
+    We also quantify the rate at which the confidence interval
+    shrinks as a function of the length of the sample path,
+    which is
+    $     O\Parens{
+      \frac1{\pimin}\sqrt{\frac{d\ln(d/\delta)}{ n}}
+      +
+      \frac{d}{\pimin\gap} \sqrt{\frac{\ln(d/\delta)}{\pimin n}}
+    }.$
+
+
+    
+%    \todoc{please add rate}
+
+\end{enumerate}
+
+\hide{
+Our approach:
+Interval can be given in terms of the mixing time of the chain 
+and the smallest visit probability. \todoc{Is this a necessary dependence?}
+We estimate both quantities. % and use a plug-in estimate.
+
+Difficulty: %Whatever empirical data is used, the speed of convergence will be dependent on the same unknown quantities.
+For both quantities,  the speed of convergence will be dependent on the same unknown quantities.
+We show how to overcome this Catch-22 problem and come up with the 
+first fully data-dependent interval estimate.
+
+(Almost) matching lower bounds.
+}
+
+\if0
+%%%
+ALGORITHMS FOR LARGE GRAPHS
+A Sarma
+Uses Batu's method.
+Estimating page rank on graph streams
+JACM paper
+
+%%
+Intersection and mixing times for reversible chains
+Y Peres, T Sauerwald, P Sousi, A Stauffer
+Sandwitches the intersection time in between the mixing time and the maximum hitting time.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+http://projecteuclid.org/euclid.aos/1362493041
+Convergence rate of Markov chain methods for genomic motif discovery
+D Woodard, J Rosenthal
+Ours are some of the first meaning- ful bounds on the convergence rate of a Markov chain method for sampling from a multimodal posterior distribution, as a function of statistical quantities like the number of observations.
+
+we show that, due to multimodality of the posterior distribution, the rate of convergence often decreases exponentially as a function of the length of the DNA sequence.
+
+Characterizing the dependence of the convergence rate on statistical quantities like the number of observations or the number of parameters is critical in justifying the use of a Markov chain method. However, there are several difficulties in doing so. First, the posterior distribution of a statistical model has a much more complex form than the stylized distributions for which Markov chain convergence rates are typically obtained [Borgs et al. (1999), Bhatnagar and Randall (2004), Woodard, Schmidler and Huber (2009b)]. Second, the data, and thus the convergence rate of the Markov chain, are stochastic and depend on the data-generating mechanism.
+
+T irreducible, aperiodic, reversible and nonnegative definite,
+
+Since the state space X is finite, Gap(T ) > 0 and the chain is called uniformly ergodic [Roberts and Rosenthal (2004)]. The quanti- ties ?? and Gap(T ) are related via [Sinclair (1992)]
+
+(2.9)
+
+
+Markov chain Monte Carlo (MCMC) sampling tech- niques are currently the most widely used approach to approximating the high-dimensional integrals arising in Bayesian statistics, as well as in related areas such as statistical mechanics. 
+
+
+Adaptive MCMC: effort to speed up..
+
+Relation between mixing time and spectral gap
+http://arxiv.org/abs/1405.0028
+Proposition 8(a) of Aldous (1982) provides a lower bound on ?? in terms of the spectral radius of T 
+
+-----------
+Peter J. Diggle:
+
+Peter Green, in his presentation, emphasized that many practical problems
+can be expressed as the estimator of the expectation, Er (f), of some functional f with respect to the
+distribution 7r;
+
+Adrian Smith adopted a more ambitious stance in suggesting that the
+full panoply of graphical data analytic methods could be used to make inferences about the whole
+full panoply of graphical data analytic methods could be used to make inferences about the whole
+distribution 7r from the empirical marginal distribution of the ÂÂ£1'.
+
+-------
+Persi Diaconis and Jeffrey S. Rosenthal
+
+The asymptotic rate of
+convergence to stationarity is determined by the second-largest eigenvalue (Besag and Green,
+Section 2). This can be deceptive.
+They give an example when based on the second largest eigenvalue, on the symmetry group of $n$ elements
+the convergence to stationary comes out as $n^2 \ln n$, whereas a more precise analysis gives $n \ln n$.
+
+
+Another class of techniques for proving convergence results involves bounds on eigenvalues by using
+the underlying geometry of the chain. They were pioneered by computer scientists (see, for example,
+Jerrum and Sinclair {1989)) to study randomized algorithms and have been developed (Lawler and Sokal,
+1988; Diaconis and Stroock, 1991; Diaconis and Saloff-Coste, 1992) to give essentially sharp rates in
+a variety of messy problems.
+
+Jerrum, M. and Sinclair, A. (1989) Approximating the permanent. SIAM J. Comput., l, 1149-1178.
+
+Lawler, G. F. and Sokal, A. D. (1988) Bounds on the L2 spectrum for Markov chains and Markov processes: a
+generalization of Cheeger's inequality. Trans. Am. Math. Soc., 309, 557-580.
+
+Diaconis, P. and Stroock, D. (1991) Geometric bounds for eigenvalues of Markov chains. Ann. Appl. Probab.,
+1, 36-61
+
+Diaconis, P. and Saloff-Coste, L. (1992) Comparison theorems for reversible Markov chains. Technical Report.
+Department of Mathematics, Harvard University, Cambridge.
+
+Permanent:
+Thepermanentfunction
+arises naturally in a number of fields, including algebra, combinatorial enumeration, and the physical sciences, and has been an object of study by mathematicians since first appearing in 1812 in the work of Cauchy and Binet (see [26] for background). Despite considerable effort, and in contrast with the syntactically very similar deter- minant, no efficient procedure for computing this function is known.
+
+16,Lemma6.1: probability boosting
+Uses conductance
+
+Combinatorial enumeration problems.
+
+
+Let (X,),=o be a time-homogeneous Markov chain with finite state space 3f and transition matrix P=(Pq)i,sx. (All chains in this paper are assumed to be of this form.) If the chain is ergodic we let or= (rri)ix denote its stationary distribution, the unique vector satisfying rP--r and i 7ri 1. In this case, if the chain is allowed to evolvefor stepsfromanyinitialstatethedistributionofitsfinalstateapproaches as t--> oe. Necessary and sufficient conditions for ergodicity are that the chain is (a) irreducible, i.e., any state can be reached from any other in some number of steps; and (b)aperiodic,i.e.,gcd{s: isreachablefromjinssteps} 1foralli,j 2f.
+
+Analysis of time-reversible Markov chains is simplified by the following observation. LEMMA2.1. Suppose(Xt)isanergodicMarkovchainwithfinitestatespaceA;and transition matrix P. Let Tri)ix be any vector satisfying the detailed balance condition (1) and the norrnalisation condition Y 7r 1. Then the Markov chain (Xt) is time-
+reversible and r is its (unique) stationary distribution.
+%%%%%
+
+The authors replied later, in writing, as follows.
+A. F. M. Smith and G.O. Roberts:
+
+Many contributors have commented on issues related to 'convergence diagnostics'. In particular, various
+doubts are raised about reliance on diagnostics based on just a few summary statistics. Unfortunately,
+the complexity of problems on which MCMC methods are currently being employed means that analytic
+bounds are usually unavailable, so that some form of output analysis is necessary. Of course this does
+not detract from the value of exploratory techniques, such as those suggested by Dr Jennison, and many
+others, although the efficiency of estimates based on importance sampling using heated 1r in high
+dimensional problems is likely to be poor.
+
+
+%%%%%%%
+Dr Jennison's example illustrates a basic principle: it is not sensible to attempt to assess convergence
+on the basis of output from one long run of the chain. Within the operations research literature many
+authors (see for example Kelton and Law (1984) and Whitt (1991), and their references) have considered
+the irnplementational question of whether to run multiple replications of a stationary time series. However,
+this body of literature concentrates on efficiency of subsequent estimates. The main advantages of running
+multiple replications are in the areas of preliminary exploration, the design of 'production run' chains
+and assessment of convergence. These aspects of the MCMC method are vital but are less amenable
+to quantitative analysis than, say, the standard error of an estimate based on an ergodic average. It
+must be remembered that simulations are experiments and, as such, should be approached with many
+of the same kinds of caution and protocol that attach to other areas of experimentation. In particular,
+pilot experiments and replication will typically be required. Similar pragmatic considerations apply to
+using the output from MCMC simulations, as Professor Geyer seems to recognize in part of his discussion,
+albeit after attributing to us views that we do not hold.
+
+
+Output from a single chain can never diagnose mixing of the chain. The only way to try to do this
+is to use multiple chains from different starting points, and to perform comparisons between chains.
+Merely taking averages across chains can be as misleading as running single chains. In the example given
+by Dr Jennison , using multiple starting points would almost certainly detect the problem, unless we
+were so unlucky as to choose all our starting points from the same component. However, the example
+would almost certainly catch out the Raftery and Lewis method.
+The coupling approach of Professor Frigessi represents the most direct approach to diagnosing mixing.
+The use of stopping times and the fundamental theorem of coupling has also been used to study
+convergence in Diaconis (1988) and is alluded to in the comment by Professor Diaconis and Professor
+Rosenthal. The disadvantage of Professor Frigessi's suggestion is the need to have an initial value,
+simulated from 1r
+
+.. quantification of Monte Carlo errors..
+
+``Output from a single chain can never diagnose mixing of the chain. ''
+
+NOTES:
+We do not exploit that $f$ may be special.
+Advantage and disadvantage..
+
+
+Although practitioners are mainly interested in stopping rules and stationarity diagnoses,
+
+%It has been observed that if the features of the posterior distribution are completely
+%unknown, then convergence diagnosis for a single Markov chain is inherently an intractable
+%problem (Clifford 1993; Bhatnagar, Bogdanov and Mossel 2010). The possible presence
+%of modes with very small Òbasins of attractionÓ (Section 3.1) implies that a convergence
+%diagnostic would have to exhaustively enumerate the space in order to guarantee that the
+%chain had not missed any such mode. The use of multiple chains, as in the Gelman-Rubin
+%approach, does not change the intractability problem.
+
+
+BaFoRuSmiWhi13
+
+What is the problem:
+
+Single sample path
+
+
+Time series problems:
+
+
+This paper studies the scenario where the observations are drawn from a stationary ?-mixing or ?-mixing sequence, a widely adopted assumption in the study of non-i.i.d. processes that im- plies a dependence between observations weakening over time (Yu, 1994; Meir, 2000; Vidyasagar, 2003; Lozano et al., 2006; Mohri and Rostamizadeh, 2007). 
+
+------------------------------------------
+Meir:
+ many of the problems to which Machine Learning techniques are applied are inherently temporal in nature. Some obvious examples are stock market prediction, analysis of financial markets, monitoring and diagnosing complex control systems and speech recognition, to name but a few..
+
+
+ One approach to incorporating temporal structure in order to form better predictors, by more appropriate complexity regularization, is described in this work. In particular, the optimal memory size that should be used in order to form a predictor is in principle derivable from the procedure (see also (Modha \& Masry, 1998)), given information about the mixing nature of the time series (see Section 4 for a definition of mixing).
+ 
+  If precise knowledge of the mixing parameters is lacking, the procedure requires estimation of these parameters. Unfortunately, as far as we are aware, there is no efficient practical approach known at this stage for estimation of mixing parameters.
+  
+Meir's main concern: complexity regularization.
+Needs the knowledge of mixing-rate.
+
+There remain several issues, which need to be addressed in future work. First, the adaptive algorithm, as well as the bounds rely heavily on a knowledge of the mixing nature of the process. As mentioned in Section 4, no tools are currently available for establishing mixing properties, which are therefore more of a theoreticianÕs dream than a practical tool. 
+------------------------------------------
+
+Idea: Online to batch reduction with correlated data.
+
+----------  
+Vidyasagar, 2003; cares a lot about time-series.
+----------
+
+Lozano:
+Convergence and consistency of regularized boosting algorithms with stationary beta-mixing observations
+
+We study the statistical convergence and consistency of regularized Boosting methods, where the samples are not independent and identi- cally distributed (i.i.d.) but come from empirical processes of stationary ?-mixing sequences. Utilizing a technique that constructs a sequence of independent blocks close in distribution to the original samples, we prove the consistency of the composite classifiers resulting from a regulariza- tion achieved by restricting the 1-norm of the base classifiersÕ weights. When compared to the i.i.d. case, the nature of sampling manifests in the consistency result only through generalization of the original condition on the growth of the regularization parameter.
+
+A practical motivation for our study of non i.i.d. sam- pling is that in many learning applications observations are intrinsically temporal and hence often weakly dependent. Ignoring this dependency could seriously undermine the perfor- mance of the learning process (for instance, information related to the time-dependent or- dering of samples would be lost). Recognition of this issue has led to several studies of non i.i.d. sampling [6, 7, 8, 9, 10, 11, 12].
+
+Basically these guys also figure that for consistency the regularization has to be adapted to the mixing rate.
+----------------------
+
+
+Estimating $\ beta $-mixing coefficients
+Daniel J McDonald, Cosma Rohilla Shalizi, Mark Schervish
+
+Good intro (short para, summarizing many previous works).
+
+
+We have shown that our estimator of the ?-mixing coefficients is consistent for the true coefficients ?(a) under some conditions on the data generating process. There are numerous results in the statistics and ma- chine learning literatures which assume knowledge of the ?-mixing coefficients, yet as far as we know, this is the first estimator for them. An ability to estimate these coefficients will allow researchers to apply ex- isting results to dependent data without the need to arbitrarily assume their values. Despite the obvious utility of this estimator, as a consequence of its novelty, it comes with a number of potential extensions which warrant careful exploration as well as some drawbacks.
+The reader will note that Theorem 2.3 does not pro- vide a convergence rate. The rate in Theorem 2.4 ap- plies only to the difference between ?×Â¦d(a) and ?d(a). In order to provide a rate in Theorem 2.3, we would need a better understanding of the non-stochastic con- vergence of ?d(a) to ?(a). It is not immediately clear that this quantity can converge at any well- defined rate. In particular, it seems likely that the rate of convergence depends on the tail of the sequence { ? ( a ) } ÂÂ°a = 1 .
+
+
+Indeed, conv. rate depends on itself. This is one thing we resolve.
+--------------------
+RL examples
+
+--------------------
+Computable exponential bounds for screened estimation and simulation
+I Kontoyiannis, S Meyn
+
+Exponential bounds and stopping rules for MCMC and general Markov chains
+I Kontoyiannis, L Lastras-MontaÂÂ–o, S Meyn
+
+ We develop explicit, general bounds for the probability that the empirical sample averages of a func- tion of a Markov chain on a general alphabet will exceed the steady-state mean of that function by a given amount. Our bounds combine simple information-theoretic ideas together with techniques from optimization and some fairly elementary tools from analysis. In one direction, motivated by central problems in simulation, we de- velop bounds for the general class of Ògeometrically ergodicÓ Markov chains. These bounds take a form that is particularly suited to simulation problems, and they naturally lead to a new class of sampling criteria. These are illustrated by several examples.
+ 
+ 
+ In this section we present a new, general-purpose stopping rule, which can be easily applied to a va- riety of Markov Chain Monte Carlo problems. In Section III-A we treat a simple example illustrating the stopping rule in a simple setting, Section III-B contains the description of the general stopping rule, and in Section III-C we present a non-asymptotic bound that justifies this stopping rule and also offers precise performance guarantees for its use.
+ 
+
+--
+
+Markov Processes
+
+Markov Reward Processes
+Output sequence of a Markov chain
+
+
+--------------------
+Negative interpretation:
+In some Markov chains estimation will be slow (tied to the size of the state space).
+Can we adapt to the actual complexity?
+Think of aggregated chains.
+
+--------------------
+
+\fi

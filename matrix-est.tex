@@ -1,0 +1,100 @@
+%\documentclass[11pt]{article}
+%\documentclass[anon,12pt]{colt2015} 
+\documentclass{article}
+\usepackage{nips15submit_e,times}
+\input{__includes}
+\renewcommand\citet\citep % since NIPS is using numbered refs
+
+%\title{Single sample path based estimation of the mixing time in finite, reversible Markov chains}
+\title{%
+  Mixing time estimation in reversible Markov chains from a single
+  sample path%
+}
+
+\author{
+David S.~Hippocampus\thanks{ Use footnote for providing further information
+about author (webpage, alternative address)---\emph{not} for acknowledging
+funding agencies.} \\
+Department of Computer Science\\
+Cranberry-Lemon University\\
+Pittsburgh, PA 15213 \\
+\texttt{hippo@cs.cranberry-lemon.edu} \\
+\And
+Coauthor \\
+Affiliation \\
+Address \\
+\texttt{email} \\
+\AND
+Coauthor \\
+Affiliation \\
+Address \\
+\texttt{email} \\
+\And
+Coauthor \\
+Affiliation \\
+Address \\
+\texttt{email} \\
+\And
+Coauthor \\
+Affiliation \\
+Address \\
+\texttt{email} \\
+(if needed)\\
+}
+
+\begin{document}
+\maketitle
+
+\begin{abstract} 
+\input{abstract}
+\end{abstract} 
+
+\if0
+\begin{keywords}
+  Markov chain; mixing time; spectral gap;
+  fully data-dependent confidence interval
+\end{keywords}
+\fi
+
+\section{Introduction}\label{sec:intro}
+\input{intro-nips}
+
+\section{Notation}\label{sec:notation}
+\input{notation}
+
+\section{Setting}\label{sec:setting}
+\input{setting}
+
+%\section{Results}
+%\input{results}
+
+\section{Convergence rates}\label{sec:rates}
+\input{rates}
+
+\section{Fully empirical confidence intervals}\label{sec:empirical}
+\input{empirical}
+
+\section{Discussion}\label{sec:discussion}
+\input{conclusions}
+
+\subsubsection*{References}
+{\def\section*#1{}\small \bibliography{all} \bibliographystyle{myunsrt}}
+
+\newpage
+
+\appendix
+
+\section{Proof of \cref{thm:err}}\label{app:upper}
+\input{upperbound-new}
+
+\section{Proofs of lower bounds}\label{app:lower}
+\input{lowerbound}
+
+\section{Proof of \cref{thm:empirical}}\label{app:empirical}
+\input{appendix-empirical}
+
+\section{Proof of \cref{thm:combined}}\label{app:combined}
+\input{appendix-combined}
+
+\end{document}
+

@@ -1,0 +1,444 @@
+\documentclass[11pt]{article}
+\usepackage{todonotes}
+\newcommand{\todoc}[2][]{\todo[size=\scriptsize,color=green!10!white,#1]{Cs: #2}} % Csaba's comments
+\newcommand{\todot}[2][]{\todo[size=\scriptsize,inline,color=blue!20!white,#1]{D: #2}} % Daniel's comments
+\newcommand{\todor}[2][]{\todo[size=\scriptsize,color=orange!20!white,#1]{A: #2}} % Aryeh's comments
+
+\usepackage{amsmath,amsbsy,amsfonts,amssymb,amsthm,color,dsfont}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PACKAGES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{latexsym}
+\usepackage{fullpage}
+\usepackage{amsmath}
+\usepackage{amssymb}
+%\usepackage{mathtools}
+\usepackage{enumerate}
+\usepackage{accents}
+\usepackage{tikz}
+%\usepackage{pgfplots}
+\usepackage[ruled]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{dsfont}
+\usepackage[bf]{caption}
+\usepackage{hyperref}
+\hypersetup{
+    bookmarks=true,         % show bookmarks bar?
+    unicode=false,          % non-Latin characters in Acrobats bookmarks
+    pdftoolbar=true,        % show Acrobats toolbar?
+    pdfmenubar=true,        % show Acrobats menu?
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width of the page to the window
+    pdftitle={My title},    % title
+    pdfauthor={Author},     % author
+    pdfsubject={Subject},   % subject of the document
+    pdfcreator={Creator},   % creator of the document
+    pdfproducer={Producer}, % producer of the document
+    pdfkeywords={keyword1} {key2} {key3}, % list of keywords
+    pdfnewwindow=true,      % links in new window
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=red,          % color of internal links (change box color with linkbordercolor)
+    citecolor=blue,        % color of links to bibliography
+    filecolor=magenta,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+\usepackage{amsthm}
+\usepackage{times}
+\usepackage{natbib}
+\usepackage{nicefrac}
+\usepackage{wrapfig}
+\usepackage[capitalize]{cleveref}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MACROS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\defined}{\vcentcolon =}
+\newcommand{\rdefined}{=\vcentcolon}
+%\newcommand{\E}{\mathbb E}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\calF}{\mathcal F}
+\newcommand{\calR}{\mathcal R}
+\newcommand{\sr}[1]{\stackrel{#1}}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\ind}[1]{\mathds{1}\!\!\set{#1}}
+\newcommand{\argmax}{\operatornamewithlimits{arg\,max}}
+\newcommand{\argmin}{\operatornamewithlimits{arg\,min}}
+\newcommand{\floor}[1]{\left \lfloor {#1} \right\rfloor}
+\newcommand{\ceil}[1]{\left \lceil {#1} \right\rceil}
+
+\def\subsubsect#1{\vspace{1ex plus 0.5ex minus 0.5ex}\noindent{\bf\boldmath{#1.}}}
+
+\renewcommand{\P}[1]{\mathbb{P}\left\{#1\right\}}
+\newcommand{\Prob}[1]{\mathbb{P}\left\{#1\right\}}
+\newcommand{\EE}[1]{\mathbb{E}\left[#1\right]}
+
+\let\temp\epsilon
+\let\epsilon\varepsilon
+\newcommand{\eps}{\varepsilon}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THEOREMS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+
+\newcommand{\R}{\mathds{R}}
+
+\newcommand\wh{\ensuremath{\widehat}}
+\newcommand\wt{\ensuremath{\widetilde}}
+\newcommand\norm[1]{\left\| #1 \right\|}
+\newcommand\tvnorm[1]{\left\| #1 \right\|_{\mathrm{TV}}}
+\newcommand\parens[1]{\left( #1 \right)}
+\DeclareMathOperator{\Diag}{Diag}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator*{\E}{\text{\bf E}}
+\renewcommand\t{{\ensuremath{\scriptscriptstyle{\top}}}}
+\newcommand\be{\ensuremath{\mathbf{e}}}
+\newcommand\tmix{\ensuremath{t_{\mathrm{mix}}}}
+\newcommand\htmix{\ensuremath{\hat{t}_{\mathrm{mix}}}}
+\newcommand{\od}{\bar{d}}
+\newcommand{\tcouple}{\tau_{\mathrm{couple}}}
+\newcommand{\ZZ}{\mathcal{Z}}
+\newcommand\trel{\ensuremath{t_{\mathrm{rel}}}}
+\newcommand{\ip}[1]{\langle#1\rangle}
+\newcommand{\DF}{\mathcal{E}}
+\newcommand\ttmix{\ensuremath{t_{\mathrm{mix},2}}}
+
+\newcommand{\paren}[1]{\left( #1 \right)}
+\newcommand{\sqprn}[1]{\left[ #1 \right]}
+\newcommand{\tlprn}[1]{\left\{ #1 \right\}}
+%\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\oo}[1]{\frac{1}{#1}}
+\newcommand{\nrm}[1]{\left\Vert #1 \right\Vert}
+\newcommand{\tnrm}[1]{\Vert #1 \Vert}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\trn}{^\intercal} %operator transpose
+
+\newcommand{\beq}{\begin{eqnarray*}}
+\newcommand{\eeq}{\end{eqnarray*}}
+\newcommand{\beqn}{\begin{eqnarray}}
+\newcommand{\eeqn}{\end{eqnarray}}
+
+
+\def\ddefloop#1{\ifx\ddefloop#1\else\ddef{#1}\expandafter\ddefloop\fi}
+% \bbA, \bbB, ...
+\def\ddef#1{\expandafter\def\csname bb#1\endcsname{\ensuremath{\mathbb{#1}}}}
+\ddefloop ABCDEFGHIJKLMNOPQRSTUVWXYZ\ddefloop
+
+\title{Aryeh's scratch notes}
+%\author{Daniel, Aryeh, Csaba}
+
+
+\begin{document}
+\maketitle
+
+
+%\begin{abstract}
+%An abstract
+%\end{abstract}
+\newcommand{\XX}{\mathbb{X}}
+\newcommand{\one}[1]{\mathbb{I}\left\{#1\right\}}
+\newcommand{\N}{\mathbb{N}}
+For any $\mu,a$ such that $n = 2\mu a$ and $\delta>2(\mu-1)\beta(a)$,
+with probability at least $1-\delta$,
+\begin{align}
+\label{eq:xbound}
+|\bar{X}_n - \EE{f(X_1)}|
+\le c_1\sqrt{\frac{1}{\mu}} + c_2\sqrt{\frac{\ln(2/\delta')}{2\mu}}\,,
+\end{align}
+where $\delta'=\delta-2(\mu-1)\beta(a)$
+If $\beta(k)$ denotes the $k$th $\beta$-mixing coefficient of $(X_i)$ then 
+\begin{align}
+\label{eq:betabound}
+ \beta(k) \le \oo{\pi_*}e^{-k \gamma_*}
+\end{align}
+where  $\gamma_* = 1-\lambda_*$ is the spectral gap ($\lambda_*$ is the second largest eigenvalue of $T$)
+and  $\pi_*  = \min_i \pi_i>0$ is the critical probability underlying the chain
+(see the $\beta$-mixing note).
+For a given value of $\pi_*,\gamma_*$, $\delta$, let $B_n(\pi_*,\gamma_*,\delta)$ be the optimal value of the optimization problem
+\begin{align*}
+\lefteqn{ \min_{\mu,a} \min\left(1, 
+c_1\sqrt{\frac{1}{\mu}} + c_2\sqrt{\frac{\ln(2/\delta')}{2\mu}}\right) 
+} \\
+& \qquad \text{s.t.} \quad n = 2\mu a, \quad \delta>2(\mu-1)\oo{\pi_*}e^{-a \gamma_*},
+\quad \delta' = \delta-2(\mu-1)\oo{\pi_*}e^{-a \gamma_*}, \quad \mu,a \in \N\,.
+\end{align*}
+
+\paragraph{We will upper-bound} $B_n$ as follows.
+Choose
+$$ a=(2\ln n)/\gamma_*.$$
+Then
+$\mu=n/2a=\gamma_*n/4\ln n$
+and
+\beq
+\delta' &=& \delta-2(\mu-1)\oo{\pi_*}e^{-a \gamma_*} \\
+&=& \delta - 2\paren{\frac{\gamma_*n}{4\ln n}-1}\oo{n^2\pi_*} \\
+%&=& \delta - {\frac{\gamma_*}{2\pi_*n\ln n}} + O(n^{-2}) \\
+&=&
+\delta - \sqprn{
+\frac{\gamma_*}{2\pi_*n\ln n}-\frac{2}{\pi_*n^2}
+}
+=:\delta-x.
+%\frac{2}{\delta'}
+%&=&
+%\frac{2}{\delta} + 
+\eeq
+Now
+\beq
+\ln\frac{2}{\delta-x} &=& \ln\frac{2}{\delta}+\frac{x}{\delta^2}+O(x^2), \\
+\sqrt{\ln\frac{2}{\delta-x}} &=& 
+\sqrt{\ln\frac{2}{\delta}}
++
+\frac{x}{2\delta\sqrt{\ln(2/\delta)}}+O(x^2), \\
+\eeq
+and hence,
+\beq
+B_n(\pi_*,\gamma_*,\delta)
+&\le&
+2\sqrt{\frac{\ln n}{\gamma_*n}}
+\sqprn{
+c_1
++ c_2
+\sqrt{\ln(2/\delta')/2}
+}\\
+&=&
+2\sqrt{\frac{\ln n}{\gamma_*n}}
+\sqprn{
+c_1
++ c_2
+\paren{
+\sqrt{
+\oo2
+\ln\frac{2}{\delta}}
++
+\frac{x}{2\delta\sqrt{2\ln(2/\delta)}}+O(x^2)
+}
+}\\
+&=&
+2\sqrt{\frac{\ln n}{\gamma_*n}}
+\sqprn{
+c_1
++ c_2
+\paren{
+\sqrt{\oo2\ln\frac{2}{\delta}}
++
+\frac{
+\gamma_*
+}{4{\pi_*n\ln n}\delta\sqrt{2\ln(2/\delta)}}+O(n^{-2})
+}
+}\\
+&=&
+2c_1\sqrt{\frac{\ln n}{\gamma_*n}}
++
+2c_2\sqrt{\frac{\ln n}{2\gamma_*n}
+\ln\frac{2}{\delta}}
++
+c_2\frac{\sqrt{\gamma_*}}
+{2\pi_* n^{3/2}\delta\sqrt{2\ln(n) \ln(2/\delta)}}
++
+\tilde O(n^{-2.5}).
+\eeq
+
+
+\paragraph{Estimating the bias in $\hat T_{ij}$.}
+This analysis assumes stationarity. 
+For $1\le i,j\le d$, define the random variable $N_{ij}=\#(i,j)$ to be the number of consecutive $(i,j)$
+pairs in the observed sequence; define $N_i=\#(i)$ analogously.
+We have
+\beq
+\hat T_{ij} = \frac{ N_{ij}}{N_i}.
+\eeq
+We will estimate the bias $\E[\hat T_{ij}]-T_{ij}$ as follows.
+First, compute the expectations of the numerator and the denominator:
+\beq
+\E[N_{ij}]
+&=& 
+(n-1)\pi_i T_{ij} 
+\\
+\E[N_{i}]
+&=& n\pi_i
+,\\
+\frac{\E[N_{ij}]}{\E[N_{i}]}
+&=&
+\frac{(n-1)\pi_i T_{ij}}{n\pi_i} = T_{ij}+O\paren{\oo n}.
+\eeq
+To estimate $\E[\hat T_{ij}]$, we are going to claim that both the numerator and the denominator
+are concentrated about their means.
+In particular, both $N_{ij}$ and $N_i$ are Lipschitz (w.r.t. Hamming) functions of the state sequence
+(with constants $2$ and $1$, resp.),
+and hence, invoking \citet[Theorem 1.1]{meroi2012-jap} with $G=1/\pi_*$ and $\theta=e^{-\gamma_*}$,
+\beq
+\P{ \abs { 
+%\oo n\E[N_{ij}] - (1-\oo n)\pi_i T_{ij} 
+N_{ij}-\E[N_{ij}]
+} > \eps n
+} &\le& 2\exp\paren{ -\frac{n(1-e^{-\gamma_*})^2\pi_*^2\eps^2}{8} } \\
+\P{ \abs { 
+%\oo n\E[N_i] - \pi_i  
+N_{i}-\E[N_{i}]
+} > 
+\eps n} &\le& 2\exp\paren{ -\frac{n(1-e^{-\gamma_*})^2\pi_*^2\eps^2}{2} } \\
+\eeq
+Thus, with probability at least
+\beq
+1-\delta &:=& 1-4 \exp\paren{ -\frac{n(1-e^{-\gamma_*})^2\pi_*^2\eps^2}{8} },
+\eeq
+%all of 
+the empirical counts $N_{ij}$ and $N_i$ are $\eps n$-close to their expectations.
+Finally, since for all $a,b,x>0$, we have
+\beq
+\abs{ \frac{a\pm x}{b\pm x} - \frac a b} \le \frac{a+b}{b^2}x+O(x^2), 
+\eeq
+it follows that for all $i,j$,
+\beq
+\abs{
+\E\sqprn{\frac{ N_{ij}}{N_i}}
+-
+\frac{\E[N_{ij}]}{\E[N_{i}]}
+}
+&\le&
+\delta + \frac{\E[N_{ij}]+\E[N_i]}{\E[N_i]^2}\eps + O(\eps^2) \\
+&=& \delta + \frac{ (n-1)\pi_i T_{ij} + n\pi_i}{n^2\pi_i^2}\eps + O(\eps^2) \\
+&\le& \delta + \frac{ (1-1/n)T_{ij} + 1}{n\pi_*}\eps + O(\eps^2).
+\eeq
+
+Thus,
+\beq
+\abs{\E[\hat T_{ij}]-T_{ij}} &\le&
+%\delta + \frac{ (1-1/n)T_{ij} + 1}{n\pi_*}\eps + O\paren{\eps^2+\oo n}.
+O\paren{
+\exp\paren{ -\frac{n(1-e^{-\gamma_*})^2\pi_*^2\eps^2}{8} }
++\frac{\eps}{n\pi_*}}.
+\eeq
+Choosing $\eps=O\paren{\frac{1}{\pi_*(1-e^{-\gamma^*})\sqrt{n\ln n}}}$ yields
+\beq
+\abs{\E[\hat T_{ij}]-T_{ij}} &\le&
+O\paren{
+\frac{1}{\pi_*^2(1-e^{-\gamma^*})n\sqrt{n\ln n}}}.
+\eeq
+
+\paragraph{Stationariy assumption:}
+One approach is to let the chain run for some time to ``burn in'',
+until it reaches the distribution $\pi'$. If $\pi$ is the true stationary distribution,
+then all of our ``w.h.p.'' results will hold with an additive correction of 
+$\tvnorm{\pi-\pi'}$. The problem is that we won't know for how long to burn in
+and also won't know $\tvnorm{\pi-\pi'}$ --- a chicken and egg problem.
+
+Another idea is to use ``coupling from the past'':\\
+\url{http://www.cc.gatech.edu/~vigoda/MCMC_Course/CouplingFromPast.pdf}
+\\
+\url{http://people.csail.mit.edu/costis/6896sp11/lec8s.pdf}
+\\
+This requires multiple restarts but otherwise works well with finite state spaces.
+It gives us guaranteed perfect samples from the stationary distribution,
+and from that point the chain can be run for $n$ steps to obtain our statistics.
+
+
+\paragraph{Still need to do:}
+Analytic upper bound on $\EE{ \hat{B}_n(\delta)}$.
+Matching lower bound.
+
+\bibliographystyle{plainnat}
+\bibliography{all}
+
+\end{document}
+
+Thus, we need estimates of $\gamma_*$ and $\pi_*$.
+To estimate them we may want to estimate the stationary probabilities and the transition matrix $T$.
+Let $\hat \pi$ denote the estimate of the former, while let $\hat T$ be the estimate of the latter.
+In particular, $\hat \pi_i$ is taken to be the empirical frequency of the visits of state $i$ in $(X_t)$,
+while we let $\hat T_{i,j}$ the frequency when 
+$X_{t+1}=j$ happens given that $X_t = i$ ($t=1,\dots,n-1$). 
+When $X_t = i$ never happens, we take $\hat T_{i,\cdot}$ to be the uniform distribution.
+Since $\Prob{\sum_{t=1}^n \one{X_t = i}=0}=\Prob{X_1\ne i, \dots, X_n\ne i}>0$ for each $i$, $\hat T_{ij}$ is a biased estimate of $T_{ij}$, although the bias decreases exponentially fast. 
+
+For $x\in \R^d$, let $D_x$ be the diagonal matrix with $x$ in its diagonal. 
+Define $L = D_\pi^{-1/2} T  D_\pi^{1/2}$, $\hat{L} = D_{\hat{\pi}}^{-1/2} \hat{T} D_{\hat{\pi}}^{1/2}$, 
+By Weyl's inequality (see notes.pdf),
+\begin{align}
+\label{eq:gammabound}
+|\hat{\gamma}_* - \gamma_* | = |\hat{\lambda}_* - \lambda_* | \le \tnrm{\hat L - L }_2
+\end{align}
+and so it remains to bound this latter quantity.
+Define $E_T = D_{\pi}^{-1/2} (\hat T - T ) D_{\pi}^{1/2}$
+and $E_\pi = D_{\hat{\pi}}^{-1/2} D_\pi^{1/2} - I$.
+We have (see notes.pdf),
+\begin{align}
+\label{eq:lbound}
+\tnrm{\hat L - L}_2 \le \norm{E_T}_2 + \norm{E_{\pi}}_2 (\norm{E_T}_2+1) (\norm{E_\pi}_2+2)\,.
+\end{align}
+Now, $\norm{E_T}_2 = \tnrm{\hat T - T}_2$ (because the eigenvalues of $E_T$ are the same as that of $\hat T - T$).
+Further, for any $\mu,a$ such that $n=2\mu a$
+and $\delta>2(\mu-1)\beta(a)$,
+with probability at least $1-\delta$,
+\begin{align}
+\label{eq:tbound}
+\tnrm{T-\hat T}_2
+\le 25\sqrt{\frac{d}{\mu}} + 2\sqrt{\frac{\ln(2/\delta')}{2\mu}}\,,
+\end{align}
+where $\delta'=\delta-2(\mu-1)\beta(a)$ (see mohri-notes.pdf). \todoc{This does not take into account the bias.}
+\todoc[inline]{Next problem: For a fixed $n$, this will limit the range of $\delta$.
+For any $n$, there will be a range of $\delta$ in the neighbourhood of $0$ for which the algorithm
+will need to return ``I don't know''.
+}
+Similarly, for any $\mu',a'$ such that $n=2\mu' a'$
+and $\delta>2(\mu'-1)\beta(a')$,
+with probability at least $1-\delta$,
+\begin{align}
+\label{eq:pibound}
+|\hat\pi_i - \pi_i | \le C \left( \sqrt{\frac{d}{\mu'}} + \sqrt{\frac{\ln(2/\delta'')}{2\mu'}}\right)\,,
+\end{align}
+where $\delta''=\delta-2(\mu'-1)\beta(a')$.
+
+By combining~\eqref{eq:betabound},
+\eqref{eq:gammabound}, \eqref{eq:lbound}, \eqref{eq:tbound} and~\eqref{eq:pibound}, we can derive 
+that for any $0\le \delta \le 1$,
+ $\mu,a,\mu',a'$  such that $n = 2\mu a$ and
+ $\frac{2}{\pi_*} \max( (\mu-1)e^{-a\gamma_*}, (\mu'-1)e^{-a'\gamma_*} )<\delta$, 
+with probability $1-\delta$,
+\begin{align*}
+|\hat{\gamma}_* - \gamma_* | &\le u( \gamma_*, \pi_*, \hat{\gamma}, \hat\pi, \hat T, n, \mu, a, \mu', a', \delta )\,,\\
+|\hat{\pi}_* - \pi_* | &\le v( \gamma_*, \pi_*, \hat{\gamma}, \hat\pi, \hat T, n, \mu, a, \mu', a', \delta )\,,
+\end{align*}
+for some functions $u$ and $v$.
+Reordering (and relaxing) the  inequalities we get
+\begin{align*}
+\gamma_* &\ge \hat\gamma_* - u( \gamma_*, \pi_*, \hat{\gamma}, \hat\pi, \hat T, n, \mu, a, \mu', a', \delta )\,,\\
+ \pi_*  &\ge \hat{\pi}_* - v( \gamma_*, \pi_*, \hat{\gamma}, \hat\pi, \hat T, n, \mu, a, \mu', a', \delta )\,.
+\end{align*}
+Now, let $\hat{B}_n(\delta)$ be the optimal value of the optimization problem 
+\begin{align*}
+\lefteqn{\max B_n(g,p,\delta)\qquad \text{s.t.} }\\
+&\qquad  g \ge \hat\gamma_* - u( g, p, \hat{\gamma}, \hat\pi, \hat T, n, \mu, a, \mu', a', \delta )\,,\\
+&\qquad p  \ge \hat{\pi}_* - v( g, p, \hat{\gamma}, \hat\pi, \hat T, n, \mu, a, \mu', a', \delta )\,,\\
+&\qquad n = 2\mu a, \quad n = 2\mu' a'\,,\\
+&\qquad \frac{2}{p} \max( (\mu-1)e^{-ag}, (\mu'-1)e^{-a'g} )<\delta\,,\\
+&\qquad g,p >0, \mu,a,\mu',a'\in \N\,.
+\end{align*}
+Then, w.p. $1-\delta$, it holds that
+\[
+|\bar{X}_n - \EE{f(X_1)}| \le \hat{B}_n(\delta)\,.
+\]
+
+Next goals: Analytic upper bound on $\EE{ \hat{B}_n(\delta)}$.
+Matching lower bound.
+
+
+\bibliographystyle{plainnat}
+\bibliography{all}
+
+\end{document}
+

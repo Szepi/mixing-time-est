@@ -1,0 +1,67 @@
+Note that with probability $1-\delta$, 
+\[
+\norm{\vP - \wh\vP} \le \norm{\vP-\wh\vP}_F \le \wh\Delta_{\vP}(\delta) \le \wt\Delta_{\vP}(\delta)\,,
+\]
+where
+\[
+\wh\Delta_{\vP}(\delta) := \sqrt{\sum_{i,j} \wh\Delta_{i,j}^2(\delta)}\,, \qquad \qquad 
+\wt\Delta_{\vP}(\delta) := \sqrt{\sum_{i,j} \wt\Delta_{i,j}^2(\delta)}\,.
+\]
+The deviation $\norm{\wh\vP - \vP}$ is of order $\sqrt{\frac{d \ln(d/\delta)}{\pimin n}}$ as $n\to \infty$:
+\todoc{This is a bit messy. $n\to\infty$, w.p. $1-\delta$..?}
+\begin{align}
+  \norm{\wh\vP - \vP} &\le
+  \sqrt{\sum_{i,j\in[d]} (\wh P_{ij}-P_{ij})^2} 
+  =
+  O_P\Parens{
+\sqrt{\sum_{i,j\in[d]} \frac{ \wh P_{ij}(1-\wh P_{ij})\ln(d/\delta)}{N_i}}
+  } \nonumber\\
+  &=
+  O_P\Parens{
+\sqrt{\sum_{i\in[d]} \frac{\ln(d/\delta)}{N_i}}
+  } 
+=O_P\Parens{\sqrt{\frac{d\ln(d/\delta)}{\pimin n}}}.  \label{eq:pdevbound}
+\end{align}  
+
+
+Note that
+$  \rho_i'(\delta) = O\Parens{\frac{\wh\kappa}{\hat\pi_i}  \wh\Delta_{\vP}^*(\delta)}$.
+%together with empirical bounds $\wh\delta_{i,j}$ (or $\wt\delta_{i,j}$) on $|\wh{P}_{i,j} - P_{i,j}|$
+%derived from~\eqref{eq:P-unobs-bound}.
+Moreover, it is shown  by \citet{cho2001comparison},
+\[
+  \kappa \leq \frac{d}{\gap} .
+  \]
+
+  Furthermore, since, as shown  on page 150 of the book by \citet{stewart1990matrix}, \todoc{Is this the right reference? Maybe  \url{http://files.ele-math.com/abstracts/oam-06-55-abs.pdf} has better references?}
+$
+  \wh\vA^\# = \vA^\# + O(\norm{\wh \vA-\vA}) $
+and since  by~\eqref{eq:pdevbound}, as $n\to\infty$,
+$\norm{\wh \vA-\vA} =O_P\Parens{\sqrt{\frac{d\ln(d/\delta)}{\pimin n}}}$,
+we get that \todoc{This is a bit messy. $n\to\infty$, w.p. $1-\delta$..?}
+\[ \wh\kappa = \kappa + O_P\Parens{\sqrt{\frac{d\ln(d/\delta)}{\pimin n}}}
+  = O_P\Parens{ \frac{d}{\gap} + \sqrt{\frac{d\ln(d/\delta)}{\pimin n}}}\,.
+\]
+
+
+  The bound in (\ref{eq:pi-unobs-bound}) implies
+  $$
+    \frac{\max_{i \in [d]} \sqrt{\hat\pi_i}}
+  {\min_{i \in [d]} \sqrt{\hat\pi_i}}
+= O\Parens{\frac1{\sqrt\pimin}}$$
+And hence
+$$
+\norm{\errP}=O\Parens{
+  \frac1{\pimin}
+\sqrt{\frac{d\ln(d/\delta)}{ n}}
+  },
+$$
+    which culminates in the estimate
+
+    $$    \norm{\wh\vL - \vL}=O\Parens{
+      \frac1{\pimin}\sqrt{\frac{d\ln(d/\delta)}{ n}}
+      +
+      \frac{d}{\pimin\gap} \sqrt{\frac{\ln(d/\delta)}{\pimin n}}
+    }.$$
+
+  \ldots

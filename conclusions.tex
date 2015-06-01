@@ -1,0 +1,37 @@
+%!TEX root =  matrix-est.tex
+
+
+The algorithm from Section~\ref{sec:empirical} demonstrates the
+feasibility of fully empirical finite-sample confidence bounds on
+Markov chain mixing time.
+This makes it possible to apply learning methods that require
+empirical bounds to many non-iid settings that are commonplace in many
+applications.
+%One limitation of our techniques is that they are limited to Markov
+%chains over finite state spaces.
+We expect that future results will generalize and tighten our
+analysis, possibly extend it to large (or infinite) state spaces by
+adding extra assumptions.
+
+A salient limitation of our approach is the reversibility assumption.
+Without the latter, one could still obtain non-trivial finite-sample
+estimates.
+One possible starting point is to work with a pointwise estimate $\wh
+P_{ij}$ and invoke the Ostrowski-Elsner theorem
+\citep{stewart1990matrix} to bound the deviation between the empirical
+$\hatgap$ and the true $\gap$.
+Unfortunately, this bound has an exponential dependence on $d$.
+Another problem we leave open for now is to close the gap between the
+upper bound in Theorem~\ref{thm:err} and the lower bounds in
+Theorems~\ref{thm:lb-pimin} and \ref{thm:lb-gap}. 
+\todoc{We need to move the references needed in the appendix to after the appendix. 
+This should be possible with some latex package for splitting references..}
+%and investigate
+%whether the width of the fully empirical confidence interval can be
+%shortened to match the width of the theoretical confidence interval.
+
+%The upshot is that now the various Markov PAC learning results stated in
+%terms of unknown mixing coefficients
+%\citep{gamarnik03,MoRo09}
+%can be applied to give nontrivial data-dependent bounds,
+%albeit in a limited setting.

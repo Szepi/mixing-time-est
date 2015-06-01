@@ -1,0 +1,274 @@
+\documentclass[11pt]{article}
+\usepackage{todonotes}
+\newcommand{\todoc}[2][]{\todo[size=\scriptsize,color=green!10!white,#1]{Cs: #2}} % Csaba's comments
+\newcommand{\todot}[2][]{\todo[size=\scriptsize,inline,color=blue!20!white,#1]{D: #2}} % Daniel's comments
+\newcommand{\todor}[2][]{\todo[size=\scriptsize,color=orange!20!white,#1]{A: #2}} % Aryeh's comments
+
+\usepackage{amsmath,amsbsy,amsfonts,amssymb,amsthm,color,dsfont}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PACKAGES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{latexsym}
+\usepackage{fullpage}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{enumerate}
+\usepackage{accents}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage[ruled]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{dsfont}
+\usepackage[bf]{caption}
+\usepackage{hyperref}
+\hypersetup{
+    bookmarks=true,         % show bookmarks bar?
+    unicode=false,          % non-Latin characters in AcrobatÕs bookmarks
+    pdftoolbar=true,        % show AcrobatÕs toolbar?
+    pdfmenubar=true,        % show AcrobatÕs menu?
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width of the page to the window
+    pdftitle={My title},    % title
+    pdfauthor={Author},     % author
+    pdfsubject={Subject},   % subject of the document
+    pdfcreator={Creator},   % creator of the document
+    pdfproducer={Producer}, % producer of the document
+    pdfkeywords={keyword1} {key2} {key3}, % list of keywords
+    pdfnewwindow=true,      % links in new window
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=red,          % color of internal links (change box color with linkbordercolor)
+    citecolor=blue,        % color of links to bibliography
+    filecolor=magenta,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+\usepackage{amsthm}
+\usepackage{times}
+\usepackage{natbib}
+\usepackage{nicefrac}
+\usepackage{wrapfig}
+\usepackage[capitalize]{cleveref}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MACROS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\defined}{\vcentcolon =}
+\newcommand{\rdefined}{=\vcentcolon}
+%\newcommand{\E}{\mathbb E}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\calF}{\mathcal F}
+\newcommand{\calR}{\mathcal R}
+\newcommand{\sr}[1]{\stackrel{#1}}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\ind}[1]{\mathds{1}\!\!\set{#1}}
+\newcommand{\argmax}{\operatornamewithlimits{arg\,max}}
+\newcommand{\argmin}{\operatornamewithlimits{arg\,min}}
+\newcommand{\floor}[1]{\left \lfloor {#1} \right\rfloor}
+\newcommand{\ceil}[1]{\left \lceil {#1} \right\rceil}
+
+\def\subsubsect#1{\vspace{1ex plus 0.5ex minus 0.5ex}\noindent{\bf\boldmath{#1.}}}
+
+\renewcommand{\P}[1]{\mathbb{P}\left\{#1\right\}}
+\newcommand{\Prob}[1]{\mathbb{P}\left\{#1\right\}}
+\newcommand{\EE}[1]{\mathbb{E}\left[#1\right]}
+
+\let\temp\epsilon
+\let\epsilon\varepsilon
+\newcommand{\eps}{\varepsilon}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THEOREMS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+
+\newcommand{\R}{\mathds{R}}
+
+\newcommand\wh{\ensuremath{\widehat}}
+\newcommand\wt{\ensuremath{\widetilde}}
+\newcommand\norm[1]{\left\| #1 \right\|}
+\newcommand\tvnorm[1]{\left\| #1 \right\|_{\mathrm{TV}}}
+\newcommand\parens[1]{\left( #1 \right)}
+\DeclareMathOperator{\Diag}{Diag}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator*{\E}{\text{\bf E}}
+\renewcommand\t{{\ensuremath{\scriptscriptstyle{\top}}}}
+\newcommand\be{\ensuremath{\mathbf{e}}}
+\newcommand\tmix{\ensuremath{t_{\mathrm{mix}}}}
+\newcommand\htmix{\ensuremath{\hat{t}_{\mathrm{mix}}}}
+\newcommand{\od}{\bar{d}}
+\newcommand{\tcouple}{\tau_{\mathrm{couple}}}
+\newcommand{\ZZ}{\mathcal{Z}}
+\newcommand\trel{\ensuremath{t_{\mathrm{rel}}}}
+\newcommand{\ip}[1]{\langle#1\rangle}
+\newcommand{\DF}{\mathcal{E}}
+\newcommand\ttmix{\ensuremath{t_{\mathrm{mix},2}}}
+
+\newcommand{\paren}[1]{\left( #1 \right)}
+\newcommand{\sqprn}[1]{\left[ #1 \right]}
+\newcommand{\tlprn}[1]{\left\{ #1 \right\}}
+%\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\oo}[1]{\frac{1}{#1}}
+\newcommand{\nrm}[1]{\left\Vert #1 \right\Vert}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\trn}{^\intercal} %operator transpose
+
+\newcommand{\beq}{\begin{eqnarray*}}
+\newcommand{\eeq}{\end{eqnarray*}}
+\newcommand{\beqn}{\begin{eqnarray}}
+\newcommand{\eeqn}{\end{eqnarray}}
+
+
+\def\ddefloop#1{\ifx\ddefloop#1\else\ddef{#1}\expandafter\ddefloop\fi}
+% \bbA, \bbB, ...
+\def\ddef#1{\expandafter\def\csname bb#1\endcsname{\ensuremath{\mathbb{#1}}}}
+\ddefloop ABCDEFGHIJKLMNOPQRSTUVWXYZ\ddefloop
+
+\title{Notes on the Mohri-Rostamizadeh approach}
+%\author{Daniel, Aryeh, Csaba}
+
+
+\begin{document}
+\maketitle
+
+
+%\begin{abstract}
+%An abstract
+%\end{abstract}
+
+Let $T$ be the true transition matrix and $\hat T$ the estimated one
+(leaving the estimation method presently unspecified). 
+Recall that for any matrix $A$, its Euclidean norm $\nrm{A}_2$ is given by
+$$ \nrm{A}_2 = \sup_{\nrm{x}\le1}\nrm{Ax} 
+= \sup_{\nrm{x},\nrm{y}\le1}x\trn A y,
+$$
+where all vector norms are $\ell_2$ unless stated otherwise.
+
+We are interested
+in bounding
+$$ \nrm{T-\hat T}_2 = \sup_{\nrm{x},\nrm{y}\le1} {x\trn(T-\hat T)y} .
+$$
+
+Trying to stay notationally close to \cite{mohri-rosta08},
+let $H=B\times B$,
+where $B$ is the Euclidean unit ball, and put
+$R(x,y)=x\trn T y$, $\hat R_S(x,y)=x\trn \hat T y$.
+Then
+$$ \nrm{T-\hat T}_2 = \sup_{(x,y)\in H} R(x,y)-\hat R_S(x,y)=:\Phi(S),$$
+where $S$ is the observed sample sequence.
+
+We will need an analogue of Prop. 1 in \cite{mohri-rosta08}:
+$$R(x,y) = \E_{S}[\hat R_S(x,y)].$$
+I believe that for $S$ sampled from a stationary process
+and $\hat T_{ij}$ taken to be the sample mean, this indeed holds.
+\todoc{I don't think so. There is a bias because maybe $i$ is never visited.}
+I don't think it holds for the median-of-means estimate.
+
+[Note: there appears to be something wrong with the indexing
+of the blocks in (6)-(7) of \cite{mohri-rosta08}. 
+The numbering in 
+\cite{MR1258867}, p.101 makes more sense, and we will follow it.]
+Partition the sequence $S=(z_1,\ldots,z_n)$,
+$n=2a\mu$, into $2a\mu$ blocks of length $a$.
+Let $S_0$ be the sequence of odd blocks
+and $\tilde S_0$ a sequence of independent blocks of length
+$a$, where each block in $\tilde S_0$ is distributed identically to its
+corresponding block $S_0$.
+
+Since $\abs{\Phi(\cdot)}\le2$, Lemma 4.1 of
+\cite{MR1258867} implies
+$$ \abs{ \E_{S_0}[\Phi]-\E_{\tilde S_0}[\Phi]}\le 2(\mu-1)\beta(a),$$
+where $\beta(\cdot)$ is the beta-mixing coefficient.
+
+By Lemma 1 of \cite{mohri-rosta08}, we have,
+for all $a,\mu,\eps>0$ with $2\mu a=n$ 
+%and 
+%$\eps>\E_{\tilde S_0}[\Phi(\tilde S_0)]$,
+that
+$$ \P{\Phi(S)>\eps}
+\le 2\P{ \Phi(\tilde S_0)
+%-\E_{\tilde S_0}[\Phi(\tilde S_0}]
+>\eps
+}
++
+2(\mu-1)\beta(a).
+$$
+
+Proposition 2 ibid. yields, for all
+$\eps>\E_{\tilde S_0}[\Phi(\tilde S_0)]$,
+
+
+$$ \P{\Phi(S)>\eps} \le
+2\exp(-\mu{\eps'}^2/2)+2(\mu-1)\beta(a),
+$$
+where $\eps'=\eps-\E_{\tilde S_0}[\Phi(\tilde S_0)]$.
+
+
+Now invoke Lemma 2 ibid. to bound the expectation over iid blocks:
+$$ \E_{\tilde S_0}[\Phi(\tilde S_0)] \le \calR_\mu(H),$$
+where $\cal_\mu(\cdot)$ is the ordinary (iid) Rademacher complexity of
+$H$.
+Now it is well-known \cite{MR1965359} that the $\ell_2$
+$t$-covering number of the $d$-dimensional Euclidean unit ball is
+bounded by $(3/t)^d$. 
+To bound the $\ell_2$ covering number of $H=B_d\times B_d$,
+fix a radius $t$ and
+%recall that
+%$$ 
+%%\frac{\sqrt{a}+\sqrt{b}}{\sqrt 2}
+%%\le 
+%\sqrt{a+b}\le \sqrt a+\sqrt b$$
+%for all $a,b>0$.
+%Hence
+observe that
+\beq
+\nrm{(x,y)}_2 &=& \sqrt{ \sum_i x_i^2 + \sum_j y_j^2} \\
+&\le& \sqrt2 t.
+\eeq
+Hence,
+$$ B_d\times B_d \subset \sqrt2 B_{2d} $$
+and $H$
+can be covered by
+$(\sqrt 6/t)^{2d}$ balls of radius $t$.
+Using Dudley's chaining integral to estimate
+the Rademacher complexity, we have
+
+\beq
+\calR_\mu(H) &\le& \frac{12}{\sqrt\mu}\int_0^{\sqrt2}\sqrt{d\ln(\sqrt 6/t)}dt \\
+&\le& 25\sqrt{d/\mu}.
+\eeq
+Note that $d$ is the number of states, consistent with our other notes.
+
+Adapting Theorem 1 in \cite{mohri-rosta08} to our needs, we have
+that for any sample $S$ of length $n=2\mu a$
+and $\delta>2(\mu-1)\beta(a)$,
+the following
+holds with probability at least $1-\delta$:
+\beq
+%\Phi(S) 
+\nrm{T-\hat T}_2
+\le 25\sqrt{\frac{d}{\mu}} + 2\sqrt{\frac{\ln(2/\delta')}{2\mu}},
+\eeq
+where $\delta'=\delta-2(\mu-1)\beta(a)$.
+
+Recall that our other calculation (``beta-mixing'') gave
+$$ \beta(a) \le \oo{\pi_*}e^{-a(1-\lambda_2)}.$$
+
+\bibliographystyle{plainnat}
+\bibliography{all}
+
+\end{document}
+

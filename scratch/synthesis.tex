@@ -1,0 +1,273 @@
+\documentclass[11pt]{article}
+\usepackage{todonotes}
+\newcommand{\todoc}[2][]{\todo[size=\scriptsize,color=green!10!white,#1]{Cs: #2}} % Csaba's comments
+\newcommand{\todot}[2][]{\todo[size=\scriptsize,inline,color=blue!20!white,#1]{D: #2}} % Daniel's comments
+\newcommand{\todor}[2][]{\todo[size=\scriptsize,color=orange!20!white,#1]{A: #2}} % Aryeh's comments
+
+\usepackage{amsmath,amsbsy,amsfonts,amssymb,amsthm,color,dsfont}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PACKAGES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{latexsym}
+\usepackage{fullpage}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{enumerate}
+\usepackage{accents}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage[ruled]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{dsfont}
+\usepackage[bf]{caption}
+\usepackage{hyperref}
+\hypersetup{
+    bookmarks=true,         % show bookmarks bar?
+    unicode=false,          % non-Latin characters in AcrobatÕs bookmarks
+    pdftoolbar=true,        % show AcrobatÕs toolbar?
+    pdfmenubar=true,        % show AcrobatÕs menu?
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width of the page to the window
+    pdftitle={My title},    % title
+    pdfauthor={Author},     % author
+    pdfsubject={Subject},   % subject of the document
+    pdfcreator={Creator},   % creator of the document
+    pdfproducer={Producer}, % producer of the document
+    pdfkeywords={keyword1} {key2} {key3}, % list of keywords
+    pdfnewwindow=true,      % links in new window
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=red,          % color of internal links (change box color with linkbordercolor)
+    citecolor=blue,        % color of links to bibliography
+    filecolor=magenta,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+\usepackage{amsthm}
+\usepackage{times}
+\usepackage{natbib}
+\usepackage{nicefrac}
+\usepackage{wrapfig}
+\usepackage[capitalize]{cleveref}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MACROS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\defined}{\vcentcolon =}
+\newcommand{\rdefined}{=\vcentcolon}
+%\newcommand{\E}{\mathbb E}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\calF}{\mathcal F}
+\newcommand{\calR}{\mathcal R}
+\newcommand{\sr}[1]{\stackrel{#1}}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\ind}[1]{\mathds{1}\!\!\set{#1}}
+\newcommand{\argmax}{\operatornamewithlimits{arg\,max}}
+\newcommand{\argmin}{\operatornamewithlimits{arg\,min}}
+\newcommand{\floor}[1]{\left \lfloor {#1} \right\rfloor}
+\newcommand{\ceil}[1]{\left \lceil {#1} \right\rceil}
+
+\def\subsubsect#1{\vspace{1ex plus 0.5ex minus 0.5ex}\noindent{\bf\boldmath{#1.}}}
+
+\renewcommand{\P}[1]{\mathbb{P}\left\{#1\right\}}
+\newcommand{\Prob}[1]{\mathbb{P}\left\{#1\right\}}
+\newcommand{\EE}[1]{\mathbb{E}\left[#1\right]}
+
+\let\temp\epsilon
+\let\epsilon\varepsilon
+\newcommand{\eps}{\varepsilon}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THEOREMS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+
+\newcommand{\R}{\mathds{R}}
+
+\newcommand\wh{\ensuremath{\widehat}}
+\newcommand\wt{\ensuremath{\widetilde}}
+\newcommand\norm[1]{\left\| #1 \right\|}
+\newcommand\tvnorm[1]{\left\| #1 \right\|_{\mathrm{TV}}}
+\newcommand\parens[1]{\left( #1 \right)}
+\DeclareMathOperator{\Diag}{Diag}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator*{\E}{\text{\bf E}}
+\renewcommand\t{{\ensuremath{\scriptscriptstyle{\top}}}}
+\newcommand\be{\ensuremath{\mathbf{e}}}
+\newcommand\tmix{\ensuremath{t_{\mathrm{mix}}}}
+\newcommand\htmix{\ensuremath{\hat{t}_{\mathrm{mix}}}}
+\newcommand{\od}{\bar{d}}
+\newcommand{\tcouple}{\tau_{\mathrm{couple}}}
+\newcommand{\ZZ}{\mathcal{Z}}
+\newcommand\trel{\ensuremath{t_{\mathrm{rel}}}}
+\newcommand{\ip}[1]{\langle#1\rangle}
+\newcommand{\DF}{\mathcal{E}}
+\newcommand\ttmix{\ensuremath{t_{\mathrm{mix},2}}}
+
+\newcommand{\paren}[1]{\left( #1 \right)}
+\newcommand{\sqprn}[1]{\left[ #1 \right]}
+\newcommand{\tlprn}[1]{\left\{ #1 \right\}}
+%\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\oo}[1]{\frac{1}{#1}}
+\newcommand{\nrm}[1]{\left\Vert #1 \right\Vert}
+\newcommand{\tnrm}[1]{\Vert #1 \Vert}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\trn}{^\intercal} %operator transpose
+
+\newcommand{\beq}{\begin{eqnarray*}}
+\newcommand{\eeq}{\end{eqnarray*}}
+\newcommand{\beqn}{\begin{eqnarray}}
+\newcommand{\eeqn}{\end{eqnarray}}
+
+
+\def\ddefloop#1{\ifx\ddefloop#1\else\ddef{#1}\expandafter\ddefloop\fi}
+% \bbA, \bbB, ...
+\def\ddef#1{\expandafter\def\csname bb#1\endcsname{\ensuremath{\mathbb{#1}}}}
+\ddefloop ABCDEFGHIJKLMNOPQRSTUVWXYZ\ddefloop
+
+\title{Synthesis..}
+%\author{Daniel, Aryeh, Csaba}
+
+
+\begin{document}
+\maketitle
+
+
+%\begin{abstract}
+%An abstract
+%\end{abstract}
+\newcommand{\XX}{\mathbb{X}}
+\newcommand{\one}[1]{\mathbb{I}\left\{#1\right\}}
+\newcommand{\N}{\mathbb{N}}
+Let  $X_1,\ldots,X_n$ be a  Markov chain with transition matrix $T$
+over the state space $\XX = \{1,\ldots,d \}$.
+We assume that the chain is reversible, irreducible, and stationary (RIS).
+\todoc[inline]{Fix this: We don't want stationarity.}
+Our goal is to derive a hight probability bound on the deviation 
+$\bar{X}_n - \EE{f(X_1)} = \frac1n \sum_{t=1}^n f(X_t) - \EE{f(X_1)}$
+(here, $f$ is some $[0,1]$-valued function).
+We know that $\bar{X}_n - \EE{f(X_1)}$ can be bounded in terms of the $\beta$-mixing coefficients of $(X_i)$,
+following the ``blocking'' method of \cite{MR1258867}.
+In particular, for any $\mu,a$ such that $n = 2\mu a$ and $\delta>2(\mu-1)\beta(a)$,
+with probability at least $1-\delta$,
+\begin{align}
+\label{eq:xbound}
+|\bar{X}_n - \EE{f(X_1)}|
+\le c_1\sqrt{\frac{1}{\mu}} + c_2\sqrt{\frac{\ln(2/\delta')}{2\mu}}\,,
+\end{align}
+where $\delta'=\delta-2(\mu-1)\beta(a)$ (see mohri-notes.pdf).
+Now note that if $\beta(k)$ denotes the $k$th $\beta$-mixing coefficient of $(X_i)$ then 
+\begin{align}
+\label{eq:betabound}
+ \beta(k) \le \oo{\pi_*}e^{-k \gamma^*}
+\end{align}
+where  $\gamma^* = 1-\lambda^*$ is the spectral gap ($\lambda^*$ is the second largest eigenvalue of $T$)
+and  $\pi^*  = \min_i \pi_i>0$ is the critical probability underlying the chain
+(see the $\beta$-mixing note).
+For a given value of $\pi^*,\gamma^*$, $\delta$, let $B_n(\pi^*,\gamma^*,\delta)$ be the optimal value of the optimization problem
+\begin{align*}
+\lefteqn{ \min_{\mu,a} \min\left(1, c_1\sqrt{\frac{1}{\mu}} + c_2\sqrt{\frac{\ln(2/\delta')}{2\mu}}\right) } \\
+& \qquad \text{s.t.} \quad n = 2\mu a, \quad \delta>2(\mu-1)\oo{\pi_*}e^{-a \gamma^*},
+\quad \delta' = \delta-2(\mu-1)\oo{\pi_*}e^{-a \gamma^*}, \quad \mu,a \in \N\,.
+\end{align*}
+
+
+Thus, we need estimates of $\gamma^*$ and $\pi^*$.
+To estimate them we may want to estimate the stationary probabilities and the transition matrix $T$.
+Let $\hat \pi$ denote the estimate of the former, while let $\hat T$ be the estimate of the latter.
+In particular, $\hat \pi_i$ is taken to be the empirical frequency of the visits of state $i$ in $(X_t)$,
+while we let $\hat T_{i,j}$ the frequency when 
+$X_{t+1}=j$ happens given that $X_t = i$ ($t=1,\dots,n-1$). 
+When $X_t = i$ never happens, we take $\hat T_{i,\cdot}$ to be the uniform distribution.
+Since $\Prob{\sum_{t=1}^n \one{X_t = i}=0}=\Prob{X_1\ne i, \dots, X_n\ne i}>0$ for each $i$, $\hat T_{ij}$ is a biased estimate of $T_{ij}$, although the bias decreases exponentially fast. 
+
+For $x\in \R^d$, let $D_x$ be the diagonal matrix with $x$ in its diagonal. 
+Define $L = D_\pi^{-1/2} T  D_\pi^{1/2}$, $\hat{L} = D_{\hat{\pi}}^{-1/2} \hat{T} D_{\hat{\pi}}^{1/2}$, 
+By Weyl's inequality (see notes.pdf),
+\begin{align}
+\label{eq:gammabound}
+|\hat{\gamma}^* - \gamma^* | = |\hat{\lambda}^* - \lambda^* | \le \tnrm{\hat L - L }_2
+\end{align}
+and so it remains to bound this latter quantity.
+Define $E_T = D_{\pi}^{-1/2} (\hat T - T ) D_{\pi}^{1/2}$
+and $E_\pi = D_{\hat{\pi}}^{-1/2} D_\pi^{1/2} - I$.
+We have (see notes.pdf),
+\begin{align}
+\label{eq:lbound}
+\tnrm{\hat L - L}_2 \le \norm{E_T}_2 + \norm{E_{\pi}}_2 (\norm{E_T}_2+1) (\norm{E_\pi}_2+2)\,.
+\end{align}
+Now, $\norm{E_T}_2 = \tnrm{\hat T - T}_2$ (because the eigenvalues of $E_T$ are the same as that of $\hat T - T$).
+Further, for any $\mu,a$ such that $n=2\mu a$
+and $\delta>2(\mu-1)\beta(a)$,
+with probability at least $1-\delta$,
+\begin{align}
+\label{eq:tbound}
+\tnrm{T-\hat T}_2
+\le 25\sqrt{\frac{d}{\mu}} + 2\sqrt{\frac{\ln(2/\delta')}{2\mu}}\,,
+\end{align}
+where $\delta'=\delta-2(\mu-1)\beta(a)$ (see mohri-notes.pdf). \todoc{This does not take into account the bias.}
+\todoc[inline]{Next problem: For a fixed $n$, this will limit the range of $\delta$.
+For any $n$, there will be a range of $\delta$ in the neighbourhood of $0$ for which the algorithm
+will need to return ``I don't know''.
+}
+Similarly, for any $\mu',a'$ such that $n=2\mu' a'$
+and $\delta>2(\mu'-1)\beta(a')$,
+with probability at least $1-\delta$,
+\begin{align}
+\label{eq:pibound}
+|\hat\pi_i - \pi_i | \le C \left( \sqrt{\frac{d}{\mu'}} + \sqrt{\frac{\ln(2/\delta'')}{2\mu'}}\right)\,,
+\end{align}
+where $\delta''=\delta-2(\mu'-1)\beta(a')$.
+
+By combining~\eqref{eq:betabound},
+\eqref{eq:gammabound}, \eqref{eq:lbound}, \eqref{eq:tbound} and~\eqref{eq:pibound}, we can derive 
+that for any $0\le \delta \le 1$,
+ $\mu,a,\mu',a'$  such that $n = 2\mu a$ and
+ $\frac{2}{\pi^*} \max( (\mu-1)e^{-a\gamma^*}, (\mu'-1)e^{-a'\gamma^*} )<\delta$, 
+with probability $1-\delta$,
+\begin{align*}
+|\hat{\gamma}^* - \gamma^* | &\le u( \gamma^*, \pi^*, \hat{\gamma}, \hat\pi, \hat T, n, \mu, a, \mu', a', \delta )\,,\\
+|\hat{\pi}^* - \pi^* | &\le v( \gamma^*, \pi^*, \hat{\gamma}, \hat\pi, \hat T, n, \mu, a, \mu', a', \delta )\,,
+\end{align*}
+for some functions $u$ and $v$.
+Reordering (and relaxing) the  inequalities we get
+\begin{align*}
+\gamma^* &\ge \hat\gamma^* - u( \gamma^*, \pi^*, \hat{\gamma}, \hat\pi, \hat T, n, \mu, a, \mu', a', \delta )\,,\\
+ \pi^*  &\ge \hat{\pi}^* - v( \gamma^*, \pi^*, \hat{\gamma}, \hat\pi, \hat T, n, \mu, a, \mu', a', \delta )\,.
+\end{align*}
+Now, let $\hat{B}_n(\delta)$ be the optimal value of the optimization problem 
+\begin{align*}
+\lefteqn{\max B_n(g,p,\delta)\qquad \text{s.t.} }\\
+&\qquad  g \ge \hat\gamma^* - u( g, p, \hat{\gamma}, \hat\pi, \hat T, n, \mu, a, \mu', a', \delta )\,,\\
+&\qquad p  \ge \hat{\pi}^* - v( g, p, \hat{\gamma}, \hat\pi, \hat T, n, \mu, a, \mu', a', \delta )\,,\\
+&\qquad n = 2\mu a, \quad n = 2\mu' a'\,,\\
+&\qquad \frac{2}{p} \max( (\mu-1)e^{-ag}, (\mu'-1)e^{-a'g} )<\delta\,,\\
+&\qquad g,p >0, \mu,a,\mu',a'\in \N\,.
+\end{align*}
+Then, w.p. $1-\delta$, it holds that
+\[
+|\bar{X}_n - \EE{f(X_1)}| \le \hat{B}_n(\delta)\,.
+\]
+
+Next goals: Analytic upper bound on $\EE{ \hat{B}_n(\delta)}$.
+Matching lower bound.
+
+
+\bibliographystyle{plainnat}
+\bibliography{all}
+
+\end{document}
+

@@ -1,0 +1,453 @@
+\documentclass[11pt]{article}
+\usepackage{todonotes}
+\newcommand{\todoc}[2][]{\todo[size=\scriptsize,color=green!10!white,#1]{Cs: #2}} % Csaba's comments
+\newcommand{\todot}[2][]{\todo[size=\scriptsize,inline,color=blue!20!white,#1]{D: #2}} % Daniel's comments
+\newcommand{\todor}[2][]{\todo[size=\scriptsize,color=orange!20!white,#1]{A: #2}} % Aryeh's comments
+
+\usepackage{amsmath,amsbsy,amsfonts,amssymb,amsthm,color,dsfont}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PACKAGES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{latexsym}
+\usepackage{fullpage}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{enumerate}
+\usepackage{accents}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage[ruled]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{dsfont}
+\usepackage[bf]{caption}
+\usepackage{hyperref}
+\hypersetup{
+    bookmarks=true,         % show bookmarks bar?
+    unicode=false,          % non-Latin characters in AcrobatÕs bookmarks
+    pdftoolbar=true,        % show AcrobatÕs toolbar?
+    pdfmenubar=true,        % show AcrobatÕs menu?
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width of the page to the window
+    pdftitle={My title},    % title
+    pdfauthor={Author},     % author
+    pdfsubject={Subject},   % subject of the document
+    pdfcreator={Creator},   % creator of the document
+    pdfproducer={Producer}, % producer of the document
+    pdfkeywords={keyword1} {key2} {key3}, % list of keywords
+    pdfnewwindow=true,      % links in new window
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=red,          % color of internal links (change box color with linkbordercolor)
+    citecolor=blue,        % color of links to bibliography
+    filecolor=magenta,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+\usepackage{amsthm}
+\usepackage{times}
+\usepackage{natbib}
+\usepackage{nicefrac}
+\usepackage{wrapfig}
+\usepackage[capitalize]{cleveref}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MACROS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\defined}{\vcentcolon =}
+\newcommand{\rdefined}{=\vcentcolon}
+\newcommand{\E}{\mathbb E}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\calF}{\mathcal F}
+\newcommand{\sr}[1]{\stackrel{#1}}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\ind}[1]{\mathds{1}\!\!\set{#1}}
+\newcommand{\argmax}{\operatornamewithlimits{arg\,max}}
+\newcommand{\argmin}{\operatornamewithlimits{arg\,min}}
+\newcommand{\floor}[1]{\left \lfloor {#1} \right\rfloor}
+\newcommand{\ceil}[1]{\left \lceil {#1} \right\rceil}
+
+\def\subsubsect#1{\vspace{1ex plus 0.5ex minus 0.5ex}\noindent{\bf\boldmath{#1.}}}
+
+\renewcommand{\P}[1]{\mathbb{P}\left\{#1\right\}}
+\newcommand{\Prob}[1]{\mathbb{P}\left\{#1\right\}}
+\newcommand{\EE}[1]{\mathbb{E}\left[#1\right]}
+
+\let\temp\epsilon
+\let\epsilon\varepsilon
+\newcommand{\eps}{\varepsilon}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THEOREMS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+
+\newcommand{\R}{\mathds{R}}
+
+\newcommand\wh{\ensuremath{\widehat}}
+\newcommand\wt{\ensuremath{\widetilde}}
+\newcommand\norm[1]{\left\| #1 \right\|}
+\newcommand\tvnorm[1]{\left\| #1 \right\|_{\mathrm{TV}}}
+\newcommand\Parens[1]{\left( #1 \right)}
+\DeclareMathOperator{\Diag}{Diag}
+\DeclareMathOperator{\Sym}{Sym}
+\renewcommand\t{{\ensuremath{\scriptscriptstyle{\top}}}}
+\newcommand\be{\ensuremath{\mathbf{e}}}
+\newcommand\tmix{\ensuremath{t_{\mathrm{mix}}}}
+\newcommand\htmix{\ensuremath{\hat{t}_{\mathrm{mix}}}}
+\newcommand{\od}{\bar{d}}
+\newcommand{\tcouple}{\tau_{\mathrm{couple}}}
+\newcommand{\ZZ}{\mathcal{Z}}
+\newcommand\trel{\ensuremath{t_{\mathrm{rel}}}}
+\newcommand{\ip}[1]{\langle#1\rangle}
+\newcommand{\DF}{\mathcal{E}}
+\newcommand\ttmix{\ensuremath{t_{\mathrm{mix},2}}}
+
+\def\ddefloop#1{\ifx\ddefloop#1\else\ddef{#1}\expandafter\ddefloop\fi}
+% \bbA, \bbB, ...
+\def\ddef#1{\expandafter\def\csname bb#1\endcsname{\ensuremath{\mathbb{#1}}}}
+\ddefloop ABCDEFGHIJKLMNOPQRSTUVWXYZ\ddefloop
+
+\title{Statistical Estimation of Mixing Times}
+\author{Daniel, Aryeh, Csaba}
+
+
+\begin{document}
+\maketitle
+
+
+\begin{abstract}
+An abstract
+\end{abstract}
+
+\section{Problem Definition}
+All unattributed statements of this section can be found in \citet{LePeWi08}.
+Let $T\in [0,1]^{d\times d}$ be a Markov transition kernel with a single essential communicating class.
+Then, as it is well known (e.g., Proposition 1.26 of \citet{LePeWi08}), $T$ has a unique stationary distribution $\pi\in[0,1]^d$:
+$\pi \ge 0$, $\pi \be = 1$, $\pi T = \pi$ (we view $\pi$ as a row vector, while $\be = (1,1,\ldots,1)^\t$).
+
+Let $T^t(i,\cdot)$ \todoc{I would prefer to use $P$ to $T$ to make this ``look'' better..}
+be the probability distribution over the states 
+obtained by running a chain from initial state $i$ for $t$ steps. 
+Let 
+\[
+d(t) = \max_{1\le i \le d} \tvnorm{ T^t(i,\cdot) - \pi }.
+\]
+The $\eps$-mixing time is defined to be 
+\[
+\tmix(\eps) = \min\{ t\ge 0: d(t)\le \eps \},
+\]
+while we define ``the'' mixing time to be 
+\[
+\tmix = \tmix(1/4).
+\]
+As it is well known, $d(	\ell \tmix ) \le 2^{-\ell}$, and $\tmix(\eps)\le \ceil{ \ln_2 \eps^{-1} } \, \tmix$.
+We are interested in estimating the mixing time based on a finite sample, as the mixing time plays a critical role when developing finite sample confidence bounds for estimating the mean of a function with respect to the stationary distribution using a sample mean obtained by averaging the function values over a single sample path of a Markov chain underlying $T$.
+\todoc{Add some results showing this.}
+
+\paragraph{Problem 1:}
+Given a sample path $(X_n)_{n\ge 0}$ of $T$ a confidence parameter $0<\delta<1$,
+design an algorithm that 
+stops at time $\tau >0$ and outputs an estimate $\htmix$ of the mixing time $\tmix$ such that 
+$\Prob{  \tmix \le \htmix } \ge 1-\delta$ while keeping $\EE{\tau}$ is as small as possible.
+Ideally, we want to find an algorithm whose performance is within a constant factor of that of a minimax optimal algorithm.
+Of interest are the running time and the memory requirements of the algorithms.
+
+\noindent Variations:
+\begin{enumerate}[{\emph (i)}]
+\item Require that $\Prob{ \frac12 \htmix \le \tmix \le \htmix } \ge 1-\delta$ so that $\htmix$ is not a ridiculous overestimate of $\tmix$.
+\item Get rid of $\delta$, change the requirement to $\tmix \le \EE{\htmix}$.
+\item KWIK-like: Get rid of $\delta$, allow the algorithm output ``I don't know'' (IDK). Require that if the algorithm outputs a real number, it should be an overestimate of $\tmix$. Measure the performance with the probability of outputting IDK.
+\item Allow multiple sample paths: The algorithm may stop a sample path and ask for a new one, starting from a fixed known/unknown/chosen probability distribution. If the initial distribution can be chosen, it is likely that the algorithms will sample single transitions only.
+\end{enumerate}
+
+\section{Background}
+Define $\od(t) = \max_{i,j} \tvnorm{ T^t(i,\cdot) - T^t(j,\cdot) }$. It is well known that $d(t)\le \od(t) \le 2d(t)$ (Eq. (4.23) of \citet{LePeWi08}). Further, the function $\od$ is submultiplicative.
+A \emph{coupling of Markov chains} with the transition kernel $T$ is a stochastic process $(X_t,Y_t)_{t\ge 0}$ such that both $(X_t)_t$ and $(Y_t)_t$ are Markov chains with transition kernel $T$. A coupling is canonical if $X_s = Y_s$ holds for any $s\ge t$ such that $X_t = Y_t$, i.e., the chains stay together after the first time they meet. The corresponding coupling time is defined to be $\tcouple = \min \{ t\ge 0: X_t = Y_t \}$.
+We have the following result (cf. Corollary~5.3 of \citet{LePeWi08}):
+\begin{theorem}
+Let $\tcouple(i,j)$ be the coupling time of a canonical coupling $(X_t,Y_t)_t$ of Markov chains with kernel $T$ where $X_0= i$ and $Y_0=j$. Then $\od(t) \le \max_{1\le i, j \le d} \Prob{\tcouple(i,j) > t}$.
+\end{theorem}
+\todoc[inline]{How tight is this theorem?}
+Hence, to test whether $\od(t)\le c$ for some specific time $t$, it suffices to construct canonical couplings with start states $(i,j)$ and estimate the probabilities $\Prob{\tcouple(i,j)>t}$. 
+For this, it is probably best to use a so-called \emph{grand coupling} $(X_t^i)_{1\le i \le d, t\ge 0}$ where for each $i$, $(X_t^i)$ is a Markov chain with transition kernel $T$ started from $i$. This can be done by using a random mapping representation of a chain: $X_{t+1}^i = f(X_t^i,Z_{t+1})$, $t\ge 0$, where $(Z_t)_{t\ge 0}$ is an i.i.d. $\ZZ$-valued sequence and $f: [d] \times \ZZ \to [d]$.
+Given a grand coupling, we can test for $\max_{1\le i, j \le d} \Prob{\tcouple(i,j) > t}\le 1/4$ at times $t=1,2,2^2,2^3,\ldots$ by running $m$ independent grand couplings while distributing the error probability $\delta = \sum_{k=0}^\infty \delta_k$ to the test times $t = 2^k$ (e.g., $\delta_k = \delta/(k(k+1))$)
+ and stopping when at some of the test times $t = 2^k$, $\hat{p}(t)  \le 1/4$, where $\hat{p}(t)$ is an upper estimate of $\max_{i,j} \Prob{\tcouple(i,j)>t}$ with probability $1-\delta_k$.
+\todoc[inline]{How does this compare to estimating the transition kernel?}
+\todoc[inline]{Can we still use this when there is a single sample path?}
+
+An alternative idea is to use \emph{strong stationary times} to bound $d(t)$:
+A strong stationary time for a Markov chain $(X_t)_t$ with $X_0 = i$ and stationary distribution $\pi$ is a randomized stopping time $\tau = \tau(i)$ that may depend on $i$ and is such that 
+$\Prob{\tau = t, X_\tau = j} = \Prob{\tau = t} \pi(j)$.
+If $\tau$ is a strong stationary time then $d(t) \le \max_i \Prob{\tau(i)> t}$. 
+\todoc[inline]{Is this tighter than the previous inequality?}
+\todoc[inline]{Is there a general way of constructing strong stationary times?}
+\todoc[inline]{Section 6.6 of  \citet{LePeWi08} defines Cesaro mixing times $\tmix^*(\eps)$: These are mixing times defined for the average of the distributions $1/t \sum_{s=0}^{t-1} T^s(i,\cdot)$. Then, if $\tau(i)$ is a stationary time for a chain started from $i$ (i.e., $\Prob{X_\tau = j} = \pi(j)$ for all $j$) then $\tmix^*(1/4) \le 4 \max_i \EE{ \tau(i) }+1$. Is this useful? Can the Cesaro mixing time be used in finite sample bounds for sample means?}
+
+\subsection{Time Reversals and Reversible Chains}
+The time reversal of $T$ is defined to be $T^*\in \R^{d\times d}$ satisfying 
+$T^*_{i,j} = \pi_j T_{j,i}/\pi_i$. The kernel $T$  is called reversible if $T = T^*$.
+If $T$ is reversible and irreducible with stationary distribution $\pi$,
+then 
+\[
+(\trel-1)\, \ln\left(\frac{1}{2\eps}\right)\le \tmix(\eps) \le \trel\, \ln\left( \frac{1}{\eps \pi^* }\right),
+\]
+where $\pi^* = \min_i \pi_i$ and $\trel = 1/\gamma_*$ is the relaxation time of the Markov chain with kernel $T$ and \emph{absolute spectral gap} $\gamma_*$, which is defined by $\gamma_* = 1-\lambda_*$, where $\lambda_* = \max\{ |\lambda| : \lambda \text{ is an eigenvalue of } T, \lambda \ne 1 \}$. ($T$ being aperiodic and irreducible implies that $\gamma_*>0$.)
+
+Define the $\pi$-weighted inner product by $\ip{u,v}_{\pi} = \sum_i u_i v_i \pi_i$ and denote the corresponding norm by $\norm{\cdot}_{2,\pi}$. More generally, we denote the $\pi$-weighted $p$-norm by $\norm{\cdot}_{p,\pi}$.
+Let $T$ be a reversible transition matrix, with eigenvalues $1 = \lambda_1 > \lambda_2 \ge \ldots \lambda_d \ge -1$ and associated eigenvectors $\{v_j\}_j$ with respect to $\ip{\cdot,\cdot}_\pi$. Then,
+\[
+\tvnorm{ T^t(i,\cdot) - \pi}^2 
+= \frac14  \norm{\frac{T^t(i,\cdot)}{\pi(\cdot)} - \be }_{1,\pi}^2  
+\le \frac14  \norm{\frac{T^t(i,\cdot)}{\pi(\cdot)} - \be }_{2,\pi}^2
+= \frac14 \sum_{j=2}^d v_j^2 \lambda_j^{2t}\,
+\]
+(cf. Lemma~12.16 of \citet{LePeWi08}).
+\if0
+Furthermore, if the chain is transitive then 
+\[
+\tvnorm{ T^t(i,\cdot) - \pi}^2 \le \frac14  \norm{\frac{T^t(i,\cdot)}{\pi_i} - \be }_2^2 \frac14 \sum_{j=2}^d \lambda_j^{2t}\,.
+\]
+\fi
+We shall let $d_2(t) =  \max_i \norm{\frac{T^t(i,\cdot)}{\pi(\cdot)} - \be }_{2,\pi}$ and the $\ell^2$ mixing time by $\ttmix(\eps) = \min\{ t: d_2(t)\le \eps\}$.
+Denote $\norm{T^*} = \sup_{v\ne 0, v^\top \pi = 0} \frac{\norm{T^* v}_{2,\pi}}{\norm{v}_{2,\pi}}$.
+Then, 
+\[
+\ttmix(\eps) \le \ceil{ \frac{1}{1-\norm{T^*}} \ln \frac{1}{\eps\sqrt{\pi_*}}} 
+%=  \ceil{\frac1{\gamma_{T T^*}}\ln \frac1{\eps\sqrt{\pi_*}}} \,,
+\]
+(cf. Proposition~1.2 \citet{MoTe06}). 
+\if0
+Here, for a Markov chain with kernel $K$ and stationary distribution $\pi$,
+ $\gamma_{K}$ is defined by
+\[
+\gamma_{K} = \inf_v \frac{\mathrm{Var}_\pi(v)}{\DF_K(v,v)}\,,
+\]
+where $\mathrm{Var}_\pi(v) = \sum_i (v_i - \ip{v,\pi})^2 \pi_i$ and
+$\DF_K(u,v) = \ip{ u, (I-K)v }_\pi$ is the \emph{Dirichlet form} underlying $K$.
+If $T$ is reversible, $\gamma_{T T^*} =\gamma_{T^2} = \gamma_*^2$.
+\fi
+If the chain is non-reversible, the above bound may be trivial (even though the chain may be contracting). For example, this happens when $d = 3$, $T_{1,2} = T_{2,3} = 1$, $T_{3,3} = T_{3,1} = 1/2$. The origin of the failure of the bound is that the methods require that the distance decreases at every step, while if the initial distribution is concentrated at state $1$, then it will take two steps before the distance decreases. This is a common problem with the bounds of this type for the nonreversible case.
+%Then, $\pi_1 = \pi_2 = 1/4$, $\pi_3 = 1/2$. 
+
+\section{Analysis via Estimation of $T$}
+
+Let $T$ be the probability kernel for a $d$-state reversible Markov
+chain, so
+\[ \Pr(X_{n+1} = j | X_n = i) = T_{i,j} . \]
+and
+\[
+  \pi_i T_{i,j} = \pi_j T_{j,i}
+\]
+for some stationary distribution given by $\pi$.
+
+\subsection{Estimation error}
+
+We use the median-of-means technique to estimate all $d^2$ entries of
+$T$ (this is just to get a variance-only bound with high probability;
+using the empirical average also works but will involve some
+additional lower-order terms).
+That is, for each $(i,j)\in[d]^2$, we consider the $\hat{n}_i$
+times $t$ where $X_t = i$ and split them into $k$ groups each of size
+$\hat{n}_i/k$; within each group, we compute the fraction of these
+times where $X_{t+1}=j$; we then compute the median of these fractions
+and use that as the estimate of $T_{i,j}$.
+Call these estimates $\wt{T}_{i,j}$.
+Using $k := 4.5\ln(d^2/\delta)$, we have using the median-of-means
+theorem and a union bound,
+\[
+  \Parens{ \wt{T}_{i,j} - T_{i,j} }^2
+  \leq \frac{27T_{i,j}(1-T_{i,j})\ln(d^2/\delta)}{\hat{n}_i}
+\]
+for all $(i,j) \in [d]^2$, with probability $\geq1-\delta$.
+Therefore, in this event,
+\begin{align*}
+  \norm{\Diag(\pi)^{1/2} (\wt{T} - T) \Diag(\pi)^{-1/2}}_F^2
+  & = \sum_{i=1}^d \sum_{j=1}^d \frac{\pi_i}{\pi_j}
+  \Parens{ \wt{T}_{i,j} - T_{i,j} }^2 \\
+  & \leq \sum_{i=1}^d \sum_{j=1}^d
+  \frac{27\pi_i T_{i,j} (1 - T_{i,j})\ln(d^2/\delta)}{\pi_j\hat{n}_i} \\
+  & = \sum_{i=1}^d \sum_{j=1}^d
+  \frac{27\pi_j T_{j,i} (1 - T_{i,j})\ln(d^2/\delta)}{\pi_j\hat{n}_i} \\
+  & = \sum_{i=1}^d \sum_{j=1}^d
+  \frac{27T_{j,i} (1 - T_{i,j})\ln(d^2/\delta)}{\hat{n}_i} \\
+  & = \sum_{i=1}^d \frac{27d_i\ln(d^2/\delta)}{\hat{n}_i}
+\end{align*}
+where $d_i := \sum_{j=1}^d T_{j,i} (1 - T_{i,j})$.
+
+\subsection{Perturbation analysis}
+
+We are interested in approximating the eigenvalues of the matrix $L :=
+\Diag(\pi)^{1/2} T \Diag(\pi)^{-1/2}$ (which is symmetric by
+reversibility).
+
+Let $\wt{T}$ and $\tilde\pi$ be estimates of $T$ and $\pi$,
+respectively.
+%Assume the Markov chain associated with $\wt{T}$ has a stationary
+%distribution denoted by $\tilde\pi$.
+%Since $I - T + 1\pi^\t$ is invertible and
+%\[
+%  (\tilde\pi - \pi)^\t (I - T + 1\pi^\t)
+%  = \tilde\pi^\t (\wt{T} - T)
+%  ,
+%\]
+%we can bound $\|\tilde\pi - \pi\|_\infty$ by
+%\[
+%  \|\tilde\pi - \pi\|_\infty
+%  \leq \|(\wt{T} - T)(I - T + 1\pi^\t)^{-1}\|_{\infty\to1}
+%  .
+%\]
+Define
+\begin{align*}
+  \wt{L}
+  & := \Diag(\tilde\pi)^{1/2} \wt{T} \Diag(\tilde\pi)^{-1/2}
+  \\
+  E_\pi & := \Diag(\pi)^{1/2} \Diag(\tilde\pi)^{-1/2} - I \\
+  E_\pi' & := \Diag(\tilde\pi)^{1/2} \Diag(\pi)^{-1/2} - I \\
+  E_T & := \Diag(\pi)^{1/2} (\wt{T} - T) \Diag(\pi)^{-1/2} .
+\end{align*}
+Then
+\[
+  \wt{L} - L
+  = E_T + E_\pi' L + L E_\pi + E_\pi' L E_\pi
+  + E_\pi' E_T + E_T E_\pi + E_\pi' E_T E_\pi
+  ,
+\]
+so
+\begin{align*}
+  \|\wt{L} - L\|_2
+  & \leq \|E_T\|_2
+  + (\|L\|_2 + \|E_T\|_2)
+  (\|E_\pi\|_2 + \|E_\pi'\|_2 + \|E_\pi\|_2\|E_\pi'\|_2)
+  .
+\end{align*}
+
+Let $\Sym(A) := 0.5 (A + A^\t)$ for a square matrix $A$.
+By the triangle inequality,
+\[
+  \norm{\Sym(\wt{L}) - L}_2
+  \leq \|\wt{L} - L\|_2 .
+\]
+Let $\lambda_i(A)$ denote the $i$-th eigenvalue of a symmetric matrix
+$A$ (assuming the eigenvalues are arranged in non-increasing order).
+By Weyl's inequality,
+\[
+  |\lambda_i(\Sym(\wt{L})) - \lambda_i(L)| \leq
+  \|\wt{L} - L\|_2
+\]
+for all $i\in[d]$.
+
+\section{Analysis via Estimation of $\Diag(\pi)T$}
+
+Let $P := \Diag(\pi) T$ (i.e., $P_{i,j} := \pi_i T_{i,j}$), so $L =
+\Diag(\pi)^{-1/2} P \Diag(\pi)^{-1/2}$.
+
+\subsection{Perturbation analysis}
+
+Let $\wh{P}$ and $\hat\pi$ be estimates of $P$ and $\pi$,
+respectively, and define
+\begin{align*}
+  \wh{L} & := \Diag(\hat\pi)^{-1/2} \wh{P} \Diag(\hat\pi)^{-1/2} \\
+  E_\pi & := \Diag(\hat\pi)^{-1/2} \Diag(\pi)^{1/2} - I \\
+  E_P & := \Diag(\pi)^{-1/2} (\wh{P} - P) \Diag(\pi)^{-1/2} .
+\end{align*}
+Then
+\[
+  \wh{L} - L
+  = E_P + E_\pi L + L E_\pi + E_\pi L E_\pi + E_\pi E_P + E_P E_\pi +
+  E_\pi E_P E_\pi
+  ,
+\]
+so
+\[
+  \|\wh{L} - L\|_2
+  \leq \|E_P\|_2 + (\|E_P\|_2 + \|L\|_2) (2\|E_\pi\|_2 + \|E_\pi\|_2^2)
+  .
+\]
+
+Recall that $L$ is symmetric and that its eigenvalues are between $-1$
+and $+1$.
+This is because $I - L$ is a normalized Laplacian matrix, which has
+eigenvalues contained in the interval $[0,2]$.
+In fact, the smallest eigenvalue of $I - L$ is zero, so the largest
+eigenvalue of $L$ is equal to $1$; the smallest eigenvalue of $L$ is
+at least $-1$.
+Therefore $\|L\|_2 = \max\{\lambda_{\max}(L),-\lambda_{\min}(L)\} =
+1$.
+Therefore
+\[
+  \|\wh{L} - L\|_2
+  \leq \|E_P\|_2 + (\|E_P\|_2 + 1) (2\|E_\pi\|_2 + \|E_\pi\|_2^2)
+  .
+\]
+
+\subsection{Estimation error in iid setting}
+
+Suppose we have $n$ iid copies of $(X_t,X_{t+1})$, where the marginal
+distribution of $X_t$ is $\pi$, and $\wh{P}$ is the maximum likelihood
+estimate of $P$.
+Then we can write $E_P$ as the average of $n$ independent copies of the
+zero-mean random matrix $Z$, where
+\[
+  \Pr\Parens{ Z = \frac1{\sqrt{\pi_i\pi_j}} e_i e_j^\t - L } = P_{i,j} .
+\]
+We can apply the matrix Bernstein inequality to bound $\|E_P\|_2$ with
+high probability.
+To do this, we need to bound the following quantities:
+\[
+  \|Z\|_2 , \quad
+  \|\bbE(ZZ^\t)\|_2 , \quad
+  \|\bbE(Z^\t Z)\|_2 .
+\]
+By the triangle inequality, we have
+\[
+  \|Z\|_2
+  \leq \frac{1}{\pi_{\min}} + \|L\|_2
+  = \frac{1}{\pi_{\min}} + 1
+\]
+where $\pi_{\min} := \min_{i\in[d]} \pi_i$.
+Moreover, by reversibility,
+\[
+  \bbE(ZZ^\t)
+  = \bbE(Z^\t Z)
+  = \sum_{i=1}^d \Parens{ \sum_{j=1}^d \frac{T_{i,j}}{\pi_j} }
+  e_ie_i^\t - L^2
+\]
+so
+\[
+  \|\bbE(ZZ^\t)\|_2
+  = \|\bbE(Z^\t Z)\|_2
+  \leq \max_{i \in [d]} \sum_{j=1}^d \frac{T_{i,j}}{\pi_j} + \|L\|_2^2
+  = D_{T,\pi} + 1
+\]
+where $D_{T,\pi} := \max_{i\in[d]} \sum_{j=1}^d T_{i,j} / \pi_j \leq
+1/\pi_{\min}$.
+By the matrix Bernstein inequality, there is an absolute constant
+$c>0$ such that with probability at least $1-\delta$,
+\begin{align*}
+  \|E_P\|_2
+  & \leq c \sqrt{\frac{(D_{T,\pi} + 1) \ln(d/\delta)}{n}}
+  + c \Parens{ \frac1{\pi_{\min}} + 1 } \frac{\ln(d/\delta)}{n}
+  \\
+  & \leq c \sqrt{\Parens{ \frac1{\pi_{\min}} + 1 }\frac{\ln(d/\delta)}{n}}
+  + c \Parens{ \frac1{\pi_{\min}} + 1 } \frac{\ln(d/\delta)}{n}
+  .
+\end{align*}
+
+\bibliographystyle{plainnat}
+\bibliography{all}
+
+\end{document}
+
