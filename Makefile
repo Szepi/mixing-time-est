@@ -1,5 +1,8 @@
+#all:
+#	latexmk -pdf matrix-est
+
 all:
-	latexmk -pdf matrix-est
+	pdflatex matrix-est && bibtex bu1 && bibtex bu2 && pdflatex matrix-est && pdflatex matrix-est
 
 split: paper-short.pdf paper-appendix.pdf
 

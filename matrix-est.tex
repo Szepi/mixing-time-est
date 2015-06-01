@@ -43,58 +43,65 @@ Address \\
 }
 
 \begin{document}
-\maketitle
+\begin{bibunit}[myunsrt]
+  \maketitle
 
-\begin{abstract} 
-\input{abstract}
-\end{abstract} 
+  \begin{abstract} 
+  \input{abstract}
+  \end{abstract} 
 
-\if0
-\begin{keywords}
-  Markov chain; mixing time; spectral gap;
-  fully data-dependent confidence interval
-\end{keywords}
-\fi
+  \if0
+  \begin{keywords}
+    Markov chain; mixing time; spectral gap;
+    fully data-dependent confidence interval
+  \end{keywords}
+  \fi
 
-\section{Introduction}\label{sec:intro}
-\input{intro-nips}
+  \section{Introduction}\label{sec:intro}
+  \input{intro-nips}
 
-\section{Notation}\label{sec:notation}
-\input{notation}
+  \section{Notation}\label{sec:notation}
+  \input{notation}
 
-\section{Setting}\label{sec:setting}
-\input{setting}
+  \section{Setting}\label{sec:setting}
+  \input{setting}
 
-%\section{Results}
-%\input{results}
+  %\section{Results}
+  %\input{results}
 
-\section{Convergence rates}\label{sec:rates}
-\input{rates}
+  \section{Convergence rates}\label{sec:rates}
+  \input{rates}
 
-\section{Fully empirical confidence intervals}\label{sec:empirical}
-\input{empirical}
+  \section{Fully empirical confidence intervals}\label{sec:empirical}
+  \input{empirical}
 
-\section{Discussion}\label{sec:discussion}
-\input{conclusions}
+  \section{Discussion}\label{sec:discussion}
+  \input{conclusions}
 
-\subsubsection*{References}
-{\def\section*#1{}\small \bibliography{all} \bibliographystyle{myunsrt}}
+  \subsubsection*{References}
+  {\def\section*#1{}\small\putbib[all]}
+\end{bibunit}
 
 \newpage
 
 \appendix
 
-\section{Proof of \cref{thm:err}}\label{app:upper}
-\input{upperbound-new}
+\begin{bibunit}[myunsrt]
+  \section{Proof of \cref{thm:err}}\label{app:upper}
+  \input{upperbound-new}
 
-\section{Proofs of lower bounds}\label{app:lower}
-\input{lowerbound}
+  \section{Proofs of lower bounds}\label{app:lower}
+  \input{lowerbound}
 
-\section{Proof of \cref{thm:empirical}}\label{app:empirical}
-\input{appendix-empirical}
+  \section{Proof of \cref{thm:empirical}}\label{app:empirical}
+  \input{appendix-empirical}
 
-\section{Proof of \cref{thm:combined}}\label{app:combined}
-\input{appendix-combined}
+  \section{Proof of \cref{thm:combined}}\label{app:combined}
+  \input{appendix-combined}
+
+  \subsubsection*{References}
+  {\def\section*#1{}\small\putbib[all]}
+\end{bibunit}
 
 \end{document}
 
