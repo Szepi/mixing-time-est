@@ -110,7 +110,6 @@ Due to ergodicity, the convergence rate can be bounded without any
 dependence on the initial state distribution $\vpi^{(1)}$.
 The proof of \cref{thm:err} is given in \cref{app:upper}.
 
-\todoc{Turn this paragraph into a remark?}
 Note that because the eigenvalues of $\vL$ are the same as that of the
 transition probability matrix $\vP$, 
 we could have instead opted to
@@ -139,9 +138,10 @@ of perturbation results that exploit more structure.
 %$\vL$---in order to exploit symmetry---that is based on estimating
 %$\vP$ for reasons discussed below.)
 
-Unfortunately, \cref{thm:err} falls short of being directly
-usable for obtaining a fully empirical confidence interval for $\gap$
-and $\pimin$, at least without further assumptions.
+Let us now return to the question of obtaining a fully empirical confidence 
+interval for $\gap$ and $\pimin$.
+Unfortunately, \cref{thm:err} falls short of being directly suitable for this,
+at least without further assumptions.
 This is because the deviation terms themselves depend inversely both
 on $\gap$ and $\pimin$, and hence can never rule out $0$ (or an
 arbitrarily small positive value) as a possibility for $\gap$ or
