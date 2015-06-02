@@ -88,11 +88,16 @@ path $(X_t)_{t \in [n]}$, and also to construct fully empirical
 confidence intervals that $\pimin$ and $\gap$ with high probability;
 in particular, the construction of the intervals should not depend on
 any unobservable quantities, including $\pimin$ and $\gap$ themselves.
+<<<<<<< Updated upstream
 As mentioned in the introduction,
 it is well-known that the \emph{mixing time} of the Markov chain
 $\tmix$ (defined in Eq.~\ref{eq:mixtimedef})
 is bounded in terms of $\pimin$ and $\gap$, as shown in
 \cref{eq:mixing-time-bound}.
+=======
+\hide{
+It is well-known that the \emph{mixing time} of the Markov chain $\tmix$ (defined in the introduction)
+>>>>>>> Stashed changes
 \hide{,
 \[
   \tmix
@@ -109,11 +114,19 @@ is bounded in terms of $\pimin$ and $\gap$, as shown in
 can be bounded in terms of $\pimin$ and $\gap$~\citep[Theorems~12.3
 and~12.4]{LePeWi08}:
 \[
-  \Parens{\frac1{\gap} - 1} \ln2
+  \Parens{\frac1{\gap} - 1} \log2
   \ \leq \ \tmix
   \ \leq \ \frac1{\gap} \log \frac4{\pimin}
   .
+<<<<<<< Updated upstream
 \]}%
+=======
+\]
+}
+As it was noted in the introduction, the 
+ \emph{mixing time} of the Markov chain $\tmix$ defined by~\eqref{eq:mixtimedef}
+ can be trapped in the interval $[ \Parens{\frac1{\gap} - 1} \log2,\frac1{\gap} \log \frac4{\pimin}]$.
+>>>>>>> Stashed changes
 Moreover, convergence rates for empirical processes on Markov chain
 sequences are also often given in terms of mixing coefficients that
 can ultimately be bounded in terms of $\pimin$ and
