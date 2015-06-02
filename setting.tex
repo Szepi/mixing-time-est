@@ -1,5 +1,4 @@
 %!TEX root =  matrix-est.tex
-\label{sec:setting}
 Let $\vP \in (\Delta^{d-1})^d \subset [0,1]^{d \times d}$ be a $d
 \times d$ row-stochastic matrix for an ergodic (i.e., irreducible and
 aperiodic) Markov chain.
@@ -65,7 +64,11 @@ path $(X_t)_{t \in [n]}$, and also to construct fully empirical
 confidence intervals that $\pimin$ and $\gap$ with high probability;
 in particular, the construction of the intervals should not depend on
 any unobservable quantities, including $\pimin$ and $\gap$ themselves.
-It is well-known that the \emph{mixing time} of the Markov chain $\tmix$ (defined in the introduction)
+As mentioned in the introduction,
+it is well-known that the \emph{mixing time} of the Markov chain
+$\tmix$ (defined in Eq.~\ref{eq:mixtimedef})
+is bounded in terms of $\pimin$ and $\gap$, as shown in
+\cref{eq:mixing-time-bound}.
 \hide{,
 \[
   \tmix
@@ -78,7 +81,7 @@ It is well-known that the \emph{mixing time} of the Markov chain $\tmix$ (define
     }_{\tv} \leq 1/4
   }
   ,
-\]}
+\]
 can be bounded in terms of $\pimin$ and $\gap$~\citep[Theorems~12.3
 and~12.4]{LePeWi08}:
 \[
@@ -86,7 +89,7 @@ and~12.4]{LePeWi08}:
   \ \leq \ \tmix
   \ \leq \ \frac1{\gap} \log \frac4{\pimin}
   .
-\]
+\]}%
 Moreover, convergence rates for empirical processes on Markov chain
 sequences are also often given in terms of mixing coefficients that
 can ultimately be bounded in terms of $\pimin$ and

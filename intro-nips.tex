@@ -15,8 +15,9 @@ Under this assumption, the chain converges to its unique stationary
   = \lim_{t\to\infty} (\vq \vP^t)_i = \pi_i
   \quad \text{for each $i \in [d]$} .
 \]
-The mixing time $\tmix$ of the Markov chain is the time that it takes
-for the chain to (approximately) reach its stationary distribution,
+The \emph{mixing time} $\tmix$ of the Markov chain is the time that it
+takes for the chain to (approximately) reach its stationary
+distribution,
 \begin{align}
 \label{eq:mixtimedef}
   \tmix
@@ -65,12 +66,13 @@ and fully empirical confidence intervals for Markov mixing time.
 Consider a reversible ergodic Markov chain on $d$ states with absolute
 spectral gap $\gap$ and stationary distribution minorized by $\pimin$. \todoc{Comment on reversibility somewhere?}
 As is well-known \citep[Theorems~12.3 and~12.4]{LePeWi08},
-\[
+\begin{equation}
+  \label{eq:mixing-time-bound}
   \Parens{\frac1{\gap} - 1} \ln2
   \ \leq \ \tmix
   \ \leq \ \frac1{\gap} \log \frac4{\pimin}
   ,
-\]
+\end{equation}
 %$(\frac{1}\gap  - 1)\log(2)  \le \tmix \le \frac{1}\gap \log \frac4\pimin$,
 and hence it suffices to estimate $\gap$ and $\pimin$. 
 \todoc{I would prefer $\ln$ over $\log$ throughout the paper.}
