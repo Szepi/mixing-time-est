@@ -58,13 +58,10 @@ assessing the estimation quality, even when \emph{a priori} knowledge
 of the mixing time or correlation structure is unavailable.
 
 \paragraph{Main results.}
-We develop the first \todoc{Maybe leave out efficient? 
-What is efficient is a question of interpretation. We 
-should maybe rather add a note on the computational complexity.}
-procedure for constructing non-trivial
+We develop the first procedure for constructing non-trivial
 and fully empirical confidence intervals for Markov mixing time.
 Consider a reversible ergodic Markov chain on $d$ states with absolute
-spectral gap $\gap$ and stationary distribution minorized by $\pimin$. \todoc{Comment on reversibility somewhere?}
+spectral gap $\gap$ and stationary distribution minorized by $\pimin$. 
 As is well-known \citep[Theorems~12.3 and~12.4]{LePeWi08},
 \begin{equation}
   \label{eq:mixing-time-bound}
@@ -75,7 +72,6 @@ As is well-known \citep[Theorems~12.3 and~12.4]{LePeWi08},
 \end{equation}
 %$(\frac{1}\gap  - 1)\log(2)  \le \tmix \le \frac{1}\gap \log \frac4\pimin$,
 and hence it suffices to estimate $\gap$ and $\pimin$. 
-\todoc{I would prefer $\ln$ over $\log$ throughout the paper.}
 %these quantities $\gap$ and $\pimin$ are well-known to govern
 %mixing time.
 Our main results are summarized as follows.
@@ -215,7 +211,6 @@ On the other hand, when one only has a circuit-based description of
 the transition probabilities of a Markov chain over an
 exponentially-large state space, there are complexity-theoretic
 barriers for many MCMC diagnostic problems~\citet{BhaBoMo11}.
-\todoc{Explain the organization of the paper?}
 %%Performance guarantees play a key role in the analysis and design of machine learning algorithms.
 %
 %In this paper we study the construction of fully empirical bounds on the mixing time of Markov chains based on a single sample path.
