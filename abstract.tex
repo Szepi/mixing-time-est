@@ -1,22 +1,38 @@
 %!TEX root =  matrix-est.tex
-We propose an efficient procedure for estimating the mixing time of a Markov chain.
-The novelty of our approach lies in several key aspects.
-Crucially,
-we do not assume any a priori bounds
-on the mixing time,
-which
-sets our approach apart from
-most others that do
-require some advance knowledge of this quantity.
-Another
-advantage of our result over
-common practice is the sufficiency of a single long sampling sequence,
-without access to a restart mechanism.
-Perhaps most importantly, we overcome an obstacle inherent in the chicken-and-egg nature of
-estimating mixing coefficients: to give confidence bounds one typically needs to know the mixing time.
-We provide confidence guarantees that are fully data-dependent in the sense that they yield non-trivial
-finite-sample deviation bounds without any knowledge of the mixing coefficients.
-Upper and lower sample complexity bounds are provided and challenging open problems are posed.
-\todod{I would remove the last sentence, at least the part about
-``challenging'' open problems.}
-%test
+This article provides an efficient procedure for estimating the mixing
+time of a reversible ergodic Markov chain.
+The procedure computes the estimate from a single sample path of the
+Markov chain, and does not require any \emph{a priori} bounds on the
+mixing time itself.
+This stands in contrast to previous approaches, which either require a
+reset mechanism or require additional prior knowledge.
+Most notably, the procedure produces a fully empirical confidence
+interval (i.e., it depends only on the sample path and a given
+confidence parameter $\delta$) that is always valid with probability
+$1-\delta$; and the width of the interval converges to zero at a
+$\sqrt{n}$-rate, where $n$ is the length of the sample path.
+
+%We provide confidence guarantees that are fully data-dependent in the sense that they yield non-trivial
+%finite-sample deviation bounds without any knowledge of the mixing coefficients.
+%
+%
+%The novelty of our approach lies in several key aspects.
+%Crucially,
+%we do not assume any a priori bounds
+%on the mixing time,
+%which
+%sets our approach apart from
+%most others that do
+%require some advance knowledge of this quantity.
+%Another
+%advantage of our result over
+%common practice is the sufficiency of a single long sampling sequence,
+%without access to a restart mechanism.
+%Perhaps most importantly, we overcome an obstacle inherent in the chicken-and-egg nature of
+%estimating mixing coefficients: to give confidence bounds one typically needs to know the mixing time.
+%We provide confidence guarantees that are fully data-dependent in the sense that they yield non-trivial
+%finite-sample deviation bounds without any knowledge of the mixing coefficients.
+%%Upper and lower sample complexity bounds are provided and challenging open problems are posed.
+%%\todod{I would remove the last sentence, at least the part about
+%%``challenging'' open problems.}
+%%%test

@@ -269,18 +269,27 @@ The main result of this section is the following result:
   \]
   where $\kappa$ is analogous to the $\hat{\kappa}$ computed
   by~\cref{alg:empest} with $\giAh$ replaced by the group inverse
-  $\giA$ of $\vA := \vI - \vP$.
-  \todoc{
-    Precisely,
-    what we mean by the $O(\cdot)$ notation is as follows:
-  for a random sequence of nonnegative numbers $(X_n)_n$
-  and another sequence of nonrandom positive numbers $(a_n^\eps)_n$ 
-  indexed by $\eps$ we
-  say that $X_n = O(a_n^\eps)$ holds almost surely as $n\to \infty$
-  if for some universal constant $C>0$, 
-  $\limsup_{n\to \infty} X_n/a_n^\eps \le C$ holds almost surely, regardless of
-  the choice of $\eps$. I think this should be made clear.
-  }
+  $\giA$ of $\vA := \vI - \vP$.\footnote{%
+    In \cref{thm:empirical,thm:combined}, our use of big-$O$ notation
+    is as follows.
+    For a random sequence $(Y_n)_n$ and a (non-random) positive
+    sequence $(a_{\theta,n})_n$ parameterized by $\theta$, we say
+    ``$Y_n = O(a_{\theta,n})$ holds almost surely as $n\to\infty$'' if
+    there is some universal constant $C>0$ such that for all $\theta$,
+    $\limsup_{n\to\infty} Y_n/a_{\theta,n} \leq C$ holds almost
+    surely.%
+  }%
+%  \todoc{
+%    Precisely,
+%    what we mean by the $O(\cdot)$ notation is as follows:
+%  for a random sequence of nonnegative numbers $(X_n)_n$
+%  and another sequence of nonrandom positive numbers $(a_n^\eps)_n$ 
+%  indexed by $\eps$ we
+%  say that $X_n = O(a_n^\eps)$ holds almost surely as $n\to \infty$
+%  if for some universal constant $C>0$, 
+%  $\limsup_{n\to \infty} X_n/a_n^\eps \le C$ holds almost surely, regardless of
+%  the choice of $\eps$. I think this should be made clear.
+%  }
 \end{theorem}
 The proof of \cref{thm:empirical} is given in \cref{app:empirical}.
 As mentioned above, the obstacle encountered in \cref{thm:err} is
