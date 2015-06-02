@@ -1,6 +1,7 @@
 %!TEX root =  matrix-est.tex
-This article provides the first efficient, non-heuristic procedure for computing a fully data dependent interval
-that traps the mixing time of a finite reversible ergodic Markov chain with a prescribed probability.
+This article provides the first procedure for computing a fully
+data-dependent interval that traps the mixing time $\tmix$ of a finite
+reversible ergodic Markov chain at a prescribed confidence level.
 The interval is computed from a single finite-length sample
 path from the Markov chain, and does not require the 
 knowledge of any parameters of the chain.
@@ -15,15 +16,13 @@ reset mechanism, or additional prior knowledge.
 %$1-\delta$; and 
 The width of the interval converges to zero at a
 $\sqrt{n}$ rate, where $n$ is the length of the sample path.
-Upper and lower bounds are given on the number of samples required
-to achieve a constant accuracy estimate in terms of the chain's parameters,
-in particular, based on the absolute spectral gap $\gap$.
+Upper and lower bounds are given on the number of samples required to
+achieve constant-factor multiplicative accuracy.
 \todoc{We may need to add some explanation to connect $\gap$ estimates
 to $\tmix$ estimates.}
-The lower bounds indicate that, 
-unless further restrictions are placed on the chain,
-no procedure can achieve a constant
-accuracy before seeing each state at least  $\Omega(1/\gap)$ times.
+The lower bounds indicate that, unless further restrictions are placed
+on the chain, no procedure can achieve this accuracy level before
+seeing each state at least $\Omega(\tmix)$ times.
 Future directions of research are identified.
 \todoc{Such as: closing the gap. Extension to large state spaces, 
 based on additional assumptions. Even if $\gap$ is large, we need many samples.
