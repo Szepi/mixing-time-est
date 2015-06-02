@@ -1,16 +1,17 @@
 %!TEX root =  matrix-est.tex
 
 In this section, we present upper and lower bounds on achievable rates
-for estimating the spectral gap as a funciton of the length of the
+for estimating the spectral gap as a function of the length of the
 sample path $n$.
 
-\subsection{Upper bounds}
+\subsection{A plug-in based point estimator and its accuracy}
 \label{sec:rates-upper}
 
 Our upper bound is demonstrated using estimators based on natural
 plug-in estimates.
-(We also provide an estimator for the minimum stationary probability
-in the process.)
+We also provide an estimator for the minimum stationary probability
+in the process, so that one can use the earlier stated bounds to trap
+the mixing time.
 
 Define the random matrix $\wh\vM \in [0,1]^{d \times d}$ and random
 vector $\hat\vpi \in \Delta^{d-1}$ by
@@ -108,7 +109,7 @@ Due to ergodicity, the convergence rate can be bounded without any
 dependence on the initial state distribution $\vpi^{(1)}$.
 The proof of \cref{thm:err} is given in \cref{app:upper}.
 
-\todoc{Make this paragraph into a remark?}
+\todoc{Turn this paragraph into a remark?}
 Note that because the eigenvalues of $\vL$ are the same as that of the
 transition probability matrix $\vP$, 
 we could have instead opted to
@@ -197,7 +198,7 @@ $\vpi$ is nearly uniform.
   Pick any positive integer $d \geq 3$ and any $\bar\gamma \in
   (0,1/2)$.
   Consider any estimator $\hatgap$ that takes as input a random sample
-  path of length $n < c d\ln(d) / \bar\gamma$ from a $d$-state
+  path of length $n < c d\log(d) / \bar\gamma$ from a $d$-state
   reversible Markov chain starting from any desired initial state
   distribution.
   There is an ergodic and reversible Markov chain distribution
