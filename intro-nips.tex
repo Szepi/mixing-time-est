@@ -64,9 +64,15 @@ procedure for constructing non-trivial
 and fully empirical confidence intervals for Markov mixing time.
 Consider a reversible ergodic Markov chain on $d$ states with absolute
 spectral gap $\gap$ and stationary distribution minorized by $\pimin$. \todoc{Comment on reversibility somewhere?}
-As is well known \citep[Theorems~12.3 and~12.4]{LePeWi08},
-$(\frac{1}\gap  - 1)\log(2)  \le \tmix \le \frac{1}\gap \log \frac4\pimin$,
-hence it suffices to estimate $\gap$ and $\pimin$. 
+As is well-known \citep[Theorems~12.3 and~12.4]{LePeWi08},
+\[
+  \Parens{\frac1{\gap} - 1} \ln2
+  \ \leq \ \tmix
+  \ \leq \ \frac1{\gap} \log \frac4{\pimin}
+  ,
+\]
+%$(\frac{1}\gap  - 1)\log(2)  \le \tmix \le \frac{1}\gap \log \frac4\pimin$,
+and hence it suffices to estimate $\gap$ and $\pimin$. 
 \todoc{I would prefer $\ln$ over $\log$ throughout the paper.}
 %these quantities $\gap$ and $\pimin$ are well-known to govern
 %mixing time.
@@ -135,8 +141,8 @@ Our main results are summarized as follows.
 
 \paragraph{Related work.}
 There is a vast statistical literature on estimation in Markov chains.
-For instance, it is know that under the assumptions on the Markov
-chain $(X_t)_t$ stated above, the law of large numbers guarantees that
+For instance, it is known that under the assumptions on
+$(X_t)_t$ from above, the law of large numbers guarantees that
 the sample mean $\vpi_n(f) \defeq \frac1n \sum_{t=1}^n f(X_t)$
 converges almost surely to $\vpi(f)$~\cite{meyn1993markov}, while the
 central limit theorem tells us that as $n\to \infty$, the distribution
@@ -200,7 +206,7 @@ independent transitions from any given state (akin to a ``reset''
 device), the mixing time becomes an efficiently testable property in
 the sense studied in~\citet{BaFoRuSmiWhi00,BaFoRuSmiWhi13}.
 On the other hand, when one only has a circuit-based description of
-the transition probabilities of Markov chain over an
+the transition probabilities of a Markov chain over an
 exponentially-large state space, there are complexity-theoretic
 barriers for many MCMC diagnostic problems~\citet{BhaBoMo11}.
 \todoc{Explain the organization of the paper?}
