@@ -70,7 +70,7 @@ As is well-known \citep[Theorems~12.3 and~12.4]{LePeWi08},
   \label{eq:mixing-time-bound}
   \Parens{\frac1{\gap} - 1} \ln2
   \ \leq \ \tmix
-  \ \leq \ \frac1{\gap} \log \frac4{\pimin}
+  \ \leq \ \frac1{\gap} \ln \frac4{\pimin}
   ,
 \end{equation}
 %$(\frac{1}\gap  - 1)\log(2)  \le \tmix \le \frac{1}\gap \log \frac4\pimin$,
@@ -81,9 +81,10 @@ and hence it suffices to estimate $\gap$ and $\pimin$.
 Our main results are summarized as follows.
 \begin{enumerate}
   \item
-    In \cref{thm:err}, we give a point-estimator for $\gap$ that
-    achieves multiplicative accuracy from \emph{a single sample path}
-    of length $\tilde{O}\parens{1/(\pimin\gap^3)}$.\footnote{The
+    In \cref{sec:rates-upper}, we give a point-estimator for $\gap$,
+    and prove in \cref{thm:err} that it achieves multiplicative
+    accuracy from \emph{a single sample path} of length
+    $\tilde{O}\parens{1/(\pimin\gap^3)}$.\footnote{The
     $\tilde{O}(\cdot)$ notation suppresses logarithmic factors.}
     We also provide a point-estimator for $\pimin$ that requires a sample
     path of length $\tilde{O}\parens{1/(\pimin\gap)}$.
@@ -92,33 +93,37 @@ Our main results are summarized as follows.
     However, the valid confidence intervals suggested by
     \cref{thm:err} depend on the unknown quantities $\pimin$ and
     $\gap$.
+    We also discuss the importance of reversibility, and some possible
+    extensions to non-reversible chains.
 
   \item
-    In \cref{thm:lb-pimin,thm:lb-gap}, we show that $\Omega\parens{
-    (d\log d)/\gap + 1/\pimin}$ observations are necessary for any
-    procedure to guarantee constant multiplicative accuracy in
-    estimating $\gap$.
+    In \cref{sec:rates-lower}, we show in
+    \cref{thm:lb-pimin,thm:lb-gap} that $n = \Omega\parens{ (d\log
+    d)/\gap + 1/\pimin}$ observations are necessary for any procedure
+    to guarantee constant multiplicative accuracy in estimating $\gap$
+    (\cref{thm:lb-pimin,thm:lb-gap}).
     Essentially, \emph{every} state may need to be visited about
     $\log(d)/\gap$ times, on average, before an accurate estimate of
-    the mixing time can be provided, regardless of what
-    estimation procedure one uses.
-    
+    the mixing time can be provided, regardless of the estimation
+    procedure used.
+
   \item
-    In \cref{thm:empirical}, we develop a procedure for computing
+    In \cref{sec:empirical}, we develop a procedure for computing
     \emph{valid empirical confidence intervals} for $\pimin$ and
     $\gap$ (\cref{alg:empest}).
     The procedure uses just a single sample path and does not require
-    any prior knowledge of the chain's parameters, such as $\pimin$ or $\gap$.
-    We also quantify the rate at which the width of the confidence
-    intervals shrink as a function of the length of the sample path.
+    any prior knowledge of the chain's parameters, such as $\pimin$ or
+    $\gap$.
+    We quantify the rate at which the width of the confidence
+    intervals shrink as a function of the length of the sample path
+    (\cref{thm:empirical}).
+    We also explain how to combine the empirical confidence intervals
+    from \cref{alg:empest} with the non-empirical bounds from
+    \cref{thm:err} to produce valid empirical confidence intervals.
+    We prove in \cref{thm:combined} that the width of these new
+    intervals converge to zero asymptotically at least as fast as
+    those from either \cref{thm:err} and \cref{thm:empirical}.
 
-  \item
-    Finally, in \cref{thm:combined}, we show how to combine the
-    empirical confidence intervals from \cref{alg:empest} with the
-    non-empirical bounds from \cref{thm:err} to produce valid
-    empirical confidence intervals;
-    the width of these intervals converge to zero asymptotically as
-    fast as those from \cref{thm:err}.
     \todoc{Is it true from the construction of \cref{thm:combined}
     that if we had a better point estimator
     then we would automatically get an interval estimator
