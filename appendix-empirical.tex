@@ -48,8 +48,8 @@ The algorithm estimates the spectral gap $\gap$ using
   \begin{equation}
     \abs{ \wh{P}_{i,j} - P_{i,j} }
     \leq
-    \sqrt{\Parens{\frac{N_i}{N_i+d\alpha}}\frac{2P_{i,j}(1-P_{i,j})\ln(2d/\delta)}{N_i+d\alpha}}
-    + \frac{\frac23\ln(2d/\delta)}{N_i+d\alpha}
+    \sqrt{\Parens{\frac{N_i}{N_i+d\alpha}}\frac{2P_{i,j}(1-P_{i,j})\log(2d/\delta)}{N_i+d\alpha}}
+    + \frac{\frac23\log(2d/\delta)}{N_i+d\alpha}
     + \frac{\abs{\alpha-d\alpha P_{i,j}}}{N_i+d\alpha}
     .
     \label{eq:P-unobs-bound}
@@ -85,8 +85,8 @@ The algorithm estimates the spectral gap $\gap$ using
   union bounds, we have
   \[
     \abs{ N_{i,j} - N_i P_{i,j} }
-    \leq \sqrt{2 N_i P_{i,j} (1-P_{i,j}) \ln(2d/\delta)} + \frac23
-    \ln\left(\frac{2d}{\delta}\right)
+    \leq \sqrt{2 N_i P_{i,j} (1-P_{i,j}) \log(2d/\delta)} + \frac23
+    \log\left(\frac{2d}{\delta}\right)
   \]
   for all $(i,j) \in [d]^2$.
 \end{proof}
@@ -113,8 +113,8 @@ of empirical Bernstein bounds~\citep{audibert2009}.
 Specifically, we compute
 \begin{equation}
   B_{i,j} :=
-  \sqrt{\frac{9\wh{P}_{i,j}(1-\wh{P}_{i,j})\ln(2d/\delta)}{2N_i}}
-  + \frac{4\ln(2d/\delta)+1.5\abs{\alpha-d\alpha\wh{P}_{i,j}}}{N_i}
+  \sqrt{\frac{9\wh{P}_{i,j}(1-\wh{P}_{i,j})\log(2d/\delta)}{2N_i}}
+  + \frac{4\log(2d/\delta)+1.5\abs{\alpha-d\alpha\wh{P}_{i,j}}}{N_i}
   \label{eq:P-obs-bound}
 \end{equation}
 for each $(i,j) \in [d]^2$.
@@ -137,8 +137,8 @@ unobservable bound in~\cref{eq:P-unobs-bound}.
   \begin{equation*}
     \abs{\wh{P}_{i,j} - P_{i,j}}
     \leq
-    \sqrt{\frac{9\wh{P}_{i,j}(1-\wh{P}_{i,j})\ln(2d/\delta)}{2N_i}}
-    + \frac{4\ln(2d/\delta)+1.5\abs{\alpha-d\alpha\wh{P}_{i,j}}}{N_i}
+    \sqrt{\frac{9\wh{P}_{i,j}(1-\wh{P}_{i,j})\log(2d/\delta)}{2N_i}}
+    + \frac{4\log(2d/\delta)+1.5\abs{\alpha-d\alpha\wh{P}_{i,j}}}{N_i}
     .
   \end{equation*}
 \end{lemma}
@@ -153,8 +153,8 @@ unobservable bound in~\cref{eq:P-unobs-bound}.
       + \frac{\alpha - d\alpha P_{i,j}}{N_i + d\alpha}
     } \\
     \leq
-    \sqrt{\frac{2N_iP_{i,j}(1-P_{i,j})\ln(2d/\delta)}{(N_i+d\alpha)^2}}
-    + \frac{\frac23\ln(2d/\delta)}{N_i+d\alpha}
+    \sqrt{\frac{2N_iP_{i,j}(1-P_{i,j})\log(2d/\delta)}{(N_i+d\alpha)^2}}
+    + \frac{\frac23\log(2d/\delta)}{N_i+d\alpha}
     + \frac{\abs{\alpha-d\alpha P_{i,j}}}{N_i+d\alpha}
     .
   \end{multline*}
@@ -167,10 +167,10 @@ unobservable bound in~\cref{eq:P-unobs-bound}.
         2N_i\parens{
           \wh{P}_{i,j}(1-\wh{P}_{i,j})
           + \abs{\wh{P}_{i,j} - P_{i,j}}
-        } \ln(2d/\delta)
+        } \log(2d/\delta)
       }{(N_i+d\alpha)^2}
     }
-    + \frac{\frac23\ln(2d/\delta)}{N_i+d\alpha}
+    + \frac{\frac23\log(2d/\delta)}{N_i+d\alpha}
     \notag \\
     & \qquad
     + \frac{
@@ -187,12 +187,12 @@ unobservable bound in~\cref{eq:P-unobs-bound}.
     \abs{\wh{P}_{i,j} - P_{i,j}}
     & \leq
     \sqrt{\abs{\wh{P}_{i,j} - P_{i,j}}} \cdot
-    \sqrt{\frac{2N_i\ln(2d/\delta)}{(N_i+d\alpha)^2}}
+    \sqrt{\frac{2N_i\log(2d/\delta)}{(N_i+d\alpha)^2}}
     \\
     & \qquad
     +
-    \sqrt{\frac{2N_i\wh{P}_{i,j}(1-\wh{P}_{i,j})\ln(2d/\delta)}{(N_i+d\alpha)^2}}
-    + \frac{\frac23\ln(2d/\delta) + \abs{\alpha -
+    \sqrt{\frac{2N_i\wh{P}_{i,j}(1-\wh{P}_{i,j})\log(2d/\delta)}{(N_i+d\alpha)^2}}
+    + \frac{\frac23\log(2d/\delta) + \abs{\alpha -
     d\alpha\wh{P}_{i,j}}}{N_i+d\alpha}
     .
   \end{align*}
@@ -527,10 +527,10 @@ since $\giAh \to \giA$ as $\wh\vP \to
 %$
 %  \wh\vA^\# = \vA^\# + O(\norm{\wh \vA-\vA}) $
 %and since  by~\eqref{eq:pdevbound}, as $n\to\infty$,
-%$\norm{\wh \vA-\vA} =O_P\Parens{\sqrt{\frac{d\ln(d/\delta)}{\pimin n}}}$,
+%$\norm{\wh \vA-\vA} =O_P\Parens{\sqrt{\frac{d\log(d/\delta)}{\pimin n}}}$,
 %we get that \todoc{This is a bit messy. $n\to\infty$, w.p. $1-\delta$..?}
-%\[ \wh\kappa = \kappa + O_P\Parens{\sqrt{\frac{d\ln(d/\delta)}{\pimin n}}}
-%  = O_P\Parens{ \frac{d}{\gap} + \sqrt{\frac{d\ln(d/\delta)}{\pimin n}}}\,.
+%\[ \wh\kappa = \kappa + O_P\Parens{\sqrt{\frac{d\log(d/\delta)}{\pimin n}}}
+%  = O_P\Parens{ \frac{d}{\gap} + \sqrt{\frac{d\log(d/\delta)}{\pimin n}}}\,.
 %\]}
 
 Further, since

@@ -145,16 +145,16 @@ complexity is $O(d^2)$.
   \begin{equation}
     \wh{B}_{i,j}
     :=
-    \sqrt{\frac{9\wh{P}_{i,j}(1-\wh{P}_{i,j})\ln(2d/\delta)}{2N_i}}
-    + \frac{4\ln(2d/\delta)+1.5\abs{(1/d)-\wh{P}_{i,j}}}{N_i}
+    \sqrt{\frac{9\wh{P}_{i,j}(1-\wh{P}_{i,j})\log(2d/\delta)}{2N_i}}
+    + \frac{4\log(2d/\delta)+1.5\abs{(1/d)-\wh{P}_{i,j}}}{N_i}
     .
 %    \label{eq:P-obs-bound}
     \notag
   \end{equation}
   \label{step:P-bound}
 
-%$\qquad$ $\wh\Delta_{i,j}(\delta) \gets \sqrt{\frac{9\wh{P}_{i,j}(1-\wh{P}_{i,j})\ln(2d/\delta)}{2N_i}}
-%  + \frac{4\ln(2d/\delta)+1.5\abs{\alpha-d\alpha\wh{P}_{i,j}}}{N_i}$%,  $(i,j) \in [d]^2$.
+%$\qquad$ $\wh\Delta_{i,j}(\delta) \gets \sqrt{\frac{9\wh{P}_{i,j}(1-\wh{P}_{i,j})\log(2d/\delta)}{2N_i}}
+%  + \frac{4\log(2d/\delta)+1.5\abs{\alpha-d\alpha\wh{P}_{i,j}}}{N_i}$%,  $(i,j) \in [d]^2$.
 %\STATE   $\qquad$ $\wh\Delta_{i,j}(\delta) \gets \min( \wh\Delta_{i,j}(\delta) , \max(\wh{P}_{i,j}, 1-\wh{P}_{i,j}))$,   $(i,j) \in [d]^2$.
 
 %  \STATE Empirical bound for $\max_{i,j}|\wh{P}_{i,j}-P_{i,j}|$:
@@ -269,8 +269,8 @@ The result is as follows.
     \hat{w}
     =
      O\Parens{ 
-     \frac{\kappa}{\pimin} \sqrt{\frac{\ln(d/\delta)}{\pimin n}} + 
-      \sqrt{ \frac{d\ln(d/\delta)}{ \pimin n}}
+     \frac{\kappa}{\pimin} \sqrt{\frac{\log(d/\delta)}{\pimin n}} + 
+      \sqrt{ \frac{d\log(d/\delta)}{ \pimin n}}
     }
     .\footnote{%
     In \cref{thm:empirical,thm:combined}, our use of big-$O$ notation

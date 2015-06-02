@@ -1,16 +1,42 @@
 %!TEX root =  matrix-est.tex
-This article provides an efficient procedure for estimating the mixing
-time of a reversible ergodic Markov chain.
-The procedure computes the estimate from a single finite-length sample
-path from the Markov chain, and does not require any \emph{a priori}
-bounds on the mixing time itself.
-This stands in contrast to previous approaches, which either require a
-reset mechanism or require additional prior knowledge.
-Most notably, the procedure produces a fully empirical confidence
-interval (i.e., it depends only on the sample path and a given
-confidence parameter $\delta$) that is always valid with probability
-$1-\delta$; and the width of the interval converges to zero at a
+This article provides the first efficient, non-heuristic procedure for computing a fully data dependent interval
+that traps the mixing time of a finite reversible ergodic Markov chain with a prescribed probability.
+The interval is computed from a single finite-length sample
+path from the Markov chain, and does not require the 
+knowledge of any parameters of the chain.
+%bounds on the mixing time itself.
+This stands in contrast to previous approaches, which either 
+only provide point estimates, or require a
+reset mechanism, or additional prior knowledge.
+%Most notably, 
+%the procedure produces a fully empirical confidence
+%interval (i.e., it depends only on the sample path and a given
+%confidence parameter $\delta$) that is always valid with probability
+%$1-\delta$; and 
+The width of the interval converges to zero at a
 $\sqrt{n}$ rate, where $n$ is the length of the sample path.
+Upper and lower bounds are given on the number of samples required
+to achieve a constant accuracy estimate in terms of the chain's parameters,
+in particular, based on the absolute spectral gap $\gap$.
+\todoc{We may need to add some explanation to connect $\gap$ estimates
+to $\tmix$ estimates.}
+Our lower bounds indicate that, 
+unless further restrictions are placed on the chain,
+no procedure can achieve a constant
+accuracy before seeing each state at least  $\Omega(1/\gap)$ times.
+Future directions of research are identified.
+\todoc{Such as: closing the gap. Extension to large state spaces, 
+based on additional assumptions. Even if $\gap$ is large, we need many samples.
+Maybe we need even stronger assumptions, like the decay rate of eigenvalues.
+}
+%If $\gap$ denotes the absolute spectral gap of the unknown Markov chain
+%and the chain's stationary distribution is minorized by $\pimin$,
+%our procedure requires $\tilde{O}( \frac{1}{\pimin\gap^3})$ observations
+% to estimate the mixing time up to a constant multiplicative accuracy, 
+%while we also establish that any algorithm to achieve the same
+%goal would need $\Omega( d\log(d)/\gap + 1/\pimin)$ samples. 
+
+%and the dependence on the main  chain's 
 
 %We provide confidence guarantees that are fully data-dependent in the sense that they yield non-trivial
 %finite-sample deviation bounds without any knowledge of the mixing coefficients.

@@ -17,7 +17,8 @@ Under this assumption, the chain converges to its unique stationary
 \]
 The mixing time $\tmix$ of the Markov chain is the time that it takes
 for the chain to (approximately) reach its stationary distribution,
-\[
+\begin{align}
+\label{eq:mixtimedef}
   \tmix
   :=
   \min\Braces{
@@ -32,7 +33,7 @@ for the chain to (approximately) reach its stationary distribution,
 %    }_{\tv} 
     \leq 1/4
   }\,.
-\]
+\end{align}
 Here, $\vpi(A) = \sum_{i\in A} \pi_i$ is the probability assigned to
 set $A$ by $\vpi$, and the supremum is over all possible initial
 distributions $\vq$.
@@ -56,20 +57,27 @@ assessing the estimation quality, even when \emph{a priori} knowledge
 of the mixing time or correlation structure is unavailable.
 
 \paragraph{Main results.}
-We develop the first efficient procedure for constructing non-trivial
+We develop the first efficient \todoc{Maybe leave out efficient? 
+What is efficient is a question of interpretation. We 
+should maybe rather add a note on the computational complexity.}
+procedure for constructing non-trivial
 and fully empirical confidence intervals for Markov mixing time.
 Consider a reversible ergodic Markov chain on $d$ states with absolute
-spectral gap $\gap$ and stationary distribution minorized by $\pimin$.
-(These quantities $\gap$ and $\pimin$ are well-known to govern
-mixing time.)
+spectral gap $\gap$ and stationary distribution minorized by $\pimin$. \todoc{Comment on reversibility somewhere?}
+As is well known \citep[Theorems~12.3 and~12.4]{LePeWi08},
+$(\frac{1}\gap  - 1)\log(2)  \le \tmix \le \frac{1}\gap \log \frac4\pimin$,
+hence it suffices to estimate $\gap$ and $\pimin$. 
+\todoc{I would prefer $\ln$ over $\log$ throughout the paper.}
+%these quantities $\gap$ and $\pimin$ are well-known to govern
+%mixing time.
 Our main results are summarized as follows.
 \begin{enumerate}
   \item
-    In \cref{thm:err}, we give an estimator for $\gap$ that
+    In \cref{thm:err}, we give a point-estimator for $\gap$ that
     achieves multiplicative accuracy from \emph{a single sample path}
     of length $\tilde{O}\parens{1/(\pimin\gap^3)}$.\footnote{The
     $\tilde{O}(\cdot)$ notation suppresses logarithmic factors.}
-    We also provide an estimator for $\pimin$ that requires a sample
+    We also provide a point-estimator for $\pimin$ that requires a sample
     path of length $\tilde{O}\parens{1/(\pimin\gap)}$.
     This establishes the feasibility of \emph{estimating} the mixing
     time in this setting.
@@ -82,16 +90,17 @@ Our main results are summarized as follows.
     (d\log d)/\gap + 1/\pimin}$ observations are necessary for any
     procedure to guarantee constant multiplicative accuracy in
     estimating $\gap$.
-    Essentially, every state may need to be visited about
+    Essentially, \emph{every} state may need to be visited about
     $\log(d)/\gap$ times, on average, before an accurate estimate of
-    the mixing time can be provided.
-
+    the mixing time can be provided, regardless of what
+    estimation procedure one uses.
+    
   \item
     In \cref{thm:empirical}, we develop a procedure for computing
     \emph{valid empirical confidence intervals} for $\pimin$ and
     $\gap$ (\cref{alg:empest}).
     The procedure uses just a single sample path and does not require
-    any prior knowledge about $\pimin$ or $\gap$.
+    any prior knowledge of the chain's parameters, such as $\pimin$ or $\gap$.
     We also quantify the rate at which the width of the confidence
     intervals shrink as a function of the length of the sample path.
 
@@ -102,12 +111,20 @@ Our main results are summarized as follows.
     empirical confidence intervals;
     the width of these intervals converge to zero asymptotically as
     fast as those from \cref{thm:err}.
+    \todoc{Is it true from the construction of \cref{thm:combined}
+    that if we had a better point estimator
+    then we would automatically get an interval estimator
+    with the same accuracy?
+    This seems to be true.
+    This would mean that to close the gap
+    one should really work on coming up with better point estimators.
+    }
 
 %    which is
 %    $     O\Parens{
-%      \frac1{\pimin}\sqrt{\frac{d\ln(d/\delta)}{ n}}
+%      \frac1{\pimin}\sqrt{\frac{d\log(d/\delta)}{ n}}
 %      +
-%      \frac{d}{\pimin\gap} \sqrt{\frac{\ln(d/\delta)}{\pimin n}}
+%      \frac{d}{\pimin\gap} \sqrt{\frac{\log(d/\delta)}{\pimin n}}
 %    }.$
 
 
@@ -152,21 +169,21 @@ dependence; intuitively, for the Markov chain to yield a fresh draw
 $X_{t'}$ that behaves as if it was independent of $X_t$, one must wait
 $\Theta(\tmix)$ time steps.
 Note that the bounds generally depend on distribution-specific
-properties of the Markov chain (e.g., $\vP$, $\tmix$), which are often
+properties of the Markov chain (e.g., $\vP$, $\tmix$, $\gap$), which are often
 unknown \emph{a priori} in practice.
 Consequently, much effort has been put towards estimating these
 unknown quantities, especially in the context of MCMC diagnostics, in
 order to provide data-dependent assessments of estimation
-accuracy~\cite[e.g.,][]{MCMCDiscussion93,jones2001,flegal2011implementing,1209.0703,Gyori-paulin15}.
+accuracy~\cite[e.g.,][]{MCMCDiscussion93,GaSmi00:eigval,jones2001,flegal2011implementing,1209.0703,Gyori-paulin15}.
 However, these approaches generally only provide asymptotic
 guarantees, and hence fall short of our goal of empirical bounds that
 are valid with any finite-length sample path.
 
+Learning with dependent data is another main motivation to our work.
 Many results from statistical learning and empirical process theory
-have been extended to sufficiently fast mixing
+have been extended to sufficiently fast mixing, dependent
 data~\citep[e.g.,][]{Yu94,MR1921877,gamarnik03,MoRo08,MoRo09,DBLP:conf/nips/SteinwartC09,Steinwart2009175},
-providing learnability assurances (e.g., generalization error bounds)
-in scenarios where data are dependent.
+providing learnability assurances (e.g., generalization error bounds).
 These results are often given in terms of mixing coefficients, which
 can be consistently estimated in some cases~\citet{McDoShaSche11}.
 However, the convergence rates of the estimates
@@ -174,7 +191,7 @@ from~\citet{McDoShaSche11}, which are needed to derive confidence
 bounds, are given in terms of unknown mixing coefficients.
 When the data comes from a Markov chain, these mixing coefficients can
 often be bounded in terms of mixing times, and hence our main results
-provide a way to make them fully empirical.
+provide a way to make them fully empirical, at least in the limited setting we study.
 
 It is possible to eliminate many of the difficulties presented above
 with additional access to the Markov chain.
@@ -186,7 +203,7 @@ On the other hand, when one only has a circuit-based description of
 the transition probabilities of Markov chain over an
 exponentially-large state space, there are complexity-theoretic
 barriers for many MCMC diagnostic problems~\citet{BhaBoMo11}.
-
+\todoc{Explain the organization of the paper?}
 %%Performance guarantees play a key role in the analysis and design of machine learning algorithms.
 %
 %In this paper we study the construction of fully empirical bounds on the mixing time of Markov chains based on a single sample path.
@@ -390,7 +407,7 @@ barriers for many MCMC diagnostic problems~\citet{BhaBoMo11}.
 %
 %  \item
 %    In \cref{thm:lb-pimin,thm:lb-gap}, we show that $\Omega\parens{
-%    (d\ln d)/\gap + 1/\pimin }$ observations are necessary for
+%    (d\log d)/\gap + 1/\pimin }$ observations are necessary for
 %    constant multiplicative accuracy in estimating $\gap$.
 %
 %  \item
@@ -410,9 +427,9 @@ barriers for many MCMC diagnostic problems~\citet{BhaBoMo11}.
 %
 %%    which is
 %%    $     O\Parens{
-%%      \frac1{\pimin}\sqrt{\frac{d\ln(d/\delta)}{ n}}
+%%      \frac1{\pimin}\sqrt{\frac{d\log(d/\delta)}{ n}}
 %%      +
-%%      \frac{d}{\pimin\gap} \sqrt{\frac{\ln(d/\delta)}{\pimin n}}
+%%      \frac{d}{\pimin\gap} \sqrt{\frac{\log(d/\delta)}{\pimin n}}
 %%    }.$
 %
 %
@@ -476,7 +493,7 @@ barriers for many MCMC diagnostic problems~\citet{BhaBoMo11}.
 %which unfortunately is given in terms of the unknown mixing coefficients.
 %%Catch-22 problem remains: The rate of convergence of their estimates depends on the unknown mixing coefficients
 %%(Theorem 2.4)
-%% $\exp(W(\ln(n)))$ is the window length, where $W$ is Lambert's $W$-function (i.e., this is between $\ln \ln(n)$ and $\ln n$).
+%% $\exp(W(\log(n)))$ is the window length, where $W$ is Lambert's $W$-function (i.e., this is between $\log \log(n)$ and $\log n$).
 %The earlier study of \citet{Nobel06} considers the generalization of
 %existing discernibility results for iid processes to weakly uniformly
 %ergodic families, and shows how this can be used to study---and in
