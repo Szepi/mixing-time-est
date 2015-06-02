@@ -64,8 +64,8 @@ $\vA^\#\vA = \vA\vA^\#$.
 Further, once given $\giAh$, the unique stationary distribution
 $\hat\vpi$ of $\wh\vP$ can be read out from the last row of
 $\giAh$~\citep[Theorem 5.3]{meyer1975role}.
-The group inverse will also be used later to compute the sensitivity
-of $\vpi$ based on a result of Cho and Meyer \cite{cho2001comparison}.
+The group inverse is also be used to compute the sensitivity of
+$\vpi$.
 Based on $\hat\vpi$ and $\wh\vP$, we construct the plug-in estimate
 $\wh\vL$ of $\vL$, and use the eigenvalues of its symmetrization to
 form the estimate $\hatgap$ of the spectral gap (Steps~\ref{step:eig}
@@ -75,12 +75,15 @@ we use perturbation analyses to relate $\hat\vpi$ and $\vpi$, viewing
 $\vP$ as the perturbation of $\wh\vP$; and also to relate $\hatgap$
 and $\gap$, viewing $\vL$ as a perturbation of $\Sym(\wh\vL)$.
 Both analyses give error bounds entirely in terms of observable
-quantities, tracing back to empirical error bounds for the smoothed
-frequency estimates of $\vP$.
-Note that the most expensive step in the algorithm is the computation of the group inverse,
-which, as noted reduces to matrix inversion.
-Thus, with a standard implementation of matrix inversion, the algorithm's complexity becomes 
-$O( n + d^3)$, while its space complexity is $O(d^2)$.
+quantities (e.g., $\hat\kappa$), tracing back to empirical error
+bounds for the smoothed frequency estimates of $\vP$.
+
+The most computationally expensive step in \cref{alg:empest} is the
+computation of the group inverse $\giAh$, which, as noted reduces to
+matrix inversion.
+Thus, with a standard implementation of matrix inversion, the
+algorithm's time complexity is $O(n + d^3)$, while its space
+complexity is $O(d^2)$.
 \todoc{Implement and test?}
 
 \begin{algorithm}[t]
@@ -231,7 +234,11 @@ $O( n + d^3)$, while its space complexity is $O(d^2)$.
 \end{algorithmic}
 \end{algorithm}
 
-The main result of this section is the following result:
+To state our main theorem concerning \cref{alg:empest}, we first define
+$\kappa$ to be analogous to $\hat{\kappa}$ from Step~\ref{step:sens},
+with $\giAh$ replaced by the group inverse $\giA$ of $\vA := \vI -
+\vP$.
+The result is as follows.
 \begin{theorem}
   \label{thm:empirical}
   Suppose \cref{alg:empest} is given as input a sample path of length
@@ -265,20 +272,17 @@ The main result of this section is the following result:
      \frac{\kappa}{\pimin} \sqrt{\frac{\ln(d/\delta)}{\pimin n}} + 
       \sqrt{ \frac{d\ln(d/\delta)}{ \pimin n}}
     }
-    ,
-  \]
-  where $\kappa$ is analogous to the $\hat{\kappa}$ computed
-  by~\cref{alg:empest} with $\giAh$ replaced by the group inverse
-  $\giA$ of $\vA := \vI - \vP$.\footnote{%
+    .\footnote{%
     In \cref{thm:empirical,thm:combined}, our use of big-$O$ notation
     is as follows.
     For a random sequence $(Y_n)_n$ and a (non-random) positive
-    sequence $(a_{\theta,n})_n$ parameterized by $\theta$, we say
-    ``$Y_n = O(a_{\theta,n})$ holds almost surely as $n\to\infty$'' if
-    there is some universal constant $C>0$ such that for all $\theta$,
-    $\limsup_{n\to\infty} Y_n/a_{\theta,n} \leq C$ holds almost
-    surely.%
+    sequence $(\veps_{\theta,n})_n$ parameterized by $\theta$, we say
+    ``$Y_n = O(\veps_{\theta,n})$ holds almost surely as
+    $n\to\infty$'' if there is some universal constant $C>0$ such that
+    for all $\theta$, $\limsup_{n\to\infty} Y_n/\veps_{\theta,n} \leq
+    C$ holds almost surely.%
   }%
+  \]
 %  \todoc{
 %    Precisely,
 %    what we mean by the $O(\cdot)$ notation is as follows:
