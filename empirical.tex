@@ -268,8 +268,8 @@ The result is as follows.
     \quad
     \hat{w}
     =
-     O\Parens{ 
-     \frac{\kappa}{\pimin} \sqrt{\frac{\log(d/\delta)}{\pimin n}} + 
+    O\Parens{ 
+      \frac{\kappa}{\pimin} \sqrt{\frac{\log(d/\delta)}{\pimin n}} + 
       \sqrt{ \frac{d\log(d/\delta)}{ \pimin n}}
     }
     .\footnote{%
@@ -334,8 +334,10 @@ The widths of these intervals are somewhat larger than the corresponding
 (non-empirical) intervals from \cref{thm:err}.
 \todoc{This needs to be updated once we finalize the results. By how much are these larger?}
 
-An easy way to improve the asymptotic width is to combine
-\cref{thm:err,thm:empirical}.
+It is easy to combine \cref{thm:err,thm:empirical} to yield intervals
+whose widths shrink at at least as fast as the non-empirical intervals
+from \cref{thm:err} and the empirical intervals from
+\cref{thm:empirical}.
 Specifically, determine lower bounds on $\pimin$ and $\gap$ using
 \cref{alg:empest},
 \[
@@ -360,6 +362,9 @@ $1-2\delta$ probability event.\footnote{%
   It is then possible to ``solve'' for observable bounds on $\pimin$.
   See \cref{app:combined} for details.%
 }
+Finally, we can take the intersection of these new intervals with the
+corresponding intervals from \cref{alg:empest}.
+% XXX now take the intersection
 This is summarized in the following \lcnamecref{thm:combined}, which
 we prove in \cref{app:combined}.
 \begin{theorem}
@@ -385,7 +390,11 @@ we prove in \cref{app:combined}.
     |\wh{V}|
     =
     O\Parens{
-      \sqrt{\frac{\log\frac{d}{\delta}\cdot\log(n)}{\pimin\gap n}}
+      \min\Braces{
+        \sqrt{\frac{\log\frac{d}{\delta}\cdot\log(n)}{\pimin\gap n}}
+        ,\,
+        \hat{w}
+      }
     }
     .
   \]
