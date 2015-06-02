@@ -1,3 +1,4 @@
+%!TEX root =  matrix-est.tex
 
 \subsection{Notations}
 \label{sec:notation}
@@ -51,7 +52,6 @@ is started from its stationary distribution.
 The matrix $\vM$ is symmetric on account of the reversibility of
 $\vP$, and hence it follows that $\vL$ is also symmetric.
 (We will strongly exploit the symmetry in our results.)
-\todoc{Say more? Maybe not..}
 %will be advantageous due to the existence of stronger perturbation results
 %for symmetric matrices.
 Further, $\vL = \Diag(\vpi)^{1/2} \vP \Diag(\vpi)^{-1/2}$, hence $\vL$
@@ -67,7 +67,8 @@ Denote and order the eigenvalues of $\vL$ as
 Let $\slem := \max\{ \lambda_2,\, |\lambda_d| \}$, and define the
 (absolute) spectral gap to be $\gap := 1-\slem$, which is strictly
 positive on account of ergodicity.
-\todoc{Do our results generalize to the spectral gap? Where do we need that we talk about the absolute spectral gap?
+\todoc{Do our results generalize to the spectral gap? No.
+Where do we need that we talk about the absolute spectral gap?
 What is the difference between the spectral and the absolute spectral gap? Say, in their relationship to $\tmix$?}
 %Throughout the paper, both $\pimin$ and $\gap$ are assumed
 %to be positive.
@@ -88,50 +89,15 @@ path $(X_t)_{t \in [n]}$, and also to construct fully empirical
 confidence intervals that $\pimin$ and $\gap$ with high probability;
 in particular, the construction of the intervals should not depend on
 any unobservable quantities, including $\pimin$ and $\gap$ themselves.
-<<<<<<< Updated upstream
 As mentioned in the introduction,
 it is well-known that the \emph{mixing time} of the Markov chain
 $\tmix$ (defined in Eq.~\ref{eq:mixtimedef})
 is bounded in terms of $\pimin$ and $\gap$, as shown in
 \cref{eq:mixing-time-bound}.
-=======
-\hide{
-It is well-known that the \emph{mixing time} of the Markov chain $\tmix$ (defined in the introduction)
->>>>>>> Stashed changes
-\hide{,
-\[
-  \tmix
-  :=
-  \min\Braces{
-    t \in \bbN :
-    \sup_{\vq \in \Delta^{d-1}}
-    \Norm{
-      \vq \vP^t - \vpi
-    }_{\tv} \leq 1/4
-  }
-  ,
-\]
-can be bounded in terms of $\pimin$ and $\gap$~\citep[Theorems~12.3
-and~12.4]{LePeWi08}:
-\[
-  \Parens{\frac1{\gap} - 1} \log2
-  \ \leq \ \tmix
-  \ \leq \ \frac1{\gap} \log \frac4{\pimin}
-  .
-<<<<<<< Updated upstream
-\]}%
-=======
-\]
-}
-As it was noted in the introduction, the 
- \emph{mixing time} of the Markov chain $\tmix$ defined by~\eqref{eq:mixtimedef}
- can be trapped in the interval $[ \Parens{\frac1{\gap} - 1} \log2,\frac1{\gap} \log \frac4{\pimin}]$.
->>>>>>> Stashed changes
 Moreover, convergence rates for empirical processes on Markov chain
 sequences are also often given in terms of mixing coefficients that
 can ultimately be bounded in terms of $\pimin$ and
 $\gap$ (as we will show in the proof of our first result).
-\todoc{I removed the citations (saving space), referring to the proof.}
 %~\citep[e.g.,][]{MR1921877,MoRo08,MoRo09}. 
 Therefore, valid confidence intervals for $\pimin$ and $\gap$ can be
 used to make these rates fully observable.
