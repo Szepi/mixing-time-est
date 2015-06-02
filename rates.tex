@@ -95,7 +95,7 @@ $\hat\vpi$ to their expectation, and then using perturbation bounds
 for eigenvalues to derive a bound on the error of $\hatgap$.
 However, since these averages are formed using a \emph{single sample
 path} from a (possibly) non-stationary Markov chain, we cannot use
-standard large deviation bounds; moreover applying Chernoff-Hoeffding
+standard large deviation bounds; moreover applying Chernoff-type
 bounds for Markov chains to each entry of $\wh{\vM}$ would result in a
 significantly worse sequence length requirement, roughly a factor of
 $d$ larger.
@@ -104,7 +104,9 @@ Instead, we adapt probability tail bounds for sums of independent
 random matrices~\citep{tropp2015intro} to our non-iid setting by
 directly applying a blocking technique of~\citet{Bernstein27} as
 described in the article of~\citet{Yu94}.
-The proof is given in \cref{app:upper}.
+Due to ergodicity, the convergence rate can be bounded without any
+dependence on the initial state distribution $\vpi^{(1)}$.
+The proof of \cref{thm:err} is given in \cref{app:upper}.
 
 \todoc{Make this paragraph into a remark?}
 Note that because the eigenvalues of $\vL$ are the same as that of the

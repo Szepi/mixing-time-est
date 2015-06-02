@@ -27,7 +27,8 @@ probability of seeing state $i$ followed by state $j$ when the chain
 is started from its stationary distribution.
 The matrix $\vM$ is symmetric on account of the reversibility of
 $\vP$, and hence it follows that $\vL$ is also symmetric.
-As we will see later, we will strongly exploit this later.  \todoc{Say more? Maybe not..}
+(We will strongly exploit the symmetry in our results.)
+\todoc{Say more? Maybe not..}
 %will be advantageous due to the existence of stronger perturbation results
 %for symmetric matrices.
 Further, $\vL = \Diag(\vpi)^{1/2} \vP \Diag(\vpi)^{-1/2}$, hence $\vL$
@@ -41,14 +42,15 @@ Denote and order the eigenvalues of $\vL$ as
   1 = \lambda_1 > \lambda_2 \geq \dotsb \geq \lambda_d > -1 .
 \]
 Let $\slem := \max\{ \lambda_2,\, |\lambda_d| \}$, and define the
-(absolute) spectral gap to be $\gap := 1-\slem$, which is strictly positive.
+(absolute) spectral gap to be $\gap := 1-\slem$, which is strictly
+positive on account of ergodicity.
 \todoc{Do our results generalize to the spectral gap? Where do we need that we talk about the absolute spectral gap?
 What is the difference between the spectral and the absolute spectral gap? Say, in their relationship to $\tmix$?}
 %Throughout the paper, both $\pimin$ and $\gap$ are assumed
 %to be positive.
 
-Let $(X_t)_{t\in\bbN}$ be a Markov chain whose transitions are governed by
-$\vP$.
+Let $(X_t)_{t\in\bbN}$ be a Markov chain whose transition
+probabilities are governed by $\vP$.
 For each $t \in \bbN$, let $\vpi^{(t)} \in \Delta^{d-1}$ denote the
 marginal distribution of $X_t$, so
 \[
@@ -88,7 +90,7 @@ and~12.4]{LePeWi08}:
 Moreover, convergence rates for empirical processes on Markov chain
 sequences are also often given in terms of mixing coefficients that
 can ultimately be bounded in terms of $\pimin$ and
-$\gap$, as we will show in the proof of our first result.
+$\gap$ (as we will show in the proof of our first result).
 \todoc{I removed the citations (saving space), referring to the proof.}
 %~\citep[e.g.,][]{MR1921877,MoRo08,MoRo09}. 
 Therefore, valid confidence intervals for $\pimin$ and $\gap$ can be
