@@ -4,8 +4,6 @@
 
 This work
 tackles the challenge of constructing
-\todoa{was:
-considers the construction of}
 fully empirical bounds on the
 mixing time of Markov chains based on a single sample path.
 Let $(X_t)_{t=1,2,\dotsc}$ be an irreducible, aperiodic
@@ -67,7 +65,9 @@ the
 mean $\vpi(f) = \sum_i \pi_i f(i)$
 for some function $f$ of the states of
 a Markov chain.
-\todoa{changed wording}
+\todoa{changed wording} \todoc{I am not sure that the new wording is better. It
+fails to express that there is an estimation problem. "Quantity of interest"
+is way to vague for me.} 
 This is the setting of the celebrated Markov Chain Monte Carlo (MCMC)
 paradigm~\cite{liu2001monte}, but the problem also arises in
 performance prediction involving time-correlated data, as is common in
@@ -90,7 +90,7 @@ As is well-known \citep[Theorems~12.3 and~12.4]{LePeWi08},
   \ \leq \ \frac1{\gap} \ln \frac4{\pimin}
   ,
 \end{equation}
-%$(\frac{1}\gap  - 1)\log(2)  \le \tmix \le \frac{1}\gap \log \frac4\pimin$,
+%$(\frac{1}\gap  - 1)\ln(2)  \le \tmix \le \frac{1}\gap \ln \frac4\pimin$,
 and hence it suffices to estimate $\gap$ and $\pimin$. 
 %these quantities $\gap$ and $\pimin$ are well-known to govern
 %mixing time.
@@ -138,15 +138,6 @@ Our main results are summarized as follows.
     We prove in \cref{thm:combined} that the width of these new
     intervals converge to zero asymptotically at least as fast as
     those from either \cref{thm:err} and \cref{thm:empirical}.
-
-    \todoc{Is it true from the construction of \cref{thm:combined}
-    that if we had a better point estimator
-    then we would automatically get an interval estimator
-    with the same accuracy?
-    This seems to be true.
-    This would mean that to close the gap
-    one should really work on coming up with better point estimators.
-    }
 
 %    which is
 %    $     O\Parens{
@@ -224,10 +215,9 @@ often be bounded in terms of mixing times, and hence our main results
 provide a way to make them fully empirical, at least in the limited setting we study.
 
 It is possible to eliminate many of the difficulties presented above
-%with additional access 
-when allowed more flexible
+%with additional access to the Markov chain.
+when allowed more flexible access
 to the Markov chain.
-\todoa{slightly changed wording}
 For example, given a sampling oracle that generates
 independent transitions from any given state (akin to a ``reset''
 device), the mixing time becomes an efficiently testable property in

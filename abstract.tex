@@ -15,8 +15,7 @@ reset mechanism, or additional prior knowledge.
 %confidence parameter $\delta$) that is always valid with probability
 %$1-\delta$; and 
 The width of the interval converges to zero at a
-rate of
-$\sqrt{n}$, where $n$ is the length of the sample path.
+$\sqrt{n}$ rate, where $n$ is the length of the sample path. \todoc{Aryeh prefers: .. at a rate of $\sqrt{n}$. }
 Upper and lower bounds are given on the number of samples required to
 achieve constant-factor multiplicative accuracy.
 \todoc{We may need to add some explanation to connect $\gap$ estimates
@@ -24,11 +23,7 @@ to $\tmix$ estimates.}
 The lower bounds indicate that, unless further restrictions are placed
 on the chain, no procedure can achieve this accuracy level before
 seeing each state at least $\Omega(\tmix)$ times on the average.
-Future directions of research are identified.
-\todoc{Such as: closing the gap. Extension to large state spaces, 
-based on additional assumptions. Even if $\gap$ is large, we need many samples.
-Maybe we need even stronger assumptions, like the decay rate of eigenvalues.
-}
+Finally, future directions of research are identified.
 %If $\gap$ denotes the absolute spectral gap of the unknown Markov chain
 %and the chain's stationary distribution is minorized by $\pimin$,
 %our procedure requires $\tilde{O}( \frac{1}{\pimin\gap^3})$ observations

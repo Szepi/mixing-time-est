@@ -5,8 +5,10 @@
 
 We denote the set of positive integers by $\bbN$, and
 the set of the first $d$ positive integers $\{1,2,\dotsc,d\}$ by $\iset{d}$.
-The non-negative part of a real number $x$ is $[x]_+ := \max\{0,x\}$,
-$\log$ denotes the natural logarithm.
+The non-negative part of a real number $x$ is $[x]_+ := \max\{0,x\}$.
+We use $\ln(\cdot)$ in expressions with exact constants, while we use $\log(\cdot)$ elsewhere.
+%In expression with exact numerical constants, we will use 
+%the natural logarithm function, $\ln(x)$, while elsewhere we use $\log(x)$.
 Boldface symbols are used for vectors and matrices (e.g., $\vv$,
 $\vM$), and their entries are referenced by subindexing (e.g., $v_i$,
 $M_{i,j}$).
@@ -68,8 +70,7 @@ Let $\slem := \max\{ \lambda_2,\, |\lambda_d| \}$, and define the
 (absolute) spectral gap to be $\gap := 1-\slem$, which is strictly
 positive on account of ergodicity.
 \todoc{Do our results generalize to the spectral gap? No.
-Where do we need that we talk about the absolute spectral gap?
-What is the difference between the spectral and the absolute spectral gap? Say, in their relationship to $\tmix$?}
+Discuss this somewhere.}
 %Throughout the paper, both $\pimin$ and $\gap$ are assumed
 %to be positive.
 
@@ -101,8 +102,11 @@ $\gap$ (as we will show in the proof of our first result).
 %~\citep[e.g.,][]{MR1921877,MoRo08,MoRo09}. 
 Therefore, valid confidence intervals for $\pimin$ and $\gap$ can be
 used to make these rates fully observable.
-All probabilities in this paper are over the space of state sequences with the given Markov measure.
-\todoa{Added this last sentence}
+%All probabilities in this paper are over the space of state sequences with the given Markov measure.
+\todoa{Add: ``All probabilities in this paper are over the space of state sequences with the given Markov measure.'' 
+Cs: I think the probability space could be arbitrary
+and the probabilities are over this (implicit) probability space as usual in probability papers.
+I would suggest to remove this sentence. Also, we are short of space.}
 
 %Therefore, confidence intervals for $\pimin$ and $\gap$ can be used to
 %make these rates data-dependent and hence usable in procedures such

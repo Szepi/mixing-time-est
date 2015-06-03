@@ -1,16 +1,13 @@
 %!TEX root =  matrix-est.tex
-The construction of \cref{thm:combined}
-suggests a general procedure for converting
-any confidence interval $I_n=I_n(\gap,\pimin)$ for the spectral gap $\gap$,
-which
-%itself depends 
-%on
-is expressed in terms of
-$\gap$ and $\pimin$,
-to a fully empirical confidence interval whose
-width matches that of $I_n$ up to lower order terms:
-Plug in the empirical bounds of \cref{alg:empest} into the expression defining $I_n$.
-\todoa{reworded}
+The construction used in \cref{thm:combined} applies more generally:
+%to convert confidence intervals trapping the spectral gap under some conditions:
+Given a confidence interval of the form $I_n = I_n(\gap,\pimin,\delta)$ 
+for some confidence level $\delta$
+and a fully empirical confidence set $E_n(\delta)$ for $(\gap,\pimin)$  for the same level,
+$I_n' = E_n(\delta) \cap \cup_{(\gamma,\pi)\in E_n(\delta)} I_n(\gamma,\pi,\delta)$ is a valid
+fully empirical $2\delta$-level confidence interval whose asymptotic width
+matches that of $I_n$ up to lower order terms under reasonable assumptions on $E_n$ and $I_n$.
+\todoa{reworded} \todoc{more rewording}
 In particular, this suggests that future work should focus on 
 closing the gap between the lower and upper bounds on the accuracy
 of point-estimation. Another interesting direction is to 
@@ -39,7 +36,6 @@ parameters based on a single sample path.
 %is full of exciting, important
 %and challenging research questions and we hope that our work will
 %serve as a source of inspiration for others to consider these questions.
-\todoa{rewrote ending}
 \if0
 The algorithm from Section~\ref{sec:empirical} demonstrates the
 feasibility of fully empirical finite-sample confidence bounds on
