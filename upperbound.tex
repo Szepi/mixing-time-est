@@ -55,25 +55,25 @@ Hence, with probability $1-\delta$, we have for all $i\in [d]$,
 \le
 \sqrt{ 8 \pi_i(1-\pi_i) 
 \,\frac{
-\log\Parens{\frac{d}\delta\sqrt{\frac{2}{\pimin}}}
+\ln\Parens{\frac{d}\delta\sqrt{\frac{2}{\pimin}}}
   }{\gap n}}
 +
 \frac{20
-  \log\Parens{\frac{d}\delta\sqrt{\frac{2}{\pimin}}}
+  \ln\Parens{\frac{d}\delta\sqrt{\frac{2}{\pimin}}}
 }{\gap n}
 %\frac1{(n-1)\gap\sqrt\pimin}
 %+
-%\sqrt{\frac2{\pimin\gap^2n}\log(2d/\delta)}
+%\sqrt{\frac2{\pimin\gap^2n}\ln(2d/\delta)}
 \le
 23 \sqrt{  \pi_i 
-	\frac{\log\Parens{\frac{d}\delta\sqrt{\frac{2}{\pimin}}}
+	\frac{\ln\Parens{\frac{d}\delta\sqrt{\frac{2}{\pimin}}}
            }{\gap n}
        }\,,
 \end{align}
 where the second inequality holds as soon as 
 \[
 n \ge
-	\frac{\log\Parens{\frac{d}\delta\sqrt{\frac{2}{\pimin}}}
+	\frac{\ln\Parens{\frac{d}\delta\sqrt{\frac{2}{\pimin}}}
            }{\gap \pimin}\,.
 \]
 Consider now the following lemma:
@@ -108,10 +108,10 @@ holds if and only if
 \end{align*}
 which is implied by our condition on $\eps$. Thus, under our condition $\hat\pi_2 \ge \pi_2 - C  \sqrt{\pi_2 } \ge \pi_1 - C \sqrt{\pi_1}$, finishing the proof.
 \end{proof}
-By this lemma, as soon as $n\ge (11.5)^2 \frac{\log( \frac{d}{\delta} )+\frac12\log(\frac2\pimin) }{ \gap\pimin}$,
+By this lemma, as soon as $n\ge (11.5)^2 \frac{\ln( \frac{d}{\delta} )+\frac12\ln(\frac2\pimin) }{ \gap\pimin}$,
 then
 \[
-\Abs{\pimin - \hatpimin} \le 23 \sqrt{ \pimin \frac{\log( \frac{d}{\delta} )+\frac12\log(\frac2\pimin) }{ \gap n} }\,,
+\Abs{\pimin - \hatpimin} \le 23 \sqrt{ \pimin \frac{\ln( \frac{d}{\delta} )+\frac12\ln(\frac2\pimin) }{ \gap n} }\,,
 \]
 For $n$ smaller than the above critical value, the second term in \eqref{eq:piminbound} is lower bounded by one.
 Noting that $\Abs{\pimin-\hatpimin}\le 1$ thus shows that \eqref{eq:piminbound} holds for any $n$.
@@ -207,7 +207,7 @@ $
 \Abs{\frac{\hat{\pi}_i}{\pi_i}-1}
 \le
 23 \sqrt{  
-	\frac{\log\Parens{\frac{d}\delta\sqrt{\frac{2}{\pimin}}}
+	\frac{\ln\Parens{\frac{d}\delta\sqrt{\frac{2}{\pimin}}}
            }{\pimin\gap n}
        }\,,
 $
@@ -417,7 +417,7 @@ By the same argument, for all $i \in [d]$,
 Suppose the first block $F$ is of length
 \begin{equation}
   \label{eq:block-length}
-  |F| = a \geq 1 + \frac{1}{\gap} \log \frac1{\pimin\gap}
+  |F| = a \geq 1 + \frac{1}{\gap} \ln \frac1{\pimin\gap}
   .
 \end{equation}
 Then
@@ -560,13 +560,13 @@ satisfies
 \begin{equation}
   \label{eq:block-length}
   a \geq
-   1 + \frac{1}{2\gap} \log \frac1{\pimin}\,.
+   1 + \frac{1}{2\gap} \ln \frac1{\pimin}\,.
 %   \geq
-%   1 + \frac{1}{\gap} \log \frac1{|H_s|\sqrt{\pimin}\gap}
+%   1 + \frac{1}{\gap} \ln \frac1{|H_s|\sqrt{\pimin}\gap}
 \end{equation}
 \todoc{By using the geometric series bound,
 we can derive that it is enough
-if $a\ge 1 + \frac{1}{\gap} \log \frac1{|H_s|\sqrt{\pimin}\gap}$,
+if $a\ge 1 + \frac{1}{\gap} \ln \frac1{|H_s|\sqrt{\pimin}\gap}$,
 which is better when $|H_s|$ is bigger than $\gap$.
 }
 \todoc{As we need $a\le n/2$, we will need $n = \Omega(1/\gap\log\frac1{\pimin})$.}
@@ -617,7 +617,7 @@ Then, for all $t\ge 0$,
 \end{theorem}
 By inverting the bound, we get that for any $0\le \delta \le 1$, with probability $1-\delta$, 
 \[
-\norm{\vS} \le \sqrt{2 v \log \frac{d_1+d_2}{\delta}} + \frac{2R}{3} \log\frac{d_1+d_2}{\delta}\,.
+\norm{\vS} \le \sqrt{2 v \ln \frac{d_1+d_2}{\delta}} + \frac{2R}{3} \ln\frac{d_1+d_2}{\delta}\,.
 \]
 
 We see, that in order to apply this result we need to bound the range of $\vZ_s$ and 
@@ -687,7 +687,7 @@ $\norm{\Diag(\vpi)^{-1/2} \vM\Diag(\vpi)^{-1/2}} = \norm{\vL}\le 1$,
 %Suppose the first block $F$ is of length
 %\begin{equation}
 %  \label{eq:block-length}
-%  |F| \geq 1 + \frac{1}{\gap} \log \frac1{\pimin\gap}
+%  |F| \geq 1 + \frac{1}{\gap} \ln \frac1{\pimin\gap}
 %  .
 %\end{equation}
 %Then
@@ -935,7 +935,7 @@ $\sum_{s=1}^{\mu_H} w_{H,s} \wt\vZ_s$ is at most
       d_{\vP}
       + 2
     }
-    \log(4d/\delta)
+    \ln(4d/\delta)
   }
   \\
 & \qquad\qquad\qquad  +
@@ -943,7 +943,7 @@ $\sum_{s=1}^{\mu_H} w_{H,s} \wt\vZ_s$ is at most
   \Parens{
     \frac1{\pimin} + 2
   }
-  \log(4d/\delta)
+  \ln(4d/\delta)
 \end{align*}
 where
 \begin{align*}
@@ -963,10 +963,10 @@ with probability at least $1-\delta$:
   \Norm{\frac1{\mu_H} \sum_{s=1}^{\mu_H} \wt\vZ_s}
   \leq
   \sqrt{
-    \frac{12\log(4d/\delta)}{\mu_H\pimin}
+    \frac{12\ln(4d/\delta)}{\mu_H\pimin}
   }
   +
-  \frac{2\log(4d/\delta)}{\mu_H\pimin}
+  \frac{2\ln(4d/\delta)}{\mu_H\pimin}
   \,.
 \end{equation}
 
@@ -1022,7 +1022,7 @@ by a well-known result
 It follows that if the block length $a$ satisfies
 \begin{equation}
   \label{eq:block-length2}
-  a \geq 1 + \frac{1}{\gap}\log\frac{n}{\delta\pimin}
+  a \geq 1 + \frac{1}{\gap}\ln\frac{n}{\delta\pimin}
   ,
 \end{equation}
 then the failure probability increases from $\delta$ to at most
@@ -1031,7 +1031,7 @@ $2\delta$.
 
 Combining \eqref{eq:biasbound},\eqref{eq:indbound}, we get that if
 \[
-  a := \left\lceil 1 + \frac{1}{\gap}\log\frac{2n}{\pimin\delta} \right\rceil
+  a := \left\lceil 1 + \frac{1}{\gap}\ln\frac{2n}{\pimin\delta} \right\rceil
 \]
 then for any $0\le \delta \le 1$, with probability at least $1-\delta$, with $\mu := \mu_H = \mu_T=n/(2a)$,
 \begin{align*}
@@ -1040,10 +1040,10 @@ then for any $0\le \delta \le 1$, with probability at least $1-\delta$, with $\m
 \norm{\wh\vM - \bbE \wh\vM }
 & \le 
   2\sqrt{
-    \frac{12\log(16d/\delta)}{\mu\pimin}
+    \frac{12\ln(16d/\delta)}{\mu\pimin}
   }
   +
-  \frac{4\log(16d/\delta)}{\mu\pimin}
+  \frac{4\ln(16d/\delta)}{\mu\pimin}
   + 
   \frac{2}{n-1}\,,
 %  +
@@ -1090,7 +1090,7 @@ finishes the proof of \cref{lem:err}.
 
 Plugging the previous bound and~\eqref{eq:singletonbound} into~\eqref{eq:vlbound}, we see that
 \[
-  a := \left\lceil 1 + \frac{1}{\gap}\log\frac{n}{\pimin\delta} \right\rceil
+  a := \left\lceil 1 + \frac{1}{\gap}\ln\frac{n}{\pimin\delta} \right\rceil
 \]
 so that~\eqref{eq:block-length2} holds (which implies~\eqref{eq:block-length}).
 Then, we have the following error bound: for some absolute constant
