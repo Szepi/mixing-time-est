@@ -1,10 +1,16 @@
 %!TEX root =  matrix-est.tex
-Generalizing the construction of  \cref{thm:combined}, 
-given any confidence interval $I_n=I_n(\gap,\pimin)$ for the spectral gap $\gap$ that itself depends 
-on $\gap$ and $\pimin$, under general conditions,
-plugging in the empirical bounds of \cref{alg:empest} into the expression defining $I_n$
-gives a fully empirical confidence interval whose
-width matches that of $I_n$ up to lower order terms.
+The construction of \cref{thm:combined}
+suggests a general procedure for converting
+any confidence interval $I_n=I_n(\gap,\pimin)$ for the spectral gap $\gap$,
+which
+%itself depends 
+%on
+is expressed in terms of
+$\gap$ and $\pimin$,
+to a fully empirical confidence interval whose
+width matches that of $I_n$ up to lower order terms:
+Plug in the empirical bounds of \cref{alg:empest} into the expression defining $I_n$.
+\todoa{reworded}
 In particular, this suggests that future work should focus on 
 closing the gap between the lower and upper bounds on the accuracy
 of point-estimation. Another interesting direction is to 
@@ -22,11 +28,18 @@ Interesting directions for future work thus must consider Markov
 chains with specific structure. Parametric classes of Markov chains,
 including but not limited to Markov chains with factored transition kernels
 with a few factors, are a promising candidate for such future investigations.
-While we realize the limitations of our work, 
-we think that the area of fully data dependent estimation of Markov chain 
-parameters based on a single sample path is full of exciting, important
-and challenging research questions and we hope that our work will
-serve as a source of inspiration for others to consider these questions.
+The results presented here are a first step in the ambitious research agenda
+outlined above, and we hope that they will
+%pave the way
+serve as a point of departure
+for
+further insights
+in the area of fully empirical estimation of Markov chain 
+parameters based on a single sample path.
+%is full of exciting, important
+%and challenging research questions and we hope that our work will
+%serve as a source of inspiration for others to consider these questions.
+\todoa{rewrote ending}
 \if0
 The algorithm from Section~\ref{sec:empirical} demonstrates the
 feasibility of fully empirical finite-sample confidence bounds on

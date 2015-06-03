@@ -36,7 +36,7 @@ which we may easily deduce \cref{eq:piminbound} in \cref{thm:err}.
   Pick any $\delta \in (0,1)$, and let
   \begin{equation}
     \veps_n :=
-    \frac{ \ln\Parens{\frac{d}\delta\sqrt{\frac{2}{\pimin}}} }{\gap n}
+    \frac{ \log\Parens{\frac{d}\delta\sqrt{\frac{2}{\pimin}}} }{\gap n}
     .
     \label{eq:singleton-veps}
   \end{equation}
@@ -81,8 +81,8 @@ which we may easily deduce \cref{eq:piminbound} in \cref{thm:err}.
     .
   \]
   To handle possibly non-stationary chains, as is our case, we combine
-  the above inquality with \citet[][Proposition 3.14]{paulin15}, to
-  obatin for any $\eps>0$,
+  the above inequality with \citet[][Proposition 3.14]{paulin15}, to
+  obtain for any $\eps>0$,
   \begin{align*}
     \bbP
     \Parens{
@@ -106,7 +106,7 @@ which we may easily deduce \cref{eq:piminbound} in \cref{thm:err}.
       }
     }.
   \end{align*}
-  Using this tail inequalitiy with $\eps :=
+  Using this tail inequality with $\eps :=
   \sqrt{8\pi_i(1-\pi_i)\veps_n} + 20\veps_n$ and a union bound over
   all $i \in [d]$ implies that the inequalities
   in~\cref{eq:singletonboundsimple} hold with probability at least
@@ -278,7 +278,7 @@ Since $\errp$ is diagonal,
 \end{align*}
 Assume that
 \begin{equation}
-  n \geq \frac{108 \ln\Parens{\frac{d}\delta\sqrt{\frac{2}{\pimin}}}
+  n \geq \frac{108 \log\Parens{\frac{d}\delta\sqrt{\frac{2}{\pimin}}}
   }{\pimin\gap}
   ,
   \label{eq:min-n1}
@@ -320,14 +320,14 @@ $1-\delta$ probability event from \cref{lem:hatpimin},
   =
   \sqrt{
     \frac{
-      8\ln\Parens{\frac{d}\delta\sqrt{\frac{2}{\pimin}}}
+      8\log\Parens{\frac{d}\delta\sqrt{\frac{2}{\pimin}}}
     }{
       \pimin\gap n
     }
   }
   +
   \frac{
-    20\ln\Parens{\frac{d}\delta\sqrt{\frac{2}{\pimin}}}
+    20\log\Parens{\frac{d}\delta\sqrt{\frac{2}{\pimin}}}
   }{
     \pimin\gap n
   }
@@ -592,15 +592,15 @@ satisfies
   a \geq
   a_\delta
   :=
-  \frac{1}{\gap} \ln \frac{2(n-2)}{\delta\pimin}
+  \frac{1}{\gap} \log \frac{2(n-2)}{\delta\pimin}
 \end{equation}
 for $\delta \in (0,1)$.
 \todoc{By using the geometric series bound,
 we can derive that it is enough
-if $a\ge 1 + \frac{1}{\gap} \ln \frac1{a\sqrt{\pimin}\gap}$,
+if $a\ge 1 + \frac{1}{\gap} \log \frac1{a\sqrt{\pimin}\gap}$,
 which is better when $a$ is bigger than $\gap$.
 }
-\todoc{As we need $a\le n/2$, we will need $n = \Omega(1/\gap\ln\frac1{\pimin})$.}
+\todoc{As we need $a\le n/2$, we will need $n = \Omega(1/\gap\log\frac1{\pimin})$.}
 
 Define%\todoc{Do we want this abuse?}
 \begin{align*}
@@ -654,8 +654,8 @@ Then, for all $t\ge 0$,
 In other words, for any $\delta \in (0,1)$,
 \[
   \bbP\Parens{
-    \norm{\vS} > \sqrt{2 v \ln \frac{2(d_1+d_2)}{\delta}} + \frac{2R}{3}
-    \ln\frac{2(d_1+d_2)}{\delta}
+    \norm{\vS} > \sqrt{2 v \log \frac{2(d_1+d_2)}{\delta}} + \frac{2R}{3}
+    \log\frac{2(d_1+d_2)}{\delta}
   } \leq \delta
   \,.
 \]
@@ -906,10 +906,10 @@ matrices, we have
     \Norm{ \frac1{\mu_H} \sum_{s=1}^{\mu_H} \wt\vZ_s}
     >
     \sqrt{
-      \frac{4\Parens{ d_{\vP} + 2 } \ln\frac{4d}{\delta}}
+      \frac{4\Parens{ d_{\vP} + 2 } \log\frac{4d}{\delta}}
       {\mu_H}
     }
-    + \frac{2\Parens{ \frac1{\pimin} + 2 } \ln\frac{4d}{\delta}}
+    + \frac{2\Parens{ \frac1{\pimin} + 2 } \log\frac{4d}{\delta}}
     {3\mu_H}
   } \leq \delta
   \label{eq:indpt-bound}
@@ -931,7 +931,7 @@ where
 %      d_{\vP}
 %      + 2
 %    }
-%    \ln(4d/\delta)
+%    \log(4d/\delta)
 %  }
 %  \\
 %& \qquad\qquad\qquad  +
@@ -939,7 +939,7 @@ where
 %  \Parens{
 %    \frac1{\pimin} + 2
 %  }
-%  \ln(4d/\delta)
+%  \log(4d/\delta)
 %\end{align*}
 %where
 %\begin{align*}
@@ -959,10 +959,10 @@ where
 %  \Norm{\frac1{\mu_H} \sum_{s=1}^{\mu_H} \wt\vZ_s}
 %  \leq
 %  \sqrt{
-%    \frac{12\ln(4d/\delta)}{\mu_H\pimin}
+%    \frac{12\log(4d/\delta)}{\mu_H\pimin}
 %  }
 %  +
-%  \frac{2\ln(4d/\delta)}{\mu_H\pimin}
+%  \frac{2\log(4d/\delta)}{\mu_H\pimin}
 %  \,.
 %\end{equation}
 
@@ -1009,10 +1009,10 @@ bound increases from $\delta$ to $\delta + (\mu_H-1)\beta(\bbP)$:
     \Norm{ \frac1{\mu_H} \sum_{s=1}^{\mu_H} \vZ_s}
     >
     \sqrt{
-      \frac{4\Parens{ d_{\vP} + 2 } \ln\frac{4d}{\delta}}
+      \frac{4\Parens{ d_{\vP} + 2 } \log\frac{4d}{\delta}}
       {\mu_H}
     }
-    + \frac{2\Parens{ \frac1{\pimin} + 2 } \ln\frac{4d}{\delta}}
+    + \frac{2\Parens{ \frac1{\pimin} + 2 } \log\frac{4d}{\delta}}
     {3\mu_H}
   } \leq \delta + (\mu_H-1)\beta(\bbP)
   .
@@ -1132,7 +1132,7 @@ Pick any $\delta \in (0,1)$, let the block length be
   := \ceil{ a_\delta }
   =
   \Ceil{
-    \frac{1}{\gap}\ln\frac{2(n-2)}{\pimin\delta}
+    \frac{1}{\gap}\log\frac{2(n-2)}{\pimin\delta}
   }
   ,
 \]
@@ -1147,7 +1147,7 @@ so
   \frac{n-1}
   {
     2\Parens{
-      1 + \frac1{\gap}\ln\frac{2(n-2)}{\pimin\delta}
+      1 + \frac1{\gap}\log\frac{2(n-2)}{\pimin\delta}
     }
   }
   -2
@@ -1156,7 +1156,7 @@ so
 \]
 If
 \begin{equation}
-  n \geq 7 + \frac6{\gap} \ln \frac{2(n-2)}{\pimin\delta}
+  n \geq 7 + \frac6{\gap} \log \frac{2(n-2)}{\pimin\delta}
   \geq 3a
   ,
   \label{eq:min-n2}
@@ -1168,15 +1168,15 @@ then with probability at least $1-4\delta$,
   \leq
   \frac{4
     \Ceil{
-      \frac{1}{\gap}\ln\frac{2(n-2)}{\pimin\delta}
+      \frac{1}{\gap}\log\frac{2(n-2)}{\pimin\delta}
     }
   }{\pimin(n-1)}
   +
   \sqrt{
-    \frac{4\Parens{ d_{\vP} + 2 } \ln\frac{4d}{\delta}}
+    \frac{4\Parens{ d_{\vP} + 2 } \log\frac{4d}{\delta}}
     {\mu}
   }
-  + \frac{2\Parens{ \frac1{\pimin} + 2 } \ln\frac{4d}{\delta}}
+  + \frac{2\Parens{ \frac1{\pimin} + 2 } \log\frac{4d}{\delta}}
   {3\mu}
   .
 \end{multline*}
@@ -1193,15 +1193,15 @@ at least $1-4\delta$,
   +
   \frac{4
     \Ceil{
-      \frac{1}{\gap}\ln\frac{2(n-2)}{\pimin\delta}
+      \frac{1}{\gap}\log\frac{2(n-2)}{\pimin\delta}
     }
   }{\pimin(n-1)}
   +
   \sqrt{
-    \frac{4\Parens{ d_{\vP} + 2 } \ln\frac{4d}{\delta}}
+    \frac{4\Parens{ d_{\vP} + 2 } \log\frac{4d}{\delta}}
     {\mu}
   }
-  + \frac{2\Parens{ \frac1{\pimin} + 2 } \ln\frac{4d}{\delta}}
+  + \frac{2\Parens{ \frac1{\pimin} + 2 } \log\frac{4d}{\delta}}
   {3\mu}
   .
   \label{eq:doubletbound}
@@ -1221,14 +1221,14 @@ In this event, \cref{eq:singletonbound} also holds, and hence by
   \Parens{
     \sqrt{
       \frac{
-        8\ln\Parens{\frac{d}\delta\sqrt{\frac{2}{\pimin}}}
+        8\log\Parens{\frac{d}\delta\sqrt{\frac{2}{\pimin}}}
       }{
         \pimin\gap n
       }
     }
     +
     \frac{
-      20\ln\Parens{\frac{d}\delta\sqrt{\frac{2}{\pimin}}}
+      20\log\Parens{\frac{d}\delta\sqrt{\frac{2}{\pimin}}}
     }{
       \pimin\gap n
     }
@@ -1240,15 +1240,15 @@ In this event, \cref{eq:singletonbound} also holds, and hence by
     +
     \frac{4
       \Ceil{
-        \frac{1}{\gap}\ln\frac{2(n-2)}{\pimin\delta}
+        \frac{1}{\gap}\log\frac{2(n-2)}{\pimin\delta}
       }
     }{\pimin(n-1)}
     +
     \sqrt{
-      \frac{4\Parens{ d_{\vP} + 2 } \ln\frac{4d}{\delta}}
+      \frac{4\Parens{ d_{\vP} + 2 } \log\frac{4d}{\delta}}
       {\mu}
     }
-    + \frac{2\Parens{ \frac1{\pimin} + 2 } \ln\frac{4d}{\delta}}
+    + \frac{2\Parens{ \frac1{\pimin} + 2 } \log\frac{4d}{\delta}}
     {3\mu}
   }
   \\
