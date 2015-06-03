@@ -1,6 +1,33 @@
 %!TEX root =  matrix-est.tex
-\todoc{Theorem 5 more generally, log}
+Generalizing the construction of  \cref{thm:combined}, 
+given any confidence interval $I_n=I_n(\gap,\pimin)$ for the spectral gap $\gap$ that itself depends 
+on $\gap$ and $\pimin$, under general conditions,
+plugging in the empirical bounds of \cref{alg:empest} into the expression defining $I_n$
+gives a fully empirical confidence interval whose
+width matches that of $I_n$ up to lower order terms.
+In particular, this suggests that future work should focus on 
+closing the gap between the lower and upper bounds on the accuracy
+of point-estimation. Another interesting direction is to 
+reduce the computation cost: The current cubic cost in the number of states
+can be too high even when the number of states is moderate.
 
+Perhaps more important, however, is to extend 
+our results to large state space Markov chains:
+In most practical applications the state space is continuous
+or is exponentially large in some natural parameters.
+As follows from our lower bounds, without further assumptions,
+the problem of fully data dependent estimation of the mixing time
+is intractable for information theoretical reasons.
+Interesting directions for future work thus must consider Markov
+chains with specific structure. Parametric classes of Markov chains,
+including but not limited to Markov chains with factored transition kernels
+with a few factors, are a promising candidate for such future investigations.
+While we realize the limitations of our work, 
+we think that the area of fully data dependent estimation of Markov chain 
+parameters based on a single sample path is full of exciting, important
+and challenging research questions and we hope that our work will
+serve as a source of inspiration for others to consider these questions.
+\if0
 The algorithm from Section~\ref{sec:empirical} demonstrates the
 feasibility of fully empirical finite-sample confidence bounds on
 Markov chain mixing time.
@@ -28,6 +55,7 @@ Theorems~\ref{thm:lb-pimin} and \ref{thm:lb-gap}.
 Sometimes $\gap$ is known, but $\pimin$ is not. Does this help?
 How about the other way around?
 }
+\fi
 %\todoc{We need to move the references needed in the appendix to after the appendix. 
 %This should be possible with some latex package for splitting references..}
 %and investigate

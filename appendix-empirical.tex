@@ -15,7 +15,7 @@ where
   \quad
   N_i := \Abs{ \Braces{ t \in [n-1] : X_t = i } }
 \]
-and $\alpha>0$ is a positive constant, which we set as $\alpha := 1/d$
+and $\alpha>0$ is a positive constant, which we set beforehand as $\alpha := 1/d$
 for simplicity.
 
 As a result of the smoothing, all entries of $\wh\vP$ are positive,
@@ -82,7 +82,9 @@ The algorithm estimates the spectral gap $\gap$ using
     Y_{t+1} \in [-P_{i,j},1-P_{i,j}] .
   \]
   Therefore, by Freedman's inequality~\citep[Theorem 1.6]{Fre75} and
-  union bounds, we have
+  union bounds, we have \todoc{Would it be better to use Tropp's Matrix Freedman? 
+  I guess it depends on whether we can derive bounds on the sensitivity of $\vpi$ in terms of 
+  the spectral norm..}
   \[
     \abs{ N_{i,j} - N_i P_{i,j} }
     \leq \sqrt{2 N_i P_{i,j} (1-P_{i,j}) \log(2d/\delta)} + \frac23
