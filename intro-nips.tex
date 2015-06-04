@@ -85,9 +85,9 @@ spectral gap $\gap$ and stationary distribution minorized by $\pimin$.
 As is well-known \citep[Theorems~12.3 and~12.4]{LePeWi08},
 \begin{equation}
   \label{eq:mixing-time-bound}
-  \Parens{\frac1{\gap} - 1} \ln2
+  \Parens{\mfrac1{\gap} - 1} \ln2
   \ \leq \ \tmix
-  \ \leq \ \frac1{\gap} \ln \frac4{\pimin}
+  \ \leq \ \mfrac1{\gap} \ln \mfrac4{\pimin}
   ,
 \end{equation}
 %$(\frac{1}\gap  - 1)\ln(2)  \le \tmix \le \frac{1}\gap \ln \frac4\pimin$,
@@ -96,6 +96,16 @@ and hence it suffices to estimate $\gap$ and $\pimin$.
 %mixing time.
 Our main results are summarized as follows.
 \begin{enumerate}
+  \item
+    In \cref{sec:rates-lower}, we show that in some problems \todoc{I had to add ``in some problems''} 
+    $n = \Omega\parens{ (d\log d)/\gap + 1/\pimin}$ observations are necessary for any procedure
+    to guarantee constant multiplicative accuracy in estimating $\gap$
+    (\cref{thm:lb-pimin,thm:lb-gap}).
+    Essentially, in some problems \emph{every} state may need to be visited about
+    $\log(d)/\gap$ times, on average, before an accurate estimate of
+    the mixing time can be provided, regardless of the estimation
+    procedure used.
+
   \item
     In \cref{sec:rates-upper}, we give a point-estimator for $\gap$,
     and prove in \cref{thm:err} that it achieves multiplicative
@@ -113,24 +123,18 @@ Our main results are summarized as follows.
     extensions to non-reversible chains.
 
   \item
-    In \cref{sec:rates-lower}, we show that $n = \Omega\parens{ (d\log
-    d)/\gap + 1/\pimin}$ observations are necessary for any procedure
-    to guarantee constant multiplicative accuracy in estimating $\gap$
-    (\cref{thm:lb-pimin,thm:lb-gap}).
-    Essentially, \emph{every} state may need to be visited about
-    $\log(d)/\gap$ times, on average, before an accurate estimate of
-    the mixing time can be provided, regardless of the estimation
-    procedure used.
-
-  \item
-    In \cref{sec:empirical}, we develop a procedure for computing
-    \emph{valid empirical confidence intervals} for $\pimin$ and
-    $\gap$ (\cref{alg:empest}).
-    The procedure uses just a single sample path and does not require
-    any prior knowledge of the chain's parameters, such as $\pimin$ or
-    $\gap$.
-    We quantify the rate at which the width of the confidence
-    intervals shrink as a function of the length of the sample path
+    In \cref{sec:empirical}, the construction of
+    valid \emph{fully empirical confidence intervals} for $\pimin$ and
+    $\gap$ are considered. First, the difficulty of the task is explained,
+    i.e., why the standard approach of turning the finite time confidence intervals of
+    \cref{thm:err} into a fully empirical one fails.
+	Combining several results from perturbation theory in a novel fashion
+	we propose a new procedure and prove that it avoids slow convergence
+%    The procedure uses just a single sample path and does not require
+%    any prior knowledge of the chain's parameters, such as $\pimin$ or
+%    $\gap$.
+%    We quantify the rate at which the width of the confidence
+%    intervals shrink as a function of the length of the sample path
     (\cref{thm:empirical}).
     We also explain how to combine the empirical confidence intervals
     from \cref{alg:empest} with the non-empirical bounds from

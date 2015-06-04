@@ -1,17 +1,74 @@
 %!TEX root =  matrix-est.tex
 
-In this section, we present upper and lower bounds on achievable rates
+In this section, we present lower and upper bounds on achievable rates
 for estimating the spectral gap as a function of the length of the
 sample path $n$.
 
+\subsection{Lower bounds}
+\label{sec:rates-lower}
+The purpose of this section is to show lower bounds on the number of observations
+necessary to achieve a fixed multiplicative (or even just additive) accuracy in estimating the spectral gap $\gap$.
+By \cref{eq:mixing-time-bound}, the multiplicative accuracy lower bound for $\gap$
+gives the same lower bound for estimating the mixing time.
+%It is important to emphasize that these are algorithm independent lower bounds, i.e.,
+%any algorithm is bound by them.
+Our first result holds even for two state Markov chains and shows that a sequence length of $\Omega(1/\pimin)$
+is necessary to achieve even a constant \emph{additive} accuracy in estimating $\gap$.
+%We begin with a result showing that any algorithm for estimating
+%$\gap$ (even for just constant additive accuracy) requires an
+%observation sequence of length $\Omega(1/\pimin)$
+%even when the number of states is only two.
+%%%
+\begin{theorem}
+  \label{thm:lb-pimin}
+  There is an absolute constant $c>0$ such that the following holds.
+  Pick any $\bar\pi \in (0,1/4)$.
+  Consider any estimator $\hatgap$ that takes as input a random sample
+  path of length $n < c/\bar\pi$ from a Markov chain starting from any
+  desired initial state distribution.
+  There exists a two-state ergodic and reversible Markov chain
+  distribution with spectral gap $\gap \geq 1/2$ and minimum
+  stationary probability $\pimin \geq \bar\pi$ such that
+  \[
+    \Pr\Brackets{ |\hatgap - \gap| \geq 1/6 } \geq 1/8 .
+  \]
+\end{theorem}
+%%%
+Next, considering $d$ state chains, we show that 
+a sequence of length $\Omega(d\log(d)/\gap)$ is required
+to estimate $\gap$ up to a constant multiplicative accuracy.
+Essentially, the sequence may have to visit all $d$ states $\log(d)/\gap$ times each on average.
+This holds \emph{even} if $\pimin$ is within a factor of two of the
+\emph{largest} possible value of $1/d$ that it can take, i.e., when
+$\vpi$ is nearly uniform.
+\begin{theorem}
+  \label{thm:lb-gap}
+  There is an absolute constant $c>0$ such that the following holds.
+  Pick any positive integer $d \geq 3$ and any $\bar\gamma \in
+  (0,1/2)$.
+  Consider any estimator $\hatgap$ that takes as input a random sample
+  path of length $n < c d\log(d) / \bar\gamma$ from a $d$-state
+  reversible Markov chain starting from any desired initial state
+  distribution.
+  There is an ergodic and reversible Markov chain distribution
+  with spectral gap $\gap \in [\bar\gamma,2\bar\gamma]$ and minimum
+  stationary probability $\pimin \geq 1/(2d)$ such that
+  \[
+    \Pr\Brackets{ |\hatgap - \gap| \geq \bar\gamma} \geq 1/4 .
+  \]
+\end{theorem}
+
+The proofs of \cref{thm:lb-pimin,thm:lb-gap} are given in
+\cref{app:lower}. 
+%In summary, the lower bounds show that no algorithm can hope to achieve a fixed multiplicative
+%accuracy before seeing $\Omega( d \log(d)/\gamma^* + 1/\pimin)$ states.
+
 \subsection{A plug-in based point estimator and its accuracy}
 \label{sec:rates-upper}
-
-Our upper bound is demonstrated using estimators based on natural
-plug-in estimates.
-We also provide an estimator for the minimum stationary probability
-in the process, so that one can use the bounds from
-\cref{eq:mixing-time-bound} to trap
+Let us now consider the problem of estimating $\gap$.
+For this, we construct a natural plug-in estimator.
+Along the way, we also provide an estimator for the minimum stationary probability,
+allowing one to use the bounds from \cref{eq:mixing-time-bound} to trap
 the mixing time.
 
 Define the random matrix $\wh\vM \in [0,1]^{d \times d}$ and random
@@ -90,6 +147,8 @@ $\gap$ to within constant multiplicative factors are, respectively,
   \tilde{O}\Parens{\frac1{\pimin\gap^3}}
   .
 \]
+By \cref{eq:mixing-time-bound},
+the second of these is also a bound on the required sequence length to estimate $\tmix$. % the mixing time.
 
 The proof of \cref{thm:err} is based on analyzing the
 convergence of the sample averages $\wh{\vM}$ and
@@ -163,56 +222,4 @@ effects---we pursue this in \cref{sec:empirical}.
 \Cref{thm:err} thus primarily serves as a point of comparison
 for what is achievable in terms of estimation accuracy when one does
 not need to provide empirical confidence bounds.
-
-\subsection{Lower bounds}
-\label{sec:rates-lower}
-
-We complement \cref{thm:err} with lower bounds showing the
-necessity of some of the quantities appearing in the upper bound.
-We begin with a result showing that any algorithm for estimating
-$\gap$ (even for just constant additive accuracy) requires an
-observation sequence of length $\Omega(1/\pimin)$
-even when the number of states is only two.
-
-\begin{theorem}
-  \label{thm:lb-pimin}
-  There is an absolute constant $c>0$ such that the following holds.
-  Pick any $\bar\pi \in (0,1/4)$.
-  Consider any estimator $\hatgap$ that takes as input a random sample
-  path of length $n < c/\bar\pi$ from a Markov chain starting from any
-  desired initial state distribution.
-  There exists a two-state ergodic and reversible Markov chain
-  distribution with spectral gap $\gap \geq 1/2$ and minimum
-  stationary probability $\pimin \geq \bar\pi$ such that
-  \[
-    \Pr\Brackets{ |\hatgap - \gap| \geq 1/6 } \geq 1/8 .
-  \]
-\end{theorem}
-
-Next, we show that in order to estimate
-$\gap$ to within a constant multiplicative accuracy in a $d$ state chain,
-a sequence of length $\Omega(d\log(d)/\gap)$ is required.
-Essentially, the sequence may have to visit all $d$ states $\log(d)/\gap$ times each on average.
-This hold \emph{even} if $\pimin$ is within a factor of two of the
-\emph{largest} possible value of $1/d$ that it can take, i.e., when
-$\vpi$ is nearly uniform.
-\begin{theorem}
-  \label{thm:lb-gap}
-  There is an absolute constant $c>0$ such that the following holds.
-  Pick any positive integer $d \geq 3$ and any $\bar\gamma \in
-  (0,1/2)$.
-  Consider any estimator $\hatgap$ that takes as input a random sample
-  path of length $n < c d\log(d) / \bar\gamma$ from a $d$-state
-  reversible Markov chain starting from any desired initial state
-  distribution.
-  There is an ergodic and reversible Markov chain distribution
-  with spectral gap $\gap \in [\bar\gamma,2\bar\gamma]$ and minimum
-  stationary probability $\pimin \geq 1/(2d)$ such that
-  \[
-    \Pr\Brackets{ |\hatgap - \gap| \geq \bar\gamma} \geq 1/4 .
-  \]
-\end{theorem}
-
-The proofs of \cref{thm:lb-pimin,thm:lb-gap} are given in
-\cref{app:lower}.
 
