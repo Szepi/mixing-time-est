@@ -1,83 +1,3 @@
-In this section, we address the shortcoming of \cref{thm:err} and give
-fully empirical confidence intervals for the stationary probabilities
-and the spectral gap $\gap$.
-The main idea is to use the Markov property to eliminate the
-dependence of the confidence intervals on the unknown quantities
-(including $\pimin$ and $\gap$).
-Specifically, we estimate the transition probabilities from the sample
-path using simple frequency estimates: as a consequence of the Markov
-property, for each state, the frequency estimates converge at a rate
-that depends only on the number of visits to the state, and in
-particular the rate (given the visit count of the state) is
-independent of the mixing time of the chain.
-
-As discussed in \cref{sec:rates}, it is possible to form a confidence
-interval for $\gap$ based on the eigenvalues of an estimated
-transition probability matrix by appealing to the
-Ostrowski-Elsner theorem.
-However, as explained earlier, this would lead to a slow
-$O(n^{-1/(2d)})$ rate.
-We avoid this slow rate by using an estimate of the symmetric matrix
-$\vL$, so that we can use a stronger perturbation result (namely Weyl's
-inequality, as in the proof of \cref{thm:err}) available for symmetric matrices.
-
-To form an estimate of $\vL$ based on an estimate of the transition
-probabilities, one possibility is to estimate $\vpi$ using a
-frequency-based estimate for $\vpi$ as was done in \cref{sec:rates},
-and appeal to the relation $\vL = \Diag(\vpi)^{1/2} \vP
-\Diag(\vpi)^{-1/2}$ to form a plug-in estimate.
-However, as noted in \cref{sec:rates-upper}, confidence intervals for
-the entries of $\vpi$ formed this way may depend on the mixing time.
-Indeed, such an estimate of $\vpi$ does not exploit the Markov
-property.
-
-We adopt a different strategy for estimating $\vpi$, which leads to
-our construction of empirical confidence intervals, detailed in
-\cref{alg:empest}.
-We form the matrix $\wh\vP$ using smoothed frequency estimates of
-$\vP$ (Step~\ref{step:P}), then compute the so-called group inverse
-$\giAh$ of $\wh\vA = I - \wh\vP$ (Step~\ref{step:gi}), followed by
-finding the unique stationary distribution $\hat\vpi$ of $\wh\vP$
-(Step~\ref{step:pi}), this way decoupling the bound on the accuracy of $\hat\vpi$
-from the mixing time.
-The group inverse $\giAh$ of $\wh\vA$ is uniquely defined;
- and if
-$\wh\vP$ defines an ergodic chain (which is the case here due to the
-use of the smoothed estimates), $\giAh$ can be computed at the cost of
-inverting an $(d{-}1){\times}(d{-}1)$ matrix~\citep[Theorem
-5.2]{meyer1975role}.%
-\footnote{%
-\label{ftnote:group-inverse}
-The group inverse of a square matrix $\vA$, a special case of the {\em Drazin inverse},
-is the unique matrix $\vA^\#$ satisfying
-$ \vA\vA^\#\vA = \vA$,
-$\vA^\#\vA\vA^\# = \vA^\#$ and
-$\vA^\#\vA = \vA\vA^\#$.
-}
-Further, once given $\giAh$, the unique stationary distribution
-$\hat\vpi$ of $\wh\vP$ can be read out from the last row of
-$\giAh$~\citep[Theorem 5.3]{meyer1975role}.
-The group inverse is also be used to compute the sensitivity of
-$\vpi$.
-Based on $\hat\vpi$ and $\wh\vP$, we construct the plug-in estimate
-$\wh\vL$ of $\vL$, and use the eigenvalues of its symmetrization to
-form the estimate $\hatgap$ of the spectral gap (Steps~\ref{step:eig}
-and~\ref{step:gap}).
-In the remaining steps, 
-we use perturbation analyses to relate $\hat\vpi$ and $\vpi$, viewing
-$\vP$ as the perturbation of $\wh\vP$; and also to relate $\hatgap$
-and $\gap$, viewing $\vL$ as a perturbation of $\Sym(\wh\vL)$.
-Both analyses give error bounds entirely in terms of observable
-quantities (e.g., $\hat\kappa$), tracing back to empirical error
-bounds for the smoothed frequency estimates of $\vP$.
-
-The most computationally expensive step in \cref{alg:empest} is the
-computation of the group inverse $\giAh$, which, as noted reduces to
-matrix inversion.
-Thus, with a standard implementation of matrix inversion, the
-algorithm's time complexity is $O(n + d^3)$, while its space
-complexity is $O(d^2)$.
-
 \begin{algorithm}
 \caption{Empirical confidence intervals}
 \label{alg:empest}
@@ -194,6 +114,86 @@ complexity is $O(d^2)$.
 
 \end{algorithmic}
 \end{algorithm}
+
+In this section, we address the shortcoming of \cref{thm:err} and give
+fully empirical confidence intervals for the stationary probabilities
+and the spectral gap $\gap$.
+The main idea is to use the Markov property to eliminate the
+dependence of the confidence intervals on the unknown quantities
+(including $\pimin$ and $\gap$).
+Specifically, we estimate the transition probabilities from the sample
+path using simple frequency estimates: as a consequence of the Markov
+property, for each state, the frequency estimates converge at a rate
+that depends only on the number of visits to the state, and in
+particular the rate (given the visit count of the state) is
+independent of the mixing time of the chain.
+
+As discussed in \cref{sec:rates}, it is possible to form a confidence
+interval for $\gap$ based on the eigenvalues of an estimated
+transition probability matrix by appealing to the
+Ostrowski-Elsner theorem.
+However, as explained earlier, this would lead to a slow
+$O(n^{-1/(2d)})$ rate.
+We avoid this slow rate by using an estimate of the symmetric matrix
+$\vL$, so that we can use a stronger perturbation result (namely Weyl's
+inequality, as in the proof of \cref{thm:err}) available for symmetric matrices.
+
+To form an estimate of $\vL$ based on an estimate of the transition
+probabilities, one possibility is to estimate $\vpi$ using a
+frequency-based estimate for $\vpi$ as was done in \cref{sec:rates},
+and appeal to the relation $\vL = \Diag(\vpi)^{1/2} \vP
+\Diag(\vpi)^{-1/2}$ to form a plug-in estimate.
+However, as noted in \cref{sec:rates-upper}, confidence intervals for
+the entries of $\vpi$ formed this way may depend on the mixing time.
+Indeed, such an estimate of $\vpi$ does not exploit the Markov
+property.
+
+We adopt a different strategy for estimating $\vpi$, which leads to
+our construction of empirical confidence intervals, detailed in
+\cref{alg:empest}.
+We form the matrix $\wh\vP$ using smoothed frequency estimates of
+$\vP$ (Step~\ref{step:P}), then compute the so-called group inverse
+$\giAh$ of $\wh\vA = I - \wh\vP$ (Step~\ref{step:gi}), followed by
+finding the unique stationary distribution $\hat\vpi$ of $\wh\vP$
+(Step~\ref{step:pi}), this way decoupling the bound on the accuracy of $\hat\vpi$
+from the mixing time.
+The group inverse $\giAh$ of $\wh\vA$ is uniquely defined;
+ and if
+$\wh\vP$ defines an ergodic chain (which is the case here due to the
+use of the smoothed estimates), $\giAh$ can be computed at the cost of
+inverting an $(d{-}1){\times}(d{-}1)$ matrix~\citep[Theorem
+5.2]{meyer1975role}.%
+\footnote{%
+\label{ftnote:group-inverse}
+The group inverse of a square matrix $\vA$, a special case of the {\em Drazin inverse},
+is the unique matrix $\vA^\#$ satisfying
+$ \vA\vA^\#\vA = \vA$,
+$\vA^\#\vA\vA^\# = \vA^\#$ and
+$\vA^\#\vA = \vA\vA^\#$.
+}
+Further, once given $\giAh$, the unique stationary distribution
+$\hat\vpi$ of $\wh\vP$ can be read out from the last row of
+$\giAh$~\citep[Theorem 5.3]{meyer1975role}.
+The group inverse is also be used to compute the sensitivity of
+$\vpi$.
+Based on $\hat\vpi$ and $\wh\vP$, we construct the plug-in estimate
+$\wh\vL$ of $\vL$, and use the eigenvalues of its symmetrization to
+form the estimate $\hatgap$ of the spectral gap (Steps~\ref{step:eig}
+and~\ref{step:gap}).
+In the remaining steps, 
+we use perturbation analyses to relate $\hat\vpi$ and $\vpi$, viewing
+$\vP$ as the perturbation of $\wh\vP$; and also to relate $\hatgap$
+and $\gap$, viewing $\vL$ as a perturbation of $\Sym(\wh\vL)$.
+Both analyses give error bounds entirely in terms of observable
+quantities (e.g., $\hat\kappa$), tracing back to empirical error
+bounds for the smoothed frequency estimates of $\vP$.
+
+The most computationally expensive step in \cref{alg:empest} is the
+computation of the group inverse $\giAh$, which, as noted reduces to
+matrix inversion.
+Thus, with a standard implementation of matrix inversion, the
+algorithm's time complexity is $O(n + d^3)$, while its space
+complexity is $O(d^2)$.
 
 To state our main theorem concerning \cref{alg:empest}, we first define
 $\kappa$ to be analogous to $\hat{\kappa}$ from Step~\ref{step:sens},
