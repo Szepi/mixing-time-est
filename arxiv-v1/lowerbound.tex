@@ -1,0 +1,213 @@
+%!TEX root =  matrix-est.tex
+
+%\subsection{A two-state Markov chain}
+%
+%Fix $\lambda_2' \in (0,1)$ (and $\gamma' := 1-\lambda_2' \in (0,1)$)
+%and $\vpi' \in \Int\Delta^1$.
+%Define the stochastic matrix $\vP' \in [0,1]^{2 \times 2}$ where
+%\begin{align*}
+%  P_{1,2}' & := \frac{\gamma'}{1 + \pi_1'/\pi_2'} , &
+%  P_{2,1}' & := \frac{\gamma'}{1 + \pi_2'/\pi_1'} .
+%\end{align*}
+%Then it can be checked that $\vpi'\vP' = \vpi'$ and the second-largest
+%eigenvalue of $\vL' = \Diag(\vpi')^{1/2}\vP'\Diag(\vpi')^{-1/2}$ is
+%$\lambda_2'$.
+
+%\subsection{Sequences of length $1/\pimin$ are required}
+
+%We begin with a result showing that
+%any algorithm for estimating $\gap$
+%requires an observation sequence of length $\Omega(1/\pimin)$.
+%
+%\begin{theorem}
+%  \label{thm:lb-pimin}
+%  Pick any $\delta \in (0,1/2)$.
+%  Consider any estimator $\hatgap$ of the spectral gap that takes as
+%  input a random sample path of length $n < 1/(2\pimin)$ from a
+%  reversible Markov chain starting from the stationary distribution.
+%  There exists a $2$-state reversible Markov chain distribution with
+%  unique stationary distribution such that
+%  \[
+%    \Pr\Brackets{ |\hatgap - \gap| \geq 1-2\delta } \geq \frac14 .
+%  \]
+%\end{theorem}
+
+%%\begin{proof}[Proof of Theorem~\ref{thm:lb-pimin}]
+%\noindent \textbf{Proof of Theorem~\ref{thm:lb-pimin}.}
+%  Fix $\bar\pi \in (0,1/4)$, and consider two Markov chains given by
+%  the following stochastic matrices:
+%  \[
+%    \vP^{(1)} :=
+%    \begin{bmatrix}
+%      1-\bar\pi & \bar\pi \\
+%      1-\bar\pi & \bar\pi
+%    \end{bmatrix}
+%    , \quad
+%    \vP^{(2)} :=
+%    \begin{bmatrix}
+%      1-\bar\pi & \bar\pi \\
+%      \bar\pi & 1-\bar\pi
+%    \end{bmatrix}
+%    .
+%  \]
+%  Both Markov chains are ergodic and reversible; their stationary
+%  distributions are, respectively, $\vpi^{(1)} = (1-\bar\pi,\bar\pi)$
+%  and $\vpi^{(2)} = (1/2,1/2)$.
+%  We have $\pimin \geq \bar\pi$ in both cases.
+%  For the first Markov chain, $\slem = 0$, and hence the spectral
+%  gap is $1$; for the second Markov chain, $\slem = 1-2\bar\pi$, so
+%  the spectral gap is $2\bar\pi$.
+%
+%  In order to guarantee $|\hatgap - \gap| < 1-2\bar\pi$, it must be
+%  possible to distinguish the above two Markov chains.
+%  In either $\vP^{(1)}$ or $\vP^{(2)}$, with probability at least
+%  half, the initial state is $1$; and both chains have the same
+%  transition probabilities from state $1$.
+%  Therefore, the chains are indistinguishable less the sample path
+%  eventually reaches state $2$.
+%  But with probability at least $1/4$, a sample path of length $n <
+%  1/(2\bar\pi)$ starting from state $1$ always remains in the same
+%  state.
+%\hfill $\blacksquare$
+%%\end{proof}
+
+\begin{proof}[Proof of \cref{thm:lb-pimin}]
+  Fix $\bar\pi \in (0,1/3)$, and set $\veps := 2\bar\pi/(1-\bar\pi)$.
+  Consider two Markov chains given by the following stochastic
+  matrices:
+  \[
+    \vP^{(1)} :=
+    \begin{bmatrix}
+      1-\veps & \veps \\
+      1-\veps & \veps
+    \end{bmatrix}
+    , \quad
+    \vP^{(2)} :=
+    \begin{bmatrix}
+      1-\veps & \veps \\
+      1/2 & 1/2
+    \end{bmatrix}
+    .
+  \]
+  Each Markov chain is ergodic and reversible; their stationary
+  distributions are, respectively, $\vpi^{(1)} = (1-\veps,\veps)$
+  and $\vpi^{(2)} = (\veps/(2+\veps),2/(2+\veps))$.
+  We have $\pimin \geq \bar\pi$ in both cases.
+  For the first Markov chain, $\slem = 0$, and hence the spectral gap
+  is $1$; for the second Markov chain, $\slem = 1/2-\veps$, so the
+  spectral gap is $1/2+\veps$.
+
+  In order to guarantee $|\hatgap - \gap| < 1/6 < 1/2-\veps$, it must
+  be possible to distinguish the two Markov chains.
+  Assume that the initial state distribution has mass at least $1/2$
+  on state $1$.
+  (If this is not the case, we swap the roles of states $1$ and $2$ in
+  the constructions above.)
+  With probability at least half, the initial state is $1$; and both
+  chains have the same transition probabilities from state $1$.
+  The chains are indistinguishable less the sample path eventually
+  reaches state $2$.
+  But with probability at least $1/4$, a sample path of length $n <
+  c/\bar\pi = c(2+\veps)/\veps$ starting from state $1$ always
+  remains in the same state.
+\end{proof}
+
+
+%\subsection{Sequences of length $d\log(d)/\gap$ are required}
+
+%Next, we show that in order to estimate
+%$\gap$ to within a constant multiplicative accuracy,
+%a sequence of length $\Omega(d\log(d)/\gap)$ is required.
+%
+%\begin{theorem}
+%  \label{thm:lb-gap}
+%  There exists absolute constants $C, c>0$ such that the following
+%  holds.
+%  Pick any positive integer $d \geq C$.
+%  Consider any estimator $\hatgap$ of the spectral gap that takes as
+%  input a random sample path of length $n < c d\log(d) / \gap$ from a
+%  $d$-state reversible Markov chain starting from an arbitrary initial
+%  state.
+%  For any initial state, there exists a reversible Markov chain
+%  distribution with unique stationary distribution such that
+%  \[
+%    \Pr\Brackets{ |\hatgap - \gap| \geq \frac12\gap} \geq \frac14 .
+%  \]
+%\end{theorem}
+
+\begin{proof}[Proof of \cref{thm:lb-gap}]
+  We consider $d$-state Markov chains of the following form:
+  \[
+    P_{i,j} =
+    \begin{cases}
+      1-\veps_i & \text{if $i = j$} ; \\
+      \displaystyle\frac{\veps_i}{d-1} & \text{if $i \neq j$}
+    \end{cases}
+  \]
+  for some $\veps_1, \veps_2, \dotsc, \veps_d \in (0,1)$.
+  Such a chain is ergodic and reversible, and its unique stationary
+  distribution $\vpi$ satisfies
+  \[
+    \pi_i = \frac{1/\veps_i}{\sum_{j=1}^d 1/\veps_j}
+    .
+  \]
+  We fix $\veps := \frac{d-1}{d/2}\bar\gamma$ and set $\veps' :=
+  \frac{d/2-1}{d-1} \veps < \veps$.
+  Consider the following $d+1$ different Markov chains of the type
+  described above:
+  \begin{itemize}
+    \item
+      $\vP^{(0)}$: $\veps_1 = \dotsb = \veps_d = \veps$.
+      For this Markov chain, $\lambda_2 = \lambda_d = \slem =
+      1-\frac{d}{d-1}\veps$.
+
+    \item
+      $\vP^{(i)}$ for $i \in [d]$: $\veps_j = \veps$ for $j \neq i$,
+      and $\veps_i = \veps'$.
+      For these Markov chains, $\lambda_2 = 1 - \veps' -
+      \frac{1}{d-1}\veps = 1 - \frac{d/2}{d-1} \veps$,
+      and $\lambda_d = 1 - \frac{d}{d-1} \veps$.
+      So $\slem = 1-\frac{d/2}{d-1} \veps$.
+
+  \end{itemize}
+  The spectral gap in each chain satisfies $\gap \in
+  [\bar\gamma,2\bar\gamma]$; in $\vP^{(i)}$ for $i \in [d]$, it is half
+  of what it is in $\vP^{(0)}$.
+  Also $\pi_i \geq 1/(2d)$ for each $i \in [d]$.
+
+  In order to guarantee $|\hatgap - \gap| \leq \bar\gamma$, it must
+  be possible to distinguish $\vP^{(0)}$ from each $\vP^{(i)}$,
+  $i\in[d]$.
+  But $\vP^{(0)}$ is identical to $\vP^{(i)}$ except for the transition
+  probabilities from state $i$.
+  Therefore, regardless of the initial state, the sample path must
+  visit all states in order to distinguish $\vP^{(0)}$ from each
+  $\vP^{(i)}$, $i \in [d]$.
+  For any of the $d+1$ Markov chains above, the earliest time in which
+  a sample path visits all $d$ states
+  stochastically dominates a generalized coupon collection time $T = 1 +
+  \sum_{i=1}^{d-1} T_i$, where $T_i$ is the number of steps required to
+  see the $(i+1)$-th distinct state in the sequence beyond the first
+  $i$.
+  The random variables $T_1,T_2,\dotsc,T_{d-1}$ are independent, and are
+  geometrically distributed, $T_i \sim \Geom(\veps -
+  (i-1)\veps/(d-1))$.
+  We have that
+  \[
+    \bbE[T_i] = \frac{d-1}{\veps(d-i)} , \quad
+    \var(T_i) = \frac{1 - \veps \frac{d-i}{d-1}}{%
+      \Parens{ \veps \frac{d-i}{d-1} }^2
+    }
+    .
+  \]
+  Therefore
+  \[
+    \bbE[T] = 1 + \frac{d-1}{\veps} H_{d-1} , \quad
+    \var(T) \leq \Parens{ \frac{d-1}{\veps} }^2 \frac{\pi^2}{6} 
+  \]
+  where $H_{d-1} = 1 + 1/2 + 1/3 + \dotsb + 1/(d-1)$.
+  Since $n < c d\log(d) / \bar\gamma$, with probability at least $1/4$,
+  the sample path does not visit all $d$ states.
+\end{proof}
+
+

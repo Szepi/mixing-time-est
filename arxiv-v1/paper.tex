@@ -1,0 +1,58 @@
+\documentclass{article}
+\input{__includes}
+\renewcommand\citet\cite % since NIPS is using numbered refs
+\renewcommand\citep\cite % since NIPS is using numbered refs
+
+\title{%
+  Mixing Time Estimation in Reversible Markov Chains from a Single
+  Sample Path%
+}
+
+\author[1]{\mbox{Daniel Hsu}}
+\author[2]{\mbox{Aryeh Kontorovich}}
+\author[3]{\mbox{Csaba Szepesv\'ari}}
+\affil[1]{\mbox{Columbia University}}
+\affil[2]{\mbox{Ben-Gurion University}}
+\affil[3]{\mbox{University of Alberta}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract} 
+\input{abstract}
+\end{abstract} 
+
+\section{Introduction}\label{sec:intro}
+\input{intro}
+
+\section{Preliminaries}\label{sec:prelim}
+\input{setting}
+
+\section{Point estimation}\label{sec:rates}
+\input{rates}
+
+\section{Fully empirical confidence intervals}\label{sec:empirical}
+\input{empirical}
+
+\section{Discussion}\label{sec:discussion}
+\input{conclusions}
+
+\bibliography{all}
+\bibliographystyle{plain}
+
+\appendix
+
+\section{Proof of \cref{thm:err}}\label{app:upper}
+\input{upperbound}
+
+\section{Proofs of the lower bounds}\label{app:lower}
+\input{lowerbound}
+
+\section{Proof of \cref{thm:empirical}}\label{app:empirical}
+\input{appendix-empirical}
+
+\section{Proof of \cref{thm:combined}}\label{app:combined}
+\input{appendix-combined}
+
+\end{document}
+
