@@ -1,5 +1,3 @@
-%!TEX root =  matrix-est.tex
-
 In this section, we present lower and upper bounds on achievable rates
 for estimating the spectral gap as a function of the length of the
 sample path $n$.
@@ -10,15 +8,8 @@ The purpose of this section is to show lower bounds on the number of observation
 necessary to achieve a fixed multiplicative (or even just additive) accuracy in estimating the spectral gap $\gap$.
 By \cref{eq:mixing-time-bound}, the multiplicative accuracy lower bound for $\gap$
 gives the same lower bound for estimating the mixing time.
-%It is important to emphasize that these are algorithm independent lower bounds, i.e.,
-%any algorithm is bound by them.
 Our first result holds even for two state Markov chains and shows that a sequence length of $\Omega(1/\pimin)$
 is necessary to achieve even a constant \emph{additive} accuracy in estimating $\gap$.
-%We begin with a result showing that any algorithm for estimating
-%$\gap$ (even for just constant additive accuracy) requires an
-%observation sequence of length $\Omega(1/\pimin)$
-%even when the number of states is only two.
-%%%
 \begin{theorem}
   \label{thm:lb-pimin}
   There is an absolute constant $c>0$ such that the following holds.
@@ -33,7 +24,6 @@ is necessary to achieve even a constant \emph{additive} accuracy in estimating $
     \Pr\Brackets{ |\hatgap - \gap| \geq 1/6 } \geq 1/8 .
   \]
 \end{theorem}
-%%%
 Next, considering $d$ state chains, we show that 
 a sequence of length $\Omega(d\log(d)/\gap)$ is required
 to estimate $\gap$ up to a constant multiplicative accuracy.
@@ -60,8 +50,6 @@ $\vpi$ is nearly uniform.
 
 The proofs of \cref{thm:lb-pimin,thm:lb-gap} are given in
 \cref{app:lower}. 
-%In summary, the lower bounds show that no algorithm can hope to achieve a fixed multiplicative
-%accuracy before seeing $\Omega( d \log(d)/\gamma^* + 1/\pimin)$ states.
 
 \subsection{A plug-in based point estimator and its accuracy}
 \label{sec:rates-upper}
@@ -131,7 +119,6 @@ These estimators have the following accuracy guarantees:
     C \,
     \Parens{
       \sqrt{\frac{\log\frac{d}{\delta}\cdot\log\frac{n}{\pimin\delta}}{\pimin\gap n}}
-%      + \frac{\log\frac{d}{\delta}\cdot\log\frac{n}{\pimin\delta}}{\pimin\gap n}  
       + \frac{\log\frac{1}{\gap}}{\gap n}  
     }
     \,.
@@ -148,7 +135,7 @@ $\gap$ to within constant multiplicative factors are, respectively,
   .
 \]
 By \cref{eq:mixing-time-bound},
-the second of these is also a bound on the required sequence length to estimate $\tmix$. % the mixing time.
+the second of these is also a bound on the required sequence length to estimate $\tmix$.
 
 The proof of \cref{thm:err} is based on analyzing the
 convergence of the sample averages $\wh{\vM}$ and
@@ -160,7 +147,6 @@ standard large deviation bounds; moreover applying Chernoff-type
 bounds for Markov chains to each entry of $\wh{\vM}$ would result in a
 significantly worse sequence length requirement, roughly a factor of
 $d$ larger.
-%\todoc{In terms of the dependence on the number of states, right? Can we be more specific? Factor of $d$ more, right?}
 Instead, we adapt probability tail bounds for sums of independent
 random matrices~\citep{tropp2015intro} to our non-iid setting by
 directly applying a blocking technique of~\citet{Bernstein27} as
@@ -183,9 +169,6 @@ One could instead invoke the Ostrowski-Elsner theorem
 \citep[cf.~Theorem 1.4 on Page 170 of][]{stewart1990matrix}, which
 bounds the \emph{matching distance} between the eigenvalues of a
 matrix $\vA$ and its perturbation $\vA+\vE$ by $O(\norm{\vE}^{1/d})$.
-%\footnote{Actually, this result is not even readily applicable: 
-%the Haussdorff distance is actually an optimistic estimate of the deviation between
-%$\gap$ and its estimate.}
 Since $\norm{\wh\vP-\vP}$ is expected to be of size $O(n^{-1/2})$,
 this approach will give a confidence interval for $\gap$ whose width
 shrinks at a rate of $O(n^{-1/(2d)})$---an exponential slow-down
@@ -195,9 +178,6 @@ dependence on the $d$-th root of the norm of the perturbation cannot
 be avoided in general.
 Our approach based on estimating a symmetric matrix affords us the use
 of perturbation results that exploit more structure.
-%(In \cref{sec:empirical}, we develop another estimator of
-%$\vL$---in order to exploit symmetry---that is based on estimating
-%$\vP$ for reasons discussed below.)
 
 Returning to the question of obtaining a fully empirical confidence 
 interval for $\gap$ and $\pimin$, we notice that,

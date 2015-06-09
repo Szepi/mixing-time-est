@@ -1,7 +1,3 @@
-%!TEX root =  matrix-est.tex
-
-%Performance guarantees play a key role in the analysis and design of machine learning algorithms.
-
 This work
 tackles the challenge of constructing
 fully empirical bounds on the
@@ -19,14 +15,10 @@ distribution $\vpi =
 \]
 The \emph{mixing time} $\tmix$ of the Markov chain is the
 number of time steps required
-%time that it
-%takes
 for the chain to
 be within a fixed threshold of
-%(approximately) reach
 its stationary
 distribution:
-\todoa{slightly changed wording}
 \begin{align}
 \label{eq:mixtimedef}
   \tmix
@@ -38,9 +30,6 @@ distribution:
     \Abs{
       \textstyle\Pr_{\vq}\Parens{ X_t \in A } - \vpi(A)
     }
-%    \Norm{
-%      \vq \vP^t - \vpi
-%    }_{\tv} 
     \leq 1/4
   }\,.
 \end{align}
@@ -55,19 +44,14 @@ succeeds with probability $1-\delta$
 in trapping
 the value of the
 mixing time $\tmix$.
-\todoa{changed wording}
 
 This problem is motivated by the numerous scientific applications and
 machine learning tasks in which
 the quantity of interest is
-%one is interested in estimating
 the
 mean $\vpi(f) = \sum_i \pi_i f(i)$
 for some function $f$ of the states of
 a Markov chain.
-\todoa{changed wording} \todoc{I am not sure that the new wording is better. It
-fails to express that there is an estimation problem. "Quantity of interest"
-is way to vague for me.} 
 This is the setting of the celebrated Markov Chain Monte Carlo (MCMC)
 paradigm~\cite{liu2001monte}, but the problem also arises in
 performance prediction involving time-correlated data, as is common in
@@ -90,14 +74,11 @@ As is well-known \citep[Theorems~12.3 and~12.4]{LePeWi08},
   \ \leq \ \mfrac1{\gap} \ln \mfrac4{\pimin}
   ,
 \end{equation}
-%$(\frac{1}\gap  - 1)\ln(2)  \le \tmix \le \frac{1}\gap \ln \frac4\pimin$,
 and hence it suffices to estimate $\gap$ and $\pimin$. 
-%these quantities $\gap$ and $\pimin$ are well-known to govern
-%mixing time.
 Our main results are summarized as follows.
 \begin{enumerate}
   \item
-    In \cref{sec:rates-lower}, we show that in some problems \todoc{I had to add ``in some problems''} 
+    In \cref{sec:rates-lower}, we show that in some problems 
     $n = \Omega\parens{ (d\log d)/\gap + 1/\pimin}$ observations are necessary for any procedure
     to guarantee constant multiplicative accuracy in estimating $\gap$
     (\cref{thm:lb-pimin,thm:lb-gap}).
@@ -130,11 +111,6 @@ Our main results are summarized as follows.
     \cref{thm:err} into a fully empirical one fails.
 	Combining several results from perturbation theory in a novel fashion
 	we propose a new procedure and prove that it avoids slow convergence
-%    The procedure uses just a single sample path and does not require
-%    any prior knowledge of the chain's parameters, such as $\pimin$ or
-%    $\gap$.
-%    We quantify the rate at which the width of the confidence
-%    intervals shrink as a function of the length of the sample path
     (\cref{thm:empirical}).
     We also explain how to combine the empirical confidence intervals
     from \cref{alg:empest} with the non-empirical bounds from
@@ -142,17 +118,6 @@ Our main results are summarized as follows.
     We prove in \cref{thm:combined} that the width of these new
     intervals converge to zero asymptotically at least as fast as
     those from either \cref{thm:err} and \cref{thm:empirical}.
-
-%    which is
-%    $     O\Parens{
-%      \frac1{\pimin}\sqrt{\frac{d\log(d/\delta)}{ n}}
-%      +
-%      \frac{d}{\pimin\gap} \sqrt{\frac{\log(d/\delta)}{\pimin n}}
-%    }.$
-
-
-    
-%    \todoc{please add rate}
 
 \end{enumerate}
 
@@ -181,12 +146,11 @@ MCMCDiscussion93%
 ,flegal2011implementing%
 ,Gyori-paulin15%
 ,SwaJoa15:LoggedBandit%
-}. %BaHaVa10:activelearning,ShaVo08:conformalpred
+}.
 To address this need, numerous works have developed Chernoff-type
 bounds on $\Pr\parens{ |\vpi_n(f)-\vpi(f)| > \eps }$, thus providing
 valuable tools for non-asymptotic probabilistic
 analysis~\cite{gillman1998chernoff,leon2004optimal,DBLP:conf/valuetools/KontoyiannisLM06,
-%meroi2012-jap,
 paulin15}.
 These probability bounds are larger than corresponding bounds for
 independent and identically distributed (iid) data due to the temporal
@@ -219,7 +183,6 @@ often be bounded in terms of mixing times, and hence our main results
 provide a way to make them fully empirical, at least in the limited setting we study.
 
 It is possible to eliminate many of the difficulties presented above
-%with additional access to the Markov chain.
 when allowed more flexible access
 to the Markov chain.
 For example, given a sampling oracle that generates
@@ -230,299 +193,4 @@ On the other hand, when one only has a circuit-based description of
 the transition probabilities of a Markov chain over an
 exponentially-large state space, there are complexity-theoretic
 barriers for many MCMC diagnostic problems~\citet{BhaBoMo11}.
-%%Performance guarantees play a key role in the analysis and design of machine learning algorithms.
-%
-%In this paper we study the construction of fully empirical bounds on the mixing time of Markov chains based on a single sample path.
-%Let $(X_t)_{t=1,2,\dotsc}$ be an irreducible, aperiodic time-homogeneous Markov chain on a finite state space $[d]$ of $d$ states numbered by positive integers with transition matrix $\vP$. Under this assumption, the chain converges to its unique stationary \todoc{Maybe steady state is better?}
-%distribution $\vpi = (\pi_i)_{i=1}^d$ regardless of the distribution $\vq$ of $X_1$: 
-%$\lim_{t\to\infty} \Pr_{\vq}\Parens{X_t = i} = \lim_{t\to\infty} (\vq \vP^t)_i = \pi_i$, $1\le i \le d$.
-%The mixing time $\tmix$ of the Markov chain is the time that it takes for the chain to reach its stationary distribution, say,
-%\[
-%  \tmix
-%  :=
-%  \min\Braces{
-%    t \in \bbN :
-%    \sup_{\vq}
-%    \max_{A\subset [d]} |\textstyle\Pr_{\vq}\Parens{ X_t \in A } - \vpi(A)|
-%%    \Norm{
-%%      \vq \vP^t - \vpi
-%%    }_{\tv} 
-%    \leq 1/4
-%  }\,.
-%\]
-%Here $\vpi(A) = \sum_{i\in A} \pi_i$ is the total probability assigned
-%to set $A$ by $\vpi$, and the supremum is over
-%all possible initial distributions $\vq$.
-%The problem studied in the paper is the construction of a confidence
-%set $C_n = C_n(X_1,X_2,\dotsc,X_n,\delta) \subset [0,\infty]$ based on
-%the knowledge of $X_1,X_2,\dotsc,X_n$ only that captures the mixing
-%time $\tmix$ with a pre-specified probability $1-\delta \in (0,1)$. 
-%In the remainder of the introduction, we describe our motivation of studying this problem, followed by a 
-%brief description of our main results.
-%\todod{``might be interesting'' sounds weak.} \todoc{better now?}
-%
-%In numerous scientific applications and some machine learning tasks
-%one is interested in estimating the mean $\vpi(f) = \sum_i \pi_i f(i)$ of some function $f$ of the states of a Markov chain. 
-%For example, this is the realms of the celebrated Markov Chain Monte Carlo (MCMC) paradigm, but 
-%the problem also arises in performance prediction when working with time correlated data, as is common in,
-%for example, in reinforcement learning.
-%%as 
-%% (cf. \cref{sec:mot}) 
-%Under our assumptions,
-%the law of large numbers guarantees that the sample mean $\vpi_n(f) \defeq \frac1n \sum_{t=1}^n f(X_t)$ 
-%converges almost surely to $\vpi(f)$, while the central limit theorem tells us that as $n\to \infty$, 
-%the distribution of the deviation $\sqrt{n}( \vpi_n(f)-\vpi(f))$ will be normal with zero mean and asymptotic
-%variance $\sigma^2_{\mathrm{as}}(f) \defeq \lim_{n\to\infty} n \Var\Parens{ \vpi_n(f) }$. \todoc{shall we add a citation here?}
-%While these results help us to understand how the sample mean over a Markov chain behaves in the limit,
-%they tell us little about the finite time, non-asymptotic behavior of the sample mean,
-%which are needed for prudent evaluation of one's method or even for algorithm design 
-%\cite{
-%MCMCDiscussion93%
-%,DBLP:conf/valuetools/KontoyiannisLM06%
-%,BBL06%
-%,MniSzeAu08%
-%,MauPo09%
-%,LiLiWaSt11:KWIK%
-%,flegal2011implementing%
-%,Gyori-paulin15%
-%,SwaJoa15:LoggedBandit%
-%}. %BaHaVa10:activelearning,ShaVo08:conformalpred
-%To address this need, numerous works have been devoted to deriving
-%Chernoff-type, exponential bounds for upper bounding the tail probabilities $p(r) = \Pr\Parens{ |\vpi_n(f)-\vpi(f)|> r }$,
-%also known as ``concentration bounds'', e.g., 
-%\cite{gillman1998chernoff,leon2004optimal,DBLP:conf/valuetools/KontoyiannisLM06,paulin15}.
-%Compared with the case when $(X_t)_t$ is an independent, identically distributed (iid) sequence of
-%random variables, these tail probabilities must be larger due to the temporal dependence of the sequence $(X_t)_t$.
-%Intuitively, for the Markov chain to forget the state where it is at time $t$, or in other words to get a 
-%``fresh'' sample $X_{t'}$ that is approximately ``independent'' from $X_t$, one must wait $\Theta(\tmix)$ time steps.
-%Thus, in the bounds on $p(r)$, one expects to see that the sample size $n$ 
-%gets appropriately reduced as $\tmix$ grows and this is indeed the case in bounds mentioned above.
-%is replaced by $n/\tmix$, which one
-%might think of as an approximate sample size. 
-%Indeed, all the above mentioned works get bounds on $p(r)$ that depend on various functions of $\vP$.
-%Namely, Kontoyiannis et al. obtain bounds that depend on certain information-theoretic quantities defined implicitly
-%as a function of $\vP$ and $f$, which are after simplification is bounded based on quantities related to 
-%a regeneration-type quantity derived from $\vP$
-%\cite{DBLP:conf/valuetools/KontoyiannisLM06}, while the other works mentioned above, in the case of reversible chains,
-%derive bounds that depend on the spectral gap of $\vP$.
-%Note that the spectral gap for such chains is essentially inversely related to the mixing time of the chain (see \cref{sec:setting}).
-%%\cite{gillman1998chernoff,leon2004optimal,,paulin15}.
-%Much research have been devoted to finding appropriate \emph{a priori} bounds on the various quantities that appear 
-%in these bounds, mostly in the theory community (e.g., \cite{saloff2004random}). 
-%To address the lack or looseness of such a priori bounds, a significant effort also went into developing methods
-%that estimate these quantities based on data, mostly in the MCMC community in an effort to develop
-%effective methods that are able to diagnose whether a chain has reached its stationary state 
-%(e.g., \cite{MCMCDiscussion93,flegal2011implementing,Gyori-paulin15}).
-%While the typical results state the asymptotic consistency of these estimators, or a central limit theorem (which 
-%are of little help to achieve a fully empirical, non-asymptotic bound on $p(r)$),
-%Gyori and Paulin give a finite time error bound for these estimates. 
-%Unsurprisingly, these error bounds themselves
-%depend on other unknown quantities of the Markov chain (which can be bounded in terms of the mixing time, again)
-%\cite{Gyori-paulin15}.
-%
-%This situation is similar to what appears when one attempts to use a Bernstein-type deviation bound to 
-%control the deviation between the sample mean of a sequence of iid random variables from their common mean
-%with a known range, but unknown variance: For a tight bound, one wishes to use the unknown variance, but in the deviation
-%bound for the error of a variance estimate, the variance appears again.
-%While in the case of Bernstein-bounds this circular reference leads to a nontrivial bound
-%\cite{audibert2009}, it appears that the situation is different in the Markov setting.
-%Focusing on the spectral gap, we will see that if one attempts to use a similar technique,
-%the set of feasible values based on the two error bounds always will never rule out that the spectral gap is zero,
-%or that the mixing time is infinite. Can one even hope to obtain 
-%after finitely many samples a nontrivial upper bound on the mixing time?
-%Obviously, for any finite sample size, if the mixing time of the chain is larger than the sample size than a sound method
-%must return infinity as the upper bound on the mixing time. Hence, the question is whether one can design a method
-%that never fails and if the sample size is appropriately large, returns a nontrivial bound on the mixing time, adapting the time it needs to trap the mixing time in a fixed size confidence interval to the unknown mixing time.
-%
-%\hide{
-%\subsection{Motivation}
-%\label{sec:mot}
-%One key competence in statistical learning is the ability to predict one's performance on future data.
-%To make performance prediction possible, one starts by posing some assumptions on how the data arises.
-%Simpler assumptions lead to simpler algorithms and analysis, while they may also limit applicability of the
-%obtained results and algorithms.
-%The most common assumption employed postulates that all data points, including past and future data points,
-%are sampled independently of each other from a common underlying distribution (e.g., \cite{SSBD14:UnderstandingML}).
-%This is helpful on two accounts: 
-%The lack of dependence between the data points means that sample averages of bounded functions of the data 
-%will converge at a uniform rate (irrespective of the distribution), while the assumption that all data points share the same
-%distribution means that one can learn about the distribution of future data points based on past data.
-%}
-%
-%\hide{
-%It is well-known that contrary to the idealized assumptions of the standard
-%learning model, real data is almost never iid.
-%Fortunately, many classical results of statistics and statistical
-%learning theory extend to the dependent data in a more or less
-%seamless fashion, at least when the data is sufficiently ``mixing''.
-%Such results include the central limit theorem, 
-%exponential tail bounds for empirical processes, 
-%performance guarantees for complexity regularization
-%using sieves or roughness penalties, as well as 
-%results based on stability arguments or Rademacher complexity 
-%\citep{Woo86,Dou94,Yu94,ZheChu96,dlPenaGine99,Mei00,
-%  MR1921877,vid2003,gamarnik03,LoKuScha05,MoRo08,MoRo09,
-%  DBLP:conf/nips/SteinwartC09,Steinwart2009175,
-%  FaSze11,
-%  london:nips12asalsn,london:icml13,
-%  DBLP:conf/nips/ShaliziK13}.
-%
-%Unfortunately, a distribution-free theory of non-iid learning is simply
-%impossible, when arbitrary dependence among the sample points is allowed.
-%Hence, one must quantify this dependence via the various mixing coefficients,
-%which appear in the non-iid generalization bounds mentioned above.
-%A frequently raised concern is that now the bounds depend on {\em
-%unknown} properties of the distribution, which precludes their
-%actual use in algorithmic applications (e.g., active
-%learning~\citep{BBL06,DHM07}).
-%%, and any algorithm aiming at a fully empirical error bound must
-%%also estimate the mixing coefficients.
-%In addition to learning-theoretic generalization bounds, the need for
-%fully empirical confidence bounds arises in Markov Chain Monte Carlo
-%(MCMC) simulations---so as to halt the run when sufficiently close to
-%the stationary distribution \citep{galin06}, and in Markov Reward
-%Processes \citep{sutton98}, as this will affect the learner's policy.
-%As \citet{Mei00} notes, in the absence of accurate estimates of the
-%mixing time, such fully empirical bounds remain ``a theoretician's
-%dream''.
-%
-%Our goal here is to develop an algorithm that, given a single sample
-%path of a Markov chain, computes non-trivial bounds on the mixing time
-%of the Markov chain.
-%We remark on the inherent chicken-and-egg nature of the challenge:
-%confidence intervals derived from a Markov chain---say, on the the
-%chain's mixing time---are typically given in terms of the chain's
-%mixing time.
-%Our way out of this conundrum is to give {\em empirical} (i.e.,
-%\emph{data-dependent}) as opposed to {\em a priori} guarantees.
-%To illustrate the intuition, consider a Markov chain on two states,
-%$\braces{0,1}$.
-%A learner who is stuck in state $0$ for a long time learns very little
-%about the chain and hence cannot be expected to give meaningful upper
-%bounds on its mixing time.
-%Consider, however, a learner who is lucky enough
-%to be in a chain that switches frequently between the two states.
-%Surely at some finite time, the learner will possess meaningful and nontrivial
-%information about the chain's mixing time --- crucially, without any
-%{\em prior} knowledge regarding this quantity. This simple example captures
-%the nature of our results: in some cases, we will not be able to say
-%anything meaningful (but the learner will recognize that this is the case),
-%while in ``luckier'' situations, we will be able to provide nontrivial
-%upper estimates on the mixing time.
-%}
-%
-%\paragraph{Main results.}
-%We propose what is apparently the first efficient and fully empirical
-%estimator of Markov mixing time.
-%\todod{``apparently'' sounds weak.}
-%Consider a reversible ergodic Markov chain on $d$ states with spectral
-%gap $\gap$ (which is well-known to govern mixing time)
-%and stationary distribution minorized by $\pimin$.
-%Our main results are summarized as follows.
-%\begin{enumerate}
-%  \item
-%    In \cref{thm:err}, we give an estimator for $\gap$ that
-%    achieves multiplicative accuracy from \emph{a single sample path}
-%    of length $\tilde{O}\parens{1/(\pimin\gap^3)}$.\footnote{The
-%    $\tilde{O}(\cdot)$ notation suppresses logarithmic factors.}
-%    We also provide an estimator for $\pimin$ that requires a sample
-%    path of length $\tilde{O}\parens{1/(\pimin\gap)}$.
-%    However, the valid confidence intervals suggested by
-%    \cref{thm:err} depend on the unknown quantities $\pimin$ and
-%    $\gap$.
-%
-%  \item
-%    In \cref{thm:lb-pimin,thm:lb-gap}, we show that $\Omega\parens{
-%    (d\log d)/\gap + 1/\pimin }$ observations are necessary for
-%    constant multiplicative accuracy in estimating $\gap$.
-%
-%  \item
-%    In \cref{thm:empirical}, we develop a procedure for computing
-%    \emph{valid empirical confidence intervals} for $\pimin$ and
-%    $\gap$.
-%    The procedure uses just a single sample path and does not require
-%    any prior knowledge about $\pimin$ or $\gap$.
-%    We also quantify the rate at which the width of the confidence
-%    intervals shrink as a function of the length of the sample path.
-%
-%    We show in \cref{thm:combined} how to combine these empirical
-%    confidence intervals with the non-empirical bounds from
-%    \cref{thm:err} to produce valid empirical confidence intervals;
-%    the width of these intervals converge to zero asymptotically as
-%    fast as those from \cref{thm:err}.
-%
-%%    which is
-%%    $     O\Parens{
-%%      \frac1{\pimin}\sqrt{\frac{d\log(d/\delta)}{ n}}
-%%      +
-%%      \frac{d}{\pimin\gap} \sqrt{\frac{\log(d/\delta)}{\pimin n}}
-%%    }.$
-%
-%
-%    
-%%    \todoc{please add rate}
-%
-%\end{enumerate}
-%
-%
-%
-%\paragraph{Related work.} \todoc{Move this later? It also needs to be updated, to 
-%adjust it to the current intro.}
-%Owing to the wide applicability of MCMC methods to various computational
-%problems, much effort has been devoted to developing effective convergence
-%diagnostic methods the aim of deriving stopping rules or stationarity
-%diagnoses. While a large number of heuristic techniques have been developed
-%\citep[e.g.,][]{MCMCDiscussion93,CoCa96}, it is widely recognized that all
-%these methods may fail to meet the guarantees that they are designed for.
-%Some recent advance in this area \citep{1209.0703,Gyori-paulin15} have
-%yielded practical algorithms for estimating the rates of convergence
-%of various MCMC algorithms, but they fall short of providing intervals
-%that are valid with any finite length sequence.
-%
-%In the theory community, \citet{BaFoRuSmiWhi00,BaFoRuSmiWhi13}
-%developed algorithms for testing whether a given Markov chain over a
-%finite state space of size $d$ is rapidly mixing.
-%In particular, assuming access to a sampling oracle that can generate
-%independent transitions from any given state, their algorithm can
-%distinguish between chains that in $t$ steps for a fixed $t$ reach a
-%distribution close to the stationary distribution using $\tilde{O}(t
-%d^{5/3})$ oracle calls.
-%It is remarkable that when $t$ is small enough, the procedure requires
-%sublinearly many samples in the total number of transitions in the
-%Markov chain.
-%For Markov chains with exponentially-large state spaces (with a
-%circuit-based description of the transition probability structure),
-%\citet{BhaBoMo11} establishes complexity-theoretic barriers for
-%similar MCMC diagnostic problems.
-%%A similar question was studied by \citet{BhaBoMo11} in the context of
-%%Markov chains with very large state spaces.
-%%They assume an circuit based description of the
-%%transition probability structure of the matrix and derive several hardness
-%%results for Markov chains whose state space consists of all binary strings of
-%%a given length. For example,
-%%they prove that given a Markov chain that mixes
-%%rapidly, it is $\mathsf{SZK}$-hard to distinguish whether the chain is close to
-%%stationarity by time $t$ or far from stationarity at time $ct$ for a
-%%constant $c$ when started from a given initial state ($\mathsf{SZK}
-%%\subset \mathsf{AM} \cap \mathsf{coAM}$, which is conjectured to
-%%extend beyond $\mathsf{BPP}$ \citep{GoVa11}).\footnote{%
-%%  $\mathsf{SZK}$ stands for statistical zero-knowledge, $\mathsf{BPP}$
-%%  stands for probabilistic polynomial-time, $\mathsf{AM}$ stands for
-%%  ``Arthur-Merlin protocol''.%
-%%}
-%
-%Other works include that of \citet{McDoShaSche11} who propose to estimate
-%the $\beta$-mixing coefficients of a stationary process possessing a density
-%based on histogram estimates of the underlying joint density. Their main
-%result is a consistency result for a fixed ``lag''. For fast mixing processes
-%(e.g., for $k$-step Markov processes) their result yields a convergence rate,
-%which unfortunately is given in terms of the unknown mixing coefficients.
-%%Catch-22 problem remains: The rate of convergence of their estimates depends on the unknown mixing coefficients
-%%(Theorem 2.4)
-%% $\exp(W(\log(n)))$ is the window length, where $W$ is Lambert's $W$-function (i.e., this is between $\log \log(n)$ and $\log n$).
-%The earlier study of \citet{Nobel06} considers the generalization of
-%existing discernibility results for iid processes to weakly uniformly
-%ergodic families, and shows how this can be used to study---and in
-%some cases estimate---polynomial mixing rates for dependent processes.
-%
-%
+

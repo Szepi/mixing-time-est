@@ -1,75 +1,3 @@
-%!TEX root =  matrix-est.tex
-
-%\subsection{A two-state Markov chain}
-%
-%Fix $\lambda_2' \in (0,1)$ (and $\gamma' := 1-\lambda_2' \in (0,1)$)
-%and $\vpi' \in \Int\Delta^1$.
-%Define the stochastic matrix $\vP' \in [0,1]^{2 \times 2}$ where
-%\begin{align*}
-%  P_{1,2}' & := \frac{\gamma'}{1 + \pi_1'/\pi_2'} , &
-%  P_{2,1}' & := \frac{\gamma'}{1 + \pi_2'/\pi_1'} .
-%\end{align*}
-%Then it can be checked that $\vpi'\vP' = \vpi'$ and the second-largest
-%eigenvalue of $\vL' = \Diag(\vpi')^{1/2}\vP'\Diag(\vpi')^{-1/2}$ is
-%$\lambda_2'$.
-
-%\subsection{Sequences of length $1/\pimin$ are required}
-
-%We begin with a result showing that
-%any algorithm for estimating $\gap$
-%requires an observation sequence of length $\Omega(1/\pimin)$.
-%
-%\begin{theorem}
-%  \label{thm:lb-pimin}
-%  Pick any $\delta \in (0,1/2)$.
-%  Consider any estimator $\hatgap$ of the spectral gap that takes as
-%  input a random sample path of length $n < 1/(2\pimin)$ from a
-%  reversible Markov chain starting from the stationary distribution.
-%  There exists a $2$-state reversible Markov chain distribution with
-%  unique stationary distribution such that
-%  \[
-%    \Pr\Brackets{ |\hatgap - \gap| \geq 1-2\delta } \geq \frac14 .
-%  \]
-%\end{theorem}
-
-%%\begin{proof}[Proof of Theorem~\ref{thm:lb-pimin}]
-%\noindent \textbf{Proof of Theorem~\ref{thm:lb-pimin}.}
-%  Fix $\bar\pi \in (0,1/4)$, and consider two Markov chains given by
-%  the following stochastic matrices:
-%  \[
-%    \vP^{(1)} :=
-%    \begin{bmatrix}
-%      1-\bar\pi & \bar\pi \\
-%      1-\bar\pi & \bar\pi
-%    \end{bmatrix}
-%    , \quad
-%    \vP^{(2)} :=
-%    \begin{bmatrix}
-%      1-\bar\pi & \bar\pi \\
-%      \bar\pi & 1-\bar\pi
-%    \end{bmatrix}
-%    .
-%  \]
-%  Both Markov chains are ergodic and reversible; their stationary
-%  distributions are, respectively, $\vpi^{(1)} = (1-\bar\pi,\bar\pi)$
-%  and $\vpi^{(2)} = (1/2,1/2)$.
-%  We have $\pimin \geq \bar\pi$ in both cases.
-%  For the first Markov chain, $\slem = 0$, and hence the spectral
-%  gap is $1$; for the second Markov chain, $\slem = 1-2\bar\pi$, so
-%  the spectral gap is $2\bar\pi$.
-%
-%  In order to guarantee $|\hatgap - \gap| < 1-2\bar\pi$, it must be
-%  possible to distinguish the above two Markov chains.
-%  In either $\vP^{(1)}$ or $\vP^{(2)}$, with probability at least
-%  half, the initial state is $1$; and both chains have the same
-%  transition probabilities from state $1$.
-%  Therefore, the chains are indistinguishable less the sample path
-%  eventually reaches state $2$.
-%  But with probability at least $1/4$, a sample path of length $n <
-%  1/(2\bar\pi)$ starting from state $1$ always remains in the same
-%  state.
-%\hfill $\blacksquare$
-%%\end{proof}
 
 \begin{proof}[Proof of \cref{thm:lb-pimin}]
   Fix $\bar\pi \in (0,1/3)$, and set $\veps := 2\bar\pi/(1-\bar\pi)$.
@@ -112,28 +40,6 @@
   remains in the same state.
 \end{proof}
 
-
-%\subsection{Sequences of length $d\log(d)/\gap$ are required}
-
-%Next, we show that in order to estimate
-%$\gap$ to within a constant multiplicative accuracy,
-%a sequence of length $\Omega(d\log(d)/\gap)$ is required.
-%
-%\begin{theorem}
-%  \label{thm:lb-gap}
-%  There exists absolute constants $C, c>0$ such that the following
-%  holds.
-%  Pick any positive integer $d \geq C$.
-%  Consider any estimator $\hatgap$ of the spectral gap that takes as
-%  input a random sample path of length $n < c d\log(d) / \gap$ from a
-%  $d$-state reversible Markov chain starting from an arbitrary initial
-%  state.
-%  For any initial state, there exists a reversible Markov chain
-%  distribution with unique stationary distribution such that
-%  \[
-%    \Pr\Brackets{ |\hatgap - \gap| \geq \frac12\gap} \geq \frac14 .
-%  \]
-%\end{theorem}
 
 \begin{proof}[Proof of \cref{thm:lb-gap}]
   We consider $d$-state Markov chains of the following form:

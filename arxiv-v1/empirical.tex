@@ -1,4 +1,3 @@
-%!TEX root =  matrix-est.tex
 In this section, we address the shortcoming of \cref{thm:err} and give
 fully empirical confidence intervals for the stationary probabilities
 and the spectral gap $\gap$.
@@ -45,21 +44,15 @@ The group inverse $\giAh$ of $\wh\vA$ is uniquely defined;
  and if
 $\wh\vP$ defines an ergodic chain (which is the case here due to the
 use of the smoothed estimates), $\giAh$ can be computed at the cost of
-inverting an $(d-1)\times (d-1)$ matrix~\citep[Theorem
+inverting an $(d{-}1){\times}(d{-}1)$ matrix~\citep[Theorem
 5.2]{meyer1975role}.%
-\footnote{
+\footnote{%
 \label{ftnote:group-inverse}
 The group inverse of a square matrix $\vA$, a special case of the {\em Drazin inverse},
 is the unique matrix $\vA^\#$ satisfying
 $ \vA\vA^\#\vA = \vA$,
 $\vA^\#\vA\vA^\# = \vA^\#$ and
 $\vA^\#\vA = \vA\vA^\#$.
-%It is efficiently computable,
-%and for $\vA=\vI-\vP$, where $\vP$ is ergodic with stationary distribution $\vpi$,
-%has the
-%following simple
-%form: $\vA^\#=(\vI-\vP+\v1\vpi^\t)^{-1}-\v1\vpi^\t$
-%\citep{seneta1993sensitivity,meyer1975role}.
 }
 Further, once given $\giAh$, the unique stationary distribution
 $\hat\vpi$ of $\wh\vP$ can be read out from the last row of
@@ -84,7 +77,6 @@ matrix inversion.
 Thus, with a standard implementation of matrix inversion, the
 algorithm's time complexity is $O(n + d^3)$, while its space
 complexity is $O(d^2)$.
-\todoc{Implement and test?}
 
 \begin{algorithm}
 \caption{Empirical confidence intervals}
@@ -118,7 +110,6 @@ complexity is $O(d^2)$.
       \frac{N_{i,j} + 1/d}{N_i + 1}
       , \quad (i,j) \in [d]^2 .
     \end{aligned}
-    %\label{eq:frequencies}
     \notag
   \end{equation}
   \label{step:P}
@@ -148,19 +139,9 @@ complexity is $O(d^2)$.
     \sqrt{\frac{9\wh{P}_{i,j}(1-\wh{P}_{i,j})\ln(2d/\delta)}{2N_i}}
     + \frac{4\ln(2d/\delta)+1.5\abs{(1/d)-\wh{P}_{i,j}}}{N_i}
     .
-%    \label{eq:P-obs-bound}
     \notag
   \end{equation}
   \label{step:P-bound}
-
-%$\qquad$ $\wh\Delta_{i,j}(\delta) \gets \sqrt{\frac{9\wh{P}_{i,j}(1-\wh{P}_{i,j})\ln(2d/\delta)}{2N_i}}
-%  + \frac{4\ln(2d/\delta)+1.5\abs{\alpha-d\alpha\wh{P}_{i,j}}}{N_i}$%,  $(i,j) \in [d]^2$.
-%\STATE   $\qquad$ $\wh\Delta_{i,j}(\delta) \gets \min( \wh\Delta_{i,j}(\delta) , \max(\wh{P}_{i,j}, 1-\wh{P}_{i,j}))$,   $(i,j) \in [d]^2$.
-
-%  \STATE Empirical bound for $\max_{i,j}|\wh{P}_{i,j}-P_{i,j}|$:
-%  \quad $B(\delta) := \max_{i,j} B_{i,j}(\delta)$.
-  %$\wh\Delta_{\vP}(\delta) \gets \sqrt{\sum_{i,j} \wh\Delta_{i,j}^2(\delta)}$,
-%  $\wh\Delta^*_{\vP}(\delta) \gets \max_{i,j} \wh\Delta_{i,j}(\delta)$.
 
   \STATE Relative sensitivity of $\vpi$:
   \begin{equation}
@@ -172,7 +153,6 @@ complexity is $O(d^2)$.
       : j \in [d]
     } 
     .
-%    \label{eq:hatkappa}
     \notag
   \end{equation}
   \label{step:sens}
@@ -196,7 +176,6 @@ complexity is $O(d^2)$.
       \frac{\hat{b}}{\brackets{\hat\pi_i-\hat{b}}_+}
     }
     .
-%    \label{eq:pi-obs-bound}
     \notag
   \end{equation}
   \label{step:pi-bound}
@@ -208,29 +187,11 @@ complexity is $O(d^2)$.
     \Biggl(
       \sum_{(i,j)\in[d]^2} \frac{\hat\pi_i}{\hat\pi_j} \hat{B}_{i,j}^2
     \Biggr)^{1/2} .
-%    \label{eq:gap-obs-bound}
     \notag
   \end{equation}
   \label{step:gap-bound}
 
-%  \STATE Empirical bounds for $\hat{\pi}_i$:
-%  \begin{align*}
-%    \rho_i(\delta)
-%    & := \frac{\wh\kappa B(\delta)}{\hat\pi_i}
-%    , \quad i \in [d] ;
-%    &
-%    \rho_i'(\delta)
-%    & := \frac{\wh\kappa B(\delta)}{[\hat{\pi}_i-\wh\kappa B(\delta)]_+}
-%    , \quad i \in [d] .
-%  \end{align*}
 
-%\STATE $\rho(\delta) \gets \frac12 \max_{i\in \iset{d}} \rho_i(\delta)$; $\rho'(\delta) \gets \frac12 \max_{i\in \iset{d}} \rho_i'(\delta)$.
-%\STATE $\hat{\rho}(\delta) \gets 2\max(\rho(\delta),\rho'(\delta)) + \max(\rho(\delta),\rho'(\delta))^2$.
-%%$\hat{\rho}(\delta) \gets \rho(\delta) + \rho'(\delta) + \rho'(\delta)\rho(\delta)$. % THIS WAS BUGGY
-%\STATE Half-width of interval: $w \gets 
-%\hat{\rho}(\delta)+ \parens{ 1+ \hat{\rho}(\delta) } \, \sqrt{ \sum_{i,j} \frac{\hat{\pi}_i}{\hat{\pi}_j} \wh{\Delta}^2_{i,j}(\delta)}
-%$.
-%\STATE Confidence interval for $\gap$: $U_n(\delta) \gets [\hatgap-w,\hatgap+w]\cap [0,1]$.
 \end{algorithmic}
 \end{algorithm}
 
@@ -283,17 +244,6 @@ The result is as follows.
     C$ holds almost surely.%
   }%
   \]
-%  \todoc{
-%    Precisely,
-%    what we mean by the $O(\cdot)$ notation is as follows:
-%  for a random sequence of nonnegative numbers $(X_n)_n$
-%  and another sequence of nonrandom positive numbers $(a_n^\eps)_n$ 
-%  indexed by $\eps$ we
-%  say that $X_n = O(a_n^\eps)$ holds almost surely as $n\to \infty$
-%  if for some universal constant $C>0$, 
-%  $\limsup_{n\to \infty} X_n/a_n^\eps \le C$ holds almost surely, regardless of
-%  the choice of $\eps$. I think this should be made clear.
-%  }
 \end{theorem}
 The proof of \cref{thm:empirical} is given in \cref{app:empirical}.
 As mentioned above, the obstacle encountered in \cref{thm:err} is
@@ -330,9 +280,6 @@ which gives
   }
   .
 \] 
-%The widths of these intervals are somewhat larger than the corresponding
-%(non-empirical) intervals from \cref{thm:err}.
-%\todoc{This needs to be updated once we finalize the results. By how much are these larger?}
 
 It is easy to combine \cref{thm:err,thm:empirical} to yield intervals
 whose widths shrink at at least as fast as both the non-empirical
@@ -364,7 +311,6 @@ $1-2\delta$ probability event.\footnote{%
 }
 Finally, we can take the intersection of these new intervals with the
 corresponding intervals from \cref{alg:empest}.
-% XXX now take the intersection
 This is summarized in the following \lcnamecref{thm:combined}, which
 we prove in \cref{app:combined}.
 \begin{theorem}
@@ -397,15 +343,5 @@ we prove in \cref{app:combined}.
   \]
   where $\hat{w}$ is the width from \cref{alg:empest}.
 \end{theorem}
-
-%The rest of the section is devoted to the proof of \cref{thm:empirical}.
-
-%In what follows, we will (re-)define  $\wh{\Delta}_{i,j}(\delta)$ to be the RHS of \eqref{eq:P-obs-bound} when $N_i>0$,
-% \todoc{Abbrev RHS should be introduced.}
-%while we let $\wh{\Delta}_{i,j}(\delta)=\max(\wh{P}_{i,j},1-\wh{P}_{i,j})$ otherwise.
-%%Clearly, $\wt{\Delta}_{i,j}(\delta) \ge \wh{\Delta}_{i,j}(\delta)$.
-%%In what follows, we calculate with the tighter $\wh{\Delta}_{i,j}(\delta)$. 
-%%In fact, the algorithm was presented for $\wt{\Delta}_{i,j}(\delta)$ for easier comprehension only.
-%
 
 

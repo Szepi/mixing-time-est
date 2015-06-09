@@ -1,31 +1,5 @@
 
-%!TEX root =  matrix-est.tex
-
 In this section, we prove \cref{thm:err}.
-%Recall the definitions from~\cref{sec:rates-upper}:
-%\begin{align*}
-%  \wh{M}_{i,j}
-%  & := \frac{|\{ t \in [n-1] : (X_t,X_{t+1}) = (i,j) \}|}{n-1}
-%  , \quad i,j \in [d] ;
-%  \\
-%  \hat{\pi}_i
-%  & := \frac{|\{ t \in [n] : X_t = i \}|}{n}
-%  , \quad i \in [n] ;
-%  \\
-%  \wh\vL
-%  & := \Diag(\hat\vpi)^{-1/2} \wh\vM \Diag(\hat\vpi)^{-1/2} ;
-%  \\
-%  \Sym(\wh\vL)
-%  & := \frac12 \Parens{ \wh\vL + \wh\vL^\t } ;
-%  \\
-%  \hatpimin
-%  & := \min_{i \in [d]} \hat\pi_i ;
-%  \\
-%  \hatgap
-%  & := 1 - \max\{ \hat\lambda_2, |\hat\lambda_d| \}
-%\end{align*}
-%where $\hat\lambda_1 \geq \hat\lambda_2 \geq \dotsb \geq
-%\hat\lambda_d$ are the eigenvalues of $\Sym(\wh\vL)$.
 
 \subsection{Accuracy of $\hatpimin$}
 
@@ -163,7 +137,7 @@ Let us now turn to proving \cref{eq:gapbound}, i.e.,
 the bound on the error of the spectral gap estimate $\hatgap$.
 The accuracy of $\hatgap$ is based on the accuracy of $\Sym(\wh\vL)$
 in approximating $\vL$ via Weyl's inequality:
-\begin{align*}%\label{eq:Weyl}
+\begin{align*}
   |\hat\lambda_i - \lambda_i|
   \leq \norm{\Sym(\wh\vL) - \vL}
   \quad \text{for all }i \in [d] .
@@ -171,7 +145,6 @@ in approximating $\vL$ via Weyl's inequality:
 Moreover, the triangle inequality implies that symmetrizing $\wh\vL$
 can only help:
 \begin{align*}
-%\label{eq:symm}
   \norm{\Sym(\wh\vL) - \vL} \leq \norm{\wh\vL - \vL} .
 \end{align*}
 Therefore, we can deduce \cref{eq:gapbound} in \cref{thm:err} from the
@@ -186,22 +159,15 @@ following lemma.
     \norm{\wh\vL - \vL}
     \leq
     C\,
-%    \Parens{
       \sqrt{
         \frac{
           \log\Parens{\frac{d}{\delta}}
           \log\Parens{\frac{n}{\pimin\delta}}
         }{\pimin\gap n}
       }
-%      +
-%      \frac{
-%        \log\Parens{\frac{d}{\delta}}
-%        \log\Parens{\frac{n}{\pimin\delta}}
-%      }{\pimin\gap n}
       +
       C\,
       \frac{\log\Parens{\frac{1}{\gap}}}{\gap n}
-%    }
   \end{equation*}
 \end{lemma}
 The remainder of this section is devoted to proving this
@@ -222,7 +188,6 @@ where
 \end{align*}
 Therefore
 \begin{align*}
-  %\label{eq:vlbound}
   \norm{\wh\vL - \vL}
   \leq \norm{\errm} +
   \Parens{
@@ -255,16 +220,7 @@ Therefore,
   \label{eq:vlsimple}
 \end{align}
 
-%
-%When $\norm{\errm}\le 1$ and $\norm{\errp}\le 1$ both hold, the previous inequality implies that
-%\begin{align}\label{eq:vlsimple}
-%  \norm{\wh\vL - \vL}
-%  \le 2(\norm{\errm}+\norm{\errp})\,.
-%\end{align}
-%
-%Here and in what follows we use $C>0$ to denote some universal constant, whose value does not depend on the problem parameters, but may change from line to line.
-%Since in addition to $\norm{\vL}\le 1$,  $\norm{\wh\vL}\le 1$ also holds (this again follows from the Perron-Frobenius theorem), in fact  \eqref{eq:vlsimple}  always holds as long as $C\ge 2$.
-%
+
 \subsection{A bound on $\norm{\errp}$}
 
 Since $\errp$ is diagonal,
@@ -335,50 +291,13 @@ $1-\delta$ probability event from \cref{lem:hatpimin},
   \label{eq:singletonbound}
 \end{align}
 
-%
-%%The purpose of this section is to develop a bound on the RHS of \eqref{eq:singleton} so as to bound $\norm{\errp}$.
-%For any $x \geq 0$, $\abs{x-1} \le 1/2$ implies
-%$\max\braces{\abs{x-1},\abs{x^{-1}-1}} \le 2 \abs{x-1}$.
-%Hence, it suffices to develop a bound on $ \Abs{ \frac{\hat\pi_i}{\pi_i} - 1 }$;
-%the final bound will follow under the condition that the developed bound is below $1/2$.
-%The required bound is readily obtained from~\eqref{eq:singletonboundsimple}:
-%As long as $n = \Omega \Parens{
-%	\frac{\log\Parens{\frac{d}\delta\sqrt{\frac{2}{\pimin}}}
-%           }{\gap \pimin} }$, \todoc{First condition on $n$.}
-%$
-%\Abs{\frac{\hat{\pi}_i}{\pi_i}-1}
-%\le
-%23 \sqrt{  
-%	\frac{\log\Parens{\frac{d}\delta\sqrt{\frac{2}{\pimin}}}
-%           }{\pimin\gap n}
-%       }\,,
-%$
-%and thus
-%\begin{align}
-%\label{eq:singletonbound}
-%\norm{\errp} \le C \sqrt{ \frac{\log\Parens{\frac{d}\delta} + \log \frac{1}{\pimin} }{\pimin\gap n}} \,.
-%\end{align}
-%We now turn to bounding  $\norm{\errm}$.
-%%Note that although the entries of $\wh{\vM}$ and $\hat\vpi$ are simply
-%%sample averages, they are formed using a \emph{single sample path}
-%%from a (possibly) non-stationary Markov chain.
-%%Applying Chernoff-Hoeffding bounds for Markov chains to each entry of
-%%$\wh{\vM}$ would result in a
-%%significantly worse sample complexity bound.
-%%%vastly worse sequence length requirement.
-%%Instead, we adapt probability tail bounds for sums of independent
-%%random matrices to our setting.
-%
-
 \subsection{Accuracy of doublet frequency estimates (bounding $\norm{\errm}$)}
 \label{sec:pairwise}
 In this section we prove a bound on $\norm{\errm}$.
 For this, we decompose
 $\errm = \Diag(\vpi)^{-1/2}(\wh\vM-\vM)\Diag(\vpi)^{-1/2} $
 into $\EE{\errm}$ and 
-$
-\errm-\EE{\errm}% =  \Diag(\vpi)^{-1/2}(\wh\vM - \EE{\wh\vM}) \Diag(\vpi)^{-1/2} ,
-$, the first measuring the effect of a non-stationary start of the chain,
+$\errm-\EE{\errm}$, the first measuring the effect of a non-stationary start of the chain,
 while the second measuring the variation due to randomness.
 \if0
 into the sum of
@@ -417,7 +336,6 @@ $\norm{\cdot}_{2,\vpi}$ denote the $\vpi$-weighted $2$-norm
   \norm{\vv}_{2,\vpi} := \Parens{ \sum_{i=1}^d \pi_i v_i^2 }^{1/2}
   .
 \end{align}
-%\todoc{Move up to notation?}
  Then,
 \begin{equation}
   \label{eq:L2-contraction}
@@ -425,7 +343,6 @@ $\norm{\cdot}_{2,\vpi}$ denote the $\vpi$-weighted $2$-norm
   \frac{(1-\gap)^{t-1}}{\sqrt{\pimin}} \,.
 \end{equation}
 \end{proposition}
-%Corollary 1.15:
 An immediate corollary of this result is that 
 \begin{align}
 \label{eq:dvpi-ratio-bound}
@@ -470,7 +387,6 @@ In this section we analyze the deviations of $\errm-\EE{\errm}$. By the definiti
 \label{eq:errmdev1}
 \norm{\errm-\EE{\errm}}
  =  \norm{\Diag(\vpi)^{-1/2}\Parens{\wh\vM - \bbE \wh\vM } \Diag(\vpi)^{-1/2}}
-% \le \frac{1}{\pimin} \norm{\wh\vM - \bbE \wh\vM }
  \,.
 \end{align}
 The matrix $\wh\vM - \EE{\wh\vM}$  is defined 
@@ -595,14 +511,8 @@ satisfies
   \frac{1}{\gap} \ln \frac{2(n-2)}{\delta\pimin}
 \end{equation}
 for $\delta \in (0,1)$.
-\todoc{By using the geometric series bound,
-we can derive that it is enough
-if $a\ge 1 + \frac{1}{\gap} \ln \frac1{a\sqrt{\pimin}\gap}$,
-which is better when $a$ is bigger than $\gap$.
-}
-\todoc{As we need $a\le n/2$, we will need $n = \Omega(1/\gap\ln\frac1{\pimin})$.}
 
-Define%\todoc{Do we want this abuse?}
+Define
 \begin{align*}
   \vpi^{(H_s)}  := \frac1a \sum_{t \in H_s} \vpi^{(t)} , \qquad \qquad
   \vpi^{(H)}  := \frac1{\mu_H} \sum_{s=1}^{\mu_H} \vpi^{(H_s)} .
@@ -666,7 +576,6 @@ norms of $\vZ_s$ (almost surely), $\bbE(\vZ_s \vZ_s^\t)$, and
 $\bbE(\vZ_s^\t \vZ_s)$.
 
 \paragraph{Range bound.}
-%We first determine a bound on the spectral norm of $\vZ_s$.
 By the triangle inequality,
 \[
   \norm{\vZ_s}
@@ -923,49 +832,6 @@ where
   \,.
 \end{align*}
 
-%\begin{align*}
-%\MoveEqLeft  \Norm{\sum_{s=1}^{\mu_H} w_{H,s} \wt\vZ_s}
-%  \leq
-%  \sqrt{
-%    4\Parens{ \max_s w_{H,s} } \Parens{
-%      d_{\vP}
-%      + 2
-%    }
-%    \ln(4d/\delta)
-%  }
-%  \\
-%& \qquad\qquad\qquad  +
-%  \frac23 \max_s w_{H,s}
-%  \Parens{
-%    \frac1{\pimin} + 2
-%  }
-%  \ln(4d/\delta)
-%\end{align*}
-%where
-%\begin{align*}
-%  d_{\vP}
-%  & := \max_{i \in [d]} \sum_{j=1}^d \frac{P_{i,j}}{\pi_j}
-%  \leq
-%  \frac{1}{\pimin}
-%  \,.
-%\end{align*}
-%
-%For simplicity, we assume that all of the blocks have length exactly $a$.
-%Under this assumption, 
-%the above bound (also with looser constants) gives that
-%with probability at least $1-\delta$:
-%\begin{equation}
-%\label{eq:indbound}
-%  \Norm{\frac1{\mu_H} \sum_{s=1}^{\mu_H} \wt\vZ_s}
-%  \leq
-%  \sqrt{
-%    \frac{12\ln(4d/\delta)}{\mu_H\pimin}
-%  }
-%  +
-%  \frac{2\ln(4d/\delta)}{\mu_H\pimin}
-%  \,.
-%\end{equation}
-
 \paragraph{The actual bound.}
 To bound the probability that $\norm{\sum_{s=1}^{\mu_H} \vZ_s/\mu_H}$
 is large, we appeal to the following result, which is a consequence of
@@ -1120,8 +986,6 @@ We conclude
 where the last step follows from the block length assumption
 \cref{eq:block-length}.
 
-%Note that this condition implies \eqref{eq:block-length}.
-
 We return to the decomposition from \cref{eq:blocking}.
 We apply \cref{eq:dpt-bound} to both the $H_s$ blocks and the $T_s$
 blocks, and combine with \cref{eq:first-block} to obtain the following
@@ -1261,25 +1125,9 @@ In this event, \cref{eq:singletonbound} also holds, and hence by
         \log\Parens{\frac{n}{\pimin\delta}}
       }{\pimin\gap n}
     }
-%    +
-%    \frac{
-%      \log\Parens{\frac{d}{\delta}}
-%      \log\Parens{\frac{n}{\pimin\delta}}
-%    }{\pimin\gap n}
   }
   .
 \end{multline*}
-
-%Consider an event when both~\eqref{eq:singletonbound} and \eqref{eq:doubletbound} hold.
-%Then, using that $\log(d/\delta) + \log(1/\pimin) \le \log(d/\delta)\log(\frac{n}{\delta\pimin})$, we get
-%\begin{align*}
-%\norm{\wh\vL - \vL} \le 
-%C\,
-%\sqrt{
-%    \frac{\log(d/\delta)\log(\frac{n}{\delta\pimin})}{\pimin\gap n}
-%  }\,,
-%\end{align*}
-%which together with \eqref{eq:singletonboundsimple},
 
 To finish the proof of \cref{lem:gap}, we replace $\delta$ with
 $\delta/5$, and now observe that the bound on $\norm{\wh\vL-\vL}$ is

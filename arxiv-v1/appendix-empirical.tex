@@ -1,4 +1,3 @@
-%!TEX root =  matrix-est.tex
 In this section, we derive \cref{alg:empest} and prove
 \cref{thm:empirical}.
 
@@ -82,9 +81,7 @@ The algorithm estimates the spectral gap $\gap$ using
     Y_{t+1} \in [-P_{i,j},1-P_{i,j}] .
   \]
   Therefore, by Freedman's inequality~\citep[Theorem 1.6]{Fre75} and
-  union bounds, we have \todoc{Would it be better to use Tropp's Matrix Freedman? 
-  I guess it depends on whether we can derive bounds on the sensitivity of $\vpi$ in terms of 
-  the spectral norm..}
+  union bounds, we have
   \[
     \abs{ N_{i,j} - N_i P_{i,j} }
     \leq \sqrt{2 N_i P_{i,j} (1-P_{i,j}) \ln(2d/\delta)} + \frac23
@@ -273,7 +270,6 @@ from~\citet{haviv1984perturbation,kirkland1998applications}).
     }
     .
     \notag
-%    \label{eq:pi-obs-bound}
   \end{align}
 \end{lemma}
 This establishes the validity of the confidence intervals for the
@@ -346,12 +342,6 @@ $\sqrt{\hat\pi_i/\pi_i}$ and $\sqrt{\pi_i/\hat\pi_i}$.
   \end{align*}
 \end{proof}
 
-
-%This proves the first claim in \cref{thm:empirical}.
-%We show that $\hat\kappa$ is not too large compared to $\kappa$ by
-%showing that $\wh\vA^\#$ is close to $\vA^\#$.
-%This is done using the perturbation theory for pseudoinverses.
-%\todoc{actually do this\ldots}
 
 \subsection{Empirical bounds for $\vL$}
 
@@ -472,34 +462,10 @@ the same event from \cref{lem:P-unobs-bound}.
 \subsection{Asymptotic widths of intervals}
 \label{sec:asymptotic}
 
-%For an empirical bound on $\norm{\errP}$, we use
-%\[
-%\]
-%Upper bounding the spectral norm with the Frobenius norm, we get
-%\[
-%\norm{\errP} \le \sqrt{ \sum_{i,j} \frac{\hat{\pi}_i}{\hat{\pi}_j} \hat{\Delta}^2_{i,j}(\delta)}\,.
-%\]
-%Putting the inequalities obtained together, we get that with probability $1-\delta$,
-%\[
-%|\gap-\hatgap| \le \norm{\vL-\wh\vL} \le  w =
-%\hat{\rho}(\delta)+ \Bigl\{1+ \hat{\rho}(\delta)\Bigr\} \, \sqrt{ \sum_{i,j} \frac{\hat{\pi}_i}{\hat{\pi}_j} \hat{\Delta}^2_{i,j}(\delta)}\,.
-%\]
-%where (as also shown in the pseudocode of \cref{alg:empest}),
-%\[
-%%\hat{\rho}(\delta) = \rho(\delta) + \rho'(\delta) + \rho'(\delta)\rho(\delta)\,,\quad
-%\hat{\rho}(\delta) = 2\max(\rho(\delta),\rho'(\delta)) + \max(\rho(\delta),\rho'(\delta))^2\,,\quad
-%\rho(\delta) = \frac12 \max_{i\in \iset{d}} \rho_i(\delta)\,,\quad
-%\rho'(\delta) = \frac12 \max_{i\in \iset{d}} \rho_i'(\delta)\,.
-%\]
-%This implies that $\gap \in U_n(\delta)$, completing the proof of the
-%first part of \cref{thm:empirical}.
-
 Let us now turn to the asymptotic behavior of the interval widths
 (regarding $\hat{b}$, $\hat\rho$, and $\hat{w}$ all as
 functions of $n$).
 
-%o avoid confusion let $w_n(\delta)$ denote the width computed
-%with a given value of $\delta$  and $n$.
 A simple calculation gives that, almost surely, as $n\to \infty$,
 \begin{align*}
   \sqrt{n} \hat{b}
@@ -519,21 +485,6 @@ A simple calculation gives that, almost surely, as $n\to \infty$,
 Here, we use the fact that $\hat\kappa \to \kappa$ as $n\to\infty$
 since $\giAh \to \giA$ as $\wh\vP \to
 \vP$~\citep{li2001improvement,benitez2012continuity}.
-
-%where we used that $\hat{\kappa} \to \kappa$ as $n\to \infty$, as
-%follows from the discussion on page 150 of the book by
-%\citet{stewart1990matrix}.
-%\todoc{Does it? Expand? Some details are in the source, commented out at the moment.}
-%\todoc{Is this the right reference? Maybe  \url{http://files.ele-math.com/abstracts/oam-06-55-abs.pdf} has better references?}
-%\hide{
-%$
-%  \wh\vA^\# = \vA^\# + O(\norm{\wh \vA-\vA}) $
-%and since  by~\eqref{eq:pdevbound}, as $n\to\infty$,
-%$\norm{\wh \vA-\vA} =O_P\Parens{\sqrt{\frac{d\log(d/\delta)}{\pimin n}}}$,
-%we get that \todoc{This is a bit messy. $n\to\infty$, w.p. $1-\delta$..?}
-%\[ \wh\kappa = \kappa + O_P\Parens{\sqrt{\frac{d\log(d/\delta)}{\pimin n}}}
-%  = O_P\Parens{ \frac{d}{\gap} + \sqrt{\frac{d\log(d/\delta)}{\pimin n}}}\,.
-%\]}
 
 Further, since
 \begin{align*}
@@ -564,8 +515,6 @@ we thus have
 \end{align*}
 This completes the proof of \cref{thm:empirical}.
 \hfill $\qed$
-
-  %\todoc{Get empirical bound on operator norm error from our max-entry norm bound from a few subsections ago. Also show that all of these bounds are eventually pretty good.}
 
 The following claim provides a bound on $\kappa$ in terms of the
 number of states and spectral gap.

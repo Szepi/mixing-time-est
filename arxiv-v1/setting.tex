@@ -1,5 +1,3 @@
-%!TEX root =  matrix-est.tex
-
 \subsection{Notations}
 \label{sec:notation}
 
@@ -7,12 +5,9 @@ We denote the set of positive integers by $\bbN$, and
 the set of the first $d$ positive integers $\{1,2,\dotsc,d\}$ by $\iset{d}$.
 The non-negative part of a real number $x$ is $[x]_+ := \max\{0,x\}$.
 We use $\ln(\cdot)$ in expressions with exact constants, while we use $\log(\cdot)$ elsewhere.
-%In expression with exact numerical constants, we will use 
-%the natural logarithm function, $\ln(x)$, while elsewhere we use $\log(x)$.
 Boldface symbols are used for vectors and matrices (e.g., $\vv$,
 $\vM$), and their entries are referenced by subindexing (e.g., $v_i$,
 $M_{i,j}$).
-%The $i$-th coordinate basis vector is denoted by $\ve_i$.
 For a vector $\vv$, $\norm{\vv}$ denotes its Euclidean norm; for a
 matrix $\vM$, $\norm{\vM}$ denotes its spectral norm.
 We use $\Diag(\vv)$ to denote the diagonal matrix whose $(i,i)$-th
@@ -20,8 +15,6 @@ entry is $v_i$.
 The probability simplex is denoted by $\Delta^{d-1} = \{ \vp
 \in [0,1]^d : \sum_{i=1}^d p_i = 1 \}$, and we regard vectors in
 $\Delta^{d-1}$ as row vectors.
-%Finally, the total variation between two probability distributions
-%$\vp, \vq \in \Delta^{d-1}$ is denoted by $\norm{\vp-\vq}_{\tv}$.
 
 \subsection{Setting}
 \label{sec:setting}
@@ -54,8 +47,6 @@ is started from its stationary distribution.
 The matrix $\vM$ is symmetric on account of the reversibility of
 $\vP$, and hence it follows that $\vL$ is also symmetric.
 (We will strongly exploit the symmetry in our results.)
-%will be advantageous due to the existence of stronger perturbation results
-%for symmetric matrices.
 Further, $\vL = \Diag(\vpi)^{1/2} \vP \Diag(\vpi)^{-1/2}$, hence $\vL$
 and $\vP$ are similar and thus their eigenvalue systems are identical.
 Ergodicity and reversibility imply that the eigenvalues of $\vL$ are
@@ -69,10 +60,6 @@ Denote and order the eigenvalues of $\vL$ as
 Let $\slem := \max\{ \lambda_2,\, |\lambda_d| \}$, and define the
 (absolute) spectral gap to be $\gap := 1-\slem$, which is strictly
 positive on account of ergodicity.
-\todoc{Do our results generalize to the spectral gap? No.
-Discuss this somewhere.}
-%Throughout the paper, both $\pimin$ and $\gap$ are assumed
-%to be positive.
 
 Let $(X_t)_{t\in\bbN}$ be a Markov chain whose transition
 probabilities are governed by $\vP$.
@@ -99,25 +86,6 @@ Moreover, convergence rates for empirical processes on Markov chain
 sequences are also often given in terms of mixing coefficients that
 can ultimately be bounded in terms of $\pimin$ and
 $\gap$ (as we will show in the proof of our first result).
-%~\citep[e.g.,][]{MR1921877,MoRo08,MoRo09}. 
 Therefore, valid confidence intervals for $\pimin$ and $\gap$ can be
 used to make these rates fully observable.
-%All probabilities in this paper are over the space of state sequences with the given Markov measure.
-\todoa{Add: ``All probabilities in this paper are over the space of state sequences with the given Markov measure.'' 
-Cs: I think the probability space could be arbitrary
-and the probabilities are over this (implicit) probability space as usual in probability papers.
-I would suggest to remove this sentence. Also, we are short of space.}
-
-%Therefore, confidence intervals for $\pimin$ and $\gap$ can be used to
-%make these rates data-dependent and hence usable in procedures such
-%as Structural Risk Minimization.
-%\todoc{citation for SRM, and other applications?}
-%
-%Additionally, we aim to provide
-%asymptotic convergence rates
-%as well as data-dependent confidence intervals;
-%the latter should not depend on any unknown quantities
-%(such as $\pimin$ and $\gap$).
-%
-%\todoc[inline]{What is the data? What is the problem?}
 
