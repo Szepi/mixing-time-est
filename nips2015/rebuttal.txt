@@ -1,4 +1,8 @@
-We thank the referees for the helpful comments. A detailed response follows.
+We thank the referees for the helpful comments. We'll incorporate the
+suggestions in a revision of the paper, especially where more detailed
+explanations are needed.
+
+The following two concerns were common to many of the reviews.
 
 Tightness of bounds: We don't claim tightness of the bounds -- they
 are indeed rather loose -- but our results give the first non-trivial
@@ -12,6 +16,8 @@ Relaxation vs mixing time: In the revision, we will be more explicit
 about estimating the relaxation time rather than mixing time proper
 (throughout the abstract and paper). We agree that this is an
 important distinction that should be emphasized.
+
+Additional responses to individual reviews follow.
 
 Reviewer_1
 
@@ -30,14 +36,15 @@ the logarithmic factor) is less than gamma_*/2.
 lower bound in the introduction. We will include the details in the
 revision.
 
-6. 
+6. ???
 
 7. To conclude Theorem 2, it follows from Paley-Zygmund and the moment
 bounds that, with probability > 1/4, the earliest time in which a
 sample path visits all d states is at least c d log(d) / \bar\gamma.
 This implies that an estimator using a shorter sample path cannot
-distinguish P^0 from P^i for some i (with probability at least 1/4),
-and hence must have large estimation error.
+distinguish P^0 from P^i for some i (with probability > 1/4), and
+hence must have large estimation error. We'll include these details in
+the revision.
 
 Reviewer_2
 
@@ -45,8 +52,6 @@ Reviewer_2
 
 Theorem 2: Indeed, including an extra constant factor in the claim (or
 minding inequality strictness) resolves this issue.
-
-Lemma 2: We'll include more details in the revision.
 
 Theorem 2 (line 958): The estimator cannot rule out P^i without having
 vistited state i. We'll clarify this point in the revision.
