@@ -1,0 +1,60 @@
+We thank the referees for the helpful comments. A detailed response follows.
+
+Tightness of bounds: We don't claim tightness of the bounds -- they
+are indeed rather loose -- but our results give the first non-trivial
+(upper and lower) bounds in this challenging setting. Our work are
+motivated by practical applications where fully data-dependent
+intervals were sought but not actually achieved. Our results are a
+first step towards a practical solution: we demonstrate feasibility
+and also prove limitations on what is possible.
+
+Relaxation vs mixing time: In the revision, we will be more explicit
+about estimating the relaxation time rather than mixing time proper
+(throughout the abstract and paper). We agree that this is an
+important distinction that should be emphasized.
+
+Reviewer_1
+
+3. Qualitatively, Theorems 1 and 2 show that if n is less than some
+function of (d,pi,gamma), then for any estimator based on a sample
+path of length n, there is some Markov chain such that the error is
+large.
+
+4. If n > max{16C^2,4C}/(pi_* gamma_*), then the RHS in (4) (without
+the logarithmic factor) is less than pi_*/2.
+
+If n > max{16C^2,4C}/(pi_* gamma_*^3), then the RHS in (5) (without
+the logarithmic factor) is less than gamma_*/2.
+
+5. Combining Theorems 1 and 2 with a standard argument yields the
+lower bound in the introduction. We will include the details in the
+revision.
+
+6. 
+
+7. To conclude Theorem 2, it follows from Paley-Zygmund and the moment
+bounds that, with probability > 1/4, the earliest time in which a
+sample path visits all d states is at least c d log(d) / \bar\gamma.
+This implies that an estimator using a shorter sample path cannot
+distinguish P^0 from P^i for some i (with probability at least 1/4),
+and hence must have large estimation error.
+
+Reviewer_2
+
+\tilde{O}: We'll use this more standard use in the revision.
+
+Theorem 2: Indeed, including an extra constant factor in the claim (or
+minding inequality strictness) resolves this issue.
+
+Lemma 2: We'll include more details in the revision.
+
+Theorem 2 (line 958): The estimator cannot rule out P^i without having
+vistited state i. We'll clarify this point in the revision.
+
+Reviewer_7
+
+Perfect sampling: Indeed, this line of work is related, although these
+methods generally do not apply in our setting of estimation from a
+single sample path. We'll discuss this in the revision.
+
+
