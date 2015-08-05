@@ -14,8 +14,9 @@ and also prove limitations on what is possible.
 
 Relaxation vs mixing time: In the revision, we will be more explicit
 about estimating the relaxation time rather than mixing time proper
-(throughout the abstract and paper). We agree that this is an
-important distinction that should be emphasized.
+(throughout the abstract and paper). We fully agree that this is a
+very important distinction that should be emphasized, and we'll amend
+the overstated claims throughout.
 
 Additional responses to individual reviews follow.
 
@@ -32,23 +33,25 @@ the logarithmic factor) is less than pi_*/2.
 If n > max{16C^2,4C}/(pi_* gamma_*^3), then the RHS in (5) (without
 the logarithmic factor) is less than gamma_*/2.
 
+We will add these details in the revision.
+
 5. Combining Theorems 1 and 2 with a standard argument yields the
 lower bound in the introduction. We will include the details in the
 revision.
 
 6. ???
 
-7. To conclude Theorem 2, it follows from Paley-Zygmund and the moment
-bounds that, with probability > 1/4, the earliest time in which a
-sample path visits all d states is at least c d log(d) / \bar\gamma.
-This implies that an estimator using a shorter sample path cannot
-distinguish P^0 from P^i for some i (with probability > 1/4), and
-hence must have large estimation error. We'll include these details in
-the revision.
+7. To conclude Theorem 2, it follows the second-moment method (e.g.,
+Paley-Zygmund) and the moment bounds that, with probability > 1/4, the
+earliest time in which a sample path visits all d states is at least c
+d log(d) / \bar\gamma.  This implies that an estimator using a shorter
+sample path cannot distinguish P^0 from P^i for some i (with
+probability > 1/4), and hence must have large estimation error. We'll
+include these details in the revision.
 
 Reviewer_2
 
-\tilde{O}: We'll use this more standard use in the revision.
+\tilde{O}: We'll adopt this more standard use in the revision.
 
 Theorem 2: Indeed, including an extra constant factor in the claim (or
 minding inequality strictness) resolves this issue.
