@@ -6,7 +6,7 @@ The following two concerns were common to many of the reviews.
 
 Tightness of bounds: We don't claim tightness of the bounds -- they
 are indeed rather loose -- but our results give the first non-trivial
-(upper and lower) bounds in this challenging setting. Our work are
+(upper and lower) bounds in this challenging setting. Our work is
 motivated by practical applications where fully data-dependent
 intervals were sought but not actually achieved. Our results are a
 first step towards a practical solution: we demonstrate feasibility
@@ -64,5 +64,3 @@ Reviewer_7
 Perfect sampling: Indeed, this line of work is related, although these
 methods generally do not apply in our setting of estimation from a
 single sample path. We'll discuss this in the revision.
-
-
