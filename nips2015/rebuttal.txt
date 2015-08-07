@@ -2,7 +2,7 @@ We thank the referees for the helpful comments. We'll incorporate the
 suggestions in a revision of the paper, especially where more detailed
 explanations are needed.
 
-The following two concerns were common to many of the reviews.
+The following two concerns were common to multiple reviews.
 
 Tightness of bounds: We don't claim tightness of the bounds -- they
 are indeed rather loose -- but our results give the first non-trivial
@@ -22,10 +22,13 @@ Additional responses to individual reviews follow.
 
 Reviewer_1
 
+2. We'll make this edit in the revision.
+
 3. Qualitatively, Theorems 1 and 2 show that if n is less than some
 function of (d,pi,gamma), then for any estimator based on a sample
 path of length n, there is some Markov chain such that the error is
-large.
+large. We'll add additional clarifying interpretations in the
+revision.
 
 4. If n > max{16C^2,4C}/(pi_* gamma_*), then the RHS in (4) (without
 the logarithmic factor) is less than pi_*/2.
@@ -39,7 +42,9 @@ We will add these details in the revision.
 lower bound in the introduction. We will include the details in the
 revision.
 
-6. ???
+6. Unfortunately, we were not able to understand the counterexample,
+likely due to typos in the review. We hope to resolve this via the
+program chairs/area chair.
 
 7. To conclude Theorem 2, it follows the second-moment method (e.g.,
 Paley-Zygmund) and the moment bounds that, with probability > 1/4, the
@@ -51,12 +56,20 @@ include these details in the revision.
 
 Reviewer_2
 
+Theorem 5: We get an improvement when the min in the bound for
+|\hat{V}| is achieved by the first term. A sheepish caveat: this is
+not always the case for all sufficiently large n, due to the
+sqrt{log(n)} term in the numerator, but will be true for a very large
+range of n. There is more discussion in Section 5.
+
 \tilde{O}: We'll adopt this more standard use in the revision.
+
+kappa: It is defined just above Theorem 4.
 
 Theorem 2: Indeed, including an extra constant factor in the claim (or
 minding inequality strictness) resolves this issue.
 
-Theorem 2 (line 958): The estimator cannot rule out P^i without having
+Theorem 2 (line 958): An estimator cannot rule out P^i without having
 vistited state i. We'll clarify this point in the revision.
 
 Reviewer_7
