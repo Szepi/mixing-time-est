@@ -1,22 +1,10 @@
-We thank the referees for the helpful comments. We'll incorporate the
-suggestions in a revision of the paper, especially where more detailed
-explanations are needed.
+We thank the referees for the helpful comments. We'll incorporate the suggestions in a revision of the paper, especially where more detailed explanations are needed.
 
 The following two concerns were common to multiple reviews.
 
-Tightness of bounds: We don't claim tightness of the bounds -- they
-are indeed rather loose -- but our results give the first non-trivial
-(upper and lower) bounds in this challenging setting. Our work is
-motivated by practical applications where fully data-dependent
-intervals were sought but not actually achieved. Our results are a
-first step towards a practical solution: we demonstrate feasibility
-and also prove limitations on what is possible.
+Tightness of bounds: We don't claim tightness of the bounds -- they are indeed rather loose -- but our results give the first non-trivial (upper and lower) bounds in this challenging setting. Our work is motivated by practical applications where fully data-dependent intervals were sought but not actually achieved. Our results are a first step towards a practical solution: we demonstrate feasibility and also prove limitations on what is possible.
 
-Relaxation vs mixing time: In the revision, we will be more explicit
-about estimating the relaxation time rather than mixing time proper
-(throughout the abstract and paper). We fully agree that this is a
-very important distinction that should be emphasized, and we'll amend
-the overstated claims throughout.
+Relaxation vs mixing time: In the revision, we will be more explicit about estimating the relaxation time rather than mixing time proper (throughout the abstract and paper). We fully agree that this is a very important distinction that should be emphasized, and we'll amend the overstated claims throughout.
 
 Additional responses to individual reviews follow.
 
@@ -24,56 +12,32 @@ Reviewer_1
 
 2. We'll make this edit in the revision.
 
-3. Qualitatively, Theorems 1 and 2 show that if n is less than some
-function of (d,pi,gamma), then for any estimator based on a sample
-path of length n, there is some Markov chain such that the error is
-large. We'll add additional clarifying interpretations in the
-revision.
+3. Qualitatively, Theorems 1 and 2 show that if n is less than some function of (d,pi,gamma), then for any estimator based on a sample path of length n, there is some Markov chain such that the error is large. We'll add additional clarifying interpretations in the revision.
 
-4. If n > max{16C^2,4C}/(pi_* gamma_*), then the RHS in (4) (without
-the logarithmic factor) is less than pi_*/2.
+4. If n > max{16C^2,4C}/(pi_* gamma_*), then the RHS in (4) (without the logarithmic factor) is less than pi_*/2.
 
-If n > max{16C^2,4C}/(pi_* gamma_*^3), then the RHS in (5) (without
-the logarithmic factor) is less than gamma_*/2.
+If n > max{16C^2,4C}/(pi_* gamma_*^3), then the RHS in (5) (without the logarithmic factor) is less than gamma_*/2.
 
 We will add these details in the revision.
 
-5. Combining Theorems 1 and 2 with a standard argument yields the
-lower bound in the introduction. We will include the details in the
-revision.
+5. Combining Theorems 1 and 2 with a standard argument yields the lower bound in the introduction. We will include the details in the revision.
 
-6. Unfortunately, we were not able to understand the counterexample,
-likely due to typos in the review. We hope to resolve this via the
-program chairs/area chair.
+6. Unfortunately, we were not able to understand the counterexample, likely due to typos in the review. We hope to resolve this via the program chairs/area chair.
 
-7. To conclude Theorem 2, it follows the second-moment method (e.g.,
-Paley-Zygmund) and the moment bounds that, with probability > 1/4, the
-earliest time in which a sample path visits all d states is at least c
-d log(d) / \bar\gamma.  This implies that an estimator using a shorter
-sample path cannot distinguish P^0 from P^i for some i (with
-probability > 1/4), and hence must have large estimation error. We'll
-include these details in the revision.
+7. To conclude Theorem 2, it follows the second-moment method (e.g., Paley-Zygmund) and the moment bounds that, with probability > 1/4, the earliest time in which a sample path visits all d states is at least c d log(d) / \bar\gamma.  This implies that an estimator using a shorter sample path cannot distinguish P^0 from P^i for some i (with probability > 1/4), and hence must have large estimation error. We'll include these details in the revision.
 
 Reviewer_2
 
-Theorem 5: We get an improvement when the min in the bound for
-|\hat{V}| is achieved by the first term. A sheepish caveat: this is
-not always the case for all sufficiently large n, due to the
-sqrt{log(n)} term in the numerator, but will be true for a very large
-range of n. There is more discussion in Section 5.
+Theorem 5: We get an improvement when the min in the bound for |\hat{V}| is achieved by the first term. A sheepish caveat: this is not always the case for all sufficiently large n, due to the sqrt{log(n)} term in the numerator, but will be true for a very large range of n. There is more discussion in Section 5.
 
 \tilde{O}: We'll adopt this more standard use in the revision.
 
 kappa: It is defined just above Theorem 4.
 
-Theorem 2: Indeed, including an extra constant factor in the claim (or
-minding inequality strictness) resolves this issue.
+Theorem 2: Indeed, including an extra constant factor in the claim (or minding inequality strictness) resolves this issue.
 
-Theorem 2 (line 958): An estimator cannot rule out P^i without having
-vistited state i. We'll clarify this point in the revision.
+Theorem 2 (line 958): An estimator cannot rule out P^i without having visited state i. We'll clarify this point in the revision.
 
 Reviewer_7
 
-Perfect sampling: Indeed, this line of work is related, although these
-methods generally do not apply in our setting of estimation from a
-single sample path. We'll discuss this in the revision.
+Perfect sampling: Indeed, this line of work is related, although these methods generally do not apply in our setting of estimation from a single sample path. We'll discuss this in the revision.
