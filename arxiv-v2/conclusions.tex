@@ -1,0 +1,33 @@
+The construction used in \cref{thm:combined} applies more generally:
+Given a confidence interval of the form $I_n = I_n(\gap,\pimin,\delta)$ 
+for some confidence level $\delta$
+and a fully empirical confidence set $E_n(\delta)$ for $(\gap,\pimin)$  for the same level,
+$I_n' = E_n(\delta) \cap \cup_{(\gamma,\pi)\in E_n(\delta)} I_n(\gamma,\pi,\delta)$ is a valid
+fully empirical $2\delta$-level confidence interval whose asymptotic width
+matches that of $I_n$ up to lower order terms under reasonable assumptions on $E_n$ and $I_n$.
+In particular, this suggests that future work should focus on 
+closing the gap between the lower and upper bounds on the accuracy
+of point-estimation. Another interesting direction is to 
+reduce the computation cost: The current cubic cost in the number of states
+can be too high even when the number of states is only moderately
+large.
+
+Perhaps more important, however, is to extend 
+our results to large state space Markov chains:
+In most practical applications the state space is continuous
+or is exponentially large in some natural parameters.
+As follows from our lower bounds, without further assumptions,
+the problem of fully data dependent estimation of the mixing time
+is intractable for information theoretical reasons.
+Interesting directions for future work thus must consider Markov
+chains with specific structure. Parametric classes of Markov chains,
+including but not limited to Markov chains with factored transition kernels
+with a few factors, are a promising candidate for such future investigations.
+The results presented here are a first step in the ambitious research agenda
+outlined above, and we hope that they will
+serve as a point of departure
+for
+further insights
+in the area of fully empirical estimation of Markov chain 
+parameters based on a single sample path.
+

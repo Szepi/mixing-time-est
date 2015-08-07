@@ -1,0 +1,91 @@
+\subsection{Notations}
+\label{sec:notation}
+
+We denote the set of positive integers by $\bbN$, and
+the set of the first $d$ positive integers $\{1,2,\dotsc,d\}$ by $\iset{d}$.
+The non-negative part of a real number $x$ is $[x]_+ := \max\{0,x\}$.
+We use $\ln(\cdot)$ in expressions with exact constants, while we use $\log(\cdot)$ elsewhere.
+Boldface symbols are used for vectors and matrices (e.g., $\vv$,
+$\vM$), and their entries are referenced by subindexing (e.g., $v_i$,
+$M_{i,j}$).
+For a vector $\vv$, $\norm{\vv}$ denotes its Euclidean norm; for a
+matrix $\vM$, $\norm{\vM}$ denotes its spectral norm.
+We use $\Diag(\vv)$ to denote the diagonal matrix whose $(i,i)$-th
+entry is $v_i$.
+The probability simplex is denoted by $\Delta^{d-1} = \{ \vp
+\in [0,1]^d : \sum_{i=1}^d p_i = 1 \}$, and we regard vectors in
+$\Delta^{d-1}$ as row vectors.
+
+\subsection{Setting}
+\label{sec:setting}
+
+Let $\vP \in (\Delta^{d-1})^d \subset [0,1]^{d \times d}$ be a $d
+\times d$ row-stochastic matrix for an ergodic (i.e., irreducible and
+aperiodic) Markov chain.
+This implies there is a unique stationary distribution $\vpi \in
+\Delta^{d-1}$ with $\pi_i > 0$ for all $i \in [d]$~\citep[Corollary
+1.17]{LePeWi08}.
+We also assume that $\vP$ is \emph{reversible} (with respect to
+$\vpi$):
+\begin{align}
+\label{eq:reversibility}
+  \pi_i P_{i,j} = \pi_j P_{j,i} ,
+  \quad i,j \in [d] .
+\end{align}
+The minimum stationary probability is denoted by $\pimin := \min_{i
+\in [d]} \pi_i$.
+
+Define the matrices
+\begin{align*}
+\vM := \Diag(\vpi) \vP \quad \text{and} \quad
+\vL := \Diag(\vpi)^{-1/2} \vM \Diag(\vpi)^{-1/2}\,.
+\end{align*}
+The $(i,j)$th entry of the matrix $M_{i,j}$ contains the \emph{doublet
+probabilities} associated with $\vP$: $M_{i,j} = \pi_i P_{i,j}$ is the
+probability of seeing state $i$ followed by state $j$ when the chain
+is started from its stationary distribution.
+The matrix $\vM$ is symmetric on account of the reversibility of
+$\vP$, and hence it follows that $\vL$ is also symmetric.
+(We will strongly exploit the symmetry in our results.)
+Further, $\vL = \Diag(\vpi)^{1/2} \vP \Diag(\vpi)^{-1/2}$, hence $\vL$
+and $\vP$ are similar and thus their eigenvalue systems are identical.
+Ergodicity and reversibility imply that the eigenvalues of $\vL$ are
+contained in the interval $\opencloseint{-1,1}$, and that $1$ is an
+eigenvalue of $\vL$ with multiplicity $1$~\citep[Lemmas 12.1 and
+12.2]{LePeWi08}.
+Denote and order the eigenvalues of $\vL$ as
+\[
+  1 = \lambda_1 > \lambda_2 \geq \dotsb \geq \lambda_d > -1 .
+\]
+Let $\slem := \max\{ \lambda_2,\, |\lambda_d| \}$, and define the
+(absolute) spectral gap to be $\gap := 1-\slem$, which is strictly
+positive on account of ergodicity.
+
+Let $(X_t)_{t\in\bbN}$ be a Markov chain whose transition
+probabilities are governed by $\vP$.
+For each $t \in \bbN$, let $\vpi^{(t)} \in \Delta^{d-1}$ denote the
+marginal distribution of $X_t$, so
+\[
+  \vpi^{(t+1)} = \vpi^{(t)} \vP ,
+  \quad t \in \bbN .
+\]
+Note that the initial distribution $\vpi^{(1)}$ is arbitrary,
+and need not be the stationary distribution $\vpi$.
+
+The goal is to estimate $\pimin$ and $\gap$ from the length $n$ sample
+path $(X_t)_{t \in [n]}$, and also to construct fully empirical
+confidence intervals that $\pimin$ and $\gap$ with high probability;
+in particular, the construction of the intervals should not depend on
+any unobservable quantities, including $\pimin$ and $\gap$ themselves.
+As mentioned in the introduction,
+it is well-known that the \emph{mixing time} of the Markov chain
+$\tmix$ (defined in Eq.~\ref{eq:mixtimedef})
+is bounded in terms of $\pimin$ and $\gap$, as shown in
+\cref{eq:mixing-time-bound}.
+Moreover, convergence rates for empirical processes on Markov chain
+sequences are also often given in terms of mixing coefficients that
+can ultimately be bounded in terms of $\pimin$ and
+$\gap$ (as we will show in the proof of our first result).
+Therefore, valid confidence intervals for $\pimin$ and $\gap$ can be
+used to make these rates fully observable.
+
