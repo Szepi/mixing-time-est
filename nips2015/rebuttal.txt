@@ -22,7 +22,9 @@ We will add these details in the revision.
 
 5. Combining Theorems 1 and 2 with a standard argument yields the lower bound in the introduction. We will include the details in the revision.
 
-6. Unfortunately, we were not able to understand the counterexample, likely due to typos in the review. We hope to resolve this via the program chairs/area chair.
+6. Regarding Theorem 1: Unfortunately, we were not able to understand the counterexample, partly due to typos in the review. We hope to resolve this via the program chairs/area chair.
+
+However, there were some minor numerical calculation errors in the proof of Theorem 1, which we can clarify here. We set \varepsilon := \bar\pi, and observe that \pi^{(2)} = (1/(1+2\varepsilon),2\varepsilon/(1+2\varepsilon)). The rest of the proof is correct as is.
 
 7. To conclude Theorem 2, it follows the second-moment method (e.g., Paley-Zygmund) and the moment bounds that, with probability > 1/4, the earliest time in which a sample path visits all d states is at least c d log(d) / \bar\gamma.  This implies that an estimator using a shorter sample path cannot distinguish P^0 from P^i for some i (with probability > 1/4), and hence must have large estimation error. We'll include these details in the revision.
 
@@ -34,7 +36,7 @@ Theorem 5: We get an improvement when the min in the bound for |\hat{V}| is achi
 
 kappa: It is defined just above Theorem 4.
 
-Theorem 2: Indeed, including an extra constant factor in the claim (or minding inequality strictness) resolves this issue.
+Theorem 2 (line 188): Indeed, including an extra constant factor in the claim (or minding inequality strictness) resolves this issue.
 
 Theorem 2 (line 958): An estimator cannot rule out P^i without having visited state i. We'll clarify this point in the revision.
 
