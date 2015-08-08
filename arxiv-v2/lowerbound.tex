@@ -36,9 +36,10 @@
   chains have the same transition probabilities from state $1$.
   The chains are indistinguishable less the sample path eventually
   reaches state $2$.
-  But with probability at least $1/3$, a sample path of length $n <
+  But with probability at least $3/4$, a sample path of length $n <
   1/(4\bar\pi)$ starting from state $1$ always remains in the same
-  state (this follows from properties of the geometric distribution).
+  state (this follows from properties of the geometric distribution
+  and the assumption $\bar\pi < 1/4$).
 \end{proof}
 
 
@@ -94,7 +95,7 @@
   a sample path visits all $d$ states
   stochastically dominates a generalized coupon collection time $T = 1 +
   \sum_{i=1}^{d-1} T_i$, where $T_i$ is the number of steps required to
-  see the $(i+1)$-th distinct state in the sequence beyond the first
+  see the $(i+1)$-th distinct state in the sample path beyond the first
   $i$.
   The random variables $T_1,T_2,\dotsc,T_{d-1}$ are independent, and are
   geometrically distributed, $T_i \sim \Geom(\veps -
