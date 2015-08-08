@@ -116,13 +116,13 @@
   By the Paley-Zygmund inequality,
   \[
     \Pr\Parens{ T > \frac13\bbE[T] }
-    \geq \frac{1}{1 + \frac{\var(T)}{(4/9)\bbE[T]^2}}
+    \geq \frac{1}{1 + \frac{\var(T)}{(1-1/3)^2\bbE[T]^2}}
     \geq \frac{1}{1 + \frac{\Parens{ \frac{d-1}{\veps} }^2
     \frac{\pi^2}{6}}{(4/9)\Parens{ \frac{d-1}{\veps} H_2}^2}}
     \geq \frac14
     .
   \]
-  Since $n < c d\log(d) / \bar\gamma \leq (1/3) (1 + d H_{d-1} /
+  Since $n < c d\log(d) / \bar\gamma \leq (1/3) (1 + (d-1) H_{d-1} /
   (2\bar\gamma)) = \bbE[T]/3$ (for an appropriate absolute constant
   $c$), with probability at least $1/4$, the sample path does not
   visit all $d$ states.
