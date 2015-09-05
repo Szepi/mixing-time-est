@@ -346,7 +346,7 @@ $\norm{\cdot}_{2,\vpi}$ denote the $\vpi$-weighted $2$-norm
 An immediate corollary of this result is that 
 \begin{align}
 \label{eq:dvpi-ratio-bound}
-\Norm{  \Dvpit \Dvpi^{-1} - \vI  } \le \frac{(1-\gap)^{t-1}}{\sqrt{\pimin}}\,.
+\Norm{  \Dvpit \Dvpi^{-1} - \vI  } \le \frac{(1-\gap)^{t-1}}{\pimin}\,.
 \end{align}
 Now note that
 \begin{align*}
@@ -371,8 +371,8 @@ and thus
 Combining this, $\norm{\vL}\le 1$ and~\cref{eq:dvpi-ratio-bound}, we get
 \begin{align}
   \norm{\bbE(\errm)}
-  \le \frac{1}{(n-1)\sqrt{\pimin}} \sum_{t=1}^{n-1} (1-\gap)^{t-1}
-  \le \frac{1}{(n-1)\gap\sqrt{\pimin}}
+  \le \frac{1}{(n-1)\pimin} \sum_{t=1}^{n-1} (1-\gap)^{t-1}
+  \le \frac{1}{(n-1)\gap\pimin}
   .
   \label{eq:biasbound}
 \end{align}
@@ -598,8 +598,8 @@ For the second term, we use the fact $\norm{\vL}\le 1$ to bound
 Then, using~\cref{eq:dvpi-ratio-bound},
 \begin{equation}
   \norm{ \Diag(\vpi^{(H_s)}) \Diag(\vpi)^{-1} - \vI }
-  \le \frac{(1-\gap)^{a'+2(s-1)a}}{\sqrt{\pimin}}
-  \le \frac{(1-\gap)^{a}}{\sqrt{\pimin}} \le 1\,,
+  \le \frac{(1-\gap)^{a'+2(s-1)a}}{\pimin}
+  \le \frac{(1-\gap)^{a}}{\pimin} \le 1\,,
   \label{eq:ysbias}
 \end{equation}
 where the last inequality follows from the assumption that the
@@ -1053,7 +1053,7 @@ at least $1-4\delta$,
 \begin{equation}
   \norm{\errm}
   \leq
-  \frac{1}{(n-1)\gap\sqrt{\pimin}}
+  \frac{1}{(n-1)\gap\pimin}
   +
   \frac{4
     \Ceil{
@@ -1100,7 +1100,7 @@ In this event, \cref{eq:singletonbound} also holds, and hence by
   \\
   +
   3\Parens{
-    \frac{1}{(n-1)\gap\sqrt{\pimin}}
+    \frac{1}{(n-1)\gap\pimin}
     +
     \frac{4
       \Ceil{
