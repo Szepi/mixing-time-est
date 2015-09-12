@@ -1,5 +1,16 @@
-
-\begin{proof}[Proof of \cref{thm:lb-pimin}]
+\begin{theorem}[Theorem~\ref{thm:lb-pimin} restated]
+  Pick any $\bar\pi \in (0,1/4)$.
+  Consider any estimator $\hatgap$ that takes as input a random sample
+  path of length $n \leq 1/(4\bar\pi)$ from a Markov chain starting
+  from any desired initial state distribution.
+  There exists a two-state ergodic and reversible Markov chain
+  distribution with spectral gap $\gap \geq 1/2$ and minimum
+  stationary probability $\pimin \geq \bar\pi$ such that
+  \[
+    \Pr\Brackets{ |\hatgap - \gap| \geq 1/8 } \geq 3/8 .
+  \]
+\end{theorem}
+\begin{proof}
   Fix $\bar\pi \in (0,1/4)$.
   Consider two Markov chains given by the following stochastic
   matrices:
@@ -43,7 +54,22 @@
 \end{proof}
 
 
-\begin{proof}[Proof of \cref{thm:lb-gap}]
+\begin{theorem}[Theorem~\ref{thm:lb-gap} restated]
+  There is an absolute constant $c>0$ such that the following holds.
+  Pick any positive integer $d \geq 3$ and any $\bar\gamma \in
+  (0,1/2)$.
+  Consider any estimator $\hatgap$ that takes as input a random sample
+  path of length $n < c d\log(d) / \bar\gamma$ from a $d$-state
+  reversible Markov chain starting from any desired initial state
+  distribution.
+  There is an ergodic and reversible Markov chain distribution
+  with spectral gap $\gap \in [\bar\gamma,2\bar\gamma]$ and minimum
+  stationary probability $\pimin \geq 1/(2d)$ such that
+  \[
+    \Pr\Brackets{ |\hatgap - \gap| \geq \bar\gamma/2} \geq 1/4 .
+  \]
+\end{theorem}
+\begin{proof}
   We consider $d$-state Markov chains of the following form:
   \[
     P_{i,j} =
@@ -128,5 +154,25 @@
   $c$), with probability at least $1/4$, the sample path does not
   visit all $d$ states.
 \end{proof}
+
+We claim in Section~\ref{sec:intro} that a sample path of length
+$\Omega\parens{ (d \log d)/\gap + 1/\pimin}$ is required to guarantee
+constant multiplicative accuracy in estimating $\gap$.
+This follows by combining Theorems~\ref{thm:lb-pimin}
+and~\ref{thm:lb-gap} in a standard, straightforward way.
+Specifically, if the length of the sample path $n$ is smaller than
+$(n_1 + n_2) / 2$---where $n_1$ is the lower bound from
+Theorem~\ref{thm:lb-pimin}, and $n_2$ is the lower bound from
+Theorem~\ref{thm:lb-gap}---then $n$ is smaller than
+$\max\braces{n_1,n_2}$.
+So at least one of Theorem~\ref{thm:lb-pimin} and
+Theorem~\ref{thm:lb-gap} implies the existence of an ergodic and
+reversible Markov chain distribution with (say) $1/4 \leq \gap \leq
+1/2$ and $\pimin \geq 1/(2d)$ such that
+\[
+  \Pr\Brackets{ |\hatgap - \gap| \geq \gap/4 } \geq 1/4
+  .
+\]
+
 
 
