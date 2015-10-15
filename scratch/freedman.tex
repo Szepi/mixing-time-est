@@ -119,15 +119,6 @@ Define $V := \sum_{i=1}^n \E(X_i^2|\cF_{i-1})$ and $S := \sum_{i=1}^n
 X_i$.
 
 Fix $t>0$.
-Our goal is to prove
-\[
-  \P\Parens{
-    |S| \leq O\Parens{ t + \sqrt{V (\ln(\ln(V/|S|)) + t)} }
-  }
-  \ \geq \ 1 - e^{-t}
-  \,.
-\]
-
 Define the following events:
 \begin{align*}
   E_A & \ := \ \braces{ |S| \leq c_1 t + c_2 V }
@@ -139,6 +130,7 @@ Define the following events:
   \item
     We can show using standard methods that $\P(E_A) \geq 1-2e^{-t}$
     for suitable $c_1, c_2 > 0$.
+    For example, see Beygelzimer et al (2011; arXiv:1002.4058).
 
   \item
     If $E_A$ and $E_B$ both hold, then $|S| \leq (c_1 + c_2c_3) t \leq
@@ -148,7 +140,7 @@ Define the following events:
     Now we shall bound $\P(E_A \wedge \neg E_B \wedge |S| > c_5
     \sqrt{V (\ln(\ln^2(V/(c_6|S|))) + t)})$.
     Using Chernoff's method, we have
-    \begin{align*}
+    \begin{align}
       \lefteqn{
         \P\Parens{
           E_A \wedge \neg E_B \wedge
@@ -160,14 +152,15 @@ Define the following events:
             }
           }
         }
-      } \\
+      }
+      \notag \\
       & \ = \
       \P\Parens{
         E_A \wedge \neg E_B \wedge
         \frac{S^2}{c_5^2V}
         > \ln\Parens{\ln^2\frac{V}{c_6|S|}} + t
       }
-      \\
+      \notag \\
       & \ = \
       \P\Parens{
         E_A \wedge \neg E_B \wedge
@@ -178,7 +171,7 @@ Define the following events:
         }
         > e^t
       }
-      \\
+      \notag \\
       & \ \leq \
       \E\Parens{
         \ind{E_A \wedge \neg E_B}
@@ -189,9 +182,7 @@ Define the following events:
         }
       }
       e^{-t}
-      \\
-      & \ \dotsb \
-      \\
+      \notag \\
       & \ \leq \
       \int_{-1/e^2}^{1/e^2}
       \E\Parens{
@@ -200,13 +191,17 @@ Define the following events:
       }
       \frac{\dif\lambda}{\abs{\lambda}\ln^2\abs{\lambda}}
       e^{-t}
-      \\
+      \label{eq:key} \\
       & \ \leq \
       e^{-t}
-      \,,
-    \end{align*}
-    where the key inequality holds for a suitable choice of $c_5, c_6
-    > 0$.
+      \,.
+    \end{align}
+    Inequality~\eqref{eq:key} holds for a suitable choice of
+    $c_5, c_6 > 0$; its proof is given below.
+    The final inequality uses the fact that for any $\lambda \in
+    \intcc{-1,1}$, we have $\E\exp(\lambda S - \lambda^2 (e-2) V) \leq
+    1$.
+    This is proved, e.g., in Beygelzimer et al (2011).
 
   \item
     Now we conclude that
