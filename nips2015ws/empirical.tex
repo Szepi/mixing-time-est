@@ -224,15 +224,20 @@ bounds for the smoothed frequency estimates of $\vP$.
     O\Parens{
       \max_{(i,j) \in [d]^2}
       \frac{d}{\gap}
-      \sqrt{\frac{P_{i,j}\log(d/\delta)}{\pi_i n}}
+      \sqrt{\frac{P_{i,j}\log\log n}{\pi_i n}}
     }
     ,
     \quad
     \hat{w}
     =
-    O\Parens{ 
-      \frac{d}{\pimin\gap} \sqrt{\frac{\log(d/\delta)}{\pimin n}} + 
-      \sqrt{ \frac{d\log(d/\delta)}{ \pimin n}}
+    O\Parens{
+      \Parens{
+        \frac{d}{\pimin^{3/2}\gap}
+        + \sqrt{\frac{d}{\pimin}}
+      }
+      \sqrt{\frac{\log\log n}{n}}
+%      \frac{d}{\pimin\gap} \sqrt{\frac{\log(d/\delta)}{\pimin n}} + 
+%      \sqrt{ \frac{d\log(d/\delta)}{ \pimin n}}
     }
     .\footnote{%
     In \cref{thm:empirical}, our use of big-$O$ notation
