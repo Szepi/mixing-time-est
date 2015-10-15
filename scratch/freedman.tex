@@ -189,7 +189,7 @@ Define the following events:
         \ind{E_A \wedge \neg E_B}
         \exp\Parens{ \lambda S - \lambda^2 (e-2) V }
       }
-      \frac{\dif\lambda}{\abs{\lambda}\ln^2\abs{\lambda}}
+      \frac{\dif\lambda}{\abs{\lambda}\ln^2\frac1{\abs{\lambda}}}
       e^{-t}
       \label{eq:key} \\
       & \ \leq \
@@ -260,7 +260,7 @@ On this same event, we have $c_7V/(|S|(1-\delta)) \geq e^2$.
 The key inequality follows by viewing the integral as an expectation
 over the random variable $\Lambda$, which has support on
 $\intco{-1/e^2,0} \cup \intoc{0,1/e^2}$ with probability density
-$f_\Lambda(t) := 1/(\abs{t}\ln^2\abs{t})$:
+$f_\Lambda(t) := 1/(\abs{t}\ln^2(1/\abs{t}))$:
 \begin{align*}
   \E\Parens{
     \ind{E_A \wedge \neg E_B}
