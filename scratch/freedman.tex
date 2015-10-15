@@ -122,11 +122,11 @@ Fix $t>0$.
 Our goal is to prove
 \[
   \P\Parens{
-    |S| > c \max\Braces{ t \,,\, \sqrt{V (c' \ln(\ln(V/|S|)) + t)} }
+    |S| \leq O\Parens{ t + \sqrt{V (\ln(\ln(V/|S|)) + t)} }
   }
-  \ \leq \ c'' e^{-t}
+  \ \geq \ 1 - e^{-t}
+  \,.
 \]
-for some suitable constants $c, c', c'' > 0$.
 
 Define the following events:
 \begin{align*}
