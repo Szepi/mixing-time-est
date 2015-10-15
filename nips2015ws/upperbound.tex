@@ -1,0 +1,1139 @@
+
+In this section, we prove \cref{thm:err}.
+
+\subsection{Accuracy of $\hatpimin$}
+
+We start by proving the deviation bound on $\pimin-\hatpimin$, from
+which we may easily deduce \cref{eq:piminbound} in \cref{thm:err}.
+\begin{lemma}
+  \label{lem:hatpimin}
+  Pick any $\delta \in (0,1)$, and let
+  \begin{equation}
+    \veps_n :=
+    \frac{ \ln\Parens{\frac{d}\delta\sqrt{\frac{2}{\pimin}}} }{\gap n}
+    .
+    \label{eq:singleton-veps}
+  \end{equation}
+  With probability at least $1-\delta$, the following inequalities
+  hold simultaneously:
+  \begin{align}
+    \Abs{\hat{\pi}_i-\pi_i}
+    & \le
+    \sqrt{8\pi_i(1-\pi_i) \veps_n}
+    + 20 \veps_n
+    \quad \text{for all $i \in [d]$}
+    ;
+    \label{eq:singletonboundsimple}
+    \\
+    \Abs{\hatpimin - \pimin}
+    & \leq
+    4\sqrt{\pimin\veps_n}
+    + 47\veps_n
+    .
+    \label{eq:hatpimin}
+  \end{align}
+\end{lemma}
+\begin{proof}
+  We use the following Bernstein-type inequality for Markov chains
+  from \citet[][Theorem~3.8]{paulin15}: letting $\bbP^{\vpi}$ denote
+  the probability with respect to the stationary chain (where the
+  marginal distribution of each $X_t$ is $\vpi$), we have for every
+  $\eps>0$,
+  \[
+    \bbP^{\vpi}
+    \Parens{
+      \abs{ \hat\pi_i-\pi_i} > \eps
+    } \le
+    2\exp\Parens{
+      -\frac{
+        n\gap\eps^2
+      }{
+        4\pi_i(1-\pi_i)+10\eps
+      }
+    },
+    \qquad i\in[d]
+    .
+  \]
+  To handle possibly non-stationary chains, as is our case, we combine
+  the above inequality with \citet[][Proposition 3.14]{paulin15}, to
+  obtain for any $\eps>0$,
+  \begin{align*}
+    \bbP
+    \Parens{
+      \abs{ \hat\pi_i-\pi_i} > \eps
+    }
+    &\le
+    \sqrt{
+      \frac1\pimin
+      \bbP^{\vpi}
+      \Parens{
+        \abs{ \hat\pi_i-\pi_i} > \eps
+      }
+    } 
+    \le
+    \sqrt{\frac2\pimin}
+    \exp\Parens{
+      -\frac{
+        n\gap\eps^2
+      }{
+        8\pi_i(1-\pi_i)+20\eps
+      }
+    }.
+  \end{align*}
+  Using this tail inequality with $\eps :=
+  \sqrt{8\pi_i(1-\pi_i)\veps_n} + 20\veps_n$ and a union bound over
+  all $i \in [d]$ implies that the inequalities
+  in~\cref{eq:singletonboundsimple} hold with probability at least
+  $1-\delta$.
+
+  Now assume this $1-\delta$ probability event holds; it remains to
+  prove that \cref{eq:hatpimin} also holds in this event.
+  Without loss of generality, we assume that $\pimin = \pi_1 \leq
+  \pi_2 \leq \dotsb \leq \pi_d$.
+  Let $j \in [d]$ be such that $\hatpimin = \hat\pi_j$.
+  By \cref{eq:singletonboundsimple}, we have $|\pi_i - \hat\pi_i| \leq
+  \sqrt{8\pi_i\veps_n} + 20\veps_n$ for each $i \in \{1,j\}$.
+  Since $\hatpimin \leq \hat\pi_1$,
+  \[
+    \hatpimin - \pimin
+    \leq \hat\pi_1 - \pi_1
+    \leq \sqrt{8\pimin\veps_n} + 20\veps_n
+    \leq \pimin + 22\veps_n
+  \]
+  where the last inequality follows by the AM/GM inequality.
+  Furthermore, using the fact that $a \leq b\sqrt{a} + c \Rightarrow a
+  \leq b^2 + b\sqrt{c} + c$ for nonnegative numbers $a, b, c \geq
+  0$~\citep[see, e.g.,][]{BBL04} with the inequality $\pi_j \leq
+  \sqrt{8\veps_n} \sqrt{\pi_j} + \parens{\hat\pi_j + 20\veps_n}$ gives
+  \[
+    \pi_j
+    \leq 
+    \hat\pi_j
+    + \sqrt{8(\hat\pi_j + 20\veps_n)\veps_n}
+    + 28\veps_n
+    .
+  \]
+  Therefore
+  \[
+    \pimin - \hatpimin
+    \leq \pi_j - \hat\pi_j
+    \leq \sqrt{8(\hatpimin + 20\veps_n)\veps_n} + 28\veps_n
+    \leq \sqrt{8(2\pimin + 42\veps_n)\veps_n} + 28\veps_n
+    \leq 4\sqrt{\pimin\veps_n} + 47\veps_n
+  \]
+  where the second-to-last inequality follows from the above bound on
+  $\hatpimin - \pimin$, and the last inequality uses $\sqrt{a+b} \leq
+  \sqrt{a} + \sqrt{b}$ for nonnegative $a,b \geq 0$.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Accuracy of $\hatgap$}
+
+Let us now turn to proving \cref{eq:gapbound}, i.e., 
+the bound on the error of the spectral gap estimate $\hatgap$.
+The accuracy of $\hatgap$ is based on the accuracy of $\Sym(\wh\vL)$
+in approximating $\vL$ via Weyl's inequality:
+\begin{align*}
+  |\hat\lambda_i - \lambda_i|
+  \leq \norm{\Sym(\wh\vL) - \vL}
+  \quad \text{for all }i \in [d] .
+\end{align*}
+Moreover, the triangle inequality implies that symmetrizing $\wh\vL$
+can only help:
+\begin{align*}
+  \norm{\Sym(\wh\vL) - \vL} \leq \norm{\wh\vL - \vL} .
+\end{align*}
+Therefore, we can deduce \cref{eq:gapbound} in \cref{thm:err} from the
+following lemma.
+\begin{lemma}
+  \label{lem:gap}
+  There exists an absolute constant $C>0$ such that the following
+  holds.
+  For any $\delta \in (0,1)$, with probability at least $1-\delta$,
+  the bounds from \cref{lem:hatpimin} hold, and
+  \begin{equation*}
+    \norm{\wh\vL - \vL}
+    \leq
+    C\,
+      \sqrt{
+        \frac{
+          \log\Parens{\frac{d}{\delta}}
+          \log\Parens{\frac{n}{\pimin\delta}}
+        }{\pimin\gap n}
+      }
+      +
+      C\,
+      \frac{\log\Parens{\frac{1}{\gap}}}{\gap n}
+  \end{equation*}
+\end{lemma}
+The remainder of this section is devoted to proving this
+\lcnamecref{lem:gap}.
+
+The error $\wh\vL - \vL$ may be written as
+\[
+  \wh\vL - \vL
+  = \errm + \errp \vL + \vL \errp + \errp \vL \errp
+  + \errp \errm + \errm \errp + \errp \errm \errp\,,
+\]
+where
+\begin{align*}
+  \errp & := \Diag(\hat\vpi)^{-1/2} \Diag(\vpi)^{1/2} - \vI , \\
+  \errm & := \Diag(\vpi)^{-1/2} \Parens{
+    \wh\vM - \vM
+  } \Diag(\vpi)^{-1/2} .
+\end{align*}
+Therefore
+\begin{align*}
+  \norm{\wh\vL - \vL}
+  \leq \norm{\errm} +
+  \Parens{
+    \norm{\errm} + \norm{\vL}
+  }
+  \Parens{
+    2\norm{\errp} + \norm{\errp}^2
+  }
+  .
+\end{align*}
+Since $\norm{\vL} \leq 1$ and $\norm{\wh\vL} \leq 1$~\citep[Lemma
+12.1]{LePeWi08}, we also have $\norm{\wh\vL - \vL} \leq 2$.
+Therefore,
+\begin{align}
+  \norm{\wh\vL - \vL}
+  \leq
+  \min\Braces{
+    \norm{\errm} +
+    \Parens{
+      \norm{\errm} + \norm{\vL}
+    }
+    \Parens{
+      2\norm{\errp} + \norm{\errp}^2
+    }
+    ,\,
+    2
+  }
+  \leq 3(\norm{\errm}+\norm{\errp})
+  .
+  \label{eq:vlsimple}
+\end{align}
+
+
+\subsection{A bound on $\norm{\errp}$}
+
+Since $\errp$ is diagonal,
+\begin{align*}
+  \norm{\errp}
+  = \max_{i\in[d]}
+  \Abs{
+    \sqrt{\frac{\pi_i}{\hat\pi_i}} - 1
+  }
+  .
+\end{align*}
+Assume that
+\begin{equation}
+  n \geq \frac{108 \ln\Parens{\frac{d}\delta\sqrt{\frac{2}{\pimin}}}
+  }{\pimin\gap}
+  ,
+  \label{eq:min-n1}
+\end{equation}
+in which case
+\[
+  \sqrt{8\pi_i(1-\pi_i) \veps_n} + 20\veps_n
+  \leq \frac{\pi_i}{2}
+\]
+where $\veps_n$ is as defined in \cref{eq:singleton-veps}.
+Therefore, in the $1-\delta$ probability event from
+\cref{lem:hatpimin}, we have $|\pi_i - \hat\pi_i| \leq \pi_i/2$ for
+each $i \in [d]$, and moreover, $2/3 \leq \pi_i/\hat\pi_i \leq 2$ for
+each $i \in [d]$.
+For this range of $\pi_i/\hat\pi_i$, we have
+\[
+  \Abs{ \sqrt{\frac{\pi_i}{\hat\pi_i}} - 1 }
+  \leq 
+  \Abs{ \frac{\hat\pi_i}{\pi_i} - 1 }
+  .
+\]
+We conclude that if $n$ satisfies \cref{eq:min-n1}, then in this
+$1-\delta$ probability event from \cref{lem:hatpimin},
+\begin{align}
+  \norm{\errp}
+  & \leq
+  \max_{i \in [d]}
+  \Abs{
+    \frac{\hat\pi_i}{\pi_i} - 1
+  }
+  \leq
+  \max_{i \in [d]}
+  \frac{
+    \sqrt{8\pi_i(1-\pi_i) \veps_n} + 20 \veps_n
+  }{\pi_i}
+  \notag \\
+  & \leq
+  \sqrt{\frac{8\veps_n}{\pimin}} + \frac{20\veps_n}{\pimin}
+  =
+  \sqrt{
+    \frac{
+      8\ln\Parens{\frac{d}\delta\sqrt{\frac{2}{\pimin}}}
+    }{
+      \pimin\gap n
+    }
+  }
+  +
+  \frac{
+    20\ln\Parens{\frac{d}\delta\sqrt{\frac{2}{\pimin}}}
+  }{
+    \pimin\gap n
+  }
+  .
+  \label{eq:singletonbound}
+\end{align}
+
+\subsection{Accuracy of doublet frequency estimates (bounding $\norm{\errm}$)}
+\label{sec:pairwise}
+In this section we prove a bound on $\norm{\errm}$.
+For this, we decompose
+$\errm = \Diag(\vpi)^{-1/2}(\wh\vM-\vM)\Diag(\vpi)^{-1/2} $
+into $\EE{\errm}$ and 
+$\errm-\EE{\errm}$, the first measuring the effect of a non-stationary start of the chain,
+while the second measuring the variation due to randomness.
+\if0
+into the sum of
+\[
+  \Diag(\vpi)^{-1/2}
+  \left(\bbE( \wh\vM )- \vM\right)
+  \Diag(\vpi)^{-1/2}
+\]
+and
+\begin{multline*}
+  \Diag(\vpi)^{-1/2} \left(\wh\vM- \bbE(\wh\vM)\right) \Diag(\vpi)^{-1/2}
+  \\
+  =
+  \frac{n_H}{n-1}
+  \Diag(\vpi)^{-1/2}\Parens{
+    \wh{\vM}_H - \bbE(\wh{\vM}_H)
+  }\Diag(\vpi)^{-1/2}
+  \\
+  + \frac{n_T}{n-1}
+  \Diag(\vpi)^{-1/2}\Parens{
+    \wh{\vM}_T - \bbE(\wh{\vM}_T)
+  }\Diag(\vpi)^{-1/2}
+  .
+\end{multline*}
+\fi
+
+\subsubsection{Bounding $\norm{\EE{\errm}}$: The price of a non-stationary start.}
+Let $\vpi^{(t)}$ be the distribution of states at time step $t$.
+We will make use of the following proposition, which can be derived by
+following \citet[Proposition 1.12]{MoTe06}:
+\begin{proposition}
+For $t\ge 1$, let $\vUpsilon^{(t)}$ be the vector with $\Upsilon^{(t)}_i= \frac{\pi_i^{(t)}}{\pi_i}$ and let
+$\norm{\cdot}_{2,\vpi}$ denote the $\vpi$-weighted $2$-norm
+\begin{align}
+\label{eq:vv}
+  \norm{\vv}_{2,\vpi} := \Parens{ \sum_{i=1}^d \pi_i v_i^2 }^{1/2}
+  .
+\end{align}
+ Then,
+\begin{equation}
+  \label{eq:L2-contraction}
+  \norm{ \vUpsilon^{(t)} - \v1 }_{2,\vpi} \leq
+  \frac{(1-\gap)^{t-1}}{\sqrt{\pimin}} \,.
+\end{equation}
+\end{proposition}
+An immediate corollary of this result is that 
+\begin{align}
+\label{eq:dvpi-ratio-bound}
+\Norm{  \Dvpit \Dvpi^{-1} - \vI  } \le \frac{(1-\gap)^{t-1}}{\pimin}\,.
+\end{align}
+Now note that
+\begin{align*}
+\bbE (\wh\vM) = \frac{1}{n-1} \sum_{t=1}^{n-1} \Dvpit \vP\,
+\end{align*}
+and thus
+\begin{align*}
+\EE{\errm} &=
+  \Dvpi^{-1/2}
+  \left(\bbE( \wh\vM )- \vM\right)
+  \Dvpi^{-1/2}\\
+& =  
+  \frac{1}{n-1} \sum_{t=1}^{n-1}
+  \Dvpi^{-1/2} (\Dvpit  - \Dvpi) \vP \Dvpi^{-1/2} \\
+& =  
+  \frac{1}{n-1} \sum_{t=1}^{n-1}
+  \Dvpi^{-1/2} (\Dvpit \Dvpi^{-1} - \vI) \vM \Dvpi^{-1/2} \\
+& =  
+  \frac{1}{n-1} \sum_{t=1}^{n-1}
+   (\Dvpit \Dvpi^{-1} - \vI) \vL \,.
+\end{align*}
+Combining this, $\norm{\vL}\le 1$ and~\cref{eq:dvpi-ratio-bound}, we get
+\begin{align}
+  \norm{\bbE(\errm)}
+  \le \frac{1}{(n-1)\pimin} \sum_{t=1}^{n-1} (1-\gap)^{t-1}
+  \le \frac{1}{(n-1)\gap\pimin}
+  .
+  \label{eq:biasbound}
+\end{align}
+
+\subsubsection{
+Bounding $\norm{\errm-\EE{\errm}}$: 
+Application of a matrix tail inequality}
+\label{sec:pairwise-tailbound}
+
+In this section we analyze the deviations of $\errm-\EE{\errm}$. By the definition of $\errm$,
+\begin{align}
+\label{eq:errmdev1}
+\norm{\errm-\EE{\errm}}
+ =  \norm{\Diag(\vpi)^{-1/2}\Parens{\wh\vM - \bbE \wh\vM } \Diag(\vpi)^{-1/2}}
+ \,.
+\end{align}
+The matrix $\wh\vM - \EE{\wh\vM}$  is defined 
+as a sum of dependent centered random matrices.
+We will use the blocking technique of \citet{Bernstein27} 
+to relate the likely deviations of this matrix to that of
+a sum of independent centered random matrices.
+The deviations of these will then bounded
+with the help of a Bernstein-type matrix tail inequality due to \citet{tropp2015intro}.
+
+We divide $[n-1]$ into contiguous blocks of time steps; each has size
+$a \leq n/3$ except possibly the first block, which has size between
+$a$ and $2a-1$.
+Formally, let $a' := a + ((n-1) \bmod a) \leq 2a-1$, and define
+\begin{align*}
+  F & := [a'] , \\
+  H_s & := \{ t \in [n-1] : a' + 2(s-1)a + 1 \leq t \leq a' + (2s-1)a \} , \\
+  T_s & := \{ t \in [n-1] : a' + (2s-1)a + 1 \leq t \leq a' + 2sa \} ,
+\end{align*}
+for $s=1,2,\dotsc$.
+Let $\mu_H$ (resp., $\mu_T$) be the number of non-empty $H_s$ (resp., $T_s$)
+blocks.
+Let $n_H := a\mu_H$ (resp., $n_T := a\mu_T$) be the number of time
+steps in $\cup_s H_s$ (resp., $\cup_s T_s$).
+We have
+\begin{align}
+  \wh\vM
+  & = \frac1{n-1} \sum_{t=1}^{n-1} \ve_{X_t} \ve_{X_{t+1}}^\t
+  \notag \\
+  & = \frac{a'}{n-1} \cdot
+    \underbrace{
+      \frac{1}{a'} \sum_{t\in F} \ve_{X_t} \ve_{X_{t+1}}^\t
+     }_{\wh\vM_F} +
+  \frac{n_H}{n-1} \cdot
+  \underbrace{
+    \frac1{\mu_H}
+    \sum_{s=1}^{\mu_H}
+    \Parens{
+      \frac1a \sum_{t \in H_s} \ve_{X_t} \ve_{X_{t+1}}^\t
+    }
+  }_{\wh{\vM}_H}
+  \notag \\
+  & \qquad
+  + \frac{n_T}{n-1} \cdot
+  \underbrace{
+    \frac1{\mu_T}
+    \sum_{s=1}^{\mu_T}
+    \Parens{
+      \frac1a \sum_{t \in T_s} \ve_{X_t} \ve_{X_{t+1}}^\t
+    }
+  }_{\wh{\vM}_T}
+  .
+  \label{eq:blocking}
+\end{align}
+Here, $\ve_i$ is the $i$-th coordinate basis vector, so $\ve_i
+\ve_j^\t \in \{0,1\}^{d \times d}$ is a $d \times d$ matrix of all
+zeros except for a $1$ in the $(i,j)$-th position.
+
+The contribution of the first block is easily bounded using the
+triangle inequality:
+\begin{multline}
+  \frac{a'}{n-1}
+  \Norm{
+    \Diag(\vpi)^{-1/2}
+    \Parens{
+      \wh\vM_F - \bbE(\wh\vM_F)
+    }
+    \Diag(\vpi)^{-1/2}
+  }
+  \\
+  \leq
+  \frac1{n-1} \sum_{t \in F}
+  \Braces{
+    \Norm{
+      \frac{
+        \ve_{X_t} \ve_{X_{t+1}}^\t
+      }{\sqrt{\pi_{X_t}\pi_{X_{t+1}}}}
+    }
+    +
+    \Norm{
+      \bbE\Parens{
+        \frac{
+          \ve_{X_t} \ve_{X_{t+1}}^\t
+        }{\sqrt{\pi_{X_t}\pi_{X_{t+1}}}}
+      }
+    }
+  }
+  \leq
+  \frac{2a'}{\pimin(n-1)}
+  .
+  \label{eq:first-block}
+\end{multline}
+
+It remains to bound the contributions of the $H_s$ blocks and the
+$T_s$ blocks.
+We just focus on the the $H_s$ blocks, since the analysis is identical
+for the $T_s$ blocks.
+
+Let
+\[
+  \vY_s := \frac1a \sum_{t \in H_s} \ve_{X_t} \ve_{X_{t+1}}^\t ,
+  \quad s \in [\mu_H] ,
+\]
+so
+\[
+  \wh{\vM}_H = \frac1{\mu_H} \sum_{s=1}^{\mu_H} \vY_s ,
+\]
+an average of the random matrices $\vY_s$.
+For each $s \in [\mu_H]$, the random matrix $\vY_s$ is a function of
+\[ (X_t : a' + 2(s-1)a + 1 \leq t \leq a' + (2s-1)a + 1) \]
+(note the $+1$ in the upper limit of $t$),
+so $\vY_{s+1}$ is $a$ time steps ahead of $\vY_s$.
+When $a$ is sufficiently large, we will be able to effectively treat
+the random matrices $\vY_s$ as if they were independent.
+In the sequel, we shall always assume that the block length $a$
+satisfies
+\begin{equation}
+  \label{eq:block-length}
+  a \geq
+  a_\delta
+  :=
+  \frac{1}{\gap} \ln \frac{2(n-2)}{\delta\pimin}
+\end{equation}
+for $\delta \in (0,1)$.
+
+Define
+\begin{align*}
+  \vpi^{(H_s)}  := \frac1a \sum_{t \in H_s} \vpi^{(t)} , \qquad \qquad
+  \vpi^{(H)}  := \frac1{\mu_H} \sum_{s=1}^{\mu_H} \vpi^{(H_s)} .
+\end{align*}
+Observe that
+\[
+  \bbE(\vY_s)
+  = \Diag(\vpi^{(H_s)}) \vP
+\]
+so
+\[
+  \bbE\Parens{
+    \frac1{\mu_H} \sum_{s=1}^{\mu_H} \vY_s
+  } = \Diag(\vpi^{(H)}) \vP
+  .
+\]
+
+Define
+\[
+  \vZ_s
+  := \Diag(\vpi)^{-1/2} \left( \vY_s 
+  - \bbE(\vY_s) \right)\Diag(\vpi)^{-1/2}
+  .
+\]
+We apply a matrix tail inequality to the average of \emph{independent}
+copies of the $\vZ_s$'s.
+More precisely, we will apply the tail inequality to independent
+copies $\wt{\vZ}_s$, $s\in \iset{\mu_H}$ of the random variables
+$\vZ_s$ and then relate the average of $\wt{\vZ}_s$ to that of
+$\vZ_s$.
+The following probability inequality is from \citet[Theorem
+6.1.1.]{tropp2015intro}.
+\begin{theorem}[Matrix Bernstein inequality]
+\label{thm:mxbernstein}
+Let $\vQ_1,\vQ_2,\dotsc,\vQ_m$ be a sequence of independent, random
+$d_1 \times d_2$ matrices.
+Assume that $\EE{\vQ_i} = \v0$ and $\Norm{\vQ_i}\le R$ for each $1\le
+i \le m$.
+Let $\vS = \sum_{i=1}^m \vQ_i$ and let 
+\begin{align*}
+v = \max\left\{ \norm{\bbE \textstyle\sum_i \vQ_i \vQ_i^\top  }, 
+						      \norm{\bbE \textstyle\sum_i \vQ_i^\top \vQ_i  }
+			\right\}\,.
+\end{align*}
+Then, for all $t\ge 0$, 
+\[
+\bbP\left( \Norm{\vS} \ge t \right) \le 2(d_1 + d_2) \exp\left( -\frac{t^2/2}{v+R t/3}\right)\,.
+\]
+In other words, for any $\delta \in (0,1)$,
+\[
+  \bbP\Parens{
+    \norm{\vS} > \sqrt{2 v \ln \frac{2(d_1+d_2)}{\delta}} + \frac{2R}{3}
+    \ln\frac{2(d_1+d_2)}{\delta}
+  } \leq \delta
+  \,.
+\]
+\end{theorem}
+
+To apply \cref{thm:mxbernstein}, it suffices to bound the spectral
+norms of $\vZ_s$ (almost surely), $\bbE(\vZ_s \vZ_s^\t)$, and
+$\bbE(\vZ_s^\t \vZ_s)$.
+
+\paragraph{Range bound.}
+By the triangle inequality,
+\[
+  \norm{\vZ_s}
+  \leq \norm{\Diag(\vpi)^{-1/2} \vY_s \Diag(\vpi)^{-1/2}}
+  + \norm{\Diag(\vpi)^{-1/2} \bbE(\vY_s) \Diag(\vpi)^{-1/2}}
+  \,.
+\]
+For the first term, we have
+\begin{align}
+\label{eq:vysbound}
+  \norm{\Diag(\vpi)^{-1/2} \vY_s \Diag(\vpi)^{-1/2}} \leq \frac1{\pimin} .
+\end{align}
+For the second term, we use the fact $\norm{\vL}\le 1$ to bound
+\begin{align*}
+  \norm{\Diag(\vpi)^{-1/2} (\bbE(\vY_s) -\vM)\Diag(\vpi)^{-1/2}}
+  & = \norm{ \bigl(\Diag(\vpi^{(H_s)}) \Diag(\vpi)^{-1} - \vI  \bigr) \vL }
+  \\
+  & \le \norm{ \Diag(\vpi^{(H_s)}) \Diag(\vpi)^{-1} - \vI }\,.
+\end{align*}
+Then, using~\cref{eq:dvpi-ratio-bound},
+\begin{equation}
+  \norm{ \Diag(\vpi^{(H_s)}) \Diag(\vpi)^{-1} - \vI }
+  \le \frac{(1-\gap)^{a'+2(s-1)a}}{\pimin}
+  \le \frac{(1-\gap)^{a}}{\pimin} \le 1\,,
+  \label{eq:ysbias}
+\end{equation}
+where the last inequality follows from the assumption that the
+block length $a$ satisfies~\cref{eq:block-length}.
+Combining this with
+$\norm{\Diag(\vpi)^{-1/2} \vM\Diag(\vpi)^{-1/2}} = \norm{\vL}\le 1$,
+it follows that
+\begin{align}
+\label{eq:evysbound}
+\norm{\Diag(\vpi)^{-1/2} \bbE(\vY_s) \Diag(\vpi)^{-1/2}} \le 2
+\end{align}
+by the triangle inequality.
+Therefore, together with~\cref{eq:vysbound}, we obtain the range bound
+\[
+  \norm{\vZ_s} \leq \frac1{\pimin} + 2
+  .
+\]
+
+\paragraph{Variance bound.}
+We now determine bounds on the spectral norms of $\bbE(\vZ_s
+\vZ_s^\t)$ and $\bbE(\vZ_s^\t \vZ_s)$.
+Observe that
+\begin{align}
+  \lefteqn{
+    \bbE(\vZ_s\vZ_s^\t)
+  } \notag \\
+  & =
+  \frac1{a^2} \sum_{t \in H_s}
+  \bbE\Parens{
+    \Diag(\vpi)^{-1/2}
+    \ve_{X_t} \ve_{X_{t+1}}^\t 
+    \Diag(\vpi)^{-1}
+    \ve_{X_{t+1}} \ve_{X_t}^\t
+    \Diag(\vpi)^{-1/2}
+  }
+  \label{eq:var1}
+  \\
+  & \quad
+  + \frac1{a^2} \sum_{ \substack{ t \neq t' \\ t,t'\in H_s} } 
+  \bbE\Parens{
+    \Diag(\vpi)^{-1/2}
+    \ve_{X_t} \ve_{X_{t+1}}^\t 
+    \Diag(\vpi)^{-1}
+    \ve_{X_{t'+1}} \ve_{X_{t'}}^\t
+    \Diag(\vpi)^{-1/2}
+  }
+  \label{eq:var2}
+  \\
+  & \quad
+  - \Diag(\vpi)^{-1/2}
+  \bbE(\vY_s)
+  \Diag(\vpi)^{-1} 
+  \bbE(\vY_s^\t)
+  \Diag(\vpi)^{-1/2}
+  .
+  \label{eq:var3}
+\end{align}
+The first sum, \cref{eq:var1}, easily simplifies to the diagonal matrix
+\begin{align*}
+  \lefteqn{
+    \frac1{a^2}
+    \sum_{t \in H_s}
+    \sum_{i=1}^d \sum_{j=1}^d \Pr(X_t = i, X_{t+1} = j) \cdot
+    \frac{1}{\pi_i\pi_j} \ve_i\ve_j^\t\ve_j\ve_i^\t
+  } \\
+  & =
+  \frac1{a^2}
+  \sum_{t \in H_s}
+  \sum_{i=1}^d \sum_{j=1}^d \pi_i^{(t)} P_{i,j} \cdot
+  \frac{1}{\pi_i\pi_j} \ve_i\ve_i^\t
+  =
+  \frac1{a}
+  \sum_{i=1}^d \frac{\pi_i^{(H_s)}}{\pi_i}
+  \Parens{ \sum_{j=1}^d \frac{P_{i,j}}{\pi_j} }
+   \ve_i \ve_i^\t
+  .
+\end{align*}
+For the second sum, \cref{eq:var2},  a symmetric matrix, consider
+\[
+  \vu^\t
+  \Parens{
+    \frac1{a^2} \sum_{ \substack{ t \neq t' \\ t,t'\in H_s} } 
+    \bbE\Parens{
+      \Diag(\vpi)^{-1/2}
+      \ve_{X_t} \ve_{X_{t+1}}^\t 
+      \Diag(\vpi)^{-1}
+      \ve_{X_{t'+1}} \ve_{X_{t'}}^\t
+      \Diag(\vpi)^{-1/2}
+    }
+  } \vu
+\]
+for an arbitrary unit vector $\vu$.
+By Cauchy-Schwarz and AM/GM, this is bounded from above by
+\begin{multline*}
+  \frac1{2a^2}
+  \sum_{ \substack{ t \neq t' \\ t,t'\in H_s} }
+  \biggl[
+  \bbE\Parens{
+    \vu^\t
+    \Diag(\vpi)^{-1/2} \ve_{X_t} \ve_{X_{t+1}}^\t \Diag(\vpi)^{-1}
+    \ve_{X_{t+1}} \ve_{X_t}^\t \Diag(\vpi)^{-1/2}
+    \vu
+  }
+  \\
+  +
+  \bbE\Parens{
+    \vu^\t
+    \Diag(\vpi)^{-1/2} \ve_{X_{t'}} \ve_{X_{t'+1}}^\t \Diag(\vpi)^{-1}
+    \ve_{X_{t'+1}} \ve_{X_{t'}}^\t \Diag(\vpi)^{-1/2}
+    \vu
+  }
+  \biggr]
+  ,
+\end{multline*}
+which simplifies to
+\[
+  \frac{a-1}{a^2}
+  \vu^\t \bbE\Parens{
+    \sum_{t \in H_s}
+    \Diag(\vpi)^{-1/2} \ve_{X_t} \ve_{X_{t+1}}^\t \Diag(\vpi)^{-1}
+    \ve_{X_{t+1}} \ve_{X_t}^\t \Diag(\vpi)^{-1/2}
+  } \vu\,.
+\]
+The expectation is the same as that for the first term,
+\cref{eq:var1}.
+
+Finally, the spectral norm of the third term, \cref{eq:var3}, is
+bounded using \cref{eq:evysbound}:
+\[
+  \norm{\Diag(\vpi)^{-1/2} \bbE(\vY_s) \Diag(\vpi)^{-1/2}}^2
+  \leq 4
+  .
+\]
+
+Therefore, by the triangle inequality, the bound $\pi_i^{(H)}/\pi_i
+\leq 2$ from \cref{eq:ysbias}, and simplifications, 
+\begin{align*}
+  \Norm{
+    \bbE(\vZ_s \vZ_s^\t)
+  }
+  &\leq
+  \max_{i\in[d]}
+  \Parens{ \sum_{j=1}^d \frac{P_{i,j}}{\pi_j} }
+  \frac{\pi_i^{(H)}}{\pi_i}
+  + 4
+  \leq
+  2\max_{i\in[d]}
+  \Parens{ \sum_{j=1}^d \frac{P_{i,j}}{\pi_j} }
+  + 4
+  .
+\end{align*}
+
+We can bound $\bbE(\vZ_s^\t \vZ_s)$
+in a similar way; the only difference is that the reversibility needs
+to be used at one place to simplify an expectation:
+\begin{align*}
+\MoveEqLeft
+    \frac1{a^2} \sum_{t \in H_s}
+    \bbE\Parens{
+      \Diag(\vpi)^{-1/2}
+      \ve_{X_{t+1}} \ve_{X_t}^\t
+      \Diag(\vpi)^{-1}
+      \ve_{X_t}\ve_{X_{t+1}}^\t
+      \Diag(\vpi)^{-1/2}
+    }
+	\\
+  & =
+  \frac1{a^2} \sum_{t \in H_s}
+  \sum_{i=1}^d \sum_{j=1}^d \Pr(X_t = i, X_{t+1} = j) \cdot
+  \frac{1}{\pi_i\pi_j} \ve_j\ve_j^\t
+  \\
+  & =
+  \frac1{a^2} \sum_{t \in H_s}
+  \sum_{i=1}^d \sum_{j=1}^d \pi_i^{(t)} P_{i,j} \cdot
+  \frac{1}{\pi_i\pi_j} \ve_j\ve_j^\t
+  \\
+  & =
+  \frac1{a^2} \sum_{t \in H_s}
+  \sum_{j=1}^d \Parens{
+    \sum_{i=1}^d \frac{\pi_i^{(t)}}{\pi_i} \cdot \frac{P_{j,i}}{\pi_i}
+  } \ve_j\ve_j^\t
+\end{align*}
+where the last step uses \cref{eq:reversibility}.
+As before, we get
+\begin{align*}
+  \Norm{
+    \bbE(\vZ_s^\t\vZ_s)
+  }
+  &\leq
+  \max_{i\in[d]}
+  \Parens{
+    \sum_{j=1}^d \frac{P_{i,j}}{\pi_j}
+    \cdot \frac{\pi_j^{(H)}}{\pi_j}
+  }
+  + 4
+  \leq
+  2 \max_{i\in[d]}
+  \Parens{
+    \sum_{j=1}^d \frac{P_{i,j}}{\pi_j}
+  }
+  + 4
+\end{align*}
+again using the bound $\pi_i^{(H)}/\pi_i \leq 2$ from
+\cref{eq:ysbias}.
+
+\paragraph{Independent copies bound.}
+Let $\wt\vZ_s$ for $s \in [\mu_H]$ be independent copies of
+$\vZ_s$ for $s \in [\mu_H]$.
+Applying \cref{thm:mxbernstein} to the average of these random
+matrices, we have
+\begin{equation}
+  \bbP\Parens{
+    \Norm{ \frac1{\mu_H} \sum_{s=1}^{\mu_H} \wt\vZ_s}
+    >
+    \sqrt{
+      \frac{4\Parens{ d_{\vP} + 2 } \ln\frac{4d}{\delta}}
+      {\mu_H}
+    }
+    + \frac{2\Parens{ \frac1{\pimin} + 2 } \ln\frac{4d}{\delta}}
+    {3\mu_H}
+  } \leq \delta
+  \label{eq:indpt-bound}
+\end{equation}
+where
+\begin{align*}
+  d_{\vP}
+  & := \max_{i \in [d]} \sum_{j=1}^d \frac{P_{i,j}}{\pi_j}
+  \leq
+  \frac{1}{\pimin}
+  \,.
+\end{align*}
+
+\paragraph{The actual bound.}
+To bound the probability that $\norm{\sum_{s=1}^{\mu_H} \vZ_s/\mu_H}$
+is large, we appeal to the following result, which is a consequence of
+\citep[Corollary 2.7]{Yu94}.
+For each $s \in [\mu_H]$, let $X^{(H_s)} := (X_t : a' + 2(s-1)a + 1
+\leq t \leq a' + (2s-1)a + 1)$, which are the random variables
+determining $\vZ_s$.
+Let $\bbP$ denote the joint distribution of $(X^{(H_s)} : s \in
+[\mu_H])$; let $\bbP_s$ be its marginal over $X^{(H_s)}$, and let
+$\bbP_{1:s+1}$ be its marginal over
+$(X^{(H_1)},X^{(H_2)},\dotsc,X^{(H_{s+1})})$.
+Let $\wt\bbP$ be the product distribution formed from the marginals
+$\bbP_1,\bbP_2,\dotsc,\bbP_{\mu_H}$, so $\wt\bbP$ governs the joint
+distribution of $(\wt\vZ_s : s \in [\mu_H])$.
+The result from \citep[Corollary 2.7]{Yu94} implies for any event $E$,
+\[
+  |\bbP(E) - \wt\bbP(E)| \leq (\mu_H-1) \beta(\bbP)
+\]
+where
+\[
+  \beta(\bbP)
+  :=
+  \max_{1 \leq s \leq \mu_H-1}
+  \bbE\Parens{
+    \Norm{
+      \bbP_{1:s+1}(\cdot\,|X^{(H_1)},X^{(H_2)},\dotsc,X^{(H_s)}) - \bbP_{s+1}
+    }_{\tv}
+  }
+  \,.
+\]
+Here, $\norm{\cdot}_{\tv}$ denotes the total variation norm.
+The number $\beta(\bbP)$ can be recognized to be the
+\emph{$\beta$-mixing coefficient} of the stochastic process
+$\{X^{(H_s)}\}_{s \in [\mu_H]}$.
+This result implies that the bound from \cref{eq:indpt-bound} for
+$\norm{\sum_{s=1}^{\mu_H} \wt\vZ_s/\mu_H}$ also holds for
+$\norm{\sum_{s=1}^{\mu_H} \vZ_s/\mu_H}$, except the probability
+bound increases from $\delta$ to $\delta + (\mu_H-1)\beta(\bbP)$:
+\begin{equation}
+  \bbP\Parens{
+    \Norm{ \frac1{\mu_H} \sum_{s=1}^{\mu_H} \vZ_s}
+    >
+    \sqrt{
+      \frac{4\Parens{ d_{\vP} + 2 } \ln\frac{4d}{\delta}}
+      {\mu_H}
+    }
+    + \frac{2\Parens{ \frac1{\pimin} + 2 } \ln\frac{4d}{\delta}}
+    {3\mu_H}
+  } \leq \delta + (\mu_H-1)\beta(\bbP)
+  .
+  \label{eq:dpt-bound}
+\end{equation}
+By the triangle inequality,
+\[
+  \beta(\bbP)
+  \leq
+  \max_{1 \leq s \leq \mu_H-1}
+  \bbE\Parens{
+    \vphantom{\bigg\vert}
+    \Norm{
+      \bbP_{1:s+1}(\cdot\,|X^{(H_1)},X^{(H_2)},\dotsc,X^{(H_s)})
+      - \bbP^{\vpi}
+    }_{\tv}
+    +
+    \Norm{
+      \bbP_{s+1}
+      - \bbP^{\vpi}
+    }_{\tv}
+  }
+\]
+where $\bbP^{\vpi}$ is the marginal distribution of $X^{(H_1)}$ under
+the stationary chain.
+Using the Markov property and integrating out $X_t$ for $t >
+\min H_{s+1} = a'+2sa+1$,
+\[
+  \Norm{
+    \bbP_{1:s+1}(\cdot\,|X^{(H_1)},X^{(H_2)},\dotsc,X^{(H_s)})
+    - \bbP^{\vpi}
+  }_{\tv}
+  =
+  \Norm{
+    \cL(X_{a'+2sa+1}\,|X_{a'+(2s-1)a+1})
+    - \vpi
+  }_{\tv}
+\]
+where $\cL(Y|Z)$ denotes the conditional distribution of $Y$ given
+$Z$.
+We bound this distance using standard arguments for bounding the
+mixing time in terms of the \emph{relaxation time}
+$1/\gap$~\citep[see, e.g., the proof of Theorem 12.3 of][]{LePeWi08}:
+for any $i \in [d]$,
+\[
+  \Norm{
+    \cL(X_{a'+2sa+1}\,|X_{a'+(2s-1)a+1}=i)
+    - \vpi
+  }_{\tv}
+  =
+  \Norm{
+    \cL(X_{a+1}\,|X_1=i)
+    - \vpi
+  }_{\tv}
+  \leq
+  \frac{
+    \exp\Parens{ -a\gap }
+  }{\pimin}
+  .
+\]
+The distance $\norm{ \bbP_{s+1} - \bbP^{\vpi} }_{\tv}$ can be bounded
+similarly:
+\begin{align*}
+  \Norm{
+    \bbP_{s+1}
+    - \bbP^{\vpi}
+  }_{\tv}
+  & =
+  \Norm{
+    \cL(X_{a'+2sa+1})
+    - \vpi
+  }_{\tv}
+  \\
+  & =
+  \Norm{
+    \sum_{i=1}^d \bbP(X_1 = i)
+    \cL(X_{a'+2sa+1}\,|X_1 = i)
+    - \vpi
+  }_{\tv}
+  \\
+  & \leq
+  \sum_{i=1}^d \bbP(X_1 = i)
+  \Norm{
+    \cL(X_{a'+2sa+1}\,|X_1 = i)
+    - \vpi
+  }_{\tv}
+  \\
+  & \leq
+  \frac{
+    \exp\Parens{-(a'+2sa)\gap}
+  }{\pimin}
+  \leq
+  \frac{
+    \exp\Parens{-a\gap}
+  }{\pimin}
+  .
+\end{align*}
+We conclude
+\[
+  (\mu_H-1)\beta(\bbP)
+  \leq (\mu_H-1)\frac{2\exp(-a\gap)}{\pimin}
+  \leq \frac{2(n-2)\exp(-a\gap)}{\pimin}
+  \leq \delta
+\]
+where the last step follows from the block length assumption
+\cref{eq:block-length}.
+
+We return to the decomposition from \cref{eq:blocking}.
+We apply \cref{eq:dpt-bound} to both the $H_s$ blocks and the $T_s$
+blocks, and combine with \cref{eq:first-block} to obtain the following
+probabilistic bound.
+Pick any $\delta \in (0,1)$, let the block length be
+\[
+  a
+  := \ceil{ a_\delta }
+  =
+  \Ceil{
+    \frac{1}{\gap}\ln\frac{2(n-2)}{\pimin\delta}
+  }
+  ,
+\]
+so
+\[
+  \min\{\mu_H,\mu_T\}
+  =
+  \Floor{
+    \frac{n-1-a'}{2a}
+  }
+  \geq
+  \frac{n-1}
+  {
+    2\Parens{
+      1 + \frac1{\gap}\ln\frac{2(n-2)}{\pimin\delta}
+    }
+  }
+  -2
+  =: \mu
+  .
+\]
+If
+\begin{equation}
+  n \geq 7 + \frac6{\gap} \ln \frac{2(n-2)}{\pimin\delta}
+  \geq 3a
+  ,
+  \label{eq:min-n2}
+\end{equation}
+then with probability at least $1-4\delta$,
+\begin{multline*}
+  \Norm{\Diag(\vpi)^{-1/2}\Parens{\wh\vM - \bbE[\wh\vM]} \Diag(\vpi)^{-1/2} }
+  \\
+  \leq
+  \frac{4
+    \Ceil{
+      \frac{1}{\gap}\ln\frac{2(n-2)}{\pimin\delta}
+    }
+  }{\pimin(n-1)}
+  +
+  \sqrt{
+    \frac{4\Parens{ d_{\vP} + 2 } \ln\frac{4d}{\delta}}
+    {\mu}
+  }
+  + \frac{2\Parens{ \frac1{\pimin} + 2 } \ln\frac{4d}{\delta}}
+  {3\mu}
+  .
+\end{multline*}
+
+\subsubsection{The bound on $\norm{\errm}$}
+Combining the probabilistic bound from above with the bound on the
+bias from \cref{eq:biasbound}, we obtain the following.
+Assuming the condition on $n$ from \cref{eq:min-n2}, with probability
+at least $1-4\delta$,
+\begin{equation}
+  \norm{\errm}
+  \leq
+  \frac{1}{(n-1)\gap\pimin}
+  +
+  \frac{4
+    \Ceil{
+      \frac{1}{\gap}\ln\frac{2(n-2)}{\pimin\delta}
+    }
+  }{\pimin(n-1)}
+  +
+  \sqrt{
+    \frac{4\Parens{ d_{\vP} + 2 } \ln\frac{4d}{\delta}}
+    {\mu}
+  }
+  + \frac{2\Parens{ \frac1{\pimin} + 2 } \ln\frac{4d}{\delta}}
+  {3\mu}
+  .
+  \label{eq:doubletbound}
+\end{equation}
+
+\subsection{Overall error bound}
+Assume the sequence length $n$ satisfies \cref{eq:min-n1} and
+\cref{eq:min-n2}.
+Consider the $1-5\delta$ probability event in which
+\cref{eq:singletonboundsimple,eq:hatpimin,eq:doubletbound} hold.
+In this event, \cref{eq:singletonbound} also holds, and hence by
+\cref{eq:vlsimple},
+\begin{multline*}
+  \norm{\wh\vL - \vL}
+  \leq
+  3
+  \Parens{
+    \sqrt{
+      \frac{
+        8\ln\Parens{\frac{d}\delta\sqrt{\frac{2}{\pimin}}}
+      }{
+        \pimin\gap n
+      }
+    }
+    +
+    \frac{
+      20\ln\Parens{\frac{d}\delta\sqrt{\frac{2}{\pimin}}}
+    }{
+      \pimin\gap n
+    }
+  }
+  \\
+  +
+  3\Parens{
+    \frac{1}{(n-1)\gap\pimin}
+    +
+    \frac{4
+      \Ceil{
+        \frac{1}{\gap}\ln\frac{2(n-2)}{\pimin\delta}
+      }
+    }{\pimin(n-1)}
+    +
+    \sqrt{
+      \frac{4\Parens{ d_{\vP} + 2 } \ln\frac{4d}{\delta}}
+      {\mu}
+    }
+    + \frac{2\Parens{ \frac1{\pimin} + 2 } \ln\frac{4d}{\delta}}
+    {3\mu}
+  }
+  \\
+  =
+  O
+  \Parens{
+    \sqrt{
+      \frac{
+        \log\Parens{\frac{d}{\delta}}
+        \log\Parens{\frac{n}{\pimin\delta}}
+      }{\pimin\gap n}
+    }
+  }
+  .
+\end{multline*}
+
+To finish the proof of \cref{lem:gap}, we replace $\delta$ with
+$\delta/5$, and now observe that the bound on $\norm{\wh\vL-\vL}$ is
+trivial if \cref{eq:min-n1} is violated (recalling that
+$\norm{\wh\vL-\vL} \leq 2$ always holds).
+We tack on an additional term $\log(1/(\pimin\gap\delta)) / (\gap n)$
+to also ensure a trivial bound if \cref{eq:min-n2} is violated.
+\hfill $\qed$
+

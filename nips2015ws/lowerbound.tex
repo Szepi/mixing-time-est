@@ -1,0 +1,178 @@
+\begin{theorem}[Theorem~\ref{thm:lb-pimin} restated]
+  Pick any $\bar\pi \in (0,1/4)$.
+  Consider any estimator $\hatgap$ that takes as input a random sample
+  path of length $n \leq 1/(4\bar\pi)$ from a Markov chain starting
+  from any desired initial state distribution.
+  There exists a two-state ergodic and reversible Markov chain
+  distribution with spectral gap $\gap \geq 1/2$ and minimum
+  stationary probability $\pimin \geq \bar\pi$ such that
+  \[
+    \Pr\Brackets{ |\hatgap - \gap| \geq 1/8 } \geq 3/8 .
+  \]
+\end{theorem}
+\begin{proof}
+  Fix $\bar\pi \in (0,1/4)$.
+  Consider two Markov chains given by the following stochastic
+  matrices:
+  \[
+    \vP^{(1)} :=
+    \begin{bmatrix}
+      1-\bar\pi & \bar\pi \\
+      1-\bar\pi & \bar\pi
+    \end{bmatrix}
+    , \quad
+    \vP^{(2)} :=
+    \begin{bmatrix}
+      1-\bar\pi & \bar\pi \\
+      1/2 & 1/2
+    \end{bmatrix}
+    .
+  \]
+  Each Markov chain is ergodic and reversible; their stationary
+  distributions are, respectively, $\vpi^{(1)} = (1-\bar\pi,\bar\pi)$
+  and $\vpi^{(2)} = (1/(1+2\bar\pi),2\bar\pi/(1+2\bar\pi))$.
+  We have $\pimin \geq \bar\pi$ in both cases.
+  For the first Markov chain, $\slem = 0$, and hence the spectral gap
+  is $1$; for the second Markov chain, $\slem = 1/2-\bar\pi$, so the
+  spectral gap is $1/2+\bar\pi$.
+
+  In order to guarantee $|\hatgap - \gap| < 1/8 < |1 -
+  (1/2+\bar\pi)|/2$, it must be possible to distinguish the two Markov
+  chains.
+  Assume that the initial state distribution has mass at least $1/2$
+  on state $1$.
+  (If this is not the case, we swap the roles of states $1$ and $2$ in
+  the constructions above.)
+  With probability at least half, the initial state is $1$; and both
+  chains have the same transition probabilities from state $1$.
+  The chains are indistinguishable unless the sample path eventually
+  reaches state $2$.
+  But with probability at least $3/4$, a sample path of length $n <
+  1/(4\bar\pi)$ starting from state $1$ always remains in the same
+  state (this follows from properties of the geometric distribution
+  and the assumption $\bar\pi < 1/4$).
+\end{proof}
+
+
+\begin{theorem}[Theorem~\ref{thm:lb-gap} restated]
+  There is an absolute constant $c>0$ such that the following holds.
+  Pick any positive integer $d \geq 3$ and any $\bar\gamma \in
+  (0,1/2)$.
+  Consider any estimator $\hatgap$ that takes as input a random sample
+  path of length $n < c d\log(d) / \bar\gamma$ from a $d$-state
+  reversible Markov chain starting from any desired initial state
+  distribution.
+  There is an ergodic and reversible Markov chain distribution
+  with spectral gap $\gap \in [\bar\gamma,2\bar\gamma]$ and minimum
+  stationary probability $\pimin \geq 1/(2d)$ such that
+  \[
+    \Pr\Brackets{ |\hatgap - \gap| \geq \bar\gamma/2} \geq 1/4 .
+  \]
+\end{theorem}
+\begin{proof}
+  We consider $d$-state Markov chains of the following form:
+  \[
+    P_{i,j} =
+    \begin{cases}
+      1-\veps_i & \text{if $i = j$} ; \\
+      \displaystyle\frac{\veps_i}{d-1} & \text{if $i \neq j$}
+    \end{cases}
+  \]
+  for some $\veps_1, \veps_2, \dotsc, \veps_d \in (0,1)$.
+  Such a chain is ergodic and reversible, and its unique stationary
+  distribution $\vpi$ satisfies
+  \[
+    \pi_i = \frac{1/\veps_i}{\sum_{j=1}^d 1/\veps_j}
+    .
+  \]
+  We fix $\veps := \frac{d-1}{d/2}\bar\gamma$ and set $\veps' :=
+  \frac{d/2-1}{d-1} \veps < \veps$.
+  Consider the following $d+1$ different Markov chains of the type
+  described above:
+  \begin{itemize}
+    \item
+      $\vP^{(0)}$: $\veps_1 = \dotsb = \veps_d = \veps$.
+      For this Markov chain, $\lambda_2 = \lambda_d = \slem =
+      1-\frac{d}{d-1}\veps$.
+
+    \item
+      $\vP^{(i)}$ for $i \in [d]$: $\veps_j = \veps$ for $j \neq i$,
+      and $\veps_i = \veps'$.
+      For these Markov chains, $\lambda_2 = 1 - \veps' -
+      \frac{1}{d-1}\veps = 1 - \frac{d/2}{d-1} \veps$,
+      and $\lambda_d = 1 - \frac{d}{d-1} \veps$.
+      So $\slem = 1-\frac{d/2}{d-1} \veps$.
+
+  \end{itemize}
+  The spectral gap in each chain satisfies $\gap \in
+  [\bar\gamma,2\bar\gamma]$; in $\vP^{(i)}$ for $i \in [d]$, it is half
+  of what it is in $\vP^{(0)}$.
+  Also $\pi_i \geq 1/(2d)$ for each $i \in [d]$.
+
+  In order to guarantee $|\hatgap - \gap| < \bar\gamma/2$, it must
+  be possible to distinguish $\vP^{(0)}$ from each $\vP^{(i)}$,
+  $i\in[d]$.
+  But $\vP^{(0)}$ is identical to $\vP^{(i)}$ except for the transition
+  probabilities from state $i$.
+  Therefore, regardless of the initial state, the sample path must
+  visit all states in order to distinguish $\vP^{(0)}$ from each
+  $\vP^{(i)}$, $i \in [d]$.
+  For any of the $d+1$ Markov chains above, the earliest time in which
+  a sample path visits all $d$ states
+  stochastically dominates a generalized coupon collection time $T = 1 +
+  \sum_{i=1}^{d-1} T_i$, where $T_i$ is the number of steps required to
+  see the $(i+1)$-th distinct state in the sample path beyond the first
+  $i$.
+  The random variables $T_1,T_2,\dotsc,T_{d-1}$ are independent, and are
+  geometrically distributed, $T_i \sim \Geom(\veps -
+  (i-1)\veps/(d-1))$.
+  We have that
+  \[
+    \bbE[T_i] = \frac{d-1}{\veps(d-i)} , \quad
+    \var(T_i) = \frac{1 - \veps \frac{d-i}{d-1}}{%
+      \Parens{ \veps \frac{d-i}{d-1} }^2
+    }
+    .
+  \]
+  Therefore
+  \[
+    \bbE[T] = 1 + \frac{d-1}{\veps} H_{d-1} , \quad
+    \var(T) \leq \Parens{ \frac{d-1}{\veps} }^2 \frac{\pi^2}{6} 
+  \]
+  where $H_{d-1} = 1 + 1/2 + 1/3 + \dotsb + 1/(d-1)$.
+  By the Paley-Zygmund inequality,
+  \[
+    \Pr\Parens{ T > \frac13\bbE[T] }
+    \geq \frac{1}{1 + \frac{\var(T)}{(1-1/3)^2\bbE[T]^2}}
+    \geq \frac{1}{1 + \frac{\Parens{ \frac{d-1}{\veps} }^2
+    \frac{\pi^2}{6}}{(4/9)\Parens{ \frac{d-1}{\veps} H_2}^2}}
+    \geq \frac14
+    .
+  \]
+  Since $n < c d\log(d) / \bar\gamma \leq (1/3) (1 + (d-1) H_{d-1} /
+  (2\bar\gamma)) = \bbE[T]/3$ (for an appropriate absolute constant
+  $c$), with probability at least $1/4$, the sample path does not
+  visit all $d$ states.
+\end{proof}
+
+We claim in Section~\ref{sec:intro} that a sample path of length
+$\Omega\parens{ (d \log d)/\gap + 1/\pimin}$ is required to guarantee
+constant multiplicative accuracy in estimating $\gap$.
+This follows by combining Theorems~\ref{thm:lb-pimin}
+and~\ref{thm:lb-gap} in a standard, straightforward way.
+Specifically, if the length of the sample path $n$ is smaller than
+$(n_1 + n_2) / 2$---where $n_1$ is the lower bound from
+Theorem~\ref{thm:lb-pimin}, and $n_2$ is the lower bound from
+Theorem~\ref{thm:lb-gap}---then $n$ is smaller than
+$\max\braces{n_1,n_2}$.
+So at least one of Theorem~\ref{thm:lb-pimin} and
+Theorem~\ref{thm:lb-gap} implies the existence of an ergodic and
+reversible Markov chain distribution with (say) $1/4 \leq \gap \leq
+1/2$ and $\pimin \geq 1/(2d)$ such that
+\[
+  \Pr\Brackets{ |\hatgap - \gap| \geq \gap/4 } \geq 1/4
+  .
+\]
+
+
+

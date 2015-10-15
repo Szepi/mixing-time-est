@@ -1,0 +1,228 @@
+%We present lower/upper bounds on rates
+%for estimating spectral gap as a function of the length of the
+%sample path $n$.
+
+\subsection{Lower bounds}
+\label{sec:rates-lower}
+We first show lower bounds on the number of observations necessary to
+achieve a fixed multiplicative (or even just additive) accuracy in
+estimating the spectral gap $\gap$.
+By \cref{eq:mixing-time-bound}, the multiplicative accuracy lower
+bound for $\gap$ gives the same lower bound for estimating the mixing
+time.
+Our first result holds even for two state Markov chains and shows that a sequence length of $\Omega(1/\pimin)$
+is necessary to achieve even a constant \emph{additive} accuracy in estimating $\gap$.
+\begin{theorem}
+  \label{thm:lb-pimin}
+  Pick any $\bar\pi \in (0,1/4)$.
+  Consider any estimator $\hatgap$ that takes as input a random sample
+  path of length $n \leq 1/(4\bar\pi)$ from a Markov chain starting
+  from any desired initial state distribution.
+  There exists a two-state ergodic and reversible Markov chain
+  distribution with spectral gap $\gap \geq 1/2$ and minimum
+  stationary probability $\pimin \geq \bar\pi$ such that
+  $\Pr\Brackets{ |\hatgap - \gap| \geq 1/8 } \geq 3/8$.
+%  \[
+%    \Pr\Brackets{ |\hatgap - \gap| \geq 1/8 } \geq 3/8 .
+%  \]
+\end{theorem}
+Next, considering $d$ state chains, we show that 
+a sequence of length $\Omega(d\log(d)/\gap)$ is required
+to estimate $\gap$ up to a constant multiplicative accuracy.
+Essentially, the sequence may have to visit all $d$ states at least
+$\log(d)/\gap$ times each, on average.
+This holds \emph{even} if $\pimin$ is within a factor of two of the
+\emph{largest} possible value of $1/d$ that it can take, i.e., when
+$\vpi$ is nearly uniform.
+\begin{theorem}
+  \label{thm:lb-gap}
+  There is an absolute constant $c>0$ such that the following holds.
+  Pick any positive integer $d \geq 3$ and any $\bar\gamma \in
+  (0,1/2)$.
+  Consider any estimator $\hatgap$ that takes as input a random sample
+  path of length $n < c d\log(d) / \bar\gamma$ from a $d$-state
+  reversible Markov chain starting from any desired initial state
+  distribution.
+  There is an ergodic and reversible Markov chain distribution
+  with spectral gap $\gap \in [\bar\gamma,2\bar\gamma]$ and minimum
+  stationary probability $\pimin \geq 1/(2d)$ such that
+  $\Pr\Brackets{ |\hatgap - \gap| \geq \bar\gamma/2} \geq 1/4$.
+%  \[
+%    \Pr\Brackets{ |\hatgap - \gap| \geq \bar\gamma/2} \geq 1/4 .
+%  \]
+\end{theorem}
+
+%The proofs of \cref{thm:lb-pimin,thm:lb-gap} are given in
+%\cref{app:lower}. 
+
+\subsection{A plug-in based point estimator and its accuracy}
+\label{sec:rates-upper}
+We now consider the problem of estimating $\gap$ using a natural
+plug-in estimator.
+%For this, we construct a natural plug-in estimator.
+%Along the way, we also provide an estimator for the minimum stationary
+%probability, allowing one to use the bounds from
+%\cref{eq:mixing-time-bound} to trap the mixing time.
+
+\iffalse
+Define the random matrix $\wh\vM \in [0,1]^{d \times d}$ and random
+vector $\hat\vpi \in \Delta^{d-1}$ by
+\begin{align*}
+  \wh{M}_{i,j}
+  & := \frac{|\{ t \in [n-1] : (X_t,X_{t+1}) = (i,j) \}|}{n-1}
+  , \quad i,j \in [d]\,,
+  \\
+  \hat{\pi}_i
+  & := \frac{|\{ t \in [n] : X_t = i \}|}{n}
+  , \quad i \in [d]
+  \,.
+\end{align*}
+Furthermore, define
+\[
+  \Sym(\wh\vL) := \frac12 \parens{ \wh\vL + \wh\vL^\t }
+\]
+to be the symmetrized version of the (possibly non-symmetric) matrix
+\[
+  \wh\vL := \Diag(\hat\vpi)^{-1/2} \wh\vM \Diag(\hat\vpi)^{-1/2}
+  .
+\]
+Let $\hat\lambda_1 \geq \hat\lambda_2 \geq \dotsb \geq \hat\lambda_d$
+be the eigenvalues of $\Sym(\wh\vL)$.
+Our estimator of the minimum stationary probability $\pimin$ is
+\[
+  \hatpimin := \min_{i \in [d]} \hat\pi_i ,
+\]
+and our estimator of the spectral gap $\gap$ is
+\[
+  \hatgap := 1 - \max\{ \hat\lambda_2, |\hat\lambda_d| \} .
+\]
+These estimators have the following accuracy guarantees:
+\fi
+\begin{theorem}
+  \label{thm:err}
+  There exists an absolute constant $C>0$ such that the following
+  holds.
+  Assume the estimators $\hatpimin$ and $\hatgap$ described above are
+  formed from a sample path of length $n$ from an ergodic and
+  reversible Markov chain.
+  Let $\gap>0$ denote the spectral gap and $\pimin>0$ the minimum
+  stationary probability.
+  For any $\delta \in (0,1)$, with probability at least $1-\delta$,
+  the plug-in estimates $\hatpimin$ and $\hatgap$ of $\pimin$ and
+  $\gap$ satisfy
+   $\Abs{\hatpimin-\pimin}
+    \le
+    C \,
+    \parens{
+      \sqrt{\pimin\log\frac{d}{\pimin\delta}/(\gap n)}
+      +
+      \log\frac{d}{\pimin\delta}/(\gap n)
+    }$
+%  \begin{equation}\label{eq:piminbound}
+%    \Abs{\hatpimin-\pimin}
+%    \le
+%    C \,
+%    \Parens{
+%      \sqrt{\frac{\pimin\log\frac{d}{\pimin\delta}}{\gap n}}
+%      +
+%      \frac{\log\frac{d}{\pimin\delta}}{\gap n}
+%    }
+%  \end{equation}
+  and
+   $\Abs{\hatgap-\gap}
+    \leq
+    C \,
+    \parens{
+      \sqrt{\log\frac{d}{\delta}\cdot\log\frac{n}{\pimin\delta}/(\pimin\gap n)}
+      + \log\frac{1}{\gap}/(\gap n)
+    }$.
+%  \begin{equation}\label{eq:gapbound}
+%    \Abs{\hatgap-\gap}
+%    \leq
+%    C \,
+%    \Parens{
+%      \sqrt{\frac{\log\frac{d}{\delta}\cdot\log\frac{n}{\pimin\delta}}{\pimin\gap n}}
+%      + \frac{\log\frac{1}{\gap}}{\gap n}  
+%    }
+%    \,.
+%  \end{equation}
+\end{theorem}
+
+%\Cref{thm:err} implies that the sequence lengths required to estimate
+%$\pimin$ and
+%$\gap$ to within constant multiplicative factors are, respectively,
+%\[
+%  \tilde{O}\Parens{\frac1{\pimin\gap}}
+%  \quad\text{and}\quad
+%  \tilde{O}\Parens{\frac1{\pimin\gap^3}}
+%  .
+%\]
+%By \cref{eq:mixing-time-bound},
+%the second of these is also a bound on the required sequence length to estimate $\tmix$.
+
+%The proof of \cref{thm:err} is based on analyzing the
+%convergence of the sample averages $\wh{\vM}$ and
+%$\hat\vpi$ to their expectation, and then using perturbation bounds
+%for eigenvalues to derive a bound on the error of $\hatgap$.
+%However, since these averages are formed using a \emph{single sample
+%path} from a (possibly) non-stationary Markov chain, we cannot use
+%standard large deviation bounds; moreover applying Chernoff-type
+%bounds for Markov chains to each entry of $\wh{\vM}$ would result in a
+%significantly worse sequence length requirement, roughly a factor of
+%$d$ larger.
+%Instead, we adapt probability tail bounds for sums of independent
+%random matrices~\citep{tropp2015intro} to our non-iid setting by
+%directly applying a blocking technique of~\citet{Bernstein27} as
+%described in the article of~\citet{Yu94}.
+%Due to ergodicity, the convergence rate can be bounded without any
+%dependence on the initial state distribution $\vpi^{(1)}$.
+%The proof of \cref{thm:err} is given in \cref{app:upper}.
+
+Note that because the eigenvalues of $\vL$ are the same as that of the
+transition probability matrix $\vP$, 
+we could have instead opted to
+estimate $\vP$, say, using simple frequency estimates obtained from
+the sample path, and then computing the second largest eigenvalue of
+this empirical estimate $\wh\vP$.
+In fact, this approach is a way to extend to non-reversible chains, as
+we would no longer rely on the symmetry of $\vM$ or $\vL$.
+The difficulty with this approach is that $\vP$ lacks the structure
+required by certain strong eigenvalue perturbation results.
+One could instead invoke the Ostrowski-Elsner theorem
+\citep[cf.~Theorem 1.4 on Page 170 of][]{stewart1990matrix}, which
+bounds the \emph{matching distance} between the eigenvalues of a
+matrix $\vA$ and its perturbation $\vA+\vE$ by $O(\norm{\vE}^{1/d})$.
+Since $\norm{\wh\vP-\vP}$ is expected to be of size $O(n^{-1/2})$,
+this approach will give a confidence interval for $\gap$ whose width
+shrinks at a rate of $O(n^{-1/(2d)})$---an exponential slow-down
+compared to the rate from \cref{thm:err}.
+As demonstrated through an example from \citet{stewart1990matrix}, the
+dependence on the $d$-th root of the norm of the perturbation cannot
+be avoided in general.
+Our approach based on estimating a symmetric matrix affords us the use
+of perturbation results that exploit more structure.
+
+Returning to the question of obtaining a fully empirical confidence 
+interval for $\gap$ and $\pimin$, we notice that,
+unfortunately, \cref{thm:err} falls short of being directly suitable for this,
+at least without further assumptions.
+This is because the deviation terms themselves depend inversely both
+on $\gap$ and $\pimin$, and hence can never rule out $0$ (or an
+arbitrarily small positive value) as a possibility for $\gap$ or
+$\pimin$.\footnote{%
+  Using \cref{thm:err}, it is possible to trap $\gap$ in the
+  union of \emph{two} empirical confidence intervals---one around
+  $\hatgap$ and the other around zero, both of which shrink in width
+  as the sequence length increases.%
+}
+In effect, the fact that the Markov chain could be slow mixing and the
+long-term frequency of some states could be small makes it difficult
+to be confident in the estimates provided by $\hatgap$ and
+$\hatpimin$.
+This suggests that in order to obtain fully empirical confidence
+intervals, we need an estimator that is not subject to such
+effects---we pursue this in \cref{sec:empirical}.
+\Cref{thm:err} thus primarily serves as a point of comparison
+for what is achievable in terms of estimation accuracy when one does
+not need to provide empirical confidence bounds.
+
