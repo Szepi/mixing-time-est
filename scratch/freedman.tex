@@ -138,7 +138,7 @@ Define the following events:
 
   \item
     Now we shall bound $\P(E_A \wedge \neg E_B \wedge |S| > c_5
-    \sqrt{V (\ln(\ln^2(|S|/(c_6V))) + t)})$.
+    \sqrt{V (\ln(\ln^2(c_6V/|S|)) + t)})$.
     Using Chernoff's method, we have
     \begin{align}
       \lefteqn{
@@ -147,7 +147,7 @@ Define the following events:
           |S| > c_5 \sqrt{
             V \Parens{
               \ln\Parens{
-                \ln^2\frac{|S|}{c_6V}
+                \ln^2\frac{c_6V}{|S|}
               } + t
             }
           }
@@ -158,7 +158,7 @@ Define the following events:
       \P\Parens{
         E_A \wedge \neg E_B \wedge
         \frac{S^2}{c_5^2V}
-        > \ln\Parens{\ln^2\frac{|S|}{c_6V}} + t
+        > \ln\Parens{\ln^2\frac{c_6V}{|S|}} + t
       }
       \notag \\
       & \ = \
@@ -167,7 +167,7 @@ Define the following events:
         \frac{
           \exp\Parens{\frac{S^2}{c_5^2V}}
         }{
-          \ln^2\frac{|S|}{c_6V}
+          \ln^2\frac{c_6V}{|S|}
         }
         > e^t
       }
@@ -178,7 +178,7 @@ Define the following events:
         \frac{
           \exp\Parens{\frac{S^2}{c_5^2V}}
         }{
-          \ln^2\frac{|S|}{c_6V}
+          \ln^2\frac{c_6V}{|S|}
         }
       }
       e^{-t}
@@ -213,7 +213,7 @@ Define the following events:
           c_5 \sqrt{
             V \Parens{
               \ln\Parens{
-                \ln^2\frac{|S|}{c_6V}
+                \ln^2\frac{c_6V}{|S|}
               } + t
             }
           }
@@ -227,7 +227,7 @@ Define the following events:
         c_5 \sqrt{
           V \Parens{
             \ln\Parens{
-              \ln^2\frac{|S|}{c_6V}
+              \ln^2\frac{c_6V}{|S|}
             } + t
           }
         }
@@ -238,6 +238,8 @@ Define the following events:
       3e^{-t}
       \,.
     \end{align*}
+    Note, the $\ln^2(x)$ should actually be read as
+    $(\ln(\max\braces{1,x}))^2$.
 
 \end{enumerate}
 
@@ -335,28 +337,25 @@ can be bounded below as follows:
   \exp\Parens{\frac{(1-\delta^2)S^2}{2c_7V}}
   \left.
   \Parens{
-    -\frac{1}{\ln(t)}
+    \frac{1}{\ln(1/t)}
   }
   \right\vert_{\frac{|S|(1-\delta)}{c_7V}}^{\frac{|S|(1+\delta)}{c_7V}}
   \\
   & \ = \
   \exp\Parens{\frac{(1-\delta^2)S^2}{2c_7V}}
   \frac{\ln\frac{1+\delta}{1-\delta}}
-  {\ln\Parens{\frac{|S|(1-\delta)}{c_7V}}\ln\Parens{\frac{|S|(1+\delta)}{c_7V}}}
+  {\ln\Parens{\frac{c_7V}{|S|(1-\delta)}}\ln\Parens{\frac{c_7V}{|S|(1+\delta)}}}
   \\
   & \ \geq \
   \exp\Parens{\frac{(1-\delta^2)S^2}{2c_7V}}
   \frac{\ln\frac{1+\delta}{1-\delta}}
-  {\ln^2\Parens{\frac{|S|(1+\delta)}{c_7V}}}
+  {\ln^2\Parens{\frac{c_7V}{|S|(1-\delta)}}}
   \\
   & \ = \
   \exp\Parens{\frac{(1-\delta^2)S^2}{2c_7V}}
-  \frac{1}{\ln^2\Parens{\frac{|S|(1+\delta)}{c_7V}}}
+  \frac{1}{\ln^2\Parens{\frac{c_7V}{|S|(1-\delta)}}}
   \,.
 \end{align*}
-
-WHAT???? SO $|S|/V \leq O(1)$ in this event?
-Does this remove the loglog term?????????
 
 \end{document}
 
