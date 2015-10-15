@@ -138,7 +138,7 @@ Define the following events:
 
   \item
     Now we shall bound $\P(E_A \wedge \neg E_B \wedge |S| > c_5
-    \sqrt{V (\ln(\ln^2(V/(c_6|S|))) + t)})$.
+    \sqrt{V (\ln(\ln^2(|S|/(c_6V))) + t)})$.
     Using Chernoff's method, we have
     \begin{align}
       \lefteqn{
@@ -147,7 +147,7 @@ Define the following events:
           |S| > c_5 \sqrt{
             V \Parens{
               \ln\Parens{
-                \ln^2\frac{V}{c_6|S|}
+                \ln^2\frac{|S|}{c_6V}
               } + t
             }
           }
@@ -158,7 +158,7 @@ Define the following events:
       \P\Parens{
         E_A \wedge \neg E_B \wedge
         \frac{S^2}{c_5^2V}
-        > \ln\Parens{\ln^2\frac{V}{c_6|S|}} + t
+        > \ln\Parens{\ln^2\frac{|S|}{c_6V}} + t
       }
       \notag \\
       & \ = \
@@ -167,7 +167,7 @@ Define the following events:
         \frac{
           \exp\Parens{\frac{S^2}{c_5^2V}}
         }{
-          \ln^2\frac{V}{c_6|S|}
+          \ln^2\frac{|S|}{c_6V}
         }
         > e^t
       }
@@ -178,7 +178,7 @@ Define the following events:
         \frac{
           \exp\Parens{\frac{S^2}{c_5^2V}}
         }{
-          \ln^2\frac{V}{c_6|S|}
+          \ln^2\frac{|S|}{c_6V}
         }
       }
       e^{-t}
@@ -213,7 +213,7 @@ Define the following events:
           c_5 \sqrt{
             V \Parens{
               \ln\Parens{
-                \ln^2\frac{V}{c_6|S|}
+                \ln^2\frac{|S|}{c_6V}
               } + t
             }
           }
@@ -227,7 +227,7 @@ Define the following events:
         c_5 \sqrt{
           V \Parens{
             \ln\Parens{
-              \ln^2\frac{V}{c_6|S|}
+              \ln^2\frac{|S|}{c_6V}
             } + t
           }
         }
