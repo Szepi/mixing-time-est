@@ -203,10 +203,162 @@ Define the following events:
       \\
       & \ \leq \
       e^{-t}
+      \,,
+    \end{align*}
+    where the key inequality holds for a suitable choice of $c_5, c_6
+    > 0$.
+
+  \item
+    Now we conclude that
+    \begin{align*}
+      \lefteqn{
+        \P\Parens{
+          |S| >
+          c_4 t +
+          c_5 \sqrt{
+            V \Parens{
+              \ln\Parens{
+                \ln^2\frac{V}{c_6|S|}
+              } + t
+            }
+          }
+        }
+      } \\
+      & \ \leq \
+      \P\Parens{
+        E_A \wedge
+        \neg E_B \wedge
+        |S| >
+        c_5 \sqrt{
+          V \Parens{
+            \ln\Parens{
+              \ln^2\frac{V}{c_6|S|}
+            } + t
+          }
+        }
+      }
+      + \P(\neg E_A)
+      \\
+      & \ \leq \
+      3e^{-t}
       \,.
     \end{align*}
 
 \end{enumerate}
+
+Observe that on the event $E_A \wedge \neg E_B$, we have
+\[
+  |S|
+  \ \leq \
+  \Parens{
+    \frac{c_1}{c_3} + c_2
+  } V
+  \ \leq \
+  \frac{c_7V}{(1+\delta)e^2}
+\]
+for a suitable choice of $c_7>0$ and $\delta := (e-1)/(e+1) \approx
+0.46212 \in (0,1)$.
+
+The key inequality follows by viewing the integral as an expectation
+over the random variable $\Lambda$, which has support on
+$\intco{-1/e^2,0} \cup \intoc{0,1/e^2}$ with probability density
+$f_\Lambda(t) := 1/(\abs{t}\ln^2\abs{t})$:
+\begin{align*}
+  \E\Parens{
+    \ind{E_A \wedge \neg E_B}
+    \exp\Parens{ \Lambda S - \Lambda^2 (e-2) V }
+  }
+  & \ = \
+  \E\Parens{
+    \ind{E_A \wedge \neg E_B}
+    \E\Parens{
+      \exp\Parens{ \Lambda S - \Lambda^2 (e-2) V }
+      \mid S,V
+    }
+  }
+  \,.
+\end{align*}
+The inner conditional expectation, on the event $E_A \wedge \neg E_B$,
+can be bounded below as follows:
+\begin{align*}
+  \lefteqn{
+    \E\Parens{
+      \exp\Parens{ \Lambda S - \Lambda^2 (e-2) V }
+      \mid S,V
+    }
+  } \\
+  & \ = \
+  \int_{-1/e^2}^{1/e^2}
+  \exp\Parens{ S t - (e-2) V t^2 }
+  f_\Lambda(t) \dif{t}
+  \\
+  & \ = \
+  \exp\Parens{\frac{S^2}{2c_7V}}
+  \int_{-1/e^2}^{1/e^2}
+  \exp\Parens{
+    -\frac{S^2}{2c_7V}
+    + S t - (e-2) V t^2
+  }
+  f_\Lambda(t) \dif{t}
+  \\
+  & \ \geq \
+  \exp\Parens{\frac{S^2}{2c_7V}}
+  \int_{-1/e^2}^{1/e^2}
+  \exp\Parens{
+    -\frac{c_7V}{2}
+    \Parens{ t - \frac{S}{c_7V} }^2
+  }
+  f_\Lambda(t) \dif{t}
+  \qquad \text{(for $c_7 \geq 2(e-2)$)}
+  \\
+  & \ \geq \
+  \exp\Parens{\frac{S^2}{2c_7V}}
+  \int_0^{1/e^2}
+  \exp\Parens{
+    -\frac{c_7V}{2}
+    \Parens{ t - \frac{|S|}{c_7V} }^2
+  }
+  f_\Lambda(t) \dif{t}
+  \qquad \text{(since $f_\Lambda(t) = f_\Lambda(-t)$)}
+  \\
+  & \ \geq \
+  \exp\Parens{\frac{S^2}{2c_7V}}
+  \int_{\frac{|S|(1-\delta)}{c_7V}}^{\frac{|S|(1+\delta)}{c_7V}}
+  \exp\Parens{
+    -\frac{c_7V}{2}
+    \Parens{ t - \frac{|S|}{c_7V} }^2
+  }
+  f_\Lambda(t) \dif{t}
+  \qquad \text{(by above observation)}
+  \\
+  & \ \geq \
+  \exp\Parens{\frac{(1-\delta)S^2}{2c_7V}}
+  \int_{\frac{|S|(1-\delta)}{c_7V}}^{\frac{|S|(1+\delta)}{c_7V}}
+  f_\Lambda(t) \dif{t}
+  \\
+  & \ = \
+  \exp\Parens{\frac{(1-\delta)S^2}{2c_7V}}
+  \left.
+  \Parens{
+    -\frac{1}{\ln(t)}
+  }
+  \right\vert_{\frac{|S|(1-\delta)}{c_7V}}^{\frac{|S|(1+\delta)}{c_7V}}
+  \\
+  & \ = \
+  \exp\Parens{\frac{(1-\delta)S^2}{2c_7V}}
+  \frac{\ln\frac{1+\delta}{1-\delta}}
+  {\ln\Parens{\frac{|S|(1-\delta)}{c_7V}}\ln\Parens{\frac{|S|(1+\delta)}{c_7V}}}
+  \\
+  & \ \geq \
+  \exp\Parens{\frac{(1-\delta)S^2}{2c_7V}}
+  \frac{\ln\frac{1+\delta}{1-\delta}}
+  {\ln^2\Parens{\frac{|S|(1+\delta)}{c_7V}}}
+  \\
+  & \ = \
+  \exp\Parens{\frac{(1-\delta)S^2}{2c_7V}}
+  \frac{1}{\ln^2\Parens{\frac{|S|(1+\delta)}{c_7V}}}
+  \,.
+\end{align*}
 
 \end{document}
 
