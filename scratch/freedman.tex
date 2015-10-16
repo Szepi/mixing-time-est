@@ -235,9 +235,17 @@
     e^{-t}
     \,.
   \end{multline*}
-  Above, $f(t) := \ind{t \in \intco{-1/e^2,0} \cup \intoc{0,1/e^2}}
-  1/(\abs{t}\ln^2(1/\abs{t}))$ can be interpreted as a probability
-  density function.
+  Above,
+  \[
+    f(t)
+    \ := \
+    \frac{
+      \Ind{t \in \intco{-1/e^2,0} \cup \intoc{0,1/e^2}}
+    }{
+      \abs{t}\ln^2(1/\abs{t})
+    }
+  \]
+  is a probability density function.
   The first inequality is by Markov's inequality; the second
   inequality is proved below; and the third inequality above follows
   from~\eqref{eq:freedman}.
