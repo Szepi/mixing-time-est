@@ -40,6 +40,82 @@ The algorithm estimates the spectral gap $\gap$ using
 \subsection{Empirical bounds for $\vP$}
 \label{sec:P-obs-bound}
 
+We make use of Freedman's inequality for martingales~\citep[Theorem
+1.6]{Fre75}, which we state below in a simplified form.
+\begin{theorem}
+  \label{thm:freedman}
+  Let $Y_1, Y_2, \dotsc, Y_n$ be a bounded martingale difference
+  sequence with respect to the filtration $\cF = (\cF_t)_{1 \leq t
+  \leq n}$ and with $|Y_t| \leq b$ for some $b>0$.
+  Let $S := \sum_{t=1}^n Y_t$ and $V := \EE{Y_t^2|\cF_{t-1}}$.
+  For all $t, v > 0$,
+  \[
+    \Pr\Brackets{
+      S > \sqrt{2vt} + 2bt/3
+      \,\wedge\,
+      V \leq v
+    }
+    \leq e^{-t}
+    .
+  \]
+\end{theorem}
+\begin{corollary}
+  \label{cor:freedman}
+  Under the same setting as \Cref{thm:freedman}, for any $t > 0$ and
+  $c > 1$,
+  \[
+    \Pr\Brackets{
+      S > \sqrt{2cVt} + 5bt/3
+    }
+    \leq
+    \Parens{ 1 + \ceil{\log_c(n)} }
+    e^{-t}
+    .
+  \]
+\end{corollary}
+\begin{proof}
+  Define $v_i := c^i b^2t/2$ for $i = 0, 1, \dotsc, \ceil{ \log_c(n)
+  }$, and let $v_{-1} := -\infty$.
+  Then, since $V \leq b^2n$,
+  \begin{align*}
+    \Pr\Brackets{
+      S > \sqrt{2\max\braces{v_0,cV}t} + 2bt/3
+    }
+    & =
+    \sum_{i=0}^{\ceil{\log_c(n)}}
+    \Pr\Brackets{
+      S > \sqrt{2\max\braces{v_0,cV}t} + 2bt/3
+      \,\wedge\, v_{j-1} < V \leq v_j
+    }
+    \\
+    & \leq
+    \sum_{i=0}^{\ceil{\log_c(n)}}
+    \Pr\Brackets{
+      S > \sqrt{2\max\braces{v_0,cv_{j-1}}t} + 2bt/3
+      \,\wedge\, v_{j-1} < V \leq v_j
+    }
+    \\
+    & \leq
+    \sum_{i=0}^{\ceil{\log_c(n)}}
+    \Pr\Brackets{
+      S > \sqrt{2v_jt} + 2bt/3
+      \,\wedge\, V \leq v_j
+    }
+    \\
+    & \leq
+    \sum_{i=0}^{\ceil{\log_c(n)}}
+    e^{-t}
+  \end{align*}
+  where the final inequality uses \Cref{thm:freedman}.
+  The conclusion now follows because
+  \[
+    \sqrt{2cVt} + 5bt/3
+    \geq \sqrt{2\max\braces{v_0,cV}t} + 2bt/3
+    .
+    \qedhere
+  \]
+\end{proof}
+
 \begin{lemma}
   \label{lem:P-unobs-bound}
   The following holds with probability at least $1-\delta$: for all
