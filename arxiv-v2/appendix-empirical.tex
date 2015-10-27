@@ -40,14 +40,15 @@ The algorithm estimates the spectral gap $\gap$ using
 \subsection{Empirical bounds for $\vP$}
 \label{sec:P-obs-bound}
 
-We make use of Freedman's inequality for martingales~\citep[Theorem
-1.6]{Fre75}, which we state below in a simplified form.
-\begin{theorem}
+We make use of a simple corollary of Freedman's inequality for
+martingales~\citep[Theorem 1.6]{Fre75}.
+\begin{theorem}[Freedman's inequality]
   \label{thm:freedman}
   Let $Y_1, Y_2, \dotsc, Y_n$ be a bounded martingale difference
-  sequence with respect to the filtration $\cF = (\cF_t)_{1 \leq t
-  \leq n}$ and with $|Y_t| \leq b$ for some $b>0$.
-  Let $S := \sum_{t=1}^n Y_t$ and $V := \EE{Y_t^2|\cF_{t-1}}$.
+  sequence with respect to the filtration $\cF = (\cF_i)_{1 \leq i
+  \leq n}$ and with $|Y_i| \leq b$ for some $b>0$.
+  Let $V := \sum_{i=1}^n \EE{Y_i^2|\cF_{i-1}}$ and $S := \max_{1 \leq
+  m \leq n} \sum_{i=1}^m Y_i$.
   For all $t, v > 0$,
   \[
     \Pr\Brackets{
@@ -68,42 +69,42 @@ We make use of Freedman's inequality for martingales~\citep[Theorem
       S > \sqrt{2cVt} + 5bt/3
     }
     \leq
-    \Parens{ 1 + \ceil{\log_c(n)} }
+    \Parens{ 1 + \ceil{\log_c(2n/t)} }
     e^{-t}
     .
   \]
 \end{corollary}
 \begin{proof}
-  Define $v_i := c^i b^2t/2$ for $i = 0, 1, \dotsc, \ceil{ \log_c(n)
-  }$, and let $v_{-1} := -\infty$.
-  Then, since $V \leq b^2n$,
+  Define $v_i := c^i b^2t/2$ for $i = 0, 1, 2, \dotsc, \ceil{
+  \log_c(2n/t) }$, and let $v_{-1} := -\infty$.
+  Then, since $V \in [0,b^2n]$,
   \begin{align*}
     \Pr\Brackets{
       S > \sqrt{2\max\braces{v_0,cV}t} + 2bt/3
     }
     & =
-    \sum_{i=0}^{\ceil{\log_c(n)}}
+    \sum_{i=0}^{\ceil{\log_c(2n/t)}}
     \Pr\Brackets{
       S > \sqrt{2\max\braces{v_0,cV}t} + 2bt/3
       \,\wedge\, v_{j-1} < V \leq v_j
     }
     \\
     & \leq
-    \sum_{i=0}^{\ceil{\log_c(n)}}
+    \sum_{i=0}^{\ceil{\log_c(2n/t)}}
     \Pr\Brackets{
       S > \sqrt{2\max\braces{v_0,cv_{j-1}}t} + 2bt/3
       \,\wedge\, v_{j-1} < V \leq v_j
     }
     \\
     & \leq
-    \sum_{i=0}^{\ceil{\log_c(n)}}
+    \sum_{i=0}^{\ceil{\log_c(2n/t)}}
     \Pr\Brackets{
       S > \sqrt{2v_jt} + 2bt/3
       \,\wedge\, V \leq v_j
     }
     \\
     & \leq
-    \sum_{i=0}^{\ceil{\log_c(n)}}
+    \Parens{ 1 + \ceil{\log_c(2n/t)} }
     e^{-t}
   \end{align*}
   where the final inequality uses \Cref{thm:freedman}.
