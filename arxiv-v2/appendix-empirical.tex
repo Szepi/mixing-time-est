@@ -119,16 +119,27 @@ martingales~\citep[Theorem 1.6]{Fre75}.
 
 \begin{lemma}
   \label{lem:P-unobs-bound}
-  The following holds with probability at least $1-\delta$: for all
-  $(i,j) \in \iset{d}^2$,
+  The following holds for any constant $c>1$ with probability at least
+  $1-\delta$: for all $(i,j) \in \iset{d}^2$,
   \begin{equation}
     \abs{ \wh{P}_{i,j} - P_{i,j} }
     \leq
-    \sqrt{\Parens{\frac{N_i}{N_i+d\alpha}}\frac{2P_{i,j}(1-P_{i,j})\ln(2d/\delta)}{N_i+d\alpha}}
-    + \frac{\frac23\ln(2d/\delta)}{N_i+d\alpha}
+    \sqrt{\Parens{\frac{N_i}{N_i+d\alpha}}\frac{2cP_{i,j}(1-P_{i,j})\emptail}{N_i+d\alpha}}
+    + \frac{(5/3)\emptail}{N_i+d\alpha}
     + \frac{\abs{\alpha-d\alpha P_{i,j}}}{N_i+d\alpha}
-    .
     \label{eq:P-unobs-bound}
+  \end{equation}
+  where
+  \begin{equation}
+    \emptail
+    := \inf
+    \Braces{
+      t\geq0 :
+      2d^2 \Parens{ 1 + \ceil{\log_c(2n/t)} } e^{-t} \leq \delta
+    }
+    = O\Parens{ \log\Parens{ \frac{d\log(n)}{\delta} } }
+    \,.
+    \label{eq:Tdelta}
   \end{equation}
 \end{lemma}
 \begin{proof}
@@ -157,12 +168,11 @@ martingales~\citep[Theorem 1.6]{Fre75}.
   \[
     Y_{t+1} \in [-P_{i,j},1-P_{i,j}] .
   \]
-  Therefore, by Freedman's inequality~\citep[Theorem 1.6]{Fre75} and
-  union bounds, we have
+  Therefore, by \Cref{cor:freedman} and union bounds, we have
   \[
     \abs{ N_{i,j} - N_i P_{i,j} }
-    \leq \sqrt{2 N_i P_{i,j} (1-P_{i,j}) \ln(2d/\delta)} + \frac23
-    \ln\left(\frac{2d}{\delta}\right)
+    \leq \sqrt{2c N_i P_{i,j} (1-P_{i,j}) \emptail} + \frac53
+    \emptail
   \]
   for all $(i,j) \in [d]^2$.
 \end{proof}
@@ -213,8 +223,8 @@ unobservable bound in~\cref{eq:P-unobs-bound}.
   \begin{equation*}
     \abs{\wh{P}_{i,j} - P_{i,j}}
     \leq
-    \sqrt{\frac{9\wh{P}_{i,j}(1-\wh{P}_{i,j})\ln(2d/\delta)}{2N_i}}
-    + \frac{4\ln(2d/\delta)+1.5\abs{\alpha-d\alpha\wh{P}_{i,j}}}{N_i}
+    \sqrt{\frac{9c\wh{P}_{i,j}(1-\wh{P}_{i,j})\emptail}{2N_i}}
+    + \frac{(3c+2.5)\ln(2d/\delta)+1.5\abs{\alpha-d\alpha\wh{P}_{i,j}}}{N_i}
     .
   \end{equation*}
 \end{lemma}
@@ -227,10 +237,10 @@ unobservable bound in~\cref{eq:P-unobs-bound}.
     \Abs{
       \frac{N_{i,j} - N_i P_{i,j}}{N_i + d\alpha}
       + \frac{\alpha - d\alpha P_{i,j}}{N_i + d\alpha}
-    } \\
+    } %\\
     \leq
-    \sqrt{\frac{2N_iP_{i,j}(1-P_{i,j})\ln(2d/\delta)}{(N_i+d\alpha)^2}}
-    + \frac{\frac23\ln(2d/\delta)}{N_i+d\alpha}
+    \sqrt{\frac{2cN_iP_{i,j}(1-P_{i,j})\emptail}{(N_i+d\alpha)^2}}
+    + \frac{(5/3)\emptail}{N_i+d\alpha}
     + \frac{\abs{\alpha-d\alpha P_{i,j}}}{N_i+d\alpha}
     .
   \end{multline*}
@@ -240,13 +250,13 @@ unobservable bound in~\cref{eq:P-unobs-bound}.
     & \leq
     \sqrt{
       \frac{
-        2N_i\parens{
+        2cN_i\parens{
           \wh{P}_{i,j}(1-\wh{P}_{i,j})
           + \abs{\wh{P}_{i,j} - P_{i,j}}
-        } \ln(2d/\delta)
+        } \emptail
       }{(N_i+d\alpha)^2}
     }
-    + \frac{\frac23\ln(2d/\delta)}{N_i+d\alpha}
+    + \frac{(5/3)\emptail}{N_i+d\alpha}
     \notag \\
     & \qquad
     + \frac{
@@ -263,12 +273,12 @@ unobservable bound in~\cref{eq:P-unobs-bound}.
     \abs{\wh{P}_{i,j} - P_{i,j}}
     & \leq
     \sqrt{\abs{\wh{P}_{i,j} - P_{i,j}}} \cdot
-    \sqrt{\frac{2N_i\ln(2d/\delta)}{(N_i+d\alpha)^2}}
+    \sqrt{\frac{2cN_i\emptail}{(N_i+d\alpha)^2}}
     \\
     & \qquad
     +
-    \sqrt{\frac{2N_i\wh{P}_{i,j}(1-\wh{P}_{i,j})\ln(2d/\delta)}{(N_i+d\alpha)^2}}
-    + \frac{\frac23\ln(2d/\delta) + \abs{\alpha -
+    \sqrt{\frac{2cN_i\wh{P}_{i,j}(1-\wh{P}_{i,j})\emptail}{(N_i+d\alpha)^2}}
+    + \frac{(5/3)\emptail + \abs{\alpha -
     d\alpha\wh{P}_{i,j}}}{N_i+d\alpha}
     .
   \end{align*}
