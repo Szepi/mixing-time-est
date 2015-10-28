@@ -200,15 +200,15 @@ Specifically, with $c := 1.01$ (an arbitrary choice), we compute
 \begin{equation}
   \wh{B}_{i,j}
   :=
-  \min_{\veps>0}
-  (1+\veps)
-  \sqrt{\frac{2c\wh{P}_{i,j}(1-\wh{P}_{i,j})\emptail}{N_i}}
-  +
   \Parens{
-    \Parens{ 1 + \frac1{2\veps} + \frac{\veps}{2} }c
-    + \frac{5(1+\veps)}{3}
-  } \frac{\emptail}{N_i}
-  + (1+\veps) \frac{\abs{\alpha-d\alpha\wh{P}_{i,j}}}{N_i}
+    \sqrt{\frac{c\emptail}{2N_i}}
+    + \sqrt{
+      \frac{c\emptail}{2N_i}
+      + 
+      \sqrt{\frac{2c\wh{P}_{i,j}(1-\wh{P}_{i,j})\emptail}{N_i}}
+      + \frac{(5/3)\emptail + \abs{\alpha-d\alpha\wh{P}_{i,j}}}{N_i}
+    }
+  }^2
   \label{eq:P-obs-bound}
 \end{equation}
 for each $(i,j) \in [d]^2$, where $\emptail$ is defined in
@@ -232,18 +232,6 @@ unobservable bound in~\cref{eq:P-unobs-bound}.
   $P_{i,j} \in \brackets{ \wh{P}_{i,j} - \wh{B}_{i,j},\, \wh{P}_{i,j}
   + \wh{B}_{i,j} }$
   for all $(i,j) \in [d]^2$,
-%  \begin{equation*}
-%    \abs{\wh{P}_{i,j} - P_{i,j}}
-%    \leq
-%    (1+\veps)
-%    \sqrt{\frac{2c\wh{P}_{i,j}(1-\wh{P}_{i,j})\emptail}{N_i}}
-%    +
-%    \Parens{
-%      \Parens{ 1 + \frac1{2\veps} + \frac{\veps}{2} }c
-%      + \frac{5(1+\veps)}{3}
-%    } \frac{\emptail}{N_i}
-%    + (1+\veps) \frac{\abs{\alpha-d\alpha\wh{P}_{i,j}}}{N_i}
-%  \end{equation*}
   where $\wh{B}_{i,j}$ is defined in \cref{eq:P-obs-bound}.
 \end{lemma}
 \begin{proof}
@@ -300,8 +288,8 @@ unobservable bound in~\cref{eq:P-unobs-bound}.
     d\alpha\wh{P}_{i,j}}}{N_i+d\alpha}
     .
   \end{align*}
-  Whenever $N_i > 0$, we can solve a quadratic inequality and apply
-  AM/GM to conclude $\abs{\wh{P}_{i,j}-P_{i,j}} \leq \wh{B}_{i,j}$.
+  Whenever $N_i > 0$, we can solve a quadratic inequality to conclude
+  $\abs{\wh{P}_{i,j}-P_{i,j}} \leq \wh{B}_{i,j}$.
 \end{proof}
 
 \subsection{Empirical bounds for $\vpi$}
