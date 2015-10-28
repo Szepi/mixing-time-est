@@ -555,17 +555,19 @@ functions of $n$).
 
 A simple calculation gives that, almost surely, as $n\to \infty$,
 \begin{align*}
-  \sqrt{n} \hat{b}
+  \sqrt{\frac{n}{\log\log n}}
+  \hat{b}
   & =
   O\Parens{
-    \max_{i,j} \kappa \sqrt{\frac{P_{i,j} \log(d/\delta)}{\pi_i}}
+    \max_{i,j} \kappa \sqrt{\frac{P_{i,j}}{\pi_i}}
   }
   ,
   \\
-  \sqrt{n} \hat\rho
+  \sqrt{\frac{n}{\log\log n}}
+  \hat\rho
   & =
   O\Parens{
-    \frac{\kappa}{\pimin} \sqrt{\frac{\log(d/\delta)}{\pimin}}
+    \frac{\kappa}{\pimin^{3/2}}
   }
   .
 \end{align*}
@@ -575,7 +577,7 @@ since $\giAh \to \giA$ as $\wh\vP \to
 
 Further, since
 \begin{align*}
-  \sqrt{n}
+  \sqrt{\frac{n}{\log\log n}}
   \Biggl(
     \sum_{i,j} \frac{\hat{\pi}_i}{\hat{\pi}_j} \wh{B}_{i,j}^2
   \Biggr)^{1/2}
@@ -583,20 +585,21 @@ Further, since
   O\Parens{
     \Biggl(
       \sum_{i,j} \frac{{\pi}_i}{{\pi}_j}
-      \cdot \frac{P_{i,j}(1-P_{i,j})\log(d/\delta)}{\pi_i}
+      \cdot \frac{P_{i,j}(1-P_{i,j})}{\pi_i}
     \Biggr)^{1/2}
   }
-  & =
-  O\Parens{ \sqrt{ \frac{d\log(d/\delta)}{ \pimin}} }
+  =
+  O\Parens{ \sqrt{ \frac{d}{\pimin}} }
   .
 \end{align*}
 we thus have
 \begin{align*}
-  \sqrt{n} \hat{w}
+  \sqrt{\frac{n}{\log\log n}}
+  \hat{w}
   =
   O\Parens{ 
-    \frac{\kappa}{\pimin} \sqrt{\frac{\log(d/\delta)}{\pimin}} + 
-    \sqrt{ \frac{d\log(d/\delta)}{ \pimin}}
+    \frac{\kappa}{\pimin^{3/2}} + 
+    \sqrt{\frac{d}{\pimin}}
   }
   .
 \end{align*}

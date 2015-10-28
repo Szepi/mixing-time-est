@@ -53,11 +53,17 @@
 
   \STATE Empirical bounds for $|\wh{P}_{i,j}-P_{i,j}|$ for each $(i,j)
   \in [d]^2$:
+  let $\emptail
+    := \inf
+    \braces{
+      t\geq0 :
+      2d^2 \parens{ 1 + \ceil{\ln(2n/t)} } e^{-t} \leq \delta
+    }$ and
   \begin{equation}
     \wh{B}_{i,j}
     :=
-    \sqrt{\frac{9\wh{P}_{i,j}(1-\wh{P}_{i,j})\ln(2d/\delta)}{2N_i}}
-    + \frac{4\ln(2d/\delta)+1.5\abs{(1/d)-\wh{P}_{i,j}}}{N_i}
+    \sqrt{\frac{9e\wh{P}_{i,j}(1-\wh{P}_{i,j})\emptail}{2N_i}}
+    + \frac{(3e+2.5)\emptail+1.5\abs{(1/d)-\wh{P}_{i,j}}}{N_i}
     .
     \notag
   \end{equation}
@@ -223,15 +229,15 @@ The result is as follows.
     O\Parens{
       \max_{(i,j) \in [d]^2}
       \kappa
-      \sqrt{\frac{P_{i,j}\log(d/\delta)}{\pi_i n}}
+      \sqrt{\frac{P_{i,j}\log\log n}{\pi_i n}}
     }
     ,
     \quad
     \hat{w}
     =
     O\Parens{ 
-      \frac{\kappa}{\pimin} \sqrt{\frac{\log(d/\delta)}{\pimin n}} + 
-      \sqrt{ \frac{d\log(d/\delta)}{ \pimin n}}
+      \frac{\kappa}{\pimin} \sqrt{\frac{\log\log n}{\pimin n}} + 
+      \sqrt{ \frac{d\log\log n}{ \pimin n}}
     }
     .\footnote{%
     In \cref{thm:empirical,thm:combined}, our use of big-$O$ notation
@@ -249,9 +255,9 @@ The proof of \cref{thm:empirical} is given in \cref{app:empirical}.
 As mentioned above, the obstacle encountered in \cref{thm:err} is
 avoided by exploiting the Markov property.
 We establish fully observable upper and lower bounds on the entries of
-$\vP$ that converge at a $\sqrt{n}$ rate using standard martingale
-tail inequalities; this justifies the validity of the bounds from
-Step~\ref{step:P-bound}.
+$\vP$ that converge at a $\sqrt{n/\log\log n}$ rate using standard
+martingale tail inequalities; this justifies the validity of the
+bounds from Step~\ref{step:P-bound}.
 Properties of the group inverse~\citep{meyer1975role,cho2001comparison} and eigenvalue
 perturbation theory~\citep{stewart1990matrix} are used to validate the
 empirical bounds on $\pi_i$ and $\gap$ developed in the remaining
@@ -270,13 +276,13 @@ $\kappa \le d/\gap$, and hence
   O\Parens{
     \max_{(i,j) \in [d]^2}
     \frac{d}{\gap}
-    \sqrt{\frac{P_{i,j}\log(d/\delta)}{\pi_i n}}
+    \sqrt{\frac{P_{i,j}\log\log n}{\pi_i n}}
   }
   , \quad
   \hat{w}
   =
   O\Parens{ 
-    \frac{d}{\pimin\gap} \sqrt{\frac{\log(d/\delta)}{\pimin n}}
+    \frac{d}{\pimin\gap} \sqrt{\frac{\log\log n}{\pimin n}}
   }
   .
 \] 
