@@ -51,19 +51,27 @@
   \[ \hatgap := 1 - \max\braces{ \hat\lambda_2,\, |\hat\lambda_d| } . \]
   \label{step:gap}
 
-  \STATE Empirical bounds for $|\wh{P}_{i,j}-P_{i,j}|$ for each $(i,j)
-  \in [d]^2$:
-  let $\emptail
+  \STATE Empirical bounds for $|\wh{P}_{i,j}{-}P_{i,j}|$ for $(i,j){\in}[d]^2$:
+  let $c:=1.01$,
+  $\emptail
     := \inf
     \braces{
       t\geq0 :
-      2d^2 \parens{ 1 + \ceil{\ln(2n/t)} } e^{-t} \leq \delta
-    }$ and
+      2d^2 \parens{ 1 + \ceil{\log_c\frac{2n}{t}} } e^{-t} \leq \delta
+    }$
   \begin{equation}
+    \text{and} \quad
     \wh{B}_{i,j}
     :=
-    \sqrt{\frac{9e\wh{P}_{i,j}(1-\wh{P}_{i,j})\emptail}{2N_i}}
-    + \frac{(3e+2.5)\emptail+1.5\abs{(1/d)-\wh{P}_{i,j}}}{N_i}
+    \min_{\veps>0}
+    (1+\veps)
+    \sqrt{\frac{2c\wh{P}_{i,j}(1-\wh{P}_{i,j})\emptail}{N_i}}
+    +
+    \Parens{
+      \Parens{ 1 + \frac1{2\veps} + \frac{\veps}{2} }c
+      + \frac{5(1+\veps)}{3}
+    } \frac{\emptail}{N_i}
+    + (1+\veps) \frac{\abs{\alpha-d\alpha\wh{P}_{i,j}}}{N_i}
     .
     \notag
   \end{equation}

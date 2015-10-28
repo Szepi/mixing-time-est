@@ -196,20 +196,29 @@ in the same event where \cref{eq:P-unobs-bound} holds.
 In the algorithm, we give a simple alternative to computing
 $B_{i,j}^*$ that avoids numerical optimization, derived in the spirit
 of empirical Bernstein bounds~\citep{audibert2009}.
-Specifically, we compute
+Specifically, with $c := 1.01$ (an arbitrary choice), we compute
 \begin{equation}
-  B_{i,j} :=
-  \sqrt{\frac{9\wh{P}_{i,j}(1-\wh{P}_{i,j})\ln(2d/\delta)}{2N_i}}
-  + \frac{4\ln(2d/\delta)+1.5\abs{\alpha-d\alpha\wh{P}_{i,j}}}{N_i}
+  \wh{B}_{i,j}
+  :=
+  \min_{\veps>0}
+  (1+\veps)
+  \sqrt{\frac{2c\wh{P}_{i,j}(1-\wh{P}_{i,j})\emptail}{N_i}}
+  +
+  \Parens{
+    \Parens{ 1 + \frac1{2\veps} + \frac{\veps}{2} }c
+    + \frac{5(1+\veps)}{3}
+  } \frac{\emptail}{N_i}
+  + (1+\veps) \frac{\abs{\alpha-d\alpha\wh{P}_{i,j}}}{N_i}
   \label{eq:P-obs-bound}
 \end{equation}
-for each $(i,j) \in [d]^2$.
+for each $(i,j) \in [d]^2$, where $\emptail$ is defined in
+\cref{eq:emptail}.
 We show in \cref{lem:P-obs-bound} that
 \[
   P_{i,j} \in
   \Brackets{
-    \wh{P}_{i,j} - B_{i,j},\,
-    \wh{P}_{i,j} + B_{i,j}
+    \wh{P}_{i,j} - \wh{B}_{i,j},\,
+    \wh{P}_{i,j} + \wh{B}_{i,j}
   }
 \]
 again, in the same event where \cref{eq:P-unobs-bound} holds.
@@ -219,14 +228,23 @@ unobservable bound in~\cref{eq:P-unobs-bound}.
 \begin{lemma}
   \label{lem:P-obs-bound}
   In the same $1-\delta$ event as from \cref{lem:P-unobs-bound},
-  we have for all $(i,j) \in [d]^2$,
-  \begin{equation*}
-    \abs{\wh{P}_{i,j} - P_{i,j}}
-    \leq
-    \sqrt{\frac{9c\wh{P}_{i,j}(1-\wh{P}_{i,j})\emptail}{2N_i}}
-    + \frac{(3c+2.5)\ln(2d/\delta)+1.5\abs{\alpha-d\alpha\wh{P}_{i,j}}}{N_i}
-  \end{equation*}
-  where $\emptail$ is defined in \cref{eq:emptail}.
+  we have
+  $P_{i,j} \in \brackets{ \wh{P}_{i,j} - \wh{B}_{i,j},\, \wh{P}_{i,j}
+  + \wh{B}_{i,j} }$
+  for all $(i,j) \in [d]^2$,
+%  \begin{equation*}
+%    \abs{\wh{P}_{i,j} - P_{i,j}}
+%    \leq
+%    (1+\veps)
+%    \sqrt{\frac{2c\wh{P}_{i,j}(1-\wh{P}_{i,j})\emptail}{N_i}}
+%    +
+%    \Parens{
+%      \Parens{ 1 + \frac1{2\veps} + \frac{\veps}{2} }c
+%      + \frac{5(1+\veps)}{3}
+%    } \frac{\emptail}{N_i}
+%    + (1+\veps) \frac{\abs{\alpha-d\alpha\wh{P}_{i,j}}}{N_i}
+%  \end{equation*}
+  where $\wh{B}_{i,j}$ is defined in \cref{eq:P-obs-bound}.
 \end{lemma}
 \begin{proof}
   Recall that in the $1-\delta$ probability event from
