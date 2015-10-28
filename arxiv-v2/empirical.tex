@@ -52,13 +52,14 @@
   \label{step:gap}
 
   \STATE Empirical bounds for $|\wh{P}_{i,j}{-}P_{i,j}|$ for $(i,j){\in}[d]^2$:
-  let $c:=1.01$,
+  $c:=1.01$,
   $\emptail
     := \inf
     \braces{
       t\geq0 :
-      2d^2 \parens{ 1 + \ceil{\log_c\frac{2n}{t}} } e^{-t} \leq \delta
-    }$
+      2d^2 \parens{ 1 + \ceil{\log_c\frac{2n}{t}}_+ } e^{-t} \leq
+      \delta
+    }$,
   \begin{equation}
     \text{and} \quad
     \wh{B}_{i,j}

@@ -69,42 +69,42 @@ martingales~\citep[Theorem 1.6]{Fre75}.
       S > \sqrt{2cVt} + 5bt/3
     }
     \leq
-    \Parens{ 1 + \ceil{\log_c(2n/t)} }
+    \Parens{ 1 + \ceil{\log_c(2n/t)}_+ }
     e^{-t}
     .
   \]
 \end{corollary}
 \begin{proof}
   Define $v_i := c^i b^2t/2$ for $i = 0, 1, 2, \dotsc, \ceil{
-  \log_c(2n/t) }$, and let $v_{-1} := -\infty$.
+  \log_c(2n/t) }_+$, and let $v_{-1} := -\infty$.
   Then, since $V \in [0,b^2n]$,
   \begin{align*}
     \Pr\Brackets{
       S > \sqrt{2\max\braces{v_0,cV}t} + 2bt/3
     }
     & =
-    \sum_{i=0}^{\ceil{\log_c(2n/t)}}
+    \sum_{i=0}^{\ceil{\log_c(2n/t)}_+}
     \Pr\Brackets{
       S > \sqrt{2\max\braces{v_0,cV}t} + 2bt/3
       \,\wedge\, v_{j-1} < V \leq v_j
     }
     \\
     & \leq
-    \sum_{i=0}^{\ceil{\log_c(2n/t)}}
+    \sum_{i=0}^{\ceil{\log_c(2n/t)}_+}
     \Pr\Brackets{
       S > \sqrt{2\max\braces{v_0,cv_{j-1}}t} + 2bt/3
       \,\wedge\, v_{j-1} < V \leq v_j
     }
     \\
     & \leq
-    \sum_{i=0}^{\ceil{\log_c(2n/t)}}
+    \sum_{i=0}^{\ceil{\log_c(2n/t)}_+}
     \Pr\Brackets{
       S > \sqrt{2v_jt} + 2bt/3
       \,\wedge\, V \leq v_j
     }
     \\
     & \leq
-    \Parens{ 1 + \ceil{\log_c(2n/t)} }
+    \Parens{ 1 + \ceil{\log_c(2n/t)}_+ }
     e^{-t}
   \end{align*}
   where the final inequality uses \Cref{thm:freedman}.
@@ -135,7 +135,7 @@ martingales~\citep[Theorem 1.6]{Fre75}.
     := \inf
     \Braces{
       t\geq0 :
-      2d^2 \Parens{ 1 + \ceil{\log_c(2n/t)} } e^{-t} \leq \delta
+      2d^2 \Parens{ 1 + \ceil{\log_c(2n/t)}_+ } e^{-t} \leq \delta
     }
     = O\Parens{ \log\Parens{ \frac{d\log(n)}{\delta} } }
     \,.
