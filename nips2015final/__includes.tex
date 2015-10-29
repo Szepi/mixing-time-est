@@ -1,0 +1,216 @@
+%!TEX root =  matrix-est.tex
+%\usepackage{etex} % handle MANY packages
+
+% comment this out for the final version, or add the final option:
+%\usepackage[notcite,notref]{showkeys}
+
+
+\usepackage{amsmath,amsbsy,amsfonts,amssymb,amsthm,color,dsfont,mleftright,nccmath}
+\usepackage{url}
+\usepackage{dsfont} % double stroke font
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PACKAGES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\marginparwidth}{25mm}
+%\usepackage[textsize=tiny]{todonotes}
+\usepackage[disable]{todonotes}
+\newcommand{\todoc}[2][]{\todo[color=red!20!white,#1]{Cs: #2}}
+\newcommand{\todod}[2][]{\todo[color=blue!20!white,#1]{D: #2}}
+\newcommand{\todoa}[2][]{\todo[color=green!20!white,#1]{A: #2}}
+
+\newcommand{\hide}[1]{}
+
+% turn off previously defined macros as we want to use ntheorem (jmlr foolishly defines these)
+\if0
+\let\proof\relax
+\let\endproof\relax
+\let\theorem\relax
+\let\endtheorem\relax
+\let\proposition\relax
+\let\endproposition\relax
+\let\lemma\relax
+\let\endlemma\relax
+\let\corollary\relax
+\let\endcorollary\relax
+\let\example\relax
+\let\endexample\relax
+\let\remark\relax
+\let\endremark\relax
+\let\definition\relax
+\let\enddefinition\relax
+\fi
+%\usepackage[amsmath,standard,thmmarks]{ntheorem} % ntheorem makes cleveref work properly 
+\newtheorem{lemma}{Lemma}
+\newtheorem{claim}{Claim}
+\newtheorem{proposition}{Proposition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+
+\usepackage{latexsym}
+%\usepackage{times}
+\usepackage{mathtools}
+\usepackage{enumerate}
+\usepackage[ruled]{algorithm}
+\usepackage{algorithmic}
+\usepackage{hyperref}
+\hypersetup{
+    bookmarks=true,         % show bookmarks bar?
+    unicode=false,          % non-Latin characters in Acrobat's bookmarks
+    pdftoolbar=true,        % show Acrobat's toolbar?
+    pdfmenubar=true,        % show Acrobat's menu?
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width of the page to the window
+    pdftitle={My title},    % title
+    pdfauthor={Author},     % author
+    pdfsubject={Subject},   % subject of the document
+    pdfcreator={Creator},   % creator of the document
+    pdfproducer={Producer}, % producer of the document
+    pdfkeywords={keyword1} {key2} {key3}, % list of keywords
+    pdfnewwindow=true,      % links in new window
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=red,          % color of internal links (change box color with linkbordercolor)
+    citecolor=blue,        % color of links to bibliography
+    filecolor=magenta,      % color of file links
+    urlcolor=black          % color of external links
+}
+%\usepackage[standard]{ntheorem}
+%\usepackage{times}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{enumitem}
+\usepackage{bibunits}
+
+
+%\setlist{nolistsep}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THEOREMS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\if0
+\newtheorem{lemma}{Lemma}
+\newtheorem{claim}{Claim}
+\newtheorem{proposition}{Proposition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{condition}{Condition}
+\newtheorem{example}{Example}
+\newtheorem{problem}{Problem}
+\fi
+\usepackage[capitalize]{cleveref}
+\usepackage{fullpage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MACROS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\ddefloop#1{\ifx\ddefloop#1\else\ddef{#1}\expandafter\ddefloop\fi}
+
+% \bA, \bB, ...
+\def\ddef#1{\expandafter\def\csname b#1\endcsname{\ensuremath{\mathbf{#1}}}}
+\ddefloop ABCDEFGHIJKLMNOPQRSTUVWXYZ\ddefloop
+
+% \bbA, \bbB, ...
+\def\ddef#1{\expandafter\def\csname bb#1\endcsname{\ensuremath{\mathbb{#1}}}}
+\ddefloop ABCDEFGHIJKLMNOPQRSTUVWXYZ\ddefloop
+
+% \cA, \cB, ...
+\def\ddef#1{\expandafter\def\csname c#1\endcsname{\ensuremath{\mathcal{#1}}}}
+\ddefloop ABCDEFGHIJKLMNOPQRSTUVWXYZ\ddefloop
+
+% \vA, \vB, ..., \va, \vb, ...
+\def\ddef#1{\expandafter\def\csname v#1\endcsname{\ensuremath{\boldsymbol{#1}}}}
+\ddefloop ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\ddefloop
+
+% \valpha, \vbeta, ...,  \vGamma, \vDelta, ...,
+\def\ddef#1{\expandafter\def\csname v#1\endcsname{\ensuremath{\boldsymbol{\csname #1\endcsname}}}}
+\ddefloop {alpha}{beta}{gamma}{delta}{epsilon}{varepsilon}{zeta}{eta}{theta}{vartheta}{iota}{kappa}{lambda}{mu}{nu}{xi}{pi}{varpi}{rho}{varrho}{sigma}{varsigma}{tau}{upsilon}{phi}{varphi}{chi}{psi}{omega}{Gamma}{Delta}{Theta}{Lambda}{Xi}{Pi}{Sigma}{varSigma}{Upsilon}{Phi}{Psi}{Omega}\ddefloop
+
+\newcommand\Sig{\ensuremath{\varSigma}}
+\newcommand\veps{\ensuremath{\varepsilon}}
+\newcommand\eps{\ensuremath{\epsilon}}
+
+\renewcommand\t{{\ensuremath{\scriptscriptstyle{\top}}}}
+
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\Diag}{Diag}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\vol}{vol}
+
+\DeclareMathOperator{\var}{var}
+\DeclareMathOperator{\Var}{Var}
+
+\DeclareMathOperator{\Bd}{bd}
+\DeclareMathOperator{\Cl}{cl}
+\DeclareMathOperator{\Conv}{conv}
+\DeclareMathOperator{\Int}{int}
+\DeclareMathOperator{\Null}{ker}
+\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\Range}{ran}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\newcommand\wt{\ensuremath{\widetilde}}
+\newcommand\wh{\ensuremath{\widehat}}
+\renewcommand\v{\ensuremath{\boldsymbol}}
+
+\newcommand\comment[1]{{\color{blue}\{\textbf{Comment}: #1\}}}
+
+\newcommand\parens[1]{(#1)}
+\newcommand\norm[1]{\|#1\|}
+\newcommand\braces[1]{\{#1\}}
+\newcommand\brackets[1]{[#1]}
+\newcommand\ceil[1]{\lceil#1\rceil}
+\newcommand\abs[1]{|#1|}
+\newcommand\ind[1]{\ensuremath{\mathds{1}\{#1\}}}
+\newcommand\dotp[1]{\langle #1 \rangle}
+
+\newcommand\Parens[1]{\left(#1\right)}
+\newcommand\Norm[1]{\left\|#1\right\|}
+\newcommand\Braces[1]{\left\{#1\right\}}
+\newcommand\Brackets[1]{\left[#1\right]}
+\newcommand\Ceil[1]{\left\lceil#1\right\rceil}
+\newcommand\Floor[1]{\left\lfloor#1\right\rfloor}
+\newcommand\Abs[1]{\left|#1\right|}
+\newcommand\Ind[1]{\ensuremath{\mathds{1}\left\{#1\right\}}}
+\newcommand\Dotp[1]{\left\langle #1 \right\rangle}
+
+\newcommand\pimin{\ensuremath{\pi_{\star}}}
+\newcommand\gap{\ensuremath{\gamma_{\star}}}
+\newcommand\slem{\ensuremath{\lambda_{\star}}}
+
+\newcommand\hatpimin{\ensuremath{\hat\pi_{\star}}}
+\newcommand\hatgap{\ensuremath{\hat\gamma_{\star}}}
+
+\newcommand\Geom{\ensuremath{\operatorname{Geom}}}
+\newcommand\Sym{\ensuremath{\operatorname{Sym}}}
+\newcommand\errm{\ensuremath{\v{\cE}_{\vM}}}
+\newcommand\errp{\ensuremath{\v{\cE}_{\vpi}}}
+\newcommand\errP{\ensuremath{\v{\cE}_{\vP}}}
+\newcommand\errpil{\ensuremath{\v{\cE}_{\vpi,1}}}
+\newcommand\errpir{\ensuremath{\v{\cE}_{\vpi,2}}}
+\newcommand\tv{\ensuremath{\operatorname{tv}}}
+\newcommand\tmix{\ensuremath{t_{\operatorname{mix}}}}
+\newcommand\trelax{\ensuremath{t_{\operatorname{relax}}}}
+\newcommand\avg{\ensuremath{\operatorname{avg}}}
+\newcommand{\iset}[1]{[#1]}
+\newcommand{\opencloseint}[1]{\ensuremath{(#1]}}
+
+\newcommand{\Dvpi}{\Diag(\vpi)}
+\newcommand{\Dvpit}{\Diag(\vpi^{(t)})}
+
+\newcommand{\EE}[1]{\bbE\left(#1\right)}
+
+\newcommand\giAh{\ensuremath{\widehat{\boldsymbol{A}}^{\raisebox{-2.9pt}{$\scriptstyle\#$}}}}
+\newcommand\giA{\ensuremath{\boldsymbol{A}^{\raisebox{-0pt}{$\scriptstyle\#$}}}}
+\newcommand{\defeq}{:=}
+
+\newcommand\emptail{\ensuremath{\tau_{n,\delta}}}
+

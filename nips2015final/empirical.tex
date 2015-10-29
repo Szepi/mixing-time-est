@@ -1,0 +1,362 @@
+\begin{algorithm}
+\caption{Empirical confidence intervals}
+\label{alg:empest}
+\begin{algorithmic}[1]
+  \renewcommand\algorithmicrequire{\textbf{Input}:}
+  \REQUIRE
+    Sample path $(X_1,X_2,\dots,X_n)$,
+    confidence parameter $\delta \in (0,1)$.
+
+  \STATE Compute state visit counts and smoothed transition
+  probability estimates:
+  \begin{equation}
+    \begin{aligned}
+      N_i & :=
+      \Abs{
+        \Braces{
+          t \in [n-1] : X_t = i
+        }
+      }
+      , \quad i \in [d] ; \\
+      N_{i,j} & :=
+      \Abs{
+        \Braces{
+          t \in [n-1] : (X_t,X_{t+1}) = (i,j)
+        }
+      }
+      , \quad (i,j) \in [d]^2 ; \\
+      \wh{P}_{i,j}
+      & :=
+      \frac{N_{i,j} + 1/d}{N_i + 1}
+      , \quad (i,j) \in [d]^2 .
+    \end{aligned}
+    \notag
+  \end{equation}
+  \label{step:P}
+
+  \STATE Let $\giAh$ be the group inverse of $\wh\vA := \vI -
+  \wh\vP$.
+  \label{step:gi}
+
+  \STATE Let $\hat\vpi \in \Delta^{d-1}$ be the unique stationary
+  distribution for $\wh\vP$.
+  \label{step:pi}
+
+  \STATE Compute eigenvalues $\hat\lambda_1 {\geq} \hat\lambda_2
+  {\geq} \dotsb {\geq} \hat\lambda_d$ of $\Sym(\wh\vL)$, where $\wh\vL
+  := \Diag(\hat\vpi)^{1/2} \wh\vP \Diag(\hat\vpi)^{-1/2}$.
+  \label{step:eig}
+
+  \STATE Spectral gap estimate:
+  \[ \hatgap := 1 - \max\braces{ \hat\lambda_2,\, |\hat\lambda_d| } . \]
+  \label{step:gap}
+
+  \STATE Empirical bounds for $|\wh{P}_{i,j}{-}P_{i,j}|$ for $(i,j){\in}[d]^2$:
+  $c:=1.01$,
+  $\emptail
+    := \inf
+    \braces{
+      t\geq0 :
+      2d^2 \parens{ 1 + \ceil{\log_c\frac{2n}{t}}_+ } e^{-t} \leq
+      \delta
+    }$,
+  \begin{equation}
+    \text{and} \quad
+    \wh{B}_{i,j}
+    :=
+    \Parens{
+      \sqrt{\frac{c\emptail}{2N_i}}
+      + \sqrt{
+        \frac{c\emptail}{2N_i}
+        + 
+        \sqrt{\frac{2c\wh{P}_{i,j}(1-\wh{P}_{i,j})\emptail}{N_i}}
+        + \frac{(5/3)\emptail + \abs{\wh{P}_{i,j}-1/d}}{N_i}
+      }
+    }^2
+    .
+    \notag
+  \end{equation}
+  \label{step:P-bound}
+
+  \STATE Relative sensitivity of $\vpi$:
+  \begin{equation}
+    \hat\kappa :=
+    \frac12
+    \max
+    \Braces{
+      \wh{A}_{j,j}^\# - \min\Braces{ \wh{A}_{i,j}^\# : i \in [d] }
+      : j \in [d]
+    } 
+    .
+    \notag
+  \end{equation}
+  \label{step:sens}
+
+  \STATE Empirical bounds for $\max_{i \in [d]} |\hat{\pi}_i -
+  \pi_i|$ and
+  $\max\bigcup_{i\in[d]}
+  \braces{
+    \abs{\sqrt{\pi_i/\hat\pi_i}-1},\,
+    \abs{\sqrt{\hat\pi_i/\pi_i}-1}
+  }$:
+  \begin{equation}
+    \hat{b} := \hat\kappa \max\Braces{
+      \wh{B}_{i,j}
+      : (i,j) \in [d]^2
+    }
+    , \qquad
+    \hat\rho := \frac12 \max \bigcup_{i\in[d]}
+    \Braces{
+      \frac{\hat{b}}{\hat\pi_i},\,
+      \frac{\hat{b}}{\brackets{\hat\pi_i-\hat{b}}_+}
+    }
+    .
+    \notag
+  \end{equation}
+  \label{step:pi-bound}
+
+  \STATE Empirical bounds for $\abs{\hatgap-\gap}$:
+  \begin{equation}
+    \hat{w} := 2\hat\rho + \hat\rho^2
+    + (1+2\hat\rho+\hat\rho^2)
+    \Biggl(
+      \sum_{(i,j)\in[d]^2} \frac{\hat\pi_i}{\hat\pi_j} \hat{B}_{i,j}^2
+    \Biggr)^{1/2} .
+    \notag
+  \end{equation}
+  \label{step:gap-bound}
+
+
+\end{algorithmic}
+\end{algorithm}
+
+In this section, we address the shortcoming of \cref{thm:err} and give
+fully empirical confidence intervals for the stationary probabilities
+and the spectral gap $\gap$.
+The main idea is to use the Markov property to eliminate the
+dependence of the confidence intervals on the unknown quantities
+(including $\pimin$ and $\gap$).
+Specifically, we estimate the transition probabilities from the sample
+path using simple frequency estimates: as a consequence of the Markov
+property, for each state, the frequency estimates converge at a rate
+that depends only on the number of visits to the state, and in
+particular the rate (given the visit count of the state) is
+independent of the mixing time of the chain.
+
+As discussed in \cref{sec:rates}, it is possible to form a confidence
+interval for $\gap$ based on the eigenvalues of an estimated
+transition probability matrix by appealing to the
+Ostrowski-Elsner theorem.
+However, as explained earlier, this would lead to a slow
+$O(n^{-1/(2d)})$ rate.
+We avoid this slow rate by using an estimate of the symmetric matrix
+$\vL$, so that we can use a stronger perturbation result (namely Weyl's
+inequality, as in the proof of \cref{thm:err}) available for symmetric matrices.
+
+To form an estimate of $\vL$ based on an estimate of the transition
+probabilities, one possibility is to estimate $\vpi$ using a
+frequency-based estimate for $\vpi$ as was done in \cref{sec:rates},
+and appeal to the relation $\vL = \Diag(\vpi)^{1/2} \vP
+\Diag(\vpi)^{-1/2}$ to form a plug-in estimate.
+However, as noted in \cref{sec:rates-upper}, confidence intervals for
+the entries of $\vpi$ formed this way may depend on the mixing time.
+Indeed, such an estimate of $\vpi$ does not exploit the Markov
+property.
+
+We adopt a different strategy for estimating $\vpi$, which leads to
+our construction of empirical confidence intervals, detailed in
+\cref{alg:empest}.
+We form the matrix $\wh\vP$ using smoothed frequency estimates of
+$\vP$ (Step~\ref{step:P}), then compute the so-called group inverse
+$\giAh$ of $\wh\vA = \vI - \wh\vP$ (Step~\ref{step:gi}), followed by
+finding the unique stationary distribution $\hat\vpi$ of $\wh\vP$
+(Step~\ref{step:pi}), this way decoupling the bound on the accuracy of $\hat\vpi$
+from the mixing time.
+The group inverse $\giAh$ of $\wh\vA$ is uniquely defined;
+ and if
+$\wh\vP$ defines an ergodic chain (which is the case here due to the
+use of the smoothed estimates), $\giAh$ can be computed at the cost of
+inverting an $(d{-}1){\times}(d{-}1)$ matrix~\citep[Theorem
+5.2]{meyer1975role}.%
+\footnote{%
+\label{ftnote:group-inverse}
+The group inverse of a square matrix $\vA$, a special case of the {\em Drazin inverse},
+is the unique matrix $\vA^\#$ satisfying
+$ \vA\vA^\#\vA = \vA$,
+$\vA^\#\vA\vA^\# = \vA^\#$ and
+$\vA^\#\vA = \vA\vA^\#$.
+}
+Further, once given $\giAh$, the unique stationary distribution
+$\hat\vpi$ of $\wh\vP$ can be read out from the last row of
+$\giAh$~\citep[Theorem 5.3]{meyer1975role}.
+The group inverse is also be used to compute the sensitivity of
+$\vpi$.
+Based on $\hat\vpi$ and $\wh\vP$, we construct the plug-in estimate
+$\wh\vL$ of $\vL$, and use the eigenvalues of its symmetrization to
+form the estimate $\hatgap$ of the spectral gap (Steps~\ref{step:eig}
+and~\ref{step:gap}).
+In the remaining steps, 
+we use perturbation analyses to relate $\hat\vpi$ and $\vpi$, viewing
+$\vP$ as the perturbation of $\wh\vP$; and also to relate $\hatgap$
+and $\gap$, viewing $\vL$ as a perturbation of $\Sym(\wh\vL)$.
+Both analyses give error bounds entirely in terms of observable
+quantities (e.g., $\hat\kappa$), tracing back to empirical error
+bounds for the smoothed frequency estimates of $\vP$.
+
+The most computationally expensive step in \cref{alg:empest} is the
+computation of the group inverse $\giAh$, which, as noted reduces to
+matrix inversion.
+Thus, with a standard implementation of matrix inversion, the
+algorithm's time complexity is $O(n + d^3)$, while its space
+complexity is $O(d^2)$.
+
+To state our main theorem concerning \cref{alg:empest}, we first define
+$\kappa$ to be analogous to $\hat{\kappa}$ from Step~\ref{step:sens},
+with $\giAh$ replaced by the group inverse $\giA$ of $\vA := \vI -
+\vP$.
+The result is as follows.
+\begin{theorem}
+  \label{thm:empirical}
+  Suppose \cref{alg:empest} is given as input a sample path of length
+  $n$ from an ergodic and reversible Markov chain and confidence
+  parameter $\delta \in (0,1)$.
+  Let $\gap>0$ denote the spectral gap, $\vpi$ the unique stationary
+  distribution, and $\pimin>0$ the minimum stationary probability.
+  Then, on an event of probability at least $1-\delta$,
+  \[
+    \pi_i \in [\hat\pi_i-\hat{b},\hat\pi_i+\hat{b}]
+    \quad \text{for all $i \in [d]$} ,
+    \qquad\text{and}\qquad
+    \gap \in [\hatgap-\hat{w},\hatgap+\hat{w}]
+    .
+  \]
+  Moreover, $\hat{b}$ and $\hat{w}$ almost surely satisfy (as $n \to
+  \infty$)
+  \[
+    \hat{b}
+    =
+    O\Parens{
+      \max_{(i,j) \in [d]^2}
+      \kappa
+      \sqrt{\frac{P_{i,j}\log\log n}{\pi_i n}}
+    }
+    ,
+    \quad
+    \hat{w}
+    =
+    O\Parens{ 
+      \frac{\kappa}{\pimin} \sqrt{\frac{\log\log n}{\pimin n}} + 
+      \sqrt{ \frac{d\log\log n}{ \pimin n}}
+    }
+    .\footnote{%
+    In \cref{thm:empirical,thm:combined}, our use of big-$O$ notation
+    is as follows.
+    For a random sequence $(Y_n)_n$ and a (non-random) positive
+    sequence $(\veps_{\theta,n})_n$ parameterized by $\theta$, we say
+    ``$Y_n = O(\veps_{\theta,n})$ holds almost surely as
+    $n\to\infty$'' if there is some universal constant $C>0$ such that
+    for all $\theta$, $\limsup_{n\to\infty} Y_n/\veps_{\theta,n} \leq
+    C$ holds almost surely.%
+  }%
+  \]
+\end{theorem}
+The proof of \cref{thm:empirical} is given in \cref{app:empirical}.
+As mentioned above, the obstacle encountered in \cref{thm:err} is
+avoided by exploiting the Markov property.
+We establish fully observable upper and lower bounds on the entries of
+$\vP$ that converge at a $\sqrt{n/\log\log n}$ rate using standard
+martingale tail inequalities; this justifies the validity of the
+bounds from Step~\ref{step:P-bound}.
+Properties of the group inverse~\citep{meyer1975role,cho2001comparison} and eigenvalue
+perturbation theory~\citep{stewart1990matrix} are used to validate the
+empirical bounds on $\pi_i$ and $\gap$ developed in the remaining
+steps of the algorithm.
+
+The first part of \cref{thm:empirical} provides valid empirical
+confidence intervals for each $\pi_i$ and for $\gap$, which are
+simultaneously valid at confidence level $\delta$.
+The second part of \cref{thm:empirical} shows that the width of the
+intervals decrease as the sequence length increases.
+We show in \cref{sec:asymptotic} that
+$\kappa \le d/\gap$, and hence
+\[
+  \hat{b}
+  =
+  O\Parens{
+    \max_{(i,j) \in [d]^2}
+    \frac{d}{\gap}
+    \sqrt{\frac{P_{i,j}\log\log n}{\pi_i n}}
+  }
+  , \quad
+  \hat{w}
+  =
+  O\Parens{ 
+    \frac{d}{\pimin\gap} \sqrt{\frac{\log\log n}{\pimin n}}
+  }
+  .
+\] 
+
+It is easy to combine \cref{thm:err,thm:empirical} to yield intervals
+whose widths shrink at at least as fast as both the non-empirical
+intervals from \cref{thm:err} and the empirical intervals from
+\cref{thm:empirical}.
+Specifically, determine lower bounds on $\pimin$ and $\gap$ using
+\cref{alg:empest},
+\[
+  \pimin \geq \min_{i \in [d]} \brackets{ \hat\pi_i - \hat{b} }_+
+  , \quad
+  \gap \geq \brackets{ \hatgap - \hat{w} }_+
+  ;
+\]
+then plug-in these lower bounds for $\pimin$ and $\gap$ in the
+deviation bounds in \cref{eq:gapbound} from \cref{thm:err}.
+This yields a new interval centered around the estimate of $\gap$ from
+\cref{thm:err}, and it no longer depends on unknown quantities.
+The interval is a valid $1-2\delta$ probability confidence interval
+for $\gap$, and for sufficiently large $n$, the width shrinks at the
+rate given in \cref{eq:gapbound}.
+We can similarly construct an empirical confidence interval for
+$\pimin$ using \cref{eq:piminbound}, which is valid on the same
+$1-2\delta$ probability event.\footnote{%
+  For the $\pimin$ interval, we only plug-in lower bounds on $\pimin$
+  and $\gap$ only where these quantities appear as $1/\pimin$ and
+  $1/\gap$ in \cref{eq:piminbound}.
+  It is then possible to ``solve'' for observable bounds on $\pimin$.
+  See \cref{app:combined} for details.%
+}
+Finally, we can take the intersection of these new intervals with the
+corresponding intervals from \cref{alg:empest}.
+This is summarized in the following \lcnamecref{thm:combined}, which
+we prove in \cref{app:combined}.
+\begin{theorem}
+  \label{thm:combined}
+  The following holds under the same conditions as
+  \cref{thm:empirical}.
+  For any $\delta \in (0,1)$, the confidence intervals $\wh{U}$ and
+  $\wh{V}$ described above for $\pimin$ and $\gap$, respectively,
+  satisfy $\pimin \in \wh{U}$ and $\gap \in \wh{V}$ with probability
+  at least $1-2\delta$.
+  Furthermore, the widths of these intervals almost surely satisfy
+  (as $n \to \infty$) 
+  \[
+    |\wh{U}|
+    =
+    O\Parens{
+      \sqrt{\frac{\pimin\log\frac{d}{\pimin\delta}}{\gap n}}
+    }
+    ,
+    \quad
+    |\wh{V}|
+    =
+    O\Parens{
+      \min\Braces{
+        \sqrt{\frac{\log\frac{d}{\delta}\cdot\log(n)}{\pimin\gap n}}
+        ,\,
+        \hat{w}
+      }
+    }
+  \]
+  where $\hat{w}$ is the width from \cref{alg:empest}.
+\end{theorem}
+
+

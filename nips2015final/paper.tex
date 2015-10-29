@@ -1,0 +1,74 @@
+\documentclass{article}
+\usepackage{nips15submit_e,times}
+\input{__includes}
+\renewcommand\citet\cite
+\renewcommand\citep\cite
+\nipsfinalcopy
+
+\title{%
+  Mixing Time Estimation in Reversible Markov Chains from a Single
+  Sample Path%
+}
+
+\author{%
+  Daniel Hsu \\
+  Columbia University \\
+  \url{djhsu@cs.columbia.edu}
+  \And
+  Aryeh Kontorovich \\
+  Ben-Gurion University \\
+  \url{karyeh@cs.bgu.ac.il}
+  \And
+  Csaba Szepesv\'ari \\
+  University of Alberta \\
+  \url{szepesva@cs.ualberta.ca}
+}
+
+\begin{document}
+\begin{bibunit}[myunsrt]
+  \maketitle
+
+  \begin{abstract} 
+  \input{abstract}
+  \end{abstract} 
+
+  \section{Introduction}\label{sec:intro}
+  \input{intro}
+
+  \section{Preliminaries}\label{sec:prelim}
+  \input{setting}
+
+  \section{Point estimation}\label{sec:rates}
+  \input{rates}
+
+  \section{Fully empirical confidence intervals}\label{sec:empirical}
+  \input{empirical}
+
+  \section{Discussion}\label{sec:discussion}
+  \input{conclusions}
+
+  \subsubsection*{References}
+  {\def\section*#1{}\small\putbib[all]}
+\end{bibunit}
+
+\appendix
+
+\begin{bibunit}[myunsrt]
+  \section{Proofs of the lower bounds}\label{app:lower}
+  \input{lowerbound}
+
+  \section{Proof of \cref{thm:err}}\label{app:upper}
+  \input{upperbound}
+
+  \section{Proof of \cref{thm:empirical}}\label{app:empirical}
+  \input{appendix-empirical}
+
+  \section{Proof of \cref{thm:combined}}\label{app:combined}
+  \input{appendix-combined}
+
+  \subsubsection*{References}
+  {\def\section*#1{}\small\putbib[all]}
+\end{bibunit}
+
+\end{document}
+

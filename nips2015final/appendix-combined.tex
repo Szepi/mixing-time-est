@@ -1,0 +1,78 @@
+\newcommand\LB{\ensuremath{\operatorname{lb}}}
+\newcommand\piminlb{\ensuremath{\hat\pi_{\star,\LB}}}
+\newcommand\gaplb{\ensuremath{\hat\gamma_{\star,\LB}}}
+Let $\piminlb$ and $\gaplb$ be the lower bounds on $\pimin$ and
+$\gap$, respectively, computed from \cref{alg:empest}.
+Let $\hatpimin$ and $\hatgap$ be the estimates of $\pimin$ and $\gap$
+computed using the estimators from \cref{thm:err}.
+By a union bound, we have by \cref{thm:err} and \cref{thm:empirical}
+that with probability at least $1-2\delta$,
+\begin{equation}
+  \Abs{\hatpimin-\pimin}
+  \le
+  C \,
+  \Parens{
+    \sqrt{\frac{\pimin\log\frac{d}{\piminlb\delta}}{\gaplb n}}
+    +
+    \frac{\log\frac{d}{\piminlb\delta}}{\gaplb n}
+  }
+  \label{eq:pimin-plugin}
+\end{equation}
+and
+\begin{equation}
+  \Abs{\hatgap-\gap}
+  \leq
+  C \,
+  \Parens{
+    \sqrt{\frac{\log\frac{d}{\delta}\cdot\log\frac{n}{\piminlb\delta}}{\piminlb\gaplb n}}
+    +
+    \frac{\log\frac{d}{\delta}\cdot\log\frac{n}{\piminlb\delta}}{\piminlb\gaplb n}  
+    + \frac{\log\frac{1}{\gaplb}}{\gaplb n}  
+  }
+  \,.
+  \label{eq:gap-plugin}
+\end{equation}
+The bound on $\abs{\hatgap-\gap}$ in \cref{eq:gap-plugin}---call it
+$\hat{w}'$---is fully observable and hence yields a confidence
+interval for $\gap$.
+The bound on $\abs{\hatpimin-\pimin}$ in \cref{eq:pimin-plugin}
+depends on $\pimin$, but from it one can derive
+\[
+  \Abs{\hatpimin-\pimin}
+  \le
+  C' \,
+  \Parens{
+    \sqrt{\frac{\hatpimin\log\frac{d}{\piminlb\delta}}{\gaplb n}}
+    +
+    \frac{\log\frac{d}{\piminlb\delta}}{\gaplb n}
+  }
+\]
+using the approach from the proof of \cref{lem:P-obs-bound}.
+Here, $C'>0$ is an absolute constant that depends only on $C$.
+This bound---call it $\hat{b}'$---is now also fully observable.
+We have established that in the $1-2\delta$ probability event from
+above,
+\[
+  \pimin \in \wh{U} := [\hatpimin-\hat{b}', \hatpimin+\hat{b}']
+  , \quad
+  \gap \in \wh{V} := [\hatgap-\hat{w}', \hatgap+\hat{w}']
+  .
+\]
+It is easy to see that almost surely (as $n \to \infty$),
+\[
+  \sqrt{\frac{n}{\log n}} \hat{w}'
+  = O\Parens{
+    \sqrt{\frac{\log(d/\delta)}{\pimin\gap}}
+  }
+\]
+and
+\[
+  \sqrt{n} \hat{b}'
+  = O\Parens{
+    \sqrt{\frac{\pimin \log\frac{d}{\pimin\delta}}{\gap}}
+  }
+  .
+\]
+This completes the proof of \cref{thm:combined}.
+\hfill\qed
+
