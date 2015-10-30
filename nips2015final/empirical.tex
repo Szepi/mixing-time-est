@@ -23,8 +23,9 @@
         \Braces{
           t \in [n-1] : (X_t,X_{t+1}) = (i,j)
         }
-      }
-      , \quad (i,j) \in [d]^2 ; \\
+      },
+%      , \quad (i,j) \in [d]^2 ; \\
+      &
       \wh{P}_{i,j}
       & :=
       \frac{N_{i,j} + 1/d}{N_i + 1}
@@ -51,7 +52,7 @@
   \[ \hatgap := 1 - \max\braces{ \hat\lambda_2,\, |\hat\lambda_d| } . \]
   \label{step:gap}
 
-  \STATE Empirical bounds for $|\wh{P}_{i,j}{-}P_{i,j}|$ for $(i,j){\in}[d]^2$:
+  \STATE Empirical bounds for $|\wh{P}_{i,j}{-}P_{i,j}|$ for $(i,j) \in [d]^2$:
   $c:=1.01$,
   $\emptail
     := \inf
@@ -279,22 +280,22 @@ The second part of \cref{thm:empirical} shows that the width of the
 intervals decrease as the sequence length increases.
 We show in \cref{sec:asymptotic} that
 $\kappa \le d/\gap$, and hence
-\[
-  \hat{b}
+%\[
+ $\hat{b}
   =
   O\Parens{
     \max_{(i,j) \in [d]^2}
     \frac{d}{\gap}
     \sqrt{\frac{P_{i,j}\log\log n}{\pi_i n}}
-  }
-  , \quad
-  \hat{w}
+  }$%
+  , %\quad
+ $\hat{w}
   =
   O\Parens{ 
     \frac{d}{\pimin\gap} \sqrt{\frac{\log\log n}{\pimin n}}
-  }
+  }$%
   .
-\] 
+%\] 
 
 It is easy to combine \cref{thm:err,thm:empirical} to yield intervals
 whose widths shrink at at least as fast as both the non-empirical
@@ -302,12 +303,12 @@ intervals from \cref{thm:err} and the empirical intervals from
 \cref{thm:empirical}.
 Specifically, determine lower bounds on $\pimin$ and $\gap$ using
 \cref{alg:empest},
-\[
-  \pimin \geq \min_{i \in [d]} \brackets{ \hat\pi_i - \hat{b} }_+
-  , \quad
-  \gap \geq \brackets{ \hatgap - \hat{w} }_+
+%\[
+ $\pimin \geq \min_{i \in [d]} \brackets{ \hat\pi_i - \hat{b} }_+$
+  , %\quad
+ $\gap \geq \brackets{ \hatgap - \hat{w} }_+$%
   ;
-\]
+%\]
 then plug-in these lower bounds for $\pimin$ and $\gap$ in the
 deviation bounds in \cref{eq:gapbound} from \cref{thm:err}.
 This yields a new interval centered around the estimate of $\gap$ from
@@ -338,15 +339,15 @@ we prove in \cref{app:combined}.
   at least $1-2\delta$.
   Furthermore, the widths of these intervals almost surely satisfy
   (as $n \to \infty$) 
-  \[
-    |\wh{U}|
+%  \[
+   $|\wh{U}|
     =
     O\Parens{
       \sqrt{\frac{\pimin\log\frac{d}{\pimin\delta}}{\gap n}}
-    }
+    }$%
     ,
-    \quad
-    |\wh{V}|
+%    \quad
+   $|\wh{V}|
     =
     O\Parens{
       \min\Braces{
@@ -354,8 +355,8 @@ we prove in \cref{app:combined}.
         ,\,
         \hat{w}
       }
-    }
-  \]
+    }$,
+%  \]
   where $\hat{w}$ is the width from \cref{alg:empest}.
 \end{theorem}
 

@@ -86,13 +86,13 @@ to be the symmetrized version of the (possibly non-symmetric) matrix
 Let $\hat\lambda_1 \geq \hat\lambda_2 \geq \dotsb \geq \hat\lambda_d$
 be the eigenvalues of $\Sym(\wh\vL)$.
 Our estimator of the minimum stationary probability $\pimin$ is
-\[
-  \hatpimin := \min_{i \in [d]} \hat\pi_i ,
-\]
+%\[
+ $\hatpimin := \min_{i \in [d]} \hat\pi_i$,
+%\]
 and our estimator of the spectral gap $\gap$ is
-\[
-  \hatgap := 1 - \max\{ \hat\lambda_2, |\hat\lambda_d| \} .
-\]
+%\[
+ $\hatgap := 1 - \max\{ \hat\lambda_2, |\hat\lambda_d| \}$.
+%\]
 
 These estimators have the following accuracy guarantees:
 \begin{theorem}
@@ -131,12 +131,13 @@ These estimators have the following accuracy guarantees:
 \Cref{thm:err} implies that the sequence lengths required to estimate
 $\pimin$ and
 $\gap$ to within constant multiplicative factors are, respectively,
-\[
-  \tilde{O}\Parens{\frac1{\pimin\gap}}
-  \quad\text{and}\quad
-  \tilde{O}\Parens{\frac1{\pimin\gap^3}}
+%\[
+ $\tilde{O}\Parens{\frac1{\pimin\gap}}$
+ and
+%  \quad\text{and}\quad
+ $\tilde{O}\Parens{\frac1{\pimin\gap^3}}$
   .
-\]
+%\]
 By \cref{eq:mixing-time-bound},
 the second of these is also a bound on the required sequence length to estimate $\tmix$.
 
