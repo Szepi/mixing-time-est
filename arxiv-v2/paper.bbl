@@ -1,0 +1,252 @@
+\begin{thebibliography}{10}
+
+\bibitem{1209.0703}
+Yves Atchad\'e.
+\newblock Markov {C}hain {M}onte {C}arlo confidence intervals.
+\newblock {\em Bernoulli}, 2015.
+\newblock (to appear).
+
+\bibitem{audibert2009}
+J.-Y. Audibert, R.~Munos, and {Cs}. Szepesv{\'a}ri.
+\newblock Exploration-exploitation tradeoff using variance estimates in
+  multi-armed bandits.
+\newblock {\em Theoretical Computer Science}, 410(19):1876--1902, 2009.
+
+\bibitem{BBL06}
+M.-F. Balcan, A.~Beygelzimer, and J.~Langford.
+\newblock Agnostic active learning.
+\newblock In {\em ICML}, pages 65--72, 2006.
+
+\bibitem{BaFoRuSmiWhi00}
+Tu{\u{g}}kan Batu, Lance Fortnow, Ronitt Rubinfeld, Warren~D Smith, and Patrick
+  White.
+\newblock Testing that distributions are close.
+\newblock In {\em FOCS}, pages 259--269. IEEE, 2000.
+
+\bibitem{BaFoRuSmiWhi13}
+Tu{\u{g}}kan Batu, Lance Fortnow, Ronitt Rubinfeld, Warren~D Smith, and Patrick
+  White.
+\newblock Testing closeness of discrete distributions.
+\newblock {\em Journal of the ACM (JACM)}, 60(1):4:2--4:25, 2013.
+
+\bibitem{benitez2012continuity}
+Julio Ben\'itez and Xiaoji Liu.
+\newblock On the continuity of the group inverse.
+\newblock {\em Operators and Matrices}, 6(4):859--868, 2012.
+
+\bibitem{Bernstein27}
+S.N. Bernstein.
+\newblock Sur l'extension du theoreme limite du calcul des probabilites aux
+  sommes de quantites dependantes.
+\newblock {\em Mathematische Annalen}, 97:1--59, 1927.
+
+\bibitem{BhaBoMo11}
+Nayantara Bhatnagar, Andrej Bogdanov, and Elchanan Mossel.
+\newblock The computational complexity of estimating {MCMC} convergence time.
+\newblock In {\em RANDOM}, pages 424--435. Springer, 2011.
+
+\bibitem{BBL04}
+O.~Bousquet, S.~Boucheron, and G.~Lugosi.
+\newblock Introduction to statistical learning theory.
+\newblock {\em Lecture Notes in Artificial Intelligence}, 3176:169--207, 2004.
+
+\bibitem{cho2001comparison}
+G.E. Cho and C.D. Meyer.
+\newblock Comparison of perturbation bounds for the stationary distribution of
+  a {M}arkov chain.
+\newblock {\em Linear Algebra and its Applications}, 335:137--150, 2001.
+
+\bibitem{MCMCDiscussion93}
+P.~Clifford, C.~Jennison, J.~Wakefield, D.~Phillips, A.~Frigessi, A.J. Gray,
+  A.~Lawson, J.~Forster, P.~Ramgopal, et~al.
+\newblock Discussion on the meeting on the {G}ibbs sampler and other {M}arkov
+  {C}hain {M}onte {C}arlo methods.
+\newblock {\em Journal of the Royal Statistical Society. Series B
+  (Methodological)}, 55(1):53--102, 1993.
+
+\bibitem{flegal2011implementing}
+James~M Flegal and Galin~L Jones.
+\newblock Implementing {MCMC}: estimating with confidence.
+\newblock In {\em Handbook of Markov chain Monte Carlo}, pages 175--197.
+  Chapman \& Hall/CRC, 2011.
+
+\bibitem{Fre75}
+D.A. Freedman.
+\newblock On tail probabilities for martingales.
+\newblock {\em The Annals of Probability}, 3(1):100--118, 1975.
+
+\bibitem{gamarnik03}
+David Gamarnik.
+\newblock Extension of the {PAC} framework to finite and countable {M}arkov
+  chains.
+\newblock {\em IEEE Transactions on Information Theory}, 49(1):338--345, 2003.
+
+\bibitem{GaSmi00:eigval}
+Steven~T. Garren and Richard~L. Smith.
+\newblock Estimating the second largest eigenvalue of a {M}arkov transition
+  matrix.
+\newblock {\em Bernoulli}, 6:215--242, 2000.
+
+\bibitem{gillman1998chernoff}
+David Gillman.
+\newblock A {C}hernoff bound for random walks on expander graphs.
+\newblock {\em SIAM Journal on Computing}, 27(4):1203--1220, 1998.
+
+\bibitem{Gyori-paulin15}
+B.~M. Gyori and D.~Paulin.
+\newblock Non-asymptotic confidence intervals for {MCMC} in practice.
+\newblock arXiv:1212.2016, 2014.
+
+\bibitem{haviv1984perturbation}
+M.~Haviv and L.~{Van der Heyden}.
+\newblock Perturbation bounds for the stationary probabilities of a finite
+  {M}arkov chain.
+\newblock {\em Advances in Applied Probability}, 16:804--818, 1984.
+
+\bibitem{jones2001}
+Galin~L. Jones and James~P. Hobert.
+\newblock Honest exploration of intractable probability distributions via
+  markov chain monte carlo.
+\newblock {\em Statist. Sci.}, 16(4):312--334, 11 2001.
+
+\bibitem{MR1921877}
+Rajeeva~L. Karandikar and Mathukumalli Vidyasagar.
+\newblock Rates of uniform convergence of empirical means with mixing
+  processes.
+\newblock {\em Statistics and Probability Letters}, 58(3):297--307, 2002.
+
+\bibitem{kipnis1986central}
+C.~Kipnis and S.~R.~S. Varadhan.
+\newblock Central limit theorem for additive functionals of reversible markov
+  processes and applications to simple exclusions.
+\newblock {\em Comm. Math. Phys.}, 104(1):1--19, 1986.
+
+\bibitem{kirkland1998applications}
+S.J. Kirkland, M.~Neumann, and B.L. Shader.
+\newblock Applications of {P}az's inequality to perturbation bounds for
+  {M}arkov chains.
+\newblock {\em Linear Algebra and its Applications}, 268:183--196, 1998.
+
+\bibitem{DBLP:conf/valuetools/KontoyiannisLM06}
+Ioannis Kontoyiannis, Luis~Alfonso Lastras{-}Monta{\~{n}}o, and Sean~P. Meyn.
+\newblock Exponential bounds and stopping rules for {MCMC} and general {M}arkov
+  chains.
+\newblock In {\em VALUETOOLS}, page~45, 2006.
+
+\bibitem{leon2004optimal}
+Carlos~A Le{\'o}n and Fran{\c{c}}ois Perron.
+\newblock Optimal {H}oeffding bounds for discrete reversible {M}arkov chains.
+\newblock {\em Annals of Applied Probability}, pages 958--970, 2004.
+
+\bibitem{LePeWi08}
+D.A. Levin, Y.~Peres, and E.L. Wilmer.
+\newblock {\em Markov Chains and Mixing Times}.
+\newblock AMS, 2008.
+
+\bibitem{LiLiWaSt11:KWIK}
+Lihong Li, Michael~L. Littman, Thomas~J. Walsh, and Alexander~L. Strehl.
+\newblock Knows what it knows: a framework for self-aware learning.
+\newblock {\em Machine Learning}, 82(3):399--443, 2011.
+
+\bibitem{li2001improvement}
+Xiezhang Li and Yimin Wei.
+\newblock An improvement on the perturbation of the group inverse and oblique
+  projection.
+\newblock {\em Linear Algebra and its Applications}, 338:53--66, 2001.
+
+\bibitem{liu2001monte}
+J.~S. Liu.
+\newblock {\em Monte Carlo Strategies in Scientific Computing}.
+\newblock Springer Series in Statistics. Springer-Verlag, 2001.
+
+\bibitem{MauPo09}
+Andreas Maurer and Massimiliano Pontil.
+\newblock Empirical {B}ernstein bounds and sample-variance penalization.
+\newblock In {\em COLT}, 2009.
+
+\bibitem{McDoShaSche11}
+D.J. McDonald, C.R. Shalizi, and M.J. Schervish.
+\newblock Estimating beta-mixing coefficients.
+\newblock In {\em AISTATS}, pages 516--524, 2011.
+
+\bibitem{meyer1975role}
+Carl~D. Meyer~Jr.
+\newblock The role of the group generalized inverse in the theory of finite
+  {M}arkov chains.
+\newblock {\em SIAM Review}, 17(3):443--464, 1975.
+
+\bibitem{meyn1993markov}
+S.~P. Meyn and R.~L. Tweedie.
+\newblock {\em Markov Chains and Stochastic Stability}.
+\newblock Springer, 1993.
+
+\bibitem{MniSzeAu08}
+V.~Mnih, {\relax Cs}.~Szepesv\'{a}ri, and J.-Y. Audibert.
+\newblock Empirical {B}ernstein stopping.
+\newblock In {\em ICML}, pages 672--679, 2008.
+
+\bibitem{MoRo08}
+M.~Mohri and A.~Rostamizadeh.
+\newblock Stability bounds for non-iid processes.
+\newblock In {\em NIPS-20}, pages 1025--1032, 2008.
+
+\bibitem{MoRo09}
+M.~Mohri and A.~Rostamizadeh.
+\newblock Rademacher complexity bounds for non-i.i.d. processes.
+\newblock In {\em NIPS-21}, pages 1097--1104, 2009.
+
+\bibitem{MoTe06}
+R.~Montenegro and P.~Tetali.
+\newblock {\em Mathematical Aspects of Mixing Times in {M}arkov Chains}.
+\newblock Now Publishers, 2006.
+
+\bibitem{paulin15}
+Daniel Paulin.
+\newblock Concentration inequalities for {M}arkov chains by {M}arton couplings
+  and spectral methods.
+\newblock {\em Electronic Journal of Probability}, 20:1--32, 2015.
+
+\bibitem{seneta1993sensitivity}
+E.~Seneta.
+\newblock Sensitivity of finite {Markov} chains under perturbation.
+\newblock {\em Statistics \& Probability Letters}, 17:163--168, 1993.
+
+\bibitem{DBLP:conf/nips/SteinwartC09}
+Ingo Steinwart and Andreas Christmann.
+\newblock Fast learning from non-i.i.d. observations.
+\newblock In {\em NIPS}, pages 1768--1776, 2009.
+
+\bibitem{Steinwart2009175}
+Ingo Steinwart, Don Hush, and Clint Scovel.
+\newblock Learning from dependent observations.
+\newblock {\em Journal of Multivariate Analysis}, 100(1):175--194, 2009.
+
+\bibitem{stewart1990matrix}
+G.~W. Stewart and J.~Sun.
+\newblock {\em Matrix perturbation theory}.
+\newblock Academic Press, Boston, 1990.
+
+\bibitem{sutton98}
+Richard~S. Sutton and Andrew~G. Barto.
+\newblock {\em Reinforcement Learning: An Introduction (Adaptive Computation
+  and Machine Learning)}.
+\newblock A Bradford Book, 1998.
+
+\bibitem{SwaJoa15:LoggedBandit}
+Adith Swaminathan and Thorsten Joachims.
+\newblock Counterfactual risk minimization: Learning from logged bandit
+  feedback.
+\newblock In {\em ICML}, 2015.
+
+\bibitem{tropp2015intro}
+J.A. Tropp.
+\newblock An introduction to matrix concentration inequalities.
+\newblock {\em Foundations and Trends in Machine Learning}, pages 1--157, 2015.
+
+\bibitem{Yu94}
+B.~Yu.
+\newblock Rates of convergence for empirical processes of stationary mixing
+  sequences.
+\newblock {\em The Annals of Probability}, 22(1):94--116, January 1994.
+
+\end{thebibliography}

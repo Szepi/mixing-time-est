@@ -3,4 +3,4 @@ all:
 
 clean:
 	latexmk -C paper
-	rm -f *.bbl *.thm
+	rm -f *.thm
