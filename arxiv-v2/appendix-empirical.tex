@@ -44,17 +44,18 @@ We make use of a simple corollary of Freedman's inequality for
 martingales~\citep[Theorem 1.6]{Fre75}.
 \begin{theorem}[Freedman's inequality]
   \label{thm:freedman}
-  Let $Y_1, Y_2, \dotsc, Y_n$ be a bounded martingale difference
-  sequence with respect to the filtration $\cF = (\cF_i)_{1 \leq i
-  \leq n}$ and with $|Y_i| \leq b$ for some $b>0$.
-  Let $V := \sum_{i=1}^n \EE{Y_i^2|\cF_{i-1}}$ and $S := \max_{1 \leq
-  m \leq n} \sum_{i=1}^m Y_i$.
+  Let $(Y_i)_{i \in \bbN}$ be a bounded martingale difference sequence
+  with respect to the filtration $(\cF_i)_{i \in \bbN}$; assume for
+  some $b>0$, $|Y_i| \leq b$ almost surely for all $i \in \bbN$.
+  Let $V_k := \sum_{i=1}^k \EE{Y_i^2|\cF_{i-1}}$ and $S_k :=
+  \sum_{i=1}^k Y_i$ for $k \in \bbN$.
   For all $t, v > 0$,
   \[
     \Pr\Brackets{
-      S > \sqrt{2vt} + 2bt/3
+      \exists k \in \bbN \,\centerdot\,
+      S_k > \sqrt{2vt} + 2bt/3
       \,\wedge\,
-      V \leq v
+      V_k \leq v
     }
     \leq e^{-t}
     .
@@ -62,11 +63,12 @@ martingales~\citep[Theorem 1.6]{Fre75}.
 \end{theorem}
 \begin{corollary}
   \label{cor:freedman}
-  Under the same setting as \Cref{thm:freedman}, for any $t > 0$ and
-  $c > 1$,
+  Under the same setting as \Cref{thm:freedman}, for any $n \geq 1$,
+  $t > 0$, and $c > 1$,
   \[
     \Pr\Brackets{
-      S > \sqrt{2cVt} + 5bt/3
+      \exists k \in [n] \,\centerdot\,
+      S_k > \sqrt{2cV_kt} + 5bt/3
     }
     \leq
     \Parens{ 1 + \ceil{\log_c(2n/t)}_+ }
@@ -77,30 +79,37 @@ martingales~\citep[Theorem 1.6]{Fre75}.
 \begin{proof}
   Define $v_i := c^i b^2t/2$ for $i = 0, 1, 2, \dotsc, \ceil{
   \log_c(2n/t) }_+$, and let $v_{-1} := -\infty$.
-  Then, since $V \in [0,b^2n]$,
+  Then, since $V_k \in [0,b^2n]$ for all $k\in[n]$,
   \begin{align*}
-    \Pr\Brackets{
-      S > \sqrt{2\max\braces{v_0,cV}t} + 2bt/3
+    \lefteqn{
+      \Pr\Brackets{
+        \exists k \in [n] \,\centerdot\,
+        S_k > \sqrt{2\max\braces{v_0,cV_k}t} + 2bt/3
+      }
     }
+    \\
     & =
     \sum_{i=0}^{\ceil{\log_c(2n/t)}_+}
     \Pr\Brackets{
-      S > \sqrt{2\max\braces{v_0,cV}t} + 2bt/3
-      \,\wedge\, v_{i-1} < V \leq v_i
+      \exists k \in [n] \,\centerdot\,
+      S_k > \sqrt{2\max\braces{v_0,cV_k}t} + 2bt/3
+      \,\wedge\, v_{i-1} < V_k \leq v_i
     }
     \\
     & \leq
     \sum_{i=0}^{\ceil{\log_c(2n/t)}_+}
     \Pr\Brackets{
-      S > \sqrt{2\max\braces{v_0,cv_{i-1}}t} + 2bt/3
-      \,\wedge\, v_{i-1} < V \leq v_i
+      \exists k \in [n] \,\centerdot\,
+      S_k > \sqrt{2\max\braces{v_0,cv_{i-1}}t} + 2bt/3
+      \,\wedge\, v_{i-1} < V_k \leq v_i
     }
     \\
     & \leq
     \sum_{i=0}^{\ceil{\log_c(2n/t)}_+}
     \Pr\Brackets{
-      S > \sqrt{2v_it} + 2bt/3
-      \,\wedge\, V \leq v_i
+      \exists k \in [n] \,\centerdot\,
+      S_k > \sqrt{2v_it} + 2bt/3
+      \,\wedge\, V_k \leq v_i
     }
     \\
     & \leq
@@ -110,11 +119,10 @@ martingales~\citep[Theorem 1.6]{Fre75}.
   where the final inequality uses \Cref{thm:freedman}.
   The conclusion now follows because
   \[
-    \sqrt{2cVt} + 5bt/3
-    \geq \sqrt{2\max\braces{v_0,cV}t} + 2bt/3
-    .
-    \qedhere
+    \sqrt{2cV_kt} + 5bt/3
+    \geq \sqrt{2\max\braces{v_0,cV_k}t} + 2bt/3
   \]
+  for all $k \in [n]$.
 \end{proof}
 
 \begin{lemma}
