@@ -49,18 +49,37 @@ martingales~\citep[Theorem 1.6]{Fre75}.
   some $b>0$, $|Y_i| \leq b$ almost surely for all $i \in \bbN$.
   Let $V_k := \sum_{i=1}^k \EE{Y_i^2|\cF_{i-1}}$ and $S_k :=
   \sum_{i=1}^k Y_i$ for $k \in \bbN$.
-  For all $t, v > 0$,
+  For all $s, v > 0$,
   \[
     \Pr\Brackets{
       \exists k \in \bbN \;\st\,
-      S_k > \sqrt{2vt} + 2bt/3
+      S_k > s
       \,\wedge\,
       V_k \leq v
     }
-    \leq e^{-t}
-    .
+    \leq \Parens{
+      \frac{v}{s+v}
+    }^{s+v}
+    e^s
+    = \exp\Parens{
+      -\frac{v}{b^2} \cdot h\Parens{\frac{bs}{v}}
+    }
+    \,,
   \]
+  where $h(u) := (1+u)\ln(1+u) - u$.
 \end{theorem}
+Observe that in \Cref{thm:freedman}, for any $t>0$, if $s :=
+\sqrt{2vt} + bt/3$ and $z := b^2t/v$, then probability bound becomes
+\[
+  \exp\Parens{
+    -t \cdot \frac{h\Parens{\sqrt{2z}+z/3}}{z}
+  }
+  \leq
+  e^{-t}
+\]
+since $h(\sqrt{2z}+z/3)/z \geq 1$ for all $z > 0$ (see,
+e.g.,~\citep[proof of Lemma 5]{audibert2009}).
+
 \begin{corollary}
   \label{cor:freedman}
   Under the same setting as \Cref{thm:freedman}, for any $n \geq 1$,
@@ -68,7 +87,7 @@ martingales~\citep[Theorem 1.6]{Fre75}.
   \[
     \Pr\Brackets{
       \exists k \in [n] \;\st\,
-      S_k > \sqrt{2cV_kt} + 5bt/3
+      S_k > \sqrt{2cV_kt} + 4bt/3
     }
     \leq
     \Parens{ 1 + \ceil{\log_c(2n/t)}_+ }
@@ -84,7 +103,7 @@ martingales~\citep[Theorem 1.6]{Fre75}.
     \MoveEqLeft{
       \Pr\Brackets{
         \exists k \in [n] \;\st\,
-        S_k > \sqrt{2\max\braces{v_0,cV_k}t} + 2bt/3
+        S_k > \sqrt{2\max\braces{v_0,cV_k}t} + bt/3
       }
     }
     \\
@@ -92,7 +111,7 @@ martingales~\citep[Theorem 1.6]{Fre75}.
     \sum_{i=0}^{\ceil{\log_c(2n/t)}_+}
     \Pr\Brackets{
       \exists k \in [n] \;\st\,
-      S_k > \sqrt{2\max\braces{v_0,cV_k}t} + 2bt/3
+      S_k > \sqrt{2\max\braces{v_0,cV_k}t} + bt/3
       \,\wedge\, v_{i-1} < V_k \leq v_i
     }
     \\
@@ -100,7 +119,7 @@ martingales~\citep[Theorem 1.6]{Fre75}.
     \sum_{i=0}^{\ceil{\log_c(2n/t)}_+}
     \Pr\Brackets{
       \exists k \in [n] \;\st\,
-      S_k > \sqrt{2\max\braces{v_0,cv_{i-1}}t} + 2bt/3
+      S_k > \sqrt{2\max\braces{v_0,cv_{i-1}}t} + bt/3
       \,\wedge\, v_{i-1} < V_k \leq v_i
     }
     \\
@@ -108,7 +127,7 @@ martingales~\citep[Theorem 1.6]{Fre75}.
     \sum_{i=0}^{\ceil{\log_c(2n/t)}_+}
     \Pr\Brackets{
       \exists k \in [n] \;\st\,
-      S_k > \sqrt{2v_it} + 2bt/3
+      S_k > \sqrt{2v_it} + bt/3
       \,\wedge\, V_k \leq v_i
     }
     \\
@@ -119,7 +138,7 @@ martingales~\citep[Theorem 1.6]{Fre75}.
   where the final inequality uses \Cref{thm:freedman}.
   The conclusion now follows because
   \[
-    \sqrt{2cV_kt} + 5bt/3
+    \sqrt{2cV_kt} + 4bt/3
     \geq \sqrt{2\max\braces{v_0,cV_k}t} + 2bt/3
   \]
   for all $k \in [n]$.
