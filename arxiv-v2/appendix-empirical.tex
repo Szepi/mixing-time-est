@@ -52,7 +52,7 @@ martingales~\citep[Theorem 1.6]{Fre75}.
   For all $t, v > 0$,
   \[
     \Pr\Brackets{
-      \exists k \in \bbN \,\centerdot\,
+      \exists k \in \bbN \;\st\,
       S_k > \sqrt{2vt} + 2bt/3
       \,\wedge\,
       V_k \leq v
@@ -67,7 +67,7 @@ martingales~\citep[Theorem 1.6]{Fre75}.
   $t > 0$, and $c > 1$,
   \[
     \Pr\Brackets{
-      \exists k \in [n] \,\centerdot\,
+      \exists k \in [n] \;\st\,
       S_k > \sqrt{2cV_kt} + 5bt/3
     }
     \leq
@@ -81,9 +81,9 @@ martingales~\citep[Theorem 1.6]{Fre75}.
   \log_c(2n/t) }_+$, and let $v_{-1} := -\infty$.
   Then, since $V_k \in [0,b^2n]$ for all $k\in[n]$,
   \begin{align*}
-    \lefteqn{
+    \MoveEqLeft{
       \Pr\Brackets{
-        \exists k \in [n] \,\centerdot\,
+        \exists k \in [n] \;\st\,
         S_k > \sqrt{2\max\braces{v_0,cV_k}t} + 2bt/3
       }
     }
@@ -91,7 +91,7 @@ martingales~\citep[Theorem 1.6]{Fre75}.
     & =
     \sum_{i=0}^{\ceil{\log_c(2n/t)}_+}
     \Pr\Brackets{
-      \exists k \in [n] \,\centerdot\,
+      \exists k \in [n] \;\st\,
       S_k > \sqrt{2\max\braces{v_0,cV_k}t} + 2bt/3
       \,\wedge\, v_{i-1} < V_k \leq v_i
     }
@@ -99,7 +99,7 @@ martingales~\citep[Theorem 1.6]{Fre75}.
     & \leq
     \sum_{i=0}^{\ceil{\log_c(2n/t)}_+}
     \Pr\Brackets{
-      \exists k \in [n] \,\centerdot\,
+      \exists k \in [n] \;\st\,
       S_k > \sqrt{2\max\braces{v_0,cv_{i-1}}t} + 2bt/3
       \,\wedge\, v_{i-1} < V_k \leq v_i
     }
@@ -107,7 +107,7 @@ martingales~\citep[Theorem 1.6]{Fre75}.
     & \leq
     \sum_{i=0}^{\ceil{\log_c(2n/t)}_+}
     \Pr\Brackets{
-      \exists k \in [n] \,\centerdot\,
+      \exists k \in [n] \;\st\,
       S_k > \sqrt{2v_it} + 2bt/3
       \,\wedge\, V_k \leq v_i
     }
