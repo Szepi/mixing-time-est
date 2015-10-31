@@ -58,9 +58,9 @@ martingales~\citep[Theorem 1.6]{Fre75}.
       V_k \leq v
     }
     \leq \Parens{
-      \frac{v}{s+v}
-    }^{s+v}
-    e^s
+      \frac{v/b^2}{s/b+v/b^2}
+    }^{s/b+v/b^2}
+    e^{s/b}
     = \exp\Parens{
       -\frac{v}{b^2} \cdot h\Parens{\frac{bs}{v}}
     }
@@ -69,7 +69,8 @@ martingales~\citep[Theorem 1.6]{Fre75}.
   where $h(u) := (1+u)\ln(1+u) - u$.
 \end{theorem}
 Observe that in \Cref{thm:freedman}, for any $t>0$, if $s :=
-\sqrt{2vt} + bt/3$ and $z := b^2t/v$, then probability bound becomes
+\sqrt{2vt} + bt/3$ and $z := b^2t/v$, then the probability bound
+on the right-hand side becomes
 \[
   \exp\Parens{
     -t \cdot \frac{h\Parens{\sqrt{2z}+z/3}}{z}
@@ -139,7 +140,7 @@ e.g.,~\citep[proof of Lemma 5]{audibert2009}).
   The conclusion now follows because
   \[
     \sqrt{2cV_kt} + 4bt/3
-    \geq \sqrt{2\max\braces{v_0,cV_k}t} + 2bt/3
+    \geq \sqrt{2\max\braces{v_0,cV_k}t} + bt/3
   \]
   for all $k \in [n]$.
 \end{proof}
