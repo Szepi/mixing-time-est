@@ -105,7 +105,7 @@ martingales~\citep[Theorem 1.6]{Fre75}.
     \\
     & \leq
     \Parens{ 1 + \ceil{\log_c(2n/t)}_+ }
-    e^{-t}
+    e^{-t}\,,
   \end{align*}
   where the final inequality uses \Cref{thm:freedman}.
   The conclusion now follows because
@@ -126,7 +126,7 @@ martingales~\citep[Theorem 1.6]{Fre75}.
     \leq
     \sqrt{\Parens{\frac{N_i}{N_i+d\alpha}}\frac{2cP_{i,j}(1-P_{i,j})\emptail}{N_i+d\alpha}}
     + \frac{(5/3)\emptail}{N_i+d\alpha}
-    + \frac{\abs{\alpha-d\alpha P_{i,j}}}{N_i+d\alpha}
+    + \frac{\abs{\alpha-d\alpha P_{i,j}}}{N_i+d\alpha}\,,
     \label{eq:P-unobs-bound}
   \end{equation}
   where
@@ -204,7 +204,7 @@ Specifically, with $c := 1.01$ (an arbitrary choice), we compute
     \sqrt{\frac{c\emptail}{2N_i}}
     + \sqrt{
       \frac{c\emptail}{2N_i}
-      + 
+      +
       \sqrt{\frac{2c\wh{P}_{i,j}(1-\wh{P}_{i,j})\emptail}{N_i}}
       + \frac{(5/3)\emptail + \abs{\alpha-d\alpha\wh{P}_{i,j}}}{N_i}
     }
@@ -304,7 +304,7 @@ following equalities:
   \giAh\wh\vA\giAh = \giAh , \quad
   \giAh\wh\vA = \wh\vA\giAh .
 \]
-The matrix $\giAh$, which is well defined no matter what transition probability matrix $\wh\vP$ we start with 
+The matrix $\giAh$, which is well defined no matter what transition probability matrix $\wh\vP$ we start with
 \citep{meyer1975role},
  is a central quantity that captures many properties
 of the ergodic Markov chain with transition matrix
@@ -319,7 +319,7 @@ Define
     \giAh_{j,j}
     - \min\Braces{ \giAh_{i,j} : i \in [d] }
     : j \in [d]
-  } 
+  }
   .
   \notag
 \end{equation}
@@ -334,7 +334,7 @@ Analogously define
     \giA_{j,j}
     - \min\Braces{ \giA_{i,j} : i \in [d] }
     : j \in [d]
-  } 
+  }
   .
 \end{align*}
 We now use the following perturbation bound from \citep[Section
@@ -397,7 +397,7 @@ $\sqrt{\hat\pi_i/\pi_i}$ and $\sqrt{\pi_i/\hat\pi_i}$.
     \leq \frac{\hat{b}}{\hat\pi_i}
     , \quad
     \frac{\abs{\hat\pi_i - \pi_i}}{\pi_i}
-    \leq 
+    \leq
     \frac{\hat{b}}{\pi_i}
     \leq
     \frac{\hat{b}}{\brackets{\hat{\pi}_i-\hat{b}}_+}
@@ -596,15 +596,15 @@ Further, since
   }
   =
   O\Parens{ \sqrt{ \frac{d}{\pimin}} }
-  .
+  \,,
 \end{align*}
 we thus have
 \begin{align*}
   \sqrt{\frac{n}{\log\log n}}
   \hat{w}
   =
-  O\Parens{ 
-    \frac{\kappa}{\pimin^{3/2}} + 
+  O\Parens{
+    \frac{\kappa}{\pimin^{3/2}} +
     \sqrt{\frac{d}{\pimin}}
   }
   .
@@ -613,13 +613,13 @@ This completes the proof of \cref{thm:empirical}.
 \hfill $\qed$
 
 The following claim provides a bound on $\kappa$ in terms of the
-number of states and spectral gap.
+number of states and the spectral gap.
 \begin{claim}
   \label{claim:kappa-bound}
   $\kappa \leq d/\gap$.
 \end{claim}
 \begin{proof}
-  It is established in~\citep{cho2001comparison} that
+  It is established by Cho and Meyer~\citep{cho2001comparison} that
   \[
     \kappa
     \leq \max_{i,j} |\giA_{i,j}|
@@ -627,7 +627,7 @@ number of states and spectral gap.
     \sup_{\norm{\vv}_1 = 1 , \dotp{\vv,\v1} = 0} \norm{\vv^\t \giA}_1
   \]
   (our $\kappa$ is the $\kappa_4$ quantity from
-  \citep{cho2001comparison}), and \citep{seneta1993sensitivity}
+  \citep{cho2001comparison}), and Seneta~\citep{seneta1993sensitivity}
   establishes
   \[
     \sup_{\norm{\vv}_1 = 1 , \dotp{\vv,\v1} = 0} \norm{\vv^\t \giA}_1
@@ -637,4 +637,3 @@ number of states and spectral gap.
     \qedhere
   \]
 \end{proof}
-
