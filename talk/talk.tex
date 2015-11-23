@@ -67,10 +67,6 @@
 %\frametitle{Outline}
 %\tableofcontents[hideallsubsections]
 %\end{frame}
-%
-%-------------------------------------------------------------------------------
-
-\section{Introduction}
 
 %-------------------------------------------------------------------------------
 
@@ -87,17 +83,18 @@
     \item<2->
       There is a unique \GREEN{stationary distribution} $\pi$ with
       \[
-        \cL(X_t) \ \to \ \pi
-        \quad\text{as}\quad
-        t \ \to \ \infty
+        \lim_{t\to\infty}
+        \cL(X_t \mid X_1=x) \ = \ \pi
+        \,,
+        \quad \text{for all $x \in \states$}
         \,.
       \]
 
     \item<3->
       The \GREEN{mixing time} $\tmix$ is the earliest time $t$ with
       \[
-        \sup_{\cL(X_1)}
-        \norm{\cL(X_t) - \pi}_{\tv}
+        \sup_{x \in \states}
+        \norm{\cL(X_t \mid X_1=x) - \pi}_{\tv}
         \ \leq \
         1/4
         \,.
