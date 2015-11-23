@@ -168,7 +168,9 @@
 
   \onslide<3->
   \begin{center}
-    Need observable deviation bounds.
+    \BLUE{%
+      Need observable deviation bounds.
+    }
   \end{center}
 
 \end{frame}
@@ -202,12 +204,14 @@
     \,.
   \]
 
-  But $\tmixhat$ is computed from $X_{1:t}$, so $\veps_t$ may also
-  depend on $\tmix$.
+  But $\tmixhat$ is computed from $X_{1:t}$, so
+  \FIREBRICK{$\veps_t$ may also depend on $\tmix$}.
 
   \begin{center}
-    Need \emph{observable confidence intervals} for $\tmix$, \\
-    not just point estimators with deviation bounds.
+    \BLUE{%
+      Need \emph{observable confidence intervals} for $\tmix$, \\
+      not just point estimators with deviation bounds.
+    }
   \end{center}
 
 \end{frame}
@@ -225,13 +229,13 @@
       \medskip
 
     \item
-      \BLUE{Lower/upper bounds} on sample path length for point
+      \textbf{Lower/upper bounds} on sample path length for point
       estimation of $\trelax$.
 
       \medskip
 
     \item
-      \BLUE{New algorithm} for constructing confidence intervals for
+      \textbf{New algorithm} for constructing confidence intervals for
       $\trelax$.
 
   \end{enumerate}
@@ -273,7 +277,9 @@
   \end{itemize}
 
   \begin{center}
-    \textbf{Spectral approach}: construct CI's for $\gap$ and $\pimin$.
+    \BLUE{%
+      \textbf{Spectral approach}: construct CI's for $\gap$ and $\pimin$.
+    }
   \end{center}
 
 \end{frame}
@@ -321,8 +327,10 @@
 
   \end{enumerate}
   \begin{center}
-    \FIREBRICK{But point estimator $\not\Rightarrow$ observable
-    confidence interval.}
+    \FIREBRICK{%
+      But point estimator $\not\Rightarrow$ observable
+      confidence interval.
+    }
   \end{center}
 
 \end{frame}
@@ -409,9 +417,9 @@
       \smallskip
 
     \item
-      \textbf{Plug-in approach}:
-      estimate $\pi$ and $M$ from $X_{1:t}$ (with empirical
-      frequencies), then form estimate of $\gap$.
+      \textbf{Plug-in estimator}:
+      estimate $\pi$ and $M$ from $X_{1:t}$ (using empirical
+      frequencies), then plug-in to formula for $\gap$.
 
   \end{itemize}
 
@@ -422,30 +430,28 @@
 \begin{frame}
   \frametitle{The chicken-and-egg problem}
 
-  \begin{itemize}
-    \item
-      (Matrix) Chernoff bound {\fns(for Markov chains)} gives error
-      bounds for estimates of $\pi$ and $M$ (and ultimately of $L$ and
-      $\gap$): e.g., w.h.p.,
-      \[
-        \abs{\gaphat-\gap}
-        \ \leq \
-        \norm{\wh L - L}
-        \ \leq \
-        O\Parens{
-          \sqrt{\frac{\log(d)\log(t/\pimin)}{\gap\pimin t}}
-        }
-        \,,
-      \]
-      which has \FIREBRICK{\emph{inverse} dependence} on $\gap$.
+  (Matrix) Chernoff bound {\fns(for Markov chains)} gives error bounds
+  for estimates of $\pi$ and $M$ (and ultimately of $L$ and $\gap$):
+  e.g., w.h.p.,
+  \[
+    \abs{\gaphat-\gap}
+    \ \leq \
+    \norm{\wh L - L}
+    \ \leq \
+    O\Parens{
+      \sqrt{\frac{\log(d)\log(t/\pimin)}{\gap\pimin t}}
+    }
+    \,,
+  \]
+  which has \FIREBRICK{\emph{inverse} dependence} on $\gap$.
 
-      \medskip
+  \begin{center}
+    \FIREBRICK{%
+      Can't ``solve the bound'' for $\gap$
+    }
 
-    \item
-      Can't ``solve the bound for $\gap$''
-      {\fns(\emph{c.f.} empirical Bernstein inequalities)}.
-
-  \end{itemize}
+    {\fns(\emph{c.f.} ``empirical Bernstein'' inequalities)}.
+  \end{center}
 
 \end{frame}
 
@@ -484,10 +490,11 @@
   \end{enumerate}
 
   \begin{center}
-    \textbf{Our approach}:
-
-    Directly estimate $P$, and \emph{indirectly} estimate $\pi$ via
-    $\wh P$.
+    \BLUE{%
+      \textbf{Our approach}: \\
+      Directly estimate $P$, and \emph{indirectly} estimate $\pi$ via
+      $\wh P$.
+    }
   \end{center}
 
 \end{frame}
