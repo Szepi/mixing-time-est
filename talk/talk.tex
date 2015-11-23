@@ -1,0 +1,620 @@
+\documentclass[11pt,compress,blue4]{beamer}
+\usepackage[T1]{fontenc}
+\usepackage{algorithmic}
+\usepackage[normalem]{ulem}
+\usepackage{adjustbox}
+
+\input{__includes}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{\hfill\insertframenumber\hspace{1mm}\vspace{1mm}}
+
+\definecolor{boldgreen}{rgb}{0.2,0.6,0.2}
+\definecolor{darkgreen}{rgb}{0.1,0.4,0.1}
+\definecolor{darkblue}{rgb}{0,0,0.7}
+\definecolor{firebrick}{rgb}{0.7,0.13,0.13}
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\GREEN}[1]{\textcolor{boldgreen}{#1}}
+\newcommand{\GRAY}[1]{\textcolor{gray}{#1}}
+\newcommand{\LIGHTGRAY}[1]{\textcolor{lightgray}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\FIREBRICK}[1]{\textcolor{firebrick}{#1}}
+
+\newcommand\fns\footnotesize
+
+\newcommand\tv{\ensuremath{\operatorname{tv}}}
+\newcommand\tmix{\ensuremath{t_{\operatorname{mix}}}}
+\newcommand\tmixhat{\ensuremath{\hat{t}_{\operatorname{mix}}}}
+\newcommand\trelax{\ensuremath{t_{\operatorname{relax}}}}
+\newcommand\pimin{\ensuremath{\pi_{\star}}}
+\newcommand\gap{\ensuremath{\gamma_{\star}}}
+\newcommand\gaphat{\ensuremath{\hat{\gamma}_{\star}}}
+\newcommand\slem{\ensuremath{\lambda_{\star}}}
+
+\newcommand\states{\ensuremath{\mathcal{X}}}
+
+\AtBeginSection[]
+{\begin{frame}<beamer>
+\begin{center}
+{\Large \thesection. \ \insertsection}
+\end{center}
+\end{frame}}
+\setbeamertemplate{section in toc}[sections numbered]
+
+\title{Confidence intervals for the mixing time \\ of a reversible Markov chain}
+\author{%
+  Daniel Hsu$^\dag$ \and
+  Aryeh Kontorovich$^\sharp$ \and
+  Csaba Szepesv\'ari$^\star$%
+}
+\institute{%
+  $^\dag$Columbia University,
+  $^\sharp$Ben-Gurion University,
+  $^\star$University of Alberta
+}
+\date{}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+
+\end{frame}
+
+%-------------------------------------------------------------------------------
+%
+%\begin{frame}
+%\frametitle{Outline}
+%\tableofcontents[hideallsubsections]
+%\end{frame}
+%
+%-------------------------------------------------------------------------------
+
+\section{Introduction}
+
+%-------------------------------------------------------------------------------
+
+\begin{frame}
+  \frametitle{Problem}
+
+  \begin{itemize}
+    \item
+      Irreducible, aperiodic, time-homogeneous Markov chain
+      \[
+        X_1 \ \to \ X_2 \ \to \ X_3 \ \to \ \dotsb
+      \]
+
+    \item<2->
+      There is a unique \GREEN{stationary distribution} $\pi$ with
+      \[
+        \cL(X_t) \ \to \ \pi
+        \quad\text{as}\quad
+        t \ \to \ \infty
+        \,.
+      \]
+
+    \item<3->
+      The \GREEN{mixing time} $\tmix$ is the earliest time $t$ with
+      \[
+        \sup_{\cL(X_1)}
+        \norm{\cL(X_t) - \pi}_{\tv}
+        \ \leq \
+        1/4
+        \,.
+      \]
+
+  \end{itemize}
+
+  \onslide<4->
+  \textbf{Problem}:
+
+  \medskip
+  \begin{overprint}
+    \onslide<4>
+    \begin{center}
+      Determine (confidently) if $t\geq\tmix$ after seeing $X_1,X_2,\dotsc,X_t$.
+    \end{center}
+    \onslide<5>
+    \begin{center}
+      Given $\delta \in (0,1)$, determine non-trivial $I_t \subseteq
+      [0,\infty]$ from $X_{1:t}$ with
+      \[
+        \P(\tmix \in I_t) \ \geq \ 1-\delta
+        \,.
+      \]
+    \end{center}
+  \end{overprint}
+
+\end{frame}
+
+%-------------------------------------------------------------------------------
+
+\begin{frame}
+  \frametitle{Some motivation from machine learning and statistics}
+
+  \textbf{Chernoff bounds for Markov chains $X_1\to X_2\to\dotsb$}:
+  \\
+  for suitably well-behaved $f \colon \states \to \bbR$,
+  with probability at least $1-\delta$,
+  \[
+    \Abs{
+      \frac1t\sum_{i=1}^t f(X_i)
+      -
+      \E_\pi f
+    }
+    \ \leq \
+    \underbrace{
+      \tilde O\Parens{
+        \sqrt{
+          \frac{\tmix \log(1/\delta)}{t}
+        }
+      }
+    }_{\text{deviation bound}}
+    \,.
+  \]
+  Bound depends on $\tmix$, which may be unknown \emph{a priori}.
+
+  \onslide<2->
+  \bigskip
+  \textbf{Examples}:
+  \begin{description}
+    \item[Bayesian inference]
+      \underline{Posterior means \& variances} via MCMC
+
+    \item[Reinforcement learning]
+      \underline{Mean action rewards} in an MDP
+
+    \item[Supervised learning]
+      \underline{Error rates of hypotheses} from non-iid data
+
+  \end{description}
+
+  \onslide<3->
+  \begin{center}
+    Need observable deviation bounds.
+  \end{center}
+
+\end{frame}
+
+%-------------------------------------------------------------------------------
+
+\begin{frame}
+  \frametitle{Observable deviation bounds from mixing time bounds}
+
+  Suppose we can compute a good estimate $\tmixhat =
+  \tmixhat(X_{1:t})$ of $\tmix$ from $X_{1:t}$:
+  \[
+    \P(\tmix \leq \tmixhat + \veps_t)
+    \ \geq \
+    1-\delta
+    \,.
+  \]
+  Then with probability at least $1-2\delta$,
+  \[
+    \Abs{
+      \frac1t\sum_{i=1}^t f(X_i)
+      -
+      \E_\pi f
+    }
+    \ \leq \
+    \tilde O\Parens{
+      \sqrt{
+        \frac{\parens{\tmixhat + \veps_t} \log(1/\delta)}{t}
+      }
+    }
+    \,.
+  \]
+
+  But $\tmixhat$ is computed from $X_{1:t}$, so $\veps_t$ may also
+  depend on $\tmix$.
+
+  \begin{center}
+    Need \emph{observable confidence intervals} for $\tmix$, \\
+    not just point estimators with deviation bounds.
+  \end{center}
+
+\end{frame}
+
+%-------------------------------------------------------------------------------
+
+\begin{frame}
+  \frametitle{What we do}
+
+  \begin{enumerate}
+    \item
+      Shift focus to \GREEN{relaxation time} $\trelax$ to enable
+      spectral methods.
+
+      \medskip
+
+    \item
+      \BLUE{Lower/upper bounds} on sample path length for point
+      estimation of $\trelax$.
+
+      \medskip
+
+    \item
+      \BLUE{New algorithm} for constructing confidence intervals for
+      $\trelax$.
+
+  \end{enumerate}
+
+\end{frame}
+
+%-------------------------------------------------------------------------------
+
+\begin{frame}
+  \frametitle{The relaxation time}
+
+  \begin{itemize}
+    \item
+      Let $P$ be the \GREEN{transition operator} of the Markov chain,
+
+      and let $\slem$ be its \GREEN{second-largest eigenvalue modulus}
+
+      {\fns(i.e., largest eigenvalue modulus other than $1$)}.
+
+      \medskip
+
+    \item
+      \GREEN{Spectral gap}: $\gap := 1-\slem$.
+
+      \GREEN{Relaxation time}: $\trelax := 1/\gap$.
+
+      \[
+        \Parens{ \trelax - 1 } \ln 2
+        \ \leq \
+        \tmix
+        \ \leq \
+        \trelax \ln \frac4{\pimin}
+      \]
+      for $\pimin := \min_{x \in \states} \pi(x)$.
+
+      \medskip
+      Assumptions on $P$ ensure $\gap, \pimin \in (0,1)$.
+
+  \end{itemize}
+
+  \begin{center}
+    \textbf{Spectral approach}: construct CI's for $\gap$ and $\pimin$.
+  \end{center}
+
+\end{frame}
+
+%-------------------------------------------------------------------------------
+
+\begin{frame}
+  \frametitle{Our results (point estimation)}
+
+  We restrict to \GREEN{reversible Markov chains} on \GREEN{finite
+  state spaces}.
+
+  Let $d$ be the (known \emph{a priori}) cardinality of the state
+  space $\states$.
+
+  \begin{enumerate}
+    \item
+      {\fns\textbf{Lower bound}:} \\
+      To estimate $\gap$ within a constant multiplicative factor,
+      \mbox{every algorithm} needs (w.p.~$1/4$) sample path of
+      length
+      \[
+        \geq \
+        \Omega\Parens{
+          \frac{d \log d}{\gap} + \frac1{\pimin}
+        }
+        \,.
+      \]
+
+    \item
+      {\fns\textbf{Upper bound}:} \\
+      Simple algorithm estimates $\gap$ and $\pimin$ within a constant
+      multiplicative factor (w.h.p.) with sample path of length
+      \begin{align*}
+        \wt O\Parens{ \frac{\log d}{\pimin\gap^3} }
+        & \quad
+        \text{(for $\gap$)}
+        \,,
+        &
+        \wt O\Parens{ \frac{\log d}{\pimin\gap} }
+        & \quad
+        \text{(for $\pimin$)}
+        \,.
+      \end{align*}
+
+  \end{enumerate}
+  \begin{center}
+    \FIREBRICK{But point estimator $\not\Rightarrow$ observable
+    confidence interval.}
+  \end{center}
+
+\end{frame}
+
+%-------------------------------------------------------------------------------
+
+\begin{frame}
+  \frametitle{Our results (confidence intervals)}
+
+  \begin{enumerate}
+    \item[3.]
+      \textbf{New algorithm}:
+      Given $\delta \in (0,1)$ and $X_{1:t}$ as input, constructs
+      intervals $I_t^{\gap}$ and $I_t^{\pimin}$ such that
+      \[
+        \P\Parens{
+          \gap \in I_t^{\gap}
+        }
+        \ \geq \ 1-\delta
+        \quad
+        \text{and}
+        \quad
+        \P\Parens{
+          \pimin \in I_t^{\pimin}
+        }
+        \ \geq \ 1-\delta
+        \,.
+      \]
+
+      Widths of intervals converge a.s.~to zero at
+      $\sqrt{\frac{t}{\log\log t}}$ rate.
+
+      \medskip
+
+    \item[4.]
+      \textbf{Hybrid approach}:
+      Use new algorithm to turn error bounds for point estimators into
+      observable CI's.
+
+      {\fns(This improves asymptotic rate for $\pimin$ interval.)}
+
+  \end{enumerate}
+
+\end{frame}
+
+%-------------------------------------------------------------------------------
+
+\begin{frame}
+  \frametitle{The plug-in estimator}
+
+  \begin{itemize}
+    \item
+      Reversibility grants the symmetry of
+      \[
+        M
+        \ := \
+        \diag(\pi) P
+        \ = \
+        \Braces{ \P_{X_1 \sim \pi}(X_1=x,X_2=x') }_{x,x'\in\states}
+      \]
+      {\fns(doublet state probabilities in stationary chain)}.
+
+      \smallskip
+
+    \item
+      Moreover, eigenvalues of
+      \[
+        L
+        \ := \
+        \diag(\pi)^{-1/2} M \diag(\pi)^{-1/2}
+      \]
+      are real, and satisfy
+      \begin{gather*}
+        1
+        \ = \ \lambda_1 \ > \ \lambda_2 \ \geq \ \dotsb \ \geq \
+        \lambda_d \ > \ -1
+        \,,
+        \\
+        \gap
+        \ = \ 1 - \max\braces{ \lambda_2, \abs{\lambda_d} }
+        \,.
+      \end{gather*}
+
+      \smallskip
+
+    \item
+      \textbf{Plug-in approach}:
+      estimate $\pi$ and $M$ from $X_{1:t}$ (with empirical
+      frequencies), then form estimate of $\gap$.
+
+  \end{itemize}
+
+\end{frame}
+
+%-------------------------------------------------------------------------------
+
+\begin{frame}
+  \frametitle{The chicken-and-egg problem}
+
+  \begin{itemize}
+    \item
+      (Matrix) Chernoff bound {\fns(for Markov chains)} gives error
+      bounds for estimates of $\pi$ and $M$ (and ultimately of $L$ and
+      $\gap$): e.g., w.h.p.,
+      \[
+        \abs{\gaphat-\gap}
+        \ \leq \
+        \norm{\wh L - L}
+        \ \leq \
+        O\Parens{
+          \sqrt{\frac{\log(d)\log(t/\pimin)}{\gap\pimin t}}
+        }
+        \,,
+      \]
+      which has \FIREBRICK{\emph{inverse} dependence} on $\gap$.
+
+      \medskip
+
+    \item
+      Can't ``solve the bound for $\gap$''
+      {\fns(\emph{c.f.} empirical Bernstein inequalities)}.
+
+  \end{itemize}
+
+\end{frame}
+
+%-------------------------------------------------------------------------------
+
+\begin{frame}
+  \frametitle{Direct estimation of $P$}
+
+  \textbf{Alternative}: directly estimate $P$ from $X_{1:t}$.
+
+  \begin{itemize}
+    \item
+      \textbf{Key advantage}: can get observable confidence intervals
+      for $P$ via ``empirical Bernstein'' for martingales.
+
+  \end{itemize}
+
+  \textbf{Two problems}:
+  \begin{enumerate}
+    \item
+      Without appealing to symmetry structure via $L$, can argue
+      \[
+        \norm{\wh{P} - P} \ \leq \ \veps
+        \quad\Longrightarrow\quad
+        \abs{\gaphat - \gap} \ \leq \ O(\veps^{1/(2d)})
+        \,,
+      \]
+      but this implies \FIREBRICK{exponential slow-down in rate}.
+
+      \medskip
+
+    \item
+      Appealing to symmetry structure via $L$, get bounds that depend
+      on $\pi$, which is unknown.
+
+  \end{enumerate}
+
+  \begin{center}
+    \textbf{Our approach}:
+
+    Directly estimate $P$, and \emph{indirectly} estimate $\pi$ via
+    $\wh P$.
+  \end{center}
+
+\end{frame}
+
+%-------------------------------------------------------------------------------
+
+\begin{frame}
+  \frametitle{Indirect estimation of $\pi$}
+
+  \begin{enumerate}
+    \item
+      We ensure that $\wh P$ is transition operator for an ergodic chain
+      {\fns(easy via Laplace smoothing)}.
+
+      \medskip
+
+    \item
+      \textbf{Key step}: estimate $\pi$ via $\wh P$ via \GREEN{group
+      inverse} $\wh A^\#$ of $I - \wh P$.
+
+      \medskip
+
+      \begin{itemize}
+        \item
+          $\wh A^\#$ contains ``virtually everything that one would want
+          to know about the chain'' [with transition operator $\wh P$]
+          {\fns(Meyer, 1975)}.
+
+          \medskip
+
+        \item
+          Reveals unique stationary distribution $\hat\pi$ w.r.t.~$\wh P$.
+
+          \BLUE{This is our indirect estimate of $\pi$}.
+
+          \medskip
+
+        \item
+          Tells us how to bound $\norm{\hat\pi-\pi}_\infty$ in terms of
+          $\norm{\wh P - P}$.
+
+          \BLUE{Hence, from this, we construct a confidence interval
+          for $\pi$.}
+
+      \end{itemize}
+
+%    \item
+%      Use \GREEN{perturbation theory for eigenvalues of symmetric
+%      operators} to get \BLUE{confidence interval for $\gap$ in terms
+%      of confidence intervals for $P$ and $\pi$}.
+%
+  \end{enumerate}
+
+\end{frame}
+
+%-------------------------------------------------------------------------------
+
+\begin{frame}
+  \frametitle{Overall algorithm (outline)}
+
+  \begin{enumerate}
+    \item
+      Form empirical estimate and confidence intervals for $P$
+
+      {\fns(exploit Markov property \& ``empirical Bernstein''-type bounds)}.
+
+      \medskip
+
+    \item
+      Form estimate and confidence intervals for $\pi$
+
+      {\fns(via group inverse of $I - \wh P$)}.
+
+      \medskip
+
+    \item
+      Form estimate and confidence interval for $\gap$
+
+      {\fns(via confidence intervals for $\pi$ and $P$, \& eigenvalue perturbation theory)}.
+
+  \end{enumerate}
+\end{frame}
+
+%-------------------------------------------------------------------------------
+
+\begin{frame}
+  \frametitle{Recap and future work}
+
+  \begin{enumerate}
+    \item
+      We resolve ``chicken-and-egg'' problem of observable
+      confidence intervals for mixing time from a single sample path.
+
+    \item
+      Strongly exploit Markov property and ergodicity in confidence
+      intervals for $P$ and $\pi$.
+
+    \item
+      \textbf{Problem \#1}:
+      close gap between lower and upper bounds on sample path length
+      (for point estimation).
+
+    \item
+      \textbf{Problem \#2}:
+      overcome computational bottlenecks from matrix operations.
+
+    \item
+      \textbf{Problem \#3}:
+      handle large/continuous state spaces under suitable assumptions.
+
+  \end{enumerate}
+
+\end{frame}
+
+%-------------------------------------------------------------------------------
+
+\begin{frame}
+  \begin{center}
+    \Huge
+    Thanks!
+  \end{center}
+\end{frame}
+
+%-------------------------------------------------------------------------------
+
+\end{document}
+

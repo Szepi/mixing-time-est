@@ -1,0 +1,124 @@
+\usepackage{amsmath,amsbsy,amsfonts,amssymb,amsthm,color,dsfont,mleftright,commath}
+
+\def\ddefloop#1{\ifx\ddefloop#1\else\ddef{#1}\expandafter\ddefloop\fi}
+
+% \bfA, \bfB, ...
+\def\ddef#1{\expandafter\def\csname bf#1\endcsname{\ensuremath{\mathbf{#1}}}}
+\ddefloop ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\ddefloop
+
+% \bfalpha, \bfbeta, ...,  \bfGamma, \bfDelta, ...,
+\def\ddef#1{\expandafter\def\csname bf#1\endcsname{\ensuremath{\pmb{\csname #1\endcsname}}}}
+\ddefloop {alpha}{beta}{gamma}{delta}{epsilon}{varepsilon}{zeta}{eta}{theta}{vartheta}{iota}{kappa}{lambda}{mu}{nu}{xi}{pi}{varpi}{rho}{varrho}{sigma}{varsigma}{tau}{upsilon}{phi}{varphi}{chi}{psi}{omega}{Gamma}{Delta}{Theta}{Lambda}{Xi}{Pi}{Sigma}{varSigma}{Upsilon}{Phi}{Psi}{Omega}{ell}\ddefloop
+
+% \bbA, \bbB, ...
+\def\ddef#1{\expandafter\def\csname bb#1\endcsname{\ensuremath{\mathbb{#1}}}}
+\ddefloop ABCDEFGHIJKLMNOPQRSTUVWXYZ\ddefloop
+
+% \cA, \cB, ...
+\def\ddef#1{\expandafter\def\csname c#1\endcsname{\ensuremath{\mathcal{#1}}}}
+\ddefloop ABCDEFGHIJKLMNOPQRSTUVWXYZ\ddefloop
+
+% \vA, \vB, ..., \va, \vb, ...
+\def\ddef#1{\expandafter\def\csname v#1\endcsname{\ensuremath{\boldsymbol{#1}}}}
+\ddefloop ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\ddefloop
+
+% \valpha, \vbeta, ...,  \vGamma, \vDelta, ...,
+\def\ddef#1{\expandafter\def\csname v#1\endcsname{\ensuremath{\boldsymbol{\csname #1\endcsname}}}}
+\ddefloop {alpha}{beta}{gamma}{delta}{epsilon}{varepsilon}{zeta}{eta}{theta}{vartheta}{iota}{kappa}{lambda}{mu}{nu}{xi}{pi}{varpi}{rho}{varrho}{sigma}{varsigma}{tau}{upsilon}{phi}{varphi}{chi}{psi}{omega}{Gamma}{Delta}{Theta}{Lambda}{Xi}{Pi}{Sigma}{varSigma}{Upsilon}{Phi}{Psi}{Omega}{ell}\ddefloop
+
+\newcommand\Sig{\ensuremath{\varSigma}}
+\newcommand\vSig{\ensuremath{\vvarSigma}}
+\newcommand\veps{\ensuremath{\varepsilon}}
+\newcommand\vveps{\ensuremath{\vvarepsilon}}
+\newcommand\eps{\ensuremath{\epsilon}}
+
+\renewcommand\t{{\ensuremath{\scriptscriptstyle{\top}}}}
+
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\Diag}{Diag}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\vol}{vol}
+
+\DeclareMathOperator{\E}{\mathbb{E}}
+\renewcommand{\P}{\ensuremath{\mathbb{P}}}
+\DeclareMathOperator{\var}{var}
+\DeclareMathOperator{\stddev}{stddev}
+\DeclareMathOperator{\cov}{cov}
+
+\DeclareMathOperator{\Bd}{bd}
+\DeclareMathOperator{\Cl}{cl}
+\DeclareMathOperator{\Conv}{conv}
+\DeclareMathOperator{\Dom}{dom}
+\DeclareMathOperator{\Epi}{epi}
+\DeclareMathOperator{\Int}{int}
+\DeclareMathOperator{\Null}{ker}
+\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\Range}{ran}
+\DeclareMathOperator{\Diam}{diam}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\cost}{cost}
+\DeclareMathOperator{\mean}{mean}
+\DeclareMathOperator{\nnz}{nnz}
+\DeclareMathOperator{\RE}{RE}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\newcommand\wt{\ensuremath{\widetilde}}
+\newcommand\wh{\ensuremath{\widehat}}
+\newcommand\mbf{\ensuremath{\mathbf}}
+\renewcommand\v{\ensuremath{\boldsymbol}}
+
+\newcommand\comment[1]{{\color{blue}\{\emph{Comment}:} #1{\color{blue}\}}}
+
+%\newtheorem{lemma}{Lemma}
+%\newtheorem{claim}{Claim}
+%\newtheorem{fact}{Fact}
+%\newtheorem{proposition}{Proposition}
+%\newtheorem{theorem}{Theorem}
+%\newtheorem{corollary}{Corollary}
+%\theoremstyle{remark}
+%\newtheorem{remark}{Remark}
+%\theoremstyle{definition}
+%\newtheorem{definition}{Definition}
+%\newtheorem{condition}{Condition}
+%\newtheorem{example}{Example}
+%\newtheorem{problem}{Problem}
+%
+\newcommand\parens[1]{(#1)}
+\renewcommand\norm[1]{\|#1\|} % already defined in commath
+\newcommand\braces[1]{\{#1\}}
+\newcommand\brackets[1]{[#1]}
+\newcommand\ceil[1]{\lceil#1\rceil}
+\renewcommand\abs[1]{|#1|} % already defined in commath
+\newcommand\ind[1]{\ensuremath{\mathds{1}\{#1\}}}
+\newcommand\dotp[1]{\langle #1 \rangle}
+
+\newcommand\Parens[1]{\mleft(#1\mright)}
+\newcommand\Norm[1]{\mleft\|#1\mright\|}
+\newcommand\Braces[1]{\mleft\{#1\mright\}}
+\newcommand\Brackets[1]{\mleft[#1\mright]}
+\newcommand\Ceil[1]{\mleft\lceil#1\mright\rceil}
+\newcommand\Abs[1]{\mleft|#1\mright|}
+\newcommand\Ind[1]{\mathds{1}\mleft\{#1\mright\}}
+\newcommand\Dotp[1]{\mleft\langle#1\mright\rangle}
+
+\newcommand{\unitsphere}[1][d]{\ensuremath{S^{#1-1}}}
+\newcommand{\unitball}[1][d]{\ensuremath{B^{#1}}}
+\newcommand{\mgf}[1]{\ensuremath{M_{#1}}}
+\newcommand{\logmgf}[1]{\ensuremath{\psi_{#1}}}
+\newcommand{\Poisson}{\ensuremath{\operatorname{Poi}}}
+\newcommand{\Normal}{\ensuremath{\operatorname{N}}}
+\newcommand{\Bernoulli}{\ensuremath{\operatorname{Bern}}}
+\newcommand{\Binomial}{\ensuremath{\operatorname{Bin}}}
+\newcommand{\ball}[1]{\ensuremath{B(#1)}}
+\newcommand{\Ball}[1]{\ensuremath{B\Parens{#1}}}
+\newcommand\fnorm[1]{\ensuremath{\|#1\|_{\operatorname{F}}}}
+\newcommand\Fnorm[1]{\ensuremath{\mleft\|#1\mright\|_{\operatorname{F}}}}
+
+\newcommand\lambdamax{\ensuremath{\lambda_{\max}}}
+\newcommand\lambdamin{\ensuremath{\lambda_{\min}}}
+
