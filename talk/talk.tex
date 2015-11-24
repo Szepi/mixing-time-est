@@ -180,7 +180,7 @@ Markov chain \\ from a single sample path}
 %-------------------------------------------------------------------------------
 
 \begin{frame}
-  \frametitle{Observable deviation bounds from mixing time bounds}
+  \frametitle{Observable deviation bounds from mixing time bounds?}
 
   Suppose we can compute a good estimate $\tmixhat =
   \tmixhat(X_{1:t})$ of $\tmix$ from $X_{1:t}$:
@@ -190,6 +190,7 @@ Markov chain \\ from a single sample path}
     1-\delta
     \,.
   \]
+  \onslide<2->
   Then with probability at least $1-2\delta$,
   \[
     \Abs{
@@ -206,9 +207,11 @@ Markov chain \\ from a single sample path}
     \,.
   \]
 
+  \onslide<3->
   But $\tmixhat$ is computed from $X_{1:t}$, so
   \FIREBRICK{$\veps_t$ may also depend on $\tmix$}.
 
+  \onslide<4->
   \begin{center}
     \BLUE{%
       Need \emph{observable confidence intervals} for $\tmix$, \\
@@ -224,19 +227,19 @@ Markov chain \\ from a single sample path}
   \frametitle{What we do}
 
   \begin{enumerate}
-    \item
+    \item<2->
       Shift focus to \GREEN{relaxation time} $\trelax$ to enable
       spectral methods.
 
       \medskip
 
-    \item
+    \item<3->
       \textbf{Lower/upper bounds} on sample path length for point
       estimation of $\trelax$.
 
       \medskip
 
-    \item
+    \item<4->
       \textbf{New algorithm} for constructing confidence intervals for
       $\trelax$.
 
@@ -259,7 +262,7 @@ Markov chain \\ from a single sample path}
 
       \medskip
 
-    \item
+    \item<2->
       \GREEN{Spectral gap}: $\gap := 1-\slem$.
 
       \GREEN{Relaxation time}: $\trelax := 1/\gap$.
@@ -273,11 +276,13 @@ Markov chain \\ from a single sample path}
       \]
       for $\pimin := \min_{x \in \states} \pi(x)$.
 
+      \onslide<3->
       \medskip
       Assumptions on $P$ ensure $\gap, \pimin \in (0,1)$.
 
   \end{itemize}
 
+  \onslide<4->
   \begin{center}
     \BLUE{%
       \textbf{Spectral approach}: construct CI's for $\gap$ and $\pimin$.
@@ -298,7 +303,7 @@ Markov chain \\ from a single sample path}
   space $\states$.
 
   \begin{enumerate}
-    \item
+    \item<2->
       {\fns\textbf{Lower bound}:} \\
       To estimate $\gap$ within a constant multiplicative factor,
       \mbox{every algorithm} needs (w.p.~$1/4$) sample path of
@@ -311,7 +316,7 @@ Markov chain \\ from a single sample path}
         \,.
       \]
 
-    \item
+    \item<3->
       {\fns\textbf{Upper bound}:} \\
       Simple algorithm estimates $\gap$ and $\pimin$ within a constant
       multiplicative factor (w.h.p.) with sample path of length
@@ -328,6 +333,8 @@ Markov chain \\ from a single sample path}
       \end{align*}
 
   \end{enumerate}
+
+  \onslide<4->
   \begin{center}
     \FIREBRICK{%
       But point estimator $\not\Rightarrow$ observable
@@ -367,7 +374,7 @@ Markov chain \\ from a single sample path}
 
       \medskip
 
-    \item[4.]
+    \item[4.]<2->
       \textbf{Hybrid approach}:
       Use new algorithm to turn error bounds for point estimators into
       observable CI's.
@@ -384,7 +391,7 @@ Markov chain \\ from a single sample path}
   \frametitle{Plug-in estimator}
 
   \begin{itemize}
-    \item
+    \item<2->
       Reversibility grants the symmetry of
       \[
         M
@@ -397,7 +404,7 @@ Markov chain \\ from a single sample path}
 
       \smallskip
 
-    \item
+    \item<3->
       Moreover, eigenvalues of
       \[
         L
@@ -418,7 +425,7 @@ Markov chain \\ from a single sample path}
 
       \smallskip
 
-    \item
+    \item<4->
       \textbf{Plug-in estimator}:
       estimate $\pi$ and $M$ from $X_{1:t}$ (using empirical
       frequencies), then plug-in to formula for $\gap$.
@@ -443,10 +450,12 @@ Markov chain \\ from a single sample path}
     O\Parens{
       \sqrt{\frac{\log(d)\log(t/\pimin)}{\gap\pimin t}}
     }
-    \,,
+    \,.
   \]
-  which has \FIREBRICK{\emph{inverse} dependence} on $\gap$.
+  \onslide<2->
+  This has \FIREBRICK{\emph{inverse} dependence} on $\gap$.
 
+  \onslide<3->
   \begin{center}
     \FIREBRICK{%
       Can't ``solve the bound'' for $\gap$
@@ -465,15 +474,16 @@ Markov chain \\ from a single sample path}
   \textbf{Alternative}: directly estimate $P$ from $X_{1:t}$.
 
   \begin{itemize}
-    \item
+    \item<2->
       \textbf{Key advantage}: can get observable confidence intervals
       for $P$ via ``empirical Bernstein'' for martingales.
 
   \end{itemize}
 
+  \onslide<3->
   \textbf{Two problems}:
   \begin{enumerate}
-    \item
+    \item<4->
       Without appealing to symmetry structure via $L$, can argue
       \[
         \norm{\wh{P} - P} \ \leq \ \veps
@@ -485,12 +495,13 @@ Markov chain \\ from a single sample path}
 
       \medskip
 
-    \item
+    \item<5->
       Appealing to symmetry structure via $L$, get bounds that depend
       on $\pi$, which is unknown.
 
   \end{enumerate}
 
+  \onslide<6->
   \begin{center}
     \BLUE{%
       \textbf{Our approach}: \\
@@ -513,28 +524,28 @@ Markov chain \\ from a single sample path}
 
       \medskip
 
-    \item
+    \item<2->
       \textbf{Key step}: estimate $\pi$ via $\wh P$ via \GREEN{group
       inverse} $\wh A^\#$ of $I - \wh P$.
 
       \medskip
 
       \begin{itemize}
-        \item
+        \item<3->
           $\wh A^\#$ contains ``virtually everything that one would want
           to know about the chain'' [with transition operator $\wh P$]
           {\fns(Meyer, 1975)}.
 
           \medskip
 
-        \item
+        \item<4->
           Reveals unique stationary distribution $\hat\pi$ w.r.t.~$\wh P$.
 
           \BLUE{This is our indirect estimate of $\pi$}.
 
           \medskip
 
-        \item
+        \item<5->
           Tells us how to bound $\norm{\hat\pi-\pi}_\infty$ in terms of
           $\norm{\wh P - P}$.
 
@@ -590,20 +601,20 @@ Markov chain \\ from a single sample path}
       We resolve ``chicken-and-egg'' problem of observable
       confidence intervals for mixing time from a single sample path.
 
-    \item
+    \item<2->
       Strongly exploit Markov property and ergodicity in confidence
       intervals for $P$ and $\pi$.
 
-    \item
+    \item<3->
       \textbf{Problem \#1}:
       close gap between lower and upper bounds on sample path length
       (for point estimation).
 
-    \item
+    \item<4->
       \textbf{Problem \#2}:
       overcome computational bottlenecks from matrix operations.
 
-    \item
+    \item<5->
       \textbf{Problem \#3}:
       handle large/continuous state spaces under suitable assumptions.
 
