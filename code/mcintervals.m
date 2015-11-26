@@ -1,4 +1,4 @@
-function [pimin_hat, gap_hat, b_hat, w_hat, P_hat, pi_hat, Asharp, lambda_hats, P_lb, P_ub, B_hat, kappa_hat, rho_hat] = mcintervals(N, d, delta)
+function [pimin_lb, pimin_ub, gap_lb, gap_ub, pimin_hat, gap_hat, P_hat, pi_hat, Asharp, lambda_hats, P_lb, P_ub, B_hat, b_hat, kappa_hat, rho_hat, w_hat] = mcintervals(N, d, delta)
 
 n = sum(N(:));
 
@@ -31,3 +31,8 @@ L_hat = diag(sqrt(pi_hat))*P_hat*diag(sqrt(1./pi_hat));
 lambda_hats = eig(0.5*(L_hat+L_hat'));
 abs_lambda_hats = sort(abs(lambda_hats), 'descend');
 gap_hat = 1 - abs_lambda_hats(2);
+
+pimin_lb = max(pimin_hat - b_hat,0);
+pimin_ub = min(pimin_hat + b_hat,1);
+gap_lb = max(gap_hat - w_hat,0);
+gap_ub = min(gap_hat + w_hat,1);
