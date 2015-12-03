@@ -605,11 +605,13 @@
                     }
                     , \\
                     \hat\rho
-                    & := \frac12 \max \bigcup_{i\in[d]}
-                    \Braces{
-                      \frac{\hat{b}}{\hat\pi_i},\,
-                      \frac{\hat{b}}{\brackets{\hat\pi_i-\hat{b}}_+}
-                    }
+                    & :=
+                    \frac{\hat{b}}{2\min_{i\in[d]}\brackets{\hat\pi_i-\hat{b}}_+}
+%                    \frac12 \max \bigcup_{i\in[d]}
+%                    \Braces{
+%                      \frac{\hat{b}}{\hat\pi_i},\,
+%                      \frac{\hat{b}}{\brackets{\hat\pi_i-\hat{b}}_+}
+%                    }
                     .
                   \end{align*}
 
