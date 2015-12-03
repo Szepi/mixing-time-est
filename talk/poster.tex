@@ -1,0 +1,462 @@
+\documentclass[notheorems,final]{beamer}
+\mode<presentation>{
+  \usetheme{cuposter}
+}
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath,amsthm, amssymb, latexsym}
+\usefonttheme[onlymath]{serif}
+\boldmath
+\usepackage[orientation=landscape,size=a0,scale=1.4,debug]{beamerposter}
+
+\title{Mixing Time Estimation in Reversible Markov Chains from a Single Sample Path}
+\author{%
+  Daniel Hsu$^\dag$,
+  Aryeh Kontorovich$^\sharp$,
+  Csaba Szepesv\'ari$^\star$%
+}
+\institute{%
+  $^\dag$Columbia University,
+  $^\sharp$Ben-Gurion University,
+  $^\star$University of Alberta%
+}
+
+\newcommand{\compresslist}{%
+  \setlength{\itemsep}{1pt}%
+  \setlength{\parskip}{0pt}%
+  \setlength{\parsep}{0pt}%
+  \setlength{\leftmargin}{0.7cm}%
+}
+
+\newlength{\columnheight}
+\setlength{\columnheight}{70cm}
+
+\input{__includes}
+
+\definecolor{boldgreen}{rgb}{0.2,0.6,0.2}
+\definecolor{darkgreen}{rgb}{0.1,0.4,0.1}
+\definecolor{darkblue}{rgb}{0,0,0.7}
+\definecolor{firebrick}{rgb}{0.7,0.13,0.13}
+\definecolor{britishracinggreen}{rgb}{0.0, 0.26, 0.15}
+\newcommand{\RED}[1]{\textcolor{red}{#1}}
+\newcommand{\GREEN}[1]{\textcolor{boldgreen}{#1}}
+\newcommand{\GRAY}[1]{\textcolor{gray}{#1}}
+\newcommand{\LIGHTGRAY}[1]{\textcolor{lightgray}{#1}}
+\newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
+\newcommand{\FIREBRICK}[1]{\textcolor{firebrick}{#1}}
+
+\newcommand\fns\footnotesize
+
+\newcommand\tv{\ensuremath{\operatorname{tv}}}
+\newcommand\tmix{\ensuremath{t_{\operatorname{mix}}}}
+\newcommand\tmixhat{\ensuremath{\hat{t}_{\operatorname{mix}}}}
+\newcommand\trelax{\ensuremath{t_{\operatorname{relax}}}}
+\newcommand\pimin{\ensuremath{\pi_{\star}}}
+\newcommand\gap{\ensuremath{\gamma_{\star}}}
+\newcommand\hatgap{\ensuremath{\hat{\gamma}_{\star}}}
+\newcommand\hatpimin{\ensuremath{\hat{\pi}_{\star}}}
+\newcommand\slem{\ensuremath{\lambda_{\star}}}
+
+\newcommand\states{\ensuremath{\mathcal{X}}}
+
+
+\begin{document}
+  \begin{frame}{} 
+    \vfill
+    \begin{columns}
+      \begin{column}{0.24\textwidth}
+        \begin{beamercolorbox}[center,wd=\textwidth]{postercolumn}
+          \begin{minipage}[T]{.95\textwidth}
+            \parbox[t][\columnheight]{\textwidth}{
+              \begin{block}{Problem}
+                \begin{list}{$\triangleright$}\compresslist
+                  \item
+                    \mbox{Irreducible, aperiodic, time-homogeneous Markov chain}
+                    \[
+                      X_1 \ \to \ X_2 \ \to \ X_3 \ \to \ \dotsb
+                    \]
+
+                  \item
+                    There is a unique \GREEN{stationary distribution} $\pi$ with
+                    \[
+                      \lim_{t\to\infty}
+                      \cL(X_t \mid X_1=x) \ = \ \pi
+                      \quad \text{for all $x \in \states$}
+                      \,.
+                    \]
+
+                  \item
+                    The \GREEN{mixing time} $\tmix$ is the earliest time $t$ with
+                    \[
+                      \sup_{x \in \states}
+                      \norm{\cL(X_t \mid X_1=x) - \pi}_{\tv}
+                      \ \leq \
+                      1/4
+                      \,.
+                    \]
+                \end{list}
+
+                \begin{center}
+                  \textbf{Task}:
+                  Given $\delta \in (0,1)$ and sample path $X_{1:t}$,
+                  determine non-trivial interval $I_t \subseteq
+                  [0,\infty]$ with
+                  \[
+                    \P(\tmix \in I_t) \ \geq \ 1-\delta
+                    \,.
+                  \]
+                \end{center}
+              \end{block}
+
+              \begin{block}{Motivation from machine learning \& statistics}
+
+                \textbf{Chernoff bounds for Markov chains}:
+                \\
+                for nicely-behaved $f \colon \states \to \bbR$,
+                w.p.~${\geq}1-\delta$,
+                \[
+                  \Abs{
+                    \frac1t\sum_{i=1}^t f(X_i)
+                    -
+                    \E_\pi f
+                  }
+                  \ \leq \
+                  \tilde O\Parens{
+                    \sqrt{
+                      \frac{\tmix \log\frac1\delta}{t}
+                    }
+                  }
+                  \,.
+                \]
+                \FIREBRICK{Bound depends on $\tmix$, unknown \emph{a priori}}.
+
+                \medskip
+                \begin{list}{$\triangleright$}\compresslist
+                  \item {\small(Bayesian inference)}:
+                    Posterior mean/variance via MCMC
+
+                  \item {\small(Reinforcement learning)}:
+                    Mean action rewards in an MDP
+
+                  \item {\small(Supervised learning)}:
+                    Error rates from non-iid data
+
+                \end{list}
+
+                \medskip
+                \begin{center}
+                  \BLUE{%
+                    Need \emph{observable} deviation bounds.
+                  }
+                \end{center}
+
+                \bigskip
+                \textbf{Can we use mixing time bounds?}
+
+                \medskip
+                Suppose estimator $\tmixhat = \tmixhat(X_{1:t})$ satisfies:
+                \[
+                  \P(\tmix \leq \tmixhat + \veps_t)
+                  \ \geq \
+                  1-\delta
+                  \,.
+                \]
+                Then with probability at least $1-2\delta$,
+                \[
+                  \Abs{
+                    \frac1t\sum_{i=1}^t f(X_i)
+                    -
+                    \E_\pi f
+                  }
+                  \ \leq \
+                  \tilde O\Parens{
+                    \sqrt{
+                      \frac{\parens{\tmixhat + \veps_t}
+                      \log\frac1\delta}{t}
+                    }
+                  }
+                  \,.
+                \]
+
+                $\tmixhat$ computed from $X_{1:t}$;
+                \FIREBRICK{$\veps_t$ may depend on $\tmix$}.
+
+                \begin{center}
+                  \FIREBRICK{%
+                    Deviation bounds for point estimators are insufficient.%
+                  }
+
+                  \medskip
+                  \BLUE{%
+                    Need \emph{observable confidence intervals} for $\tmix$.%
+                  }
+                \end{center}
+
+
+
+              \end{block}
+            }
+          \end{minipage}
+        \end{beamercolorbox}
+      \end{column}
+      \begin{column}{0.24\textwidth}
+        \begin{beamercolorbox}[center,wd=\textwidth]{postercolumn}
+          \begin{minipage}[T]{.95\textwidth}
+            \parbox[t][\columnheight]{\textwidth}{
+              \begin{block}{Relaxation time}
+
+                \begin{list}{$\triangleright$}\compresslist
+                  \item
+                    Let $P$ be the \GREEN{transition operator} of the Markov chain,
+
+                    and let $\slem$ be its \GREEN{second-largest eigenvalue modulus}
+
+                    {\small(i.e., largest eigenvalue modulus other than $1$)}.
+
+                    \medskip
+
+                  \item
+                    \GREEN{Spectral gap}: $\gap := 1-\slem$.
+
+                    \GREEN{Relaxation time}: $\trelax := 1/\gap$.
+
+                    \vspace{-1.5cm}
+                    \[
+                      \Parens{ \trelax - 1 } \ln 2
+                      \ \leq \
+                      \tmix
+                      \ \leq \
+                      \trelax \ln \frac4{\pimin}
+                    \]
+                    for $\pimin := \min_{x \in \states} \pi(x)$.
+
+                    \medskip
+                    Assumptions on $P$ ensure $\gap, \pimin \in (0,1)$.
+
+                \end{list}
+
+                \begin{center}
+                  \BLUE{%
+                    \textbf{Spectral approach}: construct CI's for $\gap$ and $\pimin$.
+                  }
+                \end{center}
+              \end{block}
+
+              \begin{block}{Our results}
+                Restrict to \GREEN{ergodic and reversible Markov
+                chains} on \GREEN{finite state spaces} $\states$ of
+                cardinality $d$.
+
+                \bigskip
+                \begin{theorem}[Lower bound]
+                  For every estimator $\hatgap \equiv
+                  \hatgap(X_{1:t})$ with $t \leq \Omega\Parens{
+                  \frac{d \log d}{\gap} + \frac1{\pimin} }$, there is
+                  a Markov chain distribution with spectral gap $\gap$
+                  and stationary distribution minorized by $\pimin$
+                  s.t.
+                  \[
+                    \Pr\Brackets{ |\hatgap - \gap| \geq \gap/4 }
+                    \ \geq \ 1/4
+                    \,.
+                  \]
+                \end{theorem}
+
+                \begin{theorem}[Upper bound]
+                  For any $\delta{\in}(0,1)$, there are plug-in estimators
+                  $\hatgap \equiv \hatgap(\delta,X_{1:t})$ and
+                  $\hatpimin \equiv \hatgap(\delta,X_{1:t})$ that satisfy,
+                  w.p.~${\geq}1-\delta$,
+                  \begin{align*}
+                    \Abs{\hatpimin-\pimin}
+                    & \leq
+                    C \,
+                    \Parens{
+                      \sqrt{\frac{\pimin\log\frac{d}{\pimin\delta}}{\gap t}}
+                      +
+                      \frac{\log\frac{d}{\pimin\delta}}{\gap t}
+                    }
+                    \,,
+                    \\
+                    \Abs{\hatgap-\gap}
+                    & \leq
+                    C \,
+                    \Parens{
+                      \sqrt{\frac{\log\frac{d}{\delta}\cdot\log\frac{t}{\pimin\delta}}{\pimin\gap t}}
+                      + \frac{\log\frac{1}{\gap}}{\gap t}  
+                    }
+                    \,.
+                  \end{align*}
+                \end{theorem}
+
+                \begin{theorem}[Confidence intervals]
+                  There is an algorithm that, on input $\delta \in
+                  (0,1)$ and $X_{1:t}$, constructs intervals
+                  $I_t^{\gap}$ and $I_t^{\pimin}$ such that
+                  \[
+                    \P\Parens{
+                      \gap \in I_t^{\gap}
+                    }
+                    \geq 1-\delta
+                    \,,
+                    \quad
+                    \P\Parens{
+                      \pimin \in I_t^{\pimin}
+                    }
+                    \geq 1-\delta
+                    \,.
+                  \]
+                  Interval lengths $\to0$ a.s.~at
+                  $\sqrt{\frac{\log\log t}{t}}$ rate.
+                \end{theorem}
+
+                \bigskip
+                \textbf{A hybrid approach}:
+                We can also combine the new algorithm to turn error
+                bounds for point estimators into observable CI's.
+
+                {\small(This improves asymptotic rate for $\pimin$
+                interval to $1/\sqrt{t}$.)}
+
+              \end{block}
+            }
+          \end{minipage}
+        \end{beamercolorbox}
+      \end{column}
+      \begin{column}{0.24\textwidth}
+        \begin{beamercolorbox}[center,wd=\textwidth]{postercolumn}
+          \begin{minipage}[T]{.95\textwidth}
+            \parbox[t][\columnheight]{\textwidth}{
+              \begin{block}{Plug-in estimator for upper bound}
+                \begin{list}{$\triangleright$}\compresslist
+                  \item
+                    Reversibility grants the symmetry of
+                    \begin{align*}
+                      M
+                      & \ := \
+                      \diag(\pi) P
+                      \\
+                      & \ \hphantom:= \
+                      \Braces{ \P_{X_1 \sim \pi}(X_1=x,X_2=x') }_{x,x'\in\states}
+                    \end{align*}
+                    {\small(doublet state probabilities in stationary chain)}.
+
+                  \item
+                    Moreover, eigenvalues of
+                    \[
+                      L
+                      \ := \
+                      \diag(\pi)^{-1/2} M \diag(\pi)^{-1/2}
+                    \]
+                    are real, and satisfy
+                    \begin{gather*}
+                      1
+                      \ = \ \lambda_1 \ > \ \lambda_2 \ \geq \ \dotsb \ \geq \
+                      \lambda_d \ > \ -1
+                      \,,
+                      \\
+                      \gap
+                      \ = \ 1 - \max\braces{ \lambda_2, \abs{\lambda_d} }
+                      \,.
+                    \end{gather*}
+
+                  \item
+                    \textbf{Plug-in estimator}:
+                    estimate $\pi$ and $M$ from $X_{1:t}$ (w/ empirical
+                    frequencies), then plug-in formula for $\gap$.
+
+                \end{list}
+
+              \end{block}
+
+              \begin{block}{Error bound for plug-in estimator}
+                (Matrix) Chernoff bound {\small(for Markov chains)}
+                gives error bounds for estimates of $\pi$ and $M$ (and
+                ultimately of $L$ and $\gap$): e.g., w.h.p.,
+                \[
+                  \abs{\hatgap-\gap}
+                  \ \leq \
+                  \norm{\wh L - L}
+                  \ \leq \
+                  O\Parens{
+                    \sqrt{\frac{\log(d)\log\frac{t}{\pimin}}{\gap\pimin t}}
+                  }
+                  \,.
+                \]
+                This has \FIREBRICK{\emph{inverse} dependence} on $\gap$.
+
+                \begin{columns}
+                  \begin{column}{0.74\textwidth}
+                    \begin{center}
+                      \FIREBRICK{%
+                        Can't ``solve the bound'' for $\gap$
+                      }
+
+                      {\small(\emph{c.f.} ``empirical Bernstein''
+                      inequalities)}.
+
+                    \end{center}
+                  \end{column}
+                  \begin{column}{0.24\textwidth}
+                    \includegraphics[width=0.80\textwidth]{chicken-and-egg.jpg}
+                  \end{column}
+                \end{columns}
+              \end{block}
+
+              \begin{block}{Direct estimation of $P$}
+                \textbf{Alternative}: directly estimate $P$ from $X_{1:t}$.
+
+                \smallskip
+                \textbf{Key advantage}: observable confidence
+                intervals for $P$ via ``empirical Bernstein''
+                inequality for martingales.
+
+                \smallskip
+                \textbf{Two problems}:
+                \begin{list}{$\triangleright$}\compresslist
+                  \item
+                    w/o using symmetry structure via $L$, can argue
+                    \[
+                      \norm{\wh{P} - P} \ \leq \ \veps
+                      \ \Longrightarrow \
+                      \abs{\hatgap - \gap} \ \leq \ O(\veps^{1/(2d)})
+                      \,,
+                    \]
+                    but this implies \FIREBRICK{exponential slow-down in rate}.
+
+                  \item
+                    Using symmetry structure via $L$, get bounds that
+                    depend on $\pi$, which is unknown.
+
+                \end{list}
+
+                \begin{center}
+                  \BLUE{%
+                    \textbf{Our approach}: \\
+                    Directly estimate $P$, and \emph{indirectly} estimate $\pi$ via
+                    $\wh P$.
+                  }
+                \end{center}
+
+
+              \end{block}
+            }
+          \end{minipage}
+        \end{beamercolorbox}
+      \end{column}
+      \begin{column}{0.24\textwidth}
+        \begin{beamercolorbox}[center,wd=\textwidth]{postercolumn}
+          \begin{minipage}[T]{.95\textwidth}
+            \parbox[t][\columnheight]{\textwidth}{
+              \begin{block}{HI THERE}
+              \end{block}
+            }
+          \end{minipage}
+        \end{beamercolorbox}
+      \end{column}
+    \end{columns}
+
+    \vfill
+  \end{frame}
+\end{document}
+

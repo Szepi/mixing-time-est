@@ -1,8 +1,7 @@
-\documentclass[11pt,compress,blue4]{beamer}
+\documentclass[11pt,compress,blue4,notheorem]{beamer}
 \usepackage[T1]{fontenc}
 \usepackage{algorithmic}
 \usepackage[normalem]{ulem}
-\usepackage{adjustbox}
 
 \input{__includes}
 
@@ -13,6 +12,7 @@
 \definecolor{darkgreen}{rgb}{0.1,0.4,0.1}
 \definecolor{darkblue}{rgb}{0,0,0.7}
 \definecolor{firebrick}{rgb}{0.7,0.13,0.13}
+\definecolor{britishracinggreen}{rgb}{0.0, 0.26, 0.15}
 \newcommand{\RED}[1]{\textcolor{red}{#1}}
 \newcommand{\GREEN}[1]{\textcolor{boldgreen}{#1}}
 \newcommand{\GRAY}[1]{\textcolor{gray}{#1}}
@@ -28,7 +28,7 @@
 \newcommand\trelax{\ensuremath{t_{\operatorname{relax}}}}
 \newcommand\pimin{\ensuremath{\pi_{\star}}}
 \newcommand\gap{\ensuremath{\gamma_{\star}}}
-\newcommand\gaphat{\ensuremath{\hat{\gamma}_{\star}}}
+\newcommand\hatgap{\ensuremath{\hat{\gamma}_{\star}}}
 \newcommand\slem{\ensuremath{\lambda_{\star}}}
 
 \newcommand\states{\ensuremath{\mathcal{X}}}
@@ -213,9 +213,12 @@ Markov chain \\ from a single sample path}
 
   \onslide<4->
   \begin{center}
+    \FIREBRICK{%
+      Deviation bounds for point estimators are insufficient.%
+    }
+    \\
     \BLUE{%
-      Need \emph{observable confidence intervals} for $\tmix$, \\
-      not just point estimators with deviation bounds.
+      Need \emph{observable confidence intervals} for $\tmix$.%
     }
   \end{center}
 
@@ -443,7 +446,7 @@ Markov chain \\ from a single sample path}
   for estimates of $\pi$ and $M$ (and ultimately of $L$ and $\gap$):
   e.g., w.h.p.,
   \[
-    \abs{\gaphat-\gap}
+    \abs{\hatgap-\gap}
     \ \leq \
     \norm{\wh L - L}
     \ \leq \
@@ -490,7 +493,7 @@ Markov chain \\ from a single sample path}
       \[
         \norm{\wh{P} - P} \ \leq \ \veps
         \quad\Longrightarrow\quad
-        \abs{\gaphat - \gap} \ \leq \ O(\veps^{1/(2d)})
+        \abs{\hatgap - \gap} \ \leq \ O(\veps^{1/(2d)})
         \,,
       \]
       but this implies \FIREBRICK{exponential slow-down in rate}.
@@ -609,16 +612,23 @@ Markov chain \\ from a single sample path}
 
     \item<3->
       \textbf{Problem \#1}:
-      close gap between lower and upper bounds on sample path length
-      (for point estimation).
+      \textcolor{britishracinggreen}{%
+        close gap between lower and upper bounds on sample path length
+        (for point estimation).%
+      }
 
     \item<4->
       \textbf{Problem \#2}:
-      overcome computational bottlenecks from matrix operations.
+      \textcolor{britishracinggreen}{%
+        overcome computational bottlenecks from matrix operations.%
+      }
 
     \item<5->
       \textbf{Problem \#3}:
-      handle large/continuous state spaces under suitable assumptions.
+      \textcolor{boldgreen}{%
+        handle large/continuous state spaces under suitable
+        assumptions.%
+      }
 
   \end{itemize}
 
