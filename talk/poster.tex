@@ -36,14 +36,15 @@
 \definecolor{boldgreen}{rgb}{0.2,0.6,0.2}
 \definecolor{darkgreen}{rgb}{0.1,0.4,0.1}
 \definecolor{darkblue}{rgb}{0,0,0.7}
-\definecolor{firebrick}{rgb}{0.7,0.13,0.13}
-\definecolor{britishracinggreen}{rgb}{0.0, 0.26, 0.15}
+\definecolor{azure}{rgb}{0.0,0.5,1.0}
+\definecolor{awesome}{rgb}{1.0, 0.13, 0.32}
 \newcommand{\RED}[1]{\textcolor{red}{#1}}
 \newcommand{\GREEN}[1]{\textcolor{boldgreen}{#1}}
 \newcommand{\GRAY}[1]{\textcolor{gray}{#1}}
 \newcommand{\LIGHTGRAY}[1]{\textcolor{lightgray}{#1}}
 \newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
-\newcommand{\FIREBRICK}[1]{\textcolor{firebrick}{#1}}
+\newcommand{\AZURE}[1]{\textcolor{azure}{#1}}
+\newcommand{\AWESOME}[1]{\textcolor{awesome}{#1}}
 
 \newcommand\fns\footnotesize
 
@@ -128,7 +129,7 @@
                   }
                   \,.
                 \]
-                \FIREBRICK{Bound depends on $\tmix$, unknown \emph{a priori}}.
+                \AWESOME{Bound depends on $\tmix$, unknown \emph{a priori}}.
 
                 \medskip
                 \begin{list}{$\triangleright$}\compresslist
@@ -179,10 +180,10 @@
                 \]
 
                 $\tmixhat$ computed from $X_{1:t}$;
-                \FIREBRICK{$\veps_t$ may depend on $\tmix$}.
+                \AWESOME{$\veps_t$ may depend on $\tmix$}.
 
                 \begin{center}
-                  \FIREBRICK{%
+                  \AWESOME{%
                     Deviation bounds for point estimators are insufficient.%
                   }
 
@@ -247,7 +248,7 @@
                 chains} on \GREEN{finite state spaces} $\states$ of
                 cardinality $d$.
 
-                \bigskip
+                \vspace{1cm}
                 \begin{theorem}[Lower bound]
                   For every estimator $\hatgap \equiv
                   \hatgap(X_{1:t})$ with $t \leq \Omega\Parens{
@@ -310,7 +311,7 @@
                   $\sqrt{\frac{\log\log t}{t}}$ rate.
                 \end{theorem}
 
-                \bigskip
+                \vspace{1.5cm}
                 \textbf{A hybrid approach}:
                 We can also combine the new algorithm to turn error
                 bounds for point estimators into observable CI's.
@@ -374,22 +375,23 @@
                 gives error bounds for estimates of $\pi$ and $M$ (and
                 ultimately of $L$ and $\gap$): e.g., w.h.p.,
                 \[
-                  \abs{\hatgap-\gap}
+                  \abs{\hatgap-\AZURE{\gap}}
                   \ \leq \
                   \norm{\wh L - L}
                   \ \leq \
                   O\Parens{
-                    \sqrt{\frac{\log(d)\log\frac{t}{\pimin}}{\gap\pimin t}}
+                    \sqrt{\frac{\log(d)\log\frac{t}{\pimin}}{\AZURE{\gap}\pimin t}}
                   }
                   \,.
                 \]
-                This has \FIREBRICK{\emph{inverse} dependence} on $\gap$.
+                This has \AWESOME{\emph{inverse} dependence} on
+                $\AZURE{\gap}$.
 
                 \begin{columns}
                   \begin{column}{0.74\textwidth}
                     \begin{center}
-                      \FIREBRICK{%
-                        Can't ``solve the bound'' for $\gap$
+                      \AWESOME{%
+                        Can't ``solve the bound'' for $\AZURE{\gap}$
                       }
 
                       {\small(\emph{c.f.} ``empirical Bernstein''
@@ -422,7 +424,7 @@
                       \abs{\hatgap - \gap} \ \leq \ O(\veps^{1/(2d)})
                       \,,
                     \]
-                    but this implies \FIREBRICK{exponential slow-down in rate}.
+                    but this implies \AWESOME{exponential slow-down in rate}.
 
                   \item
                     Using symmetry structure via $L$, get bounds that
@@ -448,7 +450,74 @@
         \begin{beamercolorbox}[center,wd=\textwidth]{postercolumn}
           \begin{minipage}[T]{.95\textwidth}
             \parbox[t][\columnheight]{\textwidth}{
-              \begin{block}{HI THERE}
+              \begin{block}{Indirect estimation of $\pi$}
+
+                \begin{list}{$\triangleright$}\compresslist
+                  \item
+                    Ensure that $\wh P$ is transition operator for
+                    ergodic chain {\small(easy via Laplace
+                    smoothing)}.
+
+                    \smallskip
+
+                  \item
+                    Estimate $\pi$ via $\wh P$ via \GREEN{group
+                    inverse} $\wh A^\#$ of $I - \wh P$.
+
+                    \smallskip
+
+                    \begin{itemize}\compresslist
+                      \item
+                        $\wh A^\#$ contains ``virtually everything
+                        that one would want to know about the chain''
+                        {\small(Meyer, 1975)}.
+
+                        \smallskip
+
+                      \item
+                        Reveals unique stationary distribution $\hat\pi$ w.r.t.~$\wh P$.
+
+                        \BLUE{This is our indirect estimate of $\pi$}.
+
+                        \smallskip
+
+                      \item
+                        Gives
+                        bound on $\norm{\hat\pi-\pi}_\infty$ in terms of
+                        $\norm{\wh P - P}$.
+
+                        \BLUE{With this, we construct a confidence interval
+                        for $\pi$.}
+
+                    \end{itemize}
+
+                \end{list}
+
+              \end{block}
+
+              \begin{block}{Overall algorithm (outline)}
+                \begin{list}{$\triangleright$}\compresslist
+                  \item
+                    Form empirical estimate and CI's for $P$
+
+                    {\small(exploit Markov property \& ``empirical Bernstein''-type bounds)}.
+
+                    \medskip
+
+                  \item
+                    Form estimate and CI's for $\pi$
+
+                    {\small(via group inverse of $I - \wh P$)}.
+
+                    \medskip
+
+                  \item
+                    Form estimate and CI's for $\gap$
+
+                    {\small(via CI's for $\pi$ and $P$, \& eigenvalue perturbation theory)}.
+
+                \end{list}
+
               \end{block}
             }
           \end{minipage}
