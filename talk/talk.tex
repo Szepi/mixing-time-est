@@ -1,4 +1,4 @@
-\documentclass[11pt,compress,blue4,notheorem]{beamer}
+\documentclass[11pt,compress,blue4,notheorems]{beamer}
 \usepackage[T1]{fontenc}
 \usepackage{algorithmic}
 \usepackage[normalem]{ulem}
@@ -13,12 +13,16 @@
 \definecolor{darkblue}{rgb}{0,0,0.7}
 \definecolor{firebrick}{rgb}{0.7,0.13,0.13}
 \definecolor{britishracinggreen}{rgb}{0.0, 0.26, 0.15}
+\definecolor{azure}{rgb}{0.0,0.5,1.0}
+\definecolor{awesome}{rgb}{1.0, 0.13, 0.32}
 \newcommand{\RED}[1]{\textcolor{red}{#1}}
 \newcommand{\GREEN}[1]{\textcolor{boldgreen}{#1}}
 \newcommand{\GRAY}[1]{\textcolor{gray}{#1}}
 \newcommand{\LIGHTGRAY}[1]{\textcolor{lightgray}{#1}}
 \newcommand{\BLUE}[1]{\textcolor{blue}{#1}}
 \newcommand{\FIREBRICK}[1]{\textcolor{firebrick}{#1}}
+\newcommand{\AZURE}[1]{\textcolor{azure}{#1}}
+\newcommand{\AWESOME}[1]{\textcolor{awesome}{#1}}
 
 \newcommand\fns\footnotesize
 
@@ -114,8 +118,8 @@ Markov chain \\ from a single sample path}
     \end{center}
     \onslide<5>
     \begin{center}
-      Given $\delta \in (0,1)$, determine non-trivial $I_t \subseteq
-      [0,\infty]$ from $X_{1:t}$ with
+      Given $\delta \in (0,1)$ and $X_{1:t}$, determine non-trivial
+      $I_t \subseteq [0,\infty]$ with
       \[
         \P(\tmix \in I_t) \ \geq \ 1-\delta
         \,.
@@ -171,7 +175,7 @@ Markov chain \\ from a single sample path}
   \onslide<3->
   \begin{center}
     \BLUE{%
-      Need observable deviation bounds.
+      Need \emph{observable} deviation bounds.
     }
   \end{center}
 
@@ -446,22 +450,22 @@ Markov chain \\ from a single sample path}
   for estimates of $\pi$ and $M$ (and ultimately of $L$ and $\gap$):
   e.g., w.h.p.,
   \[
-    \abs{\hatgap-\gap}
+    \abs{\hatgap-\AZURE{\gap}}
     \ \leq \
     \norm{\wh L - L}
     \ \leq \
     O\Parens{
-      \sqrt{\frac{\log(d)\log(t/\pimin)}{\gap\pimin t}}
+      \sqrt{\frac{\log(d)\log(t/\pimin)}{\AZURE{\gap}\pimin t}}
     }
     \,.
   \]
   \onslide<2->
-  This has \FIREBRICK{\emph{inverse} dependence} on $\gap$.
+  This has \FIREBRICK{\emph{inverse} dependence} on $\AZURE{\gap}$.
 
   \onslide<3->
   \begin{center}
     \FIREBRICK{%
-      Can't ``solve the bound'' for $\gap$
+      Can't ``solve the bound'' for $\AZURE{\gap}$
     }
 
     {\fns(\emph{c.f.} ``empirical Bernstein'' inequalities)}.
