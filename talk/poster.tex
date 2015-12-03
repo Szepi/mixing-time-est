@@ -8,7 +8,7 @@
 \usefonttheme[onlymath]{serif}
 \boldmath
 \usepackage[orientation=landscape,size=a0,scale=1.4,debug]{beamerposter}
-
+\usepackage{algorithm,algorithmic}
 \title{Mixing Time Estimation in Reversible Markov Chains from a Single Sample Path}
 \author{%
   Daniel Hsu$^\dag$,
@@ -59,7 +59,10 @@
 \newcommand\slem{\ensuremath{\lambda_{\star}}}
 
 \newcommand\states{\ensuremath{\mathcal{X}}}
-
+\newcommand\giAh{\ensuremath{\widehat{\boldsymbol{A}}^{\raisebox{-2.9pt}{$\scriptstyle\#$}}}}
+\newcommand\giA{\ensuremath{\boldsymbol{A}^{\raisebox{-0pt}{$\scriptstyle\#$}}}}
+\newcommand\Sym{\ensuremath{\operatorname{Sym}}}
+\newcommand\emptail{\ensuremath{\tau_{n,\delta}}}
 
 \begin{document}
   \begin{frame}{} 
@@ -495,30 +498,134 @@
 
               \end{block}
 
-              \begin{block}{Overall algorithm (outline)}
-                \begin{list}{$\triangleright$}\compresslist
-                  \item
-                    Form empirical estimate and CI's for $P$
+%              \begin{block}{Overall algorithm (outline)}
+%                \begin{list}{$\triangleright$}\compresslist
+%                  \item
+%                    Form empirical estimate and CI's for $P$
+%
+%                    {\small(exploit Markov property \& ``empirical Bernstein''-type bounds)}.
+%
+%                    \medskip
+%
+%                  \item
+%                    Form estimate and CI's for $\pi$
+%
+%                    {\small(via group inverse of $I - \wh P$)}.
+%
+%                    \medskip
+%
+%                  \item
+%                    Form estimate and CI's for $\gap$
+%
+%                    {\small(via CI's for $\pi$ and $P$, \& eigenvalue perturbation theory)}.
+%
+%                \end{list}
+%
+%              \end{block}
+%
+              \begin{block}{Overall algorithm}
+                \begin{algorithmic}[1]
+                  \STATE Compute state visit counts and smoothed transition
+                  probability estimates:
+                  \begin{equation}
+                    \begin{aligned}
+                      N_i & :=
+                      \Abs{
+                        \Braces{
+                          \tau \in [t{-}1] : X_\tau = i
+                        }
+                      }
+                      \,, \\
+                      N_{i,j} & :=
+                      \Abs{
+                        \Braces{
+                          \tau \in [t{-}1] : (X_\tau,X_{\tau+1}) = (i,j)
+                        }
+                      }
+                      \,, \\
+                      \wh{P}_{i,j}
+                      & :=
+                      \frac{N_{i,j} + 1/d}{N_i + 1}
+                      \,.
+                    \end{aligned}
+                    \notag
+                  \end{equation}
 
-                    {\small(exploit Markov property \& ``empirical Bernstein''-type bounds)}.
+                  \STATE Let $\giAh$ be the group inverse of $\wh\vA := \vI -
+                  \wh\vP$.
 
-                    \medskip
+                  \STATE Let $\hat\vpi \in \Delta^{d-1}$ be stationary
+                  distribution for $\wh\vP$.
 
-                  \item
-                    Form estimate and CI's for $\pi$
+                  \STATE Compute eigenvalues
+                  $\braces{\hat\lambda_i}_{i\in[d]}$ of
+                  $0.5(\wh\vL+\wh\vL^\t)$, where $\wh\vL
+                  := \Diag(\hat\vpi)^{1/2} \wh\vP \Diag(\hat\vpi)^{-1/2}$.
 
-                    {\small(via group inverse of $I - \wh P$)}.
+                  \STATE Gap estimate:
+                    $\hatgap := 1 - \max\braces{ \hat\lambda_2,
+                    |\hat\lambda_d| }$.
 
-                    \medskip
+                  \STATE Empirical bounds for $|\wh{P}_{i,j}{-}P_{i,j}|$ for $(i,j){\in}[d]^2$:
+                  \begin{equation}
+                    \wh{B}_{i,j}
+                    :=
+                    O\Parens{
+                      \sqrt{\frac{\wh P_{i,j}\log\frac{d\log t}\delta}{N_i}}
+                      + \frac{\log\frac{d\log t}\delta}{N_i}
+                    }
+                    .
+                    \notag
+                  \end{equation}
 
-                  \item
-                    Form estimate and CI's for $\gap$
+                  \STATE Relative sensitivity of $\vpi$:
+                  \begin{equation}
+                    \hat\kappa :=
+                    \frac12
+                    \max_{j\in[d]}
+                    \Braces{
+                      \wh{A}_{j,j}^\# - \min_{i\in[d]}\Braces{ \wh{A}_{i,j}^\# }
+                    } 
+                    .
+                    \notag
+                  \end{equation}
 
-                    {\small(via CI's for $\pi$ and $P$, \& eigenvalue perturbation theory)}.
+                  \STATE Empirical bounds for $\max_{i \in [d]} |\hat{\pi}_i -
+                  \pi_i|$ and
+                  $\max\bigcup_{i\in[d]}
+                  \braces{
+                    \abs{\sqrt{\pi_i/\hat\pi_i}-1},\,
+                    \abs{\sqrt{\hat\pi_i/\pi_i}-1}
+                  }$:
+                  \begin{align*}
+                    \hat{b}
+                    & := \hat\kappa \max\Braces{
+                      \wh{B}_{i,j}
+                      : (i,j) \in [d]^2
+                    }
+                    , \\
+                    \hat\rho
+                    & := \frac12 \max \bigcup_{i\in[d]}
+                    \Braces{
+                      \frac{\hat{b}}{\hat\pi_i},\,
+                      \frac{\hat{b}}{\brackets{\hat\pi_i-\hat{b}}_+}
+                    }
+                    .
+                  \end{align*}
 
-                \end{list}
+                  \STATE Empirical bounds for $\abs{\hatgap-\gap}$:
+                  \begin{equation}
+                    \hat{w} := 2\hat\rho + \hat\rho^2
+                    + (1+2\hat\rho+\hat\rho^2)
+                    \Biggl(
+                      \sum_{(i,j)\in[d]^2} \frac{\hat\pi_i}{\hat\pi_j} \hat{B}_{i,j}^2
+                    \Biggr)^{1/2} .
+                    \notag
+                  \end{equation}
 
+                \end{algorithmic}
               \end{block}
+
             }
           \end{minipage}
         \end{beamercolorbox}
