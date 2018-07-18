@@ -4,6 +4,8 @@ d = 4;
 gamma_bar = 0.4;
 delta = 0.05;
 [P,gap] = make_lb_P(d,gamma_bar,d);
+[~,stationary] = group_inverse(P);
+pimin = min(stationary);
 
 n_vals = 2.^(15:20);
 T = length(n_vals);
