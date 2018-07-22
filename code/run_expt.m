@@ -1,7 +1,7 @@
 rng(0);
 
-d = 4;
-gamma_bar = 0.4;
+d = 3;
+gamma_bar = 0.49;
 delta = 0.05;
 [P,gap] = make_lb_P(d,gamma_bar,d);
 [~,stationary] = group_inverse(P);
@@ -27,12 +27,24 @@ for i=1:T
   end
 end
 
-subplot(1,2,1);
-plot(n_vals, gap_ub, n_vals, gap_lb);
-xlabel('n');
-legend('\gamma_* ub', '\gamma_* lb');
+% figure(1);
+% subplot(1,2,1);
+% plot(n_vals, gap_ub, n_vals, gap_lb);
+% xlabel('n');
+% legend('\gamma_* ub', '\gamma_* lb');
+% subplot(1,2,2);
+% plot(n_vals, pimin_ub, n_vals, pimin_lb);
+% xlabel('n');
+% legend('\pi_* ub', '\pi_* lb');
 
-subplot(1,2,2);
-plot(n_vals, pimin_ub, n_vals, pimin_lb);
-xlabel('n');
-legend('\pi_* ub', '\pi_* lb');
+% figure(2);
+% subplot(1,2,1);
+% plot(n_vals, gap_ub - gap_lb);
+% xlabel('n');
+% legend('\gamma_* interval width');
+% subplot(1,2,2);
+% plot(n_vals, pimin_ub - pimin_lb);
+% xlabel('n');
+% legend('\pi_* interval width');
+
+gap_ub - gap_lb

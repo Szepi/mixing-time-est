@@ -25,7 +25,7 @@ kappa_hat = 0.5 * max(diag(Asharp) - min(Asharp)');
 b_hat = kappa_hat * max(B_hat(:));
 rho_hat = 0.5 * max([b_hat ./ pi_hat, b_hat ./ max(pi_hat - b_hat,0)]);
 % w_hat = 2*rho_hat + rho_hat^2 + (1+2*rho_hat+rho_hat^2)*norm(diag(sqrt(pi_hat))*B_hat*diag(1./sqrt(pi_hat)),'fro');
-w_hat = 2*rho_hat + rho_hat^2 + (1+2*rho_hat+rho_hat^2)*norm(diag(sqrt(pi_hat))*B_hat*diag(1./sqrt(pi_hat)));
+w_hat = 2*rho_hat + rho_hat^2 + (1+2*rho_hat+rho_hat^2)*norm(diag(sqrt(pi_hat))*B_hat*diag(1./sqrt(pi_hat))); % this is valid and tighter than above.
 
 L_hat = diag(sqrt(pi_hat))*P_hat*diag(sqrt(1./pi_hat));
 lambda_hats = eig(0.5*(L_hat+L_hat'));
